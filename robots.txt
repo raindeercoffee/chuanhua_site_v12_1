@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /position-editor.html
+
+Sitemap: https://raindeercoffee.com/chuanhua_site_v12_1/sitemap.xml
