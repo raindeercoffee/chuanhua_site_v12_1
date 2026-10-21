@@ -439,6 +439,56 @@ footer .back-garden:hover{color:var(--pink-deep)}
 .service-detail-items h3{font:600 18px/1.7 var(--serif);color:var(--river-deep);margin-bottom:9px}
 .service-detail-items p{font-size:14px;line-height:2;color:var(--ink-soft);font-weight:300}
 .service-detail-cta{text-decoration:none}
+#quote-wizard{max-width:900px;margin-top:34px;color:var(--ink-soft)}
+#quote-wizard [hidden]{display:none!important}
+.quote-kinds{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:30px}
+.quote-kind{font:inherit;min-height:48px;padding:10px 22px;border:1px solid var(--line);border-radius:99px;background:transparent;color:var(--ink-soft);cursor:pointer;transition:background .3s,border-color .3s,color .3s}
+.quote-kind[aria-pressed="true"]{background:var(--card);border-color:var(--river-mid);color:var(--river-deep)}
+.quote-mobile-price{display:none}
+.quote-layout{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(240px,1fr);gap:36px;align-items:start}
+.quote-workspace{min-width:0}
+.quote-progress-row{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:13px;margin-bottom:12px}
+.quote-progress{width:100%;height:5px;display:block;accent-color:var(--river);border:0;border-radius:99px;overflow:hidden;background:var(--line)}
+.quote-progress::-webkit-progress-bar{background:var(--line);border-radius:99px}
+.quote-progress::-webkit-progress-value{background:var(--river-mid);border-radius:99px;transition:width .3s}
+.quote-progress::-moz-progress-bar{background:var(--river-mid);border-radius:99px}
+.quote-step-title{font:600 23px/1.7 var(--serif);color:var(--river-deep);margin:30px 0 10px}
+.quote-step-note{font-size:13px;line-height:1.95;margin-bottom:24px}
+.quote-fieldset{border:0;min-width:0;margin:0;padding:0}
+.quote-fieldset legend{font-size:14px;color:var(--river-deep);margin-bottom:14px}
+.quote-options{display:grid;gap:12px}
+.quote-option{position:relative;display:flex;align-items:flex-start;gap:12px;min-height:48px;padding:18px;border:1px solid var(--line);border-radius:16px;background:var(--card);cursor:pointer;transition:border-color .3s,background .3s}
+.quote-option:has(input:checked){border-color:var(--river-mid);background:#fff}
+.quote-option input{flex:0 0 auto;width:18px;height:18px;margin-top:5px;accent-color:var(--river)}
+.quote-option-content{display:block;min-width:0;flex:1}
+.quote-option b{display:block;color:var(--river-deep);font:600 16px/1.7 var(--serif)}
+.quote-option small{display:block;font-size:12px;line-height:1.9;margin-top:5px}
+.quote-option .quote-option-price{color:var(--river);font:500 13px/1.8 var(--sans);margin-top:8px}
+.quote-range-label{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:12px;color:var(--river-deep);font-size:15px;margin:24px 0 12px}
+.quote-range-value{font:500 25px/1.5 var(--serif);color:var(--river-deep)}
+.quote-range{display:block;width:100%;height:44px;accent-color:var(--river);cursor:pointer}
+.quote-range-limits{display:flex;justify-content:space-between;font-size:12px;margin-top:2px}
+.quote-range-help{font-size:13px;line-height:2;margin-top:22px;padding:18px 0;border-top:1px solid var(--line)}
+.quote-aside{position:sticky;top:24px;border:1px solid var(--line);border-radius:20px;background:var(--card);padding:26px 24px}
+.quote-aside-flower{width:26px;height:26px;display:block;margin-bottom:14px}
+.quote-price-label{font-size:13px;letter-spacing:1px;color:var(--river)}
+#quote-total{display:block;font:600 clamp(24px,3vw,32px)/1.7 var(--serif);color:var(--river-deep);overflow-wrap:anywhere;margin:8px 0 18px}
+.quote-breakdown{list-style:none;padding:0;margin:0;font-size:12.5px;line-height:1.9}
+.quote-breakdown li{padding:10px 0;border-top:1px solid var(--line)}
+.quote-disclaimer{font-size:11.5px;line-height:1.95;margin-top:20px;color:var(--ink-soft)}
+.quote-controls{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:30px;padding-top:24px;border-top:1px solid var(--line)}
+.quote-controls button{font:inherit;font-size:14px;min-height:48px;cursor:pointer}
+.quote-controls .btn{border:1px solid var(--line);padding:10px 22px}
+.quote-controls .btn:disabled{opacity:.48;cursor:default}
+.quote-reset{font:inherit;font-size:12px;min-height:44px;border:0;border-bottom:1px solid var(--line);padding:8px 2px;background:transparent;color:var(--ink-soft);cursor:pointer}
+.quote-summary{border-top:1px solid var(--line);margin-top:22px;padding-top:8px}
+.quote-summary h3{font:600 18px/1.7 var(--serif);color:var(--river-deep);margin:18px 0 12px}
+.quote-summary .quote-breakdown{font-size:14px}
+.quote-summary-note{font-size:13px;line-height:2;margin:22px 0}
+.quote-summary-contact{text-decoration:none;display:inline-flex;min-height:48px;align-items:center}
+#quote-wizard button:focus-visible,#quote-wizard input:focus-visible,#quote-wizard a:focus-visible{outline:2px solid var(--pink-deep);outline-offset:5px}
+.quote-status{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
+@media(max-width:760px){.quote-layout{grid-template-columns:1fr;gap:28px}.quote-aside{position:static;padding:24px 20px}.quote-kinds{gap:10px}.quote-kind{padding:10px 16px;font-size:14px}.quote-step-title{font-size:21px}.quote-option{padding:16px}.quote-controls .btn{padding:10px 18px}.quote-mobile-price{display:flex;align-items:center;justify-content:space-between;gap:12px;position:sticky;top:0;z-index:3;padding:12px 0;margin-bottom:24px;background:var(--sky);border-bottom:1px solid var(--line);color:var(--river-deep)}.quote-mobile-price span{font-size:12px}.quote-mobile-price output{font:600 19px/1.7 var(--serif)}}
 @media(max-width:760px){.service-details .topic-tabs{gap:9px;justify-content:flex-start;margin-bottom:30px}.service-details .topic-tab{padding:9px 14px;letter-spacing:0}.service-details .topic-panel{padding-top:28px}.service-detail-items{grid-template-columns:1fr;margin-top:28px}.service-detail-items li{padding:22px 0}.service-detail-intro{font-size:14px}}
 .feature-placeholder{min-height:210px;border:1px dashed var(--line);border-radius:18px;padding:32px 24px;color:var(--ink-soft)}
 .feature-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:16px;margin-top:32px}
@@ -1042,7 +1092,7 @@ footer .notes-link{margin-left:24px}
             <li><h3>挑選適合的工具與做法</h3><p>從實際工作裡卡住的地方開始，評估網站、AI 與流程工具，安排用得上的改變。</p></li>
             <li><h3>把方向，走成具體的下一步</h3><p>依目標、資源與步調拆解工作，讓每一步都有落點，再從實際回饋裡持續調整。</p></li>
           </ul>
-          <a class="btn service-detail-cta" href="/chuanhua_site_v12_1/ai/quote/" data-route data-quote-kind="custom">看如何開花 →</a>
+          <a class="btn service-detail-cta" href="/chuanhua_site_v12_1/ai/quote/" data-route>看如何開花 →</a>
         </section>
       </div>
       <div class="feature-actions">
@@ -1063,7 +1113,60 @@ footer .notes-link{margin-left:24px}
     <section class="feature-page" data-feature="quote" hidden>
       <div class="st-top"><a class="st-back" href="/chuanhua_site_v12_1/ai/" data-route>← 回到 AI 客製化服務</a></div>
       <header class="st-head"><h1 id="feature-quote-title" tabindex="-1">告訴川花，你想改善哪件事？</h1><p>從工作中最繁瑣的地方開始，一起找到適合的解決方式。</p></header>
-      <div class="feature-body"><div class="feature-placeholder" aria-label="需求詢價預留區"></div></div>
+      <div class="feature-body" id="quote-wizard">
+        <div class="quote-kinds" role="group" aria-label="想先了解哪一種服務？">
+          <button class="quote-kind" id="quote-kind-website" type="button" aria-pressed="true">品牌官網製作</button>
+          <button class="quote-kind" id="quote-kind-custom" type="button" aria-pressed="false">軟體專案客製化</button>
+        </div>
+        <div class="quote-mobile-price" id="quote-mobile-price" aria-hidden="true"><span id="quote-mobile-label">官網建置預估</span><output id="quote-mobile-total" aria-live="off">請先選擇方案</output></div>
+        <div class="quote-layout">
+          <div class="quote-workspace">
+            <div class="quote-progress-row"><span id="quote-step">第 1 步 / 4</span><button class="quote-reset" id="quote-reset" type="button">重新種下需求</button></div>
+            <progress class="quote-progress" id="quote-progress" max="4" value="1" aria-label="需求探索進度"></progress>
+            <h2 class="quote-step-title" id="quote-step-title" tabindex="-1">先選一種網站的模樣</h2>
+            <p class="quote-step-note" id="quote-step-note"></p>
+            <div data-quote-step="1">
+              <fieldset class="quote-fieldset" data-quote-kind-panel="website"><legend>網站方案</legend><div class="quote-options" id="quote-plans"></div></fieldset>
+              <fieldset class="quote-fieldset" data-quote-kind-panel="custom" hidden><legend>最想改善的工作</legend><div class="quote-options" id="quote-goals"></div></fieldset>
+            </div>
+            <div data-quote-step="2" hidden>
+              <div data-quote-kind-panel="website">
+                <label class="quote-range-label" for="q-pages">希望安排幾頁內容？ <output class="quote-range-value" id="quote-pages-value" for="q-pages" aria-live="off">1 頁</output></label>
+                <input class="quote-range" id="q-pages" type="range" min="1" max="10" step="1" value="1" aria-describedby="quote-pages-help">
+                <div class="quote-range-limits"><span id="quote-pages-min">1 頁</span><span>10 頁</span></div>
+                <p class="quote-range-help" id="quote-pages-help"></p>
+              </div>
+              <div data-quote-kind-panel="custom" hidden>
+                <label class="quote-range-label" for="q-tools">預計串接幾個工具或平台？ <output class="quote-range-value" id="quote-tools-value" for="q-tools" aria-live="off">0 個</output></label>
+                <input class="quote-range" id="q-tools" type="range" min="0" max="5" step="1" value="0" aria-describedby="quote-tools-help">
+                <div class="quote-range-limits"><span>0 個</span><span>5 個</span></div>
+                <p class="quote-range-help" id="quote-tools-help">可以先抓一個大概。工具種類、資料權限與串接方式，都會影響實作範圍；這裡先記下需求，新增需求待評估。</p>
+              </div>
+            </div>
+            <div data-quote-step="3" hidden>
+              <fieldset class="quote-fieldset" data-quote-kind-panel="website"><legend>依需要選擇，也可以不加購</legend><div class="quote-options" id="quote-addons"></div></fieldset>
+              <fieldset class="quote-fieldset" data-quote-kind-panel="custom" hidden><legend>希望有哪些幫手？可複選，也可以先略過</legend><div class="quote-options" id="quote-custom-features"></div></fieldset>
+            </div>
+            <div data-quote-step="4" hidden>
+              <div class="quote-summary" id="quote-summary"></div>
+              <p class="quote-summary-note">把這份想法帶來，和川花聊聊。你可以截圖保留，再一起確認適合的做法。</p>
+              <a class="btn quote-summary-contact" href="/chuanhua_site_v12_1/contact/" data-route>找川花說話 →</a>
+            </div>
+            <div class="quote-controls">
+              <button class="btn" id="quote-prev" type="button" hidden>← 上一步</button>
+              <button class="btn" id="quote-next" type="button" disabled>下一步 →</button>
+            </div>
+          </div>
+          <aside class="quote-aside" aria-label="目前需求與預估">
+            <svg class="quote-aside-flower" viewBox="0 0 26 26" fill="none" aria-hidden="true"><circle cx="7" cy="9" r="2.6" fill="#D6DAE7"/><circle cx="14" cy="5.6" r="2.2" fill="#E2E5EF"/><circle cx="19.6" cy="10" r="2.7" fill="#CBD1E2"/><circle cx="11" cy="14" r="2.4" fill="#DDE1EC"/><circle cx="18" cy="17" r="2.1" fill="#D6DAE7"/><circle cx="8.4" cy="19.6" r="2.5" fill="#E2E5EF"/><circle cx="7" cy="9" r=".8" fill="#EBD3A4"/><circle cx="19.6" cy="10" r=".8" fill="#EBD3A4"/><circle cx="8.4" cy="19.6" r=".8" fill="#EBD3A4"/></svg>
+            <p class="quote-price-label" id="quote-total-label">官網建置預估</p>
+            <output id="quote-total" aria-live="off">請先選擇方案</output>
+            <ul class="quote-breakdown" id="quote-breakdown"></ul>
+            <p class="quote-disclaimer" id="quote-disclaimer"></p>
+          </aside>
+        </div>
+        <p class="quote-status" id="quote-status" role="status" aria-live="polite" aria-atomic="true"></p>
+      </div>
     </section>
   </div>
 </div>
@@ -1466,6 +1569,155 @@ document.addEventListener('click',e=>{
   const tab=document.getElementById('detail-'+link.dataset.serviceTab+'-tab');
   if(tab)tab.click();
 });
+
+/* 試算只在瀏覽器整理需求；價格與項目集中在此，不送出資料。 */
+(()=>{
+  const wizard=document.getElementById('quote-wizard');
+  if(!wizard)return;
+  const CONFIG={
+    pagePrice:5000,maxPages:10,customStart:49000,
+    plans:{
+      single:{title:'一頁式品牌頁',price:30000,pages:1,description:'把一個主題說清楚，適合品牌起步、活動介紹與單一服務。以一頁為起點，可增加獨立內頁。'},
+      brand:{title:'品牌形象官網',price:45000,pages:4,description:'安排品牌介紹、服務與聯絡入口，讓訪客循著清楚的路認識你。'},
+      story:{title:'品牌故事官網',price:60000,pages:6,description:'給品牌故事與內容更多空間，細細呈現自己的樣子。'}
+    },
+    addons:{
+      copy:{title:'品牌文案整理',price:5000,description:'依你提供的素材，整理一組網站內容。'},
+      motion:{title:'細緻互動動效',price:5000,description:'安排輕量動效，讓畫面保有舒服的節奏。'},
+      form:{title:'表單與通知串接',price:5000,description:'串接單一表單與單一通知通路。'},
+      'ai-search':{title:'AI 搜尋內容整理',price:5000,description:'整理常見問答與基礎結構化內容，不保證搜尋排名。'}
+    },
+    goals:{automation:'流程自動化',content:'AI 內容與文案',reports:'資料報表工具',other:'其他客製需求'},
+    customFeatures:{content:'AI 內容生成',reports:'報表彙整',notifications:'通知串接',permissions:'使用者權限'},
+    included:'基本方案含品牌版面、手機排版、基礎搜尋設定與聯絡入口。',
+    excluded:'不含自製金流、會員、商城與後台開發。',
+    disclaimer:'此為建置預估，非正式報價。網域、主機及第三方服務費依實際使用另計。',
+    customDisclaimer:'此為專案起價，並非完整報價。功能與串接需求待評估，實際費用依需求確認；第三方服務費依實際使用另計。'
+  };
+  const $q=id=>document.getElementById(id);
+  const money=n=>'NT$'+n.toLocaleString('zh-TW');
+  const websiteDefault=()=>({step:1,plan:null,pages:1,addons:new Set()});
+  const customDefault=()=>({step:1,goal:'automation',tools:0,features:new Set()});
+  const branches={website:websiteDefault(),custom:customDefault()};
+  let kind='website';
+  function option(id,name,value,title,description,price,type='radio'){
+    return `<label class="quote-option" for="${id}"><input id="${id}" type="${type}" name="${name}" value="${value}"><span class="quote-option-content"><b>${title}</b>${description?`<small>${description}</small>`:''}${price?`<span class="quote-option-price">${price}</span>`:''}</span></label>`;
+  }
+  $q('quote-plans').innerHTML=Object.entries(CONFIG.plans).map(([key,p])=>option('q-plan-'+key,'website-plan',key,p.title,`${p.description} 含 ${p.pages} 頁。`,money(p.price))).join('');
+  $q('quote-addons').innerHTML=Object.entries(CONFIG.addons).map(([key,a])=>option('q-addon-'+key,'website-addon',key,a.title,a.description,'＋'+money(a.price),'checkbox')).join('');
+  $q('quote-goals').innerHTML=Object.entries(CONFIG.goals).map(([key,title])=>option('q-goal-'+key,'custom-goal',key,title,'','')).join('');
+  $q('quote-custom-features').innerHTML=Object.entries(CONFIG.customFeatures).map(([key,title])=>option('q-custom-'+key,'custom-feature',key,title,'先記下希望的功能，實作範圍與新增費用待評估。','','checkbox')).join('');
+  const steps={
+    website:[['先選一種網站的模樣',CONFIG.included+' '+CONFIG.excluded],['給品牌，剛剛好的內容空間','方案已包含基本頁數，可依需要增加。每增加一頁 '+money(CONFIG.pagePrice)+'。'],['還想為網站添上什麼？','四項加購各 '+money(CONFIG.addons.copy.price)+'，可以依需要選擇，也可以保留最初的樣子。'],['這是你想種下的網站','一起看看內容與預估費用，再和川花確認適合的做法。']],
+    custom:[['先從最想改善的工作開始','軟體專案客製化 '+money(CONFIG.customStart)+' 起。先整理方向，完整費用依需求確認。'],['讓哪些工具，開始彼此說話？','選擇預計串接的工具或平台數量，幫助我們了解需求範圍。'],['希望 AI 與系統，幫上哪些忙？','這裡整理的是需求方向，並非起價已包含的功能承諾；新增需求待評估。'],['把想法帶來，一起找到做法','以下是已知起價與希望討論的需求，新增項目尚未估價。']]
+  };
+  function details(){
+    const state=branches[kind];
+    if(kind==='custom'){
+      const selected=[...state.features].map(key=>CONFIG.customFeatures[key]);
+      return {amount:money(CONFIG.customStart)+' 起',label:'軟體專案起價',rows:[
+        '服務：軟體專案客製化',
+        '已知專案起價：'+money(CONFIG.customStart)+' 起',
+        '希望改善：'+CONFIG.goals[state.goal],
+        '工具串接：'+state.tools+' 個（需求範圍待確認）',
+        '功能需求：'+(selected.length?selected.join('、'):'尚未指定'),
+        '新增需求待評估，尚未加總為完整報價。'
+      ],disclaimer:CONFIG.customDisclaimer};
+    }
+    const plan=CONFIG.plans[state.plan];
+    if(!plan)return {amount:'請先選擇方案',label:'官網建置預估',rows:['先選一種網站的模樣，再一起安排內容與功能。'],disclaimer:CONFIG.disclaimer};
+    const extra=state.pages-plan.pages;
+    const addons=[...state.addons].map(key=>CONFIG.addons[key]);
+    const total=plan.price+extra*CONFIG.pagePrice+addons.reduce((sum,a)=>sum+a.price,0);
+    return {amount:money(total),label:'官網建置預估',rows:[
+      '服務：品牌官網製作',
+      '方案：'+plan.title+'（含 '+plan.pages+' 頁）｜'+money(plan.price),
+      '總頁數：'+state.pages+' 頁；增加 '+extra+' 頁 × '+money(CONFIG.pagePrice)+'｜'+money(extra*CONFIG.pagePrice),
+      ...(addons.length?addons.map(a=>'加購：'+a.title+'｜'+money(a.price)):['加購：無｜'+money(0)]),
+      '建置預估合計：'+money(total)
+    ],disclaimer:CONFIG.disclaimer};
+  }
+  function render(){
+    const state=branches[kind],plan=CONFIG.plans[branches.website.plan];
+    const data=details();
+    ['website','custom'].forEach(key=>$q('quote-kind-'+key).setAttribute('aria-pressed',String(key===kind)));
+    wizard.querySelectorAll('[data-quote-step]').forEach(panel=>{panel.hidden=Number(panel.dataset.quoteStep)!==state.step});
+    wizard.querySelectorAll('[data-quote-kind-panel]').forEach(panel=>{panel.hidden=panel.dataset.quoteKindPanel!==kind});
+    wizard.querySelectorAll('[name="website-plan"]').forEach(input=>{input.checked=input.value===branches.website.plan});
+    wizard.querySelectorAll('[name="website-addon"]').forEach(input=>{input.checked=branches.website.addons.has(input.value)});
+    wizard.querySelectorAll('[name="custom-goal"]').forEach(input=>{input.checked=input.value===branches.custom.goal});
+    wizard.querySelectorAll('[name="custom-feature"]').forEach(input=>{input.checked=branches.custom.features.has(input.value)});
+    $q('q-pages').min=plan?plan.pages:1;
+    $q('q-pages').max=CONFIG.maxPages;
+    $q('q-pages').value=branches.website.pages;
+    $q('quote-pages-value').value=branches.website.pages+' 頁';
+    $q('quote-pages-min').textContent=(plan?plan.pages:1)+' 頁';
+    $q('quote-pages-help').textContent=plan?`${plan.title}已含 ${plan.pages} 頁。目前增加 ${branches.website.pages-plan.pages} 頁，加頁費用 ${money((branches.website.pages-plan.pages)*CONFIG.pagePrice)}。更換方案時，頁數會回到新方案包含的頁數。`:'請先選擇網站方案。';
+    $q('q-tools').value=branches.custom.tools;
+    $q('quote-tools-value').value=branches.custom.tools+' 個';
+    $q('quote-step').textContent='第 '+state.step+' 步 / 4';
+    $q('quote-progress').value=state.step;
+    $q('quote-step-title').textContent=steps[kind][state.step-1][0];
+    $q('quote-step-note').textContent=steps[kind][state.step-1][1];
+    $q('quote-total-label').textContent=data.label;
+    $q('quote-total').value=data.amount;
+    $q('quote-mobile-label').textContent=data.label;
+    $q('quote-mobile-total').value=data.amount;
+    const list=data.rows.map(row=>'<li>'+row+'</li>').join('');
+    $q('quote-breakdown').innerHTML=list;
+    $q('quote-disclaimer').textContent=data.disclaimer;
+    $q('quote-summary').innerHTML='<h3>'+data.label+'：'+data.amount+'</h3><ul class="quote-breakdown">'+list+'</ul><p class="quote-summary-note">'+(kind==='website'?CONFIG.included+' '+CONFIG.excluded+' ':'')+data.disclaimer+'</p>';
+    $q('quote-prev').hidden=state.step===1;
+    $q('quote-next').hidden=state.step===4;
+    $q('quote-next').disabled=kind==='website'&&!plan;
+  }
+  const focusStep=()=>$q('quote-step-title').focus({preventScroll:false});
+  function enter(nextKind){
+    kind=nextKind==='custom'?'custom':'website';
+    branches[kind].step=1;
+    render();
+  }
+  ['website','custom'].forEach(key=>$q('quote-kind-'+key).addEventListener('click',()=>{
+    kind=key;render();
+    $q('quote-status').textContent=(key==='website'?'品牌官網製作':'軟體專案客製化')+'，已保留這個方向的選擇。';
+  }));
+  function changeStep(offset){
+    const state=branches[kind];
+    if(kind==='website'&&!CONFIG.plans[state.plan]&&offset>0)return;
+    state.step=Math.max(1,Math.min(4,state.step+offset));render();focusStep();
+  }
+  $q('quote-next').addEventListener('click',()=>changeStep(1));
+  $q('quote-prev').addEventListener('click',()=>changeStep(-1));
+  $q('quote-reset').addEventListener('click',()=>{
+    branches[kind]=kind==='website'?websiteDefault():customDefault();render();
+    $q('quote-status').textContent='已重新整理目前這個方向；另一種服務的選擇仍保留。';focusStep();
+  });
+  function bounded(value,min,max){const number=Number(value);return Number.isFinite(number)?Math.max(min,Math.min(max,Math.round(number))):min;}
+  wizard.addEventListener('input',e=>{
+    const input=e.target;
+    if(input.name==='website-plan'&&CONFIG.plans[input.value]){
+      branches.website.plan=input.value;branches.website.pages=CONFIG.plans[input.value].pages;
+    }else if(input.id==='q-pages'){
+      const p=CONFIG.plans[branches.website.plan];branches.website.pages=bounded(input.value,p?p.pages:1,CONFIG.maxPages);
+    }else if(input.name==='website-addon'&&CONFIG.addons[input.value]){
+      branches.website.addons[input.checked?'add':'delete'](input.value);
+    }else if(input.name==='custom-goal'&&CONFIG.goals[input.value]){
+      branches.custom.goal=input.value;
+    }else if(input.id==='q-tools'){
+      branches.custom.tools=bounded(input.value,0,5);
+    }else if(input.name==='custom-feature'&&CONFIG.customFeatures[input.value]){
+      branches.custom.features[input.checked?'add':'delete'](input.value);
+    }else return;
+    render();
+  });
+  document.addEventListener('click',e=>{
+    const link=e.target.closest('a[data-route]');
+    if(!link||e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;
+    const url=new URL(link.href,location.href);
+    if(url.origin===location.origin&&url.pathname==='/chuanhua_site_v12_1/ai/quote/')enter(link.dataset.quoteKind);
+  });
+  render();
+})();
 
 /* ═════════ 主頁互動 ═════════ */
 const nav=$('#nav');
@@ -2533,10 +2785,11 @@ async function submit(){
     if (!panel) return;
     if (e.key==='Escape'){e.preventDefault();panel.querySelector('.st-back').click();return}
     if (e.key!=='Tab') return;
-    const links=[...panel.querySelectorAll('a[href],button:not([disabled])')];
+    const links=[...panel.querySelectorAll('a[href],button,input:not([type="hidden"]),select,textarea,[tabindex]')].filter(el=>!el.disabled&&el.tabIndex>=0&&!el.closest('[hidden],[inert]')&&el.getClientRects().length>0);
     const first=links[0], last=links[links.length-1];
+    if(!first){e.preventDefault();panel.querySelector('h1').focus();return}
     if (e.shiftKey && (document.activeElement===first || document.activeElement===panel.querySelector('h1'))){e.preventDefault();last.focus()}
-    else if (!e.shiftKey && document.activeElement===last){e.preventDefault();first.focus()}
+    else if (!e.shiftKey && (document.activeElement===last || document.activeElement===panel.querySelector('h1'))){e.preventDefault();first.focus()}
   });
   const plantById = id => QUIZ_DATA.plants.find(p=>p.id===id);
   const wait = ms => new Promise(r=>setTimeout(r,ms));
