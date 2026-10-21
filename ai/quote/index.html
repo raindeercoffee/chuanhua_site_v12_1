@@ -265,6 +265,9 @@ nav.scrolled{box-shadow:0 4px 24px rgba(90,80,60,.08)}
 .srv h3 small{display:block;font-size:13px;color:var(--river);font-weight:400}
 .srv p{font-size:13.5px;color:var(--ink-soft);font-weight:300;margin-top:10px}
 .srv .fl-icon{position:absolute;top:-11px;right:18px;width:26px;height:26px;filter:drop-shadow(0 2px 5px rgba(90,80,60,.18))}
+.srv .service-entry{display:inline-block;margin-top:20px;color:var(--river);font-size:13px;text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:4px;transition:color .3s,border-color .3s}
+.srv .service-entry:hover{color:var(--pink-deep);border-color:var(--pink-deep)}
+.srv .service-entry:focus-visible{outline:2px solid var(--pink-deep);outline-offset:5px}
 
 /* 品牌／AI 分類：沿用原本的字體、色彩與卡片 */
 .topic-tabs{position:relative;z-index:2;display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
@@ -424,6 +427,19 @@ footer .back-garden:hover{color:var(--pink-deep)}
 .feature-page h1:focus{outline:none}
 .feature-page .st-head p{max-width:620px;margin-top:18px}
 .feature-body{margin:44px auto 0;max-width:760px}
+.feature-body.service-details{max-width:1020px}
+.service-details .topic-tabs{justify-content:center;margin:0 0 42px}
+.service-details .topic-panel{border-top:1px solid var(--line);padding-top:38px}
+.service-detail-title{font:600 clamp(23px,3vw,32px)/1.65 var(--serif);color:var(--river-deep);margin:0 0 10px}
+.service-detail-tag{font-size:13px;letter-spacing:2px;color:var(--river);margin-bottom:24px}
+.service-detail-intro{max-width:760px;color:var(--ink-soft);font-size:15px;line-height:2.15}
+.service-detail-intro p+p{margin-top:14px}
+.service-detail-items{list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:48px;margin:34px 0 32px;padding:0}
+.service-detail-items li{padding:24px 0 26px;border-top:1px solid var(--line)}
+.service-detail-items h3{font:600 18px/1.7 var(--serif);color:var(--river-deep);margin-bottom:9px}
+.service-detail-items p{font-size:14px;line-height:2;color:var(--ink-soft);font-weight:300}
+.service-detail-cta{text-decoration:none}
+@media(max-width:760px){.service-details .topic-tabs{gap:9px;justify-content:flex-start;margin-bottom:30px}.service-details .topic-tab{padding:9px 14px;letter-spacing:0}.service-details .topic-panel{padding-top:28px}.service-detail-items{grid-template-columns:1fr;margin-top:28px}.service-detail-items li{padding:22px 0}.service-detail-intro{font-size:14px}}
 .feature-placeholder{min-height:210px;border:1px dashed var(--line);border-radius:18px;padding:32px 24px;color:var(--ink-soft)}
 .feature-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:16px;margin-top:32px}
 .feature-actions .btn{min-width:180px;text-decoration:none;justify-content:center}
@@ -762,16 +778,16 @@ footer .notes-link{margin-left:24px}
         <div class="srv-grid">
           <article class="srv reveal">
           <svg class="fl-icon" viewBox="0 0 26 26" fill="none" aria-hidden="true"><circle cx="7" cy="9" r="2.6" fill="#D6DAE7"/><circle cx="14" cy="5.6" r="2.2" fill="#E2E5EF"/><circle cx="19.6" cy="10" r="2.7" fill="#CBD1E2"/><circle cx="11" cy="14" r="2.4" fill="#DDE1EC"/><circle cx="18" cy="17" r="2.1" fill="#D6DAE7"/><circle cx="8.4" cy="19.6" r="2.5" fill="#E2E5EF"/><circle cx="7" cy="9" r=".8" fill="#EBD3A4"/><circle cx="19.6" cy="10" r=".8" fill="#EBD3A4"/><circle cx="8.4" cy="19.6" r=".8" fill="#EBD3A4"/></svg>
-          <h3>AI 工作流程自動化<small>AI 代理・流程串接</small></h3><p>把資料整理、表單彙整與重複上稿串成清楚的工作流程，依你的做事方式規劃，讓每天重複的操作少一點。</p></article>
+          <h3>AI 工作流程自動化<small>AI 代理・流程串接</small></h3><p>把資料整理、表單彙整與重複上稿串成清楚的工作流程，依你的做事方式規劃，讓每天重複的操作少一點。</p><a class="service-entry" href="/chuanhua_site_v12_1/ai/" data-route data-service-tab="workflow">看如何開花 →</a></article>
           <article class="srv reveal d1">
           <svg class="fl-icon" viewBox="0 0 26 26" fill="none" aria-hidden="true"><path d="M13 4 C17 3 21 6 20.6 10 C22 13 20 17 16.6 18 C14.6 21 10.6 21 8.6 18.6 C5 18 3.6 14 5 11 C4.6 7 8 4 11 4.6 Z" fill="#D9B0B5"/><path d="M13 7 C15.6 6.4 18 8.4 17.6 11 C18.6 13 17 15.6 14.6 16 C13 18 10 17.6 8.9 15.9 C6.6 15.6 5.6 13 6.6 11 C6.4 8.6 8.6 6.6 10.6 7.2 Z" fill="#C58F97"/><circle cx="12.8" cy="11.8" r="2.4" fill="#E6CBCE"/></svg>
-          <h3>AI 內容與文案生成<small>品牌文案・社群內容</small></h3><p>從品牌語氣、商品文案到社群貼文，建立適合你的內容生成流程。讓人工智慧協助打底，保留品牌自己的聲音。</p></article>
+          <h3>AI 內容與文案生成<small>品牌文案・社群內容</small></h3><p>從品牌語氣、商品文案到社群貼文，建立適合你的內容生成流程。讓 AI 協助打底，保留品牌自己的聲音。</p><a class="service-entry" href="/chuanhua_site_v12_1/ai/" data-route data-service-tab="workflow">看如何開花 →</a></article>
           <article class="srv reveal d2">
           <svg class="fl-icon" viewBox="0 0 26 26" fill="none" aria-hidden="true"><path d="M13 21 C8 21 4.6 17 5.4 12.6 C6 9 9 6.4 13 6.4 C17 6.4 20 9 20.6 12.6 C21.4 17 18 21 13 21 Z" fill="#EBD5D7"/><path d="M13 20 C9.4 20 7 17 7.6 13.6 C8 11 10.4 9 13 9 C15.6 9 18 11 18.4 13.6 C19 17 16.6 20 13 20 Z" fill="#DFBEC2"/><path d="M13 19 C10.6 19 9 17 9.4 14.6 C9.8 13 11.4 11.6 13 11.6 C14.6 11.6 16.2 13 16.6 14.6 C17 17 15.4 19 13 19 Z" fill="#D2A7AD"/><circle cx="13" cy="15.4" r="1.6" fill="#EBD3A4"/></svg>
-          <h3>AI 客製工具開發<small>報表工具・系統串接</small></h3><p>依實際需求規劃報表、記帳或資料查詢工具，串接既有表單與系統。從最卡手的小事開始，做出真正用得上的幫手。</p></article>
+          <h3>AI 客製工具開發<small>報表工具・系統串接</small></h3><p>依實際需求規劃報表、記帳或資料查詢工具，串接既有表單與系統。從最卡手的小事開始，做出真正用得上的幫手。</p><a class="service-entry" href="/chuanhua_site_v12_1/ai/" data-route data-service-tab="workflow">看如何開花 →</a></article>
           <article class="srv reveal">
           <svg class="fl-icon" viewBox="0 0 26 26" fill="none" aria-hidden="true"><circle cx="7" cy="9" r="2.6" fill="#D6DAE7"/><circle cx="14" cy="5.6" r="2.2" fill="#E2E5EF"/><circle cx="19.6" cy="10" r="2.7" fill="#CBD1E2"/><circle cx="11" cy="14" r="2.4" fill="#DDE1EC"/><circle cx="18" cy="17" r="2.1" fill="#D6DAE7"/><circle cx="8.4" cy="19.6" r="2.5" fill="#E2E5EF"/><circle cx="7" cy="9" r=".8" fill="#EBD3A4"/><circle cx="19.6" cy="10" r=".8" fill="#EBD3A4"/><circle cx="8.4" cy="19.6" r=".8" fill="#EBD3A4"/></svg>
-          <h3>品牌官網製作<small>形象官網・手機版網站</small></h3><p>從品牌風格、內容架構到手機版排版，協助規劃與製作官網，並依需求串接表單、預約與人工智慧工具。</p></article>
+          <h3>品牌官網製作<small>形象官網・手機版網站</small></h3><p>從品牌風格、內容架構到手機版排版，協助規劃與製作官網，並依需求串接表單、預約與 AI 工具。</p><a class="service-entry" href="/chuanhua_site_v12_1/ai/" data-route data-service-tab="website">看如何開花 →</a></article>
         </div>
         <div class="topic-intro">
           <p>讓繁瑣的工作變簡單，把時間留給真正重要的事。</p>
@@ -982,7 +998,53 @@ footer .notes-link{margin-left:24px}
     <section class="feature-page" data-feature="ai" hidden>
       <div class="st-top"><a class="st-back" href="/chuanhua_site_v12_1/services/" data-route>← 回到我們做的事</a></div>
       <header class="st-head"><h1 id="feature-ai-title" tabindex="-1">AI 客製化服務</h1><p>讓繁瑣的工作變簡單，把時間留給真正重要的事。</p></header>
-      <div class="feature-body"><div class="feature-placeholder"><p>更多服務內容，正在準備中。</p></div></div>
+      <div class="feature-body service-details">
+        <div class="topic-tabs" role="tablist" aria-label="服務細節分類" data-topic-tabs>
+          <button class="topic-tab" type="button" role="tab" id="detail-website-tab" aria-selected="true" aria-controls="detail-website-panel" tabindex="0">網站製作</button>
+          <button class="topic-tab" type="button" role="tab" id="detail-workflow-tab" aria-selected="false" aria-controls="detail-workflow-panel" tabindex="-1">自動化工作流</button>
+          <button class="topic-tab" type="button" role="tab" id="detail-consulting-tab" aria-selected="false" aria-controls="detail-consulting-panel" tabindex="-1">合作與諮詢</button>
+        </div>
+        <section class="topic-panel" id="detail-website-panel" role="tabpanel" aria-labelledby="detail-website-tab">
+          <h2 class="service-detail-title">打造有質感、定位明確的品牌網站</h2>
+          <p class="service-detail-tag">品牌定位・美學落地</p>
+          <div class="service-detail-intro"><p>網站，是品牌讓人認識自己的地方。</p><p>我們從你的故事與商品出發，梳理內容、安排畫面，把品牌的個性放進字裡行間。讓美感有方向，也讓每一位走進來的人，看懂你的好，找到願意靠近的理由。</p></div>
+          <ul class="service-detail-items">
+            <li><h3>梳理品牌，找到方向</h3><p>你是誰、為誰而做、最想被記住什麼。我們先把這些想清楚，再安排網站的模樣。</p></li>
+            <li><h3>讓美感長出自己的樣子</h3><p>從色彩、字體到畫面的留白，讓每一個細節，都說著同一個品牌故事。</p></li>
+            <li><h3>把想說的話，放對位置</h3><p>整理品牌介紹、商品特色與服務內容，讓訪客循著清楚的路，慢慢認識你。</p></li>
+            <li><h3>照顧每一種螢幕裡的相遇</h3><p>從電腦到手機，細細安排閱讀與操作，讓品牌在不同的畫面裡，都能自在呈現。</p></li>
+            <li><h3>讓喜歡，有下一步</h3><p>依需求串接聯絡表單、預約與服務入口，接住每一次想了解、想合作的心意。</p></li>
+            <li><h3>上線之後，陪它繼續生長</h3><p>依合作需求安排內容更新與網站維護，讓網站跟得上品牌每一個階段的變化。</p></li>
+          </ul>
+          <a class="btn service-detail-cta" href="/chuanhua_site_v12_1/ai/quote/" data-route data-quote-kind="website">看如何開花 →</a>
+        </section>
+        <section class="topic-panel" id="detail-workflow-panel" role="tabpanel" aria-labelledby="detail-workflow-tab" hidden>
+          <h2 class="service-detail-title">讓 AI 接手繁瑣，讓創意有空開花</h2>
+          <p class="service-detail-tag">AI 應用・流程自動化</p>
+          <div class="service-detail-intro"><p>好的想法，需要時間醞釀，也需要留白，才能長出自己的樣子。</p><p>川花把 AI 放進真正用得上的地方。從文案草稿、素材整理，到社群排程與數據報表，依你的工作方式，串起適合的工具與流程。</p><p>讓每天反覆澆水的小事，有幫手一起照顧。把你的心力，留給品牌的下一朵花。</p></div>
+          <ul class="service-detail-items">
+            <li><h3>讓品牌的聲音，持續開花</h3><p>讓 AI 依品牌語氣協助草擬文案，再串接貼文排程與發佈，讓每一次分享都保有自己的聲音。</p></li>
+            <li><h3>把零散數據，整理成生長的線索</h3><p>自動彙整資料與報表，搭配 AI 協助整理重點，讓你更容易看見值得留意的變化。</p></li>
+            <li><h3>讓重要的消息，準時捎來</h3><p>依設定整理新詢問、工作進度與異常提醒，送到慣用的通訊工具，接住每一個需要回應的時刻。</p></li>
+            <li><h3>養一位懂你工作方式的智慧助理</h3><p>整理常用資料、品牌語氣與工作規則，讓助理協助查找資訊、草擬回覆，重要決定仍由你掌握。</p></li>
+            <li><h3>把工具串起，讓流程順著走</h3><p>串接表單、試算表與既有系統，在需要的步驟加入 AI，減少重複輸入與來回整理。</p></li>
+            <li><h3>從一個想法，到一份準備好的內容</h3><p>讓 AI 協助延伸文案、整理素材與套用圖文版型，再交由你細細修整，留下品牌獨有的美感。</p></li>
+          </ul>
+          <a class="btn service-detail-cta" href="/chuanhua_site_v12_1/ai/quote/" data-route data-quote-kind="custom">看如何開花 →</a>
+        </section>
+        <section class="topic-panel" id="detail-consulting-panel" role="tabpanel" aria-labelledby="detail-consulting-tab" hidden>
+          <h2 class="service-detail-title">陪你的想法，找到開花的方向</h2>
+          <p class="service-detail-tag">方向梳理・一起落地</p>
+          <div class="service-detail-intro"><p>有時候，想法已經很多，只是還不知道該從哪裡開始。</p><p>川花陪你看看品牌現在的樣子，也聽聽你想走向的地方。從定位、內容到工作流程，一起釐清問題、安排先後，把遠處的想像，慢慢變成眼前做得到的事。</p></div>
+          <ul class="service-detail-items">
+            <li><h3>找到品牌最有共鳴的核心</h3><p>梳理商品特色、品牌個性與受眾，找到值得深耕的蛋黃層，再讓影響慢慢向外開展。</p></li>
+            <li><h3>看見市場，也看清自己的位置</h3><p>整理市場與競品的線索，找出品牌能回應的需要，讓你的不同，有清楚的表達。</p></li>
+            <li><h3>挑選適合的工具與做法</h3><p>從實際工作裡卡住的地方開始，評估網站、AI 與流程工具，安排用得上的改變。</p></li>
+            <li><h3>把方向，走成具體的下一步</h3><p>依目標、資源與步調拆解工作，讓每一步都有落點，再從實際回饋裡持續調整。</p></li>
+          </ul>
+          <a class="btn service-detail-cta" href="/chuanhua_site_v12_1/ai/quote/" data-route data-quote-kind="custom">看如何開花 →</a>
+        </section>
+      </div>
       <div class="feature-actions">
         <a class="btn" href="/chuanhua_site_v12_1/ai/demo/" data-route>互動展示 →</a>
         <a class="btn" href="/chuanhua_site_v12_1/ai/quote/" data-route>需求詢價 →</a>
@@ -1370,7 +1432,7 @@ $('#navLogo').addEventListener('click',e=>{e.preventDefault();if($('#studio').cl
 const stFlowLink=$('#stFlowLink');
 if(stFlowLink) stFlowLink.addEventListener('click',e=>{e.preventDefault();closeStudio('#flow')});
 
-/* 兩組分類各自切換；左右鍵、Home、End 都可使用 */
+/* 各組分類各自切換；左右鍵、Home、End 都可使用 */
 $$('[data-topic-tabs]').forEach(list=>{
   const tabs=[...list.querySelectorAll('[role="tab"]')];
   function select(tab,focus){
@@ -1395,6 +1457,14 @@ $$('[data-topic-tabs]').forEach(list=>{
     else return;
     e.preventDefault();select(tabs[next],true);
   });
+});
+
+/* 服務卡沿用同一介紹頁，開啟對應的服務分類 */
+document.addEventListener('click',e=>{
+  const link=e.target.closest('a[data-service-tab]');
+  if(!link||e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;
+  const tab=document.getElementById('detail-'+link.dataset.serviceTab+'-tab');
+  if(tab)tab.click();
 });
 
 /* ═════════ 主頁互動 ═════════ */
