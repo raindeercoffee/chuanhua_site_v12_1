@@ -1,8 +1,12 @@
 about/index.html
+ai/demo/index.html
+ai/index.html
+ai/quote/index.html
 cases/index.html
 contact/index.html
 courses/index.html
 home/index.html
+notes/index.html
 policy/index.html
 quiz/index.html
 resonance/index.html

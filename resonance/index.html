@@ -65,6 +65,10 @@
   "/contact/":   {"layer":"main", "section":"#contact",   "title":"找川花說話｜聯絡我們｜川花 RIVER FLOWER", "desc":"課程報名、諮詢預約、合作洽談，都歡迎透過官方 LINE、電話或 Email 找川花。"},
   "/studio/":    {"layer":"studio", "title":"開花教室 BLOOM STUDIO｜川花 RIVER FLOWER", "desc":"推開門，空氣就不一樣了。行銷諮詢、老朋友一對一諮詢，聊完之後，讓你的品牌開花。"},
   "/studio/flow/": {"layer":"studio", "section":"#flow", "title":"開花的流程｜開花教室｜川花 RIVER FLOWER", "desc":"從付款到開花，只要四步：預約付款、付款成功、加入官方 LINE、專人確認時段。"},
+  "/ai/":        {"layer":"feature", "feature":"ai", "noindex":true, "title":"AI 客製化服務｜川花 RIVER FLOWER", "desc":"讓繁瑣的工作變簡單，把時間留給真正重要的事。"},
+  "/ai/demo/":   {"layer":"feature", "feature":"demo", "noindex":true, "title":"AI 工具互動展示｜川花 RIVER FLOWER", "desc":"互動展示功能準備中。"},
+  "/notes/":     {"layer":"feature", "feature":"notes", "noindex":true, "title":"花的筆記｜川花 RIVER FLOWER", "desc":"關於品牌、行銷與 AI 的一些觀察。"},
+  "/ai/quote/":  {"layer":"feature", "feature":"quote", "noindex":true, "title":"需求詢價｜川花 RIVER FLOWER", "desc":"從工作中最繁瑣的地方開始，一起找到適合的解決方式。"},
   "/quiz/":      {"layer":"quiz", "title":"企業生長體質測驗｜16 種植物看你的品牌體質｜川花 RIVER FLOWER", "desc":"16 種植物，對應公司的經營體質與生長狀態。做完測驗，看看你的品牌是哪一種植物。"}
 }
 </script>
@@ -262,6 +266,20 @@ nav.scrolled{box-shadow:0 4px 24px rgba(90,80,60,.08)}
 .srv p{font-size:13.5px;color:var(--ink-soft);font-weight:300;margin-top:10px}
 .srv .fl-icon{position:absolute;top:-11px;right:18px;width:26px;height:26px;filter:drop-shadow(0 2px 5px rgba(90,80,60,.18))}
 
+/* 品牌／AI 分類：沿用原本的字體、色彩與卡片 */
+.topic-tabs{position:relative;z-index:2;display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.topic-tab{font:inherit;font-size:14px;letter-spacing:1px;padding:10px 22px;border:1px solid var(--line);border-radius:99px;background:transparent;color:var(--ink-soft);cursor:pointer;transition:background .3s,color .3s,border-color .3s}
+.topic-tab[aria-selected="true"]{background:var(--card);color:var(--river-deep);border-color:var(--river-mid)}
+.topic-tab:focus-visible,.feature-page a:focus-visible{outline:2px solid var(--pink-deep);outline-offset:5px}
+.topic-panel[hidden],.feature-page[hidden]{display:none!important}
+.topic-intro{position:relative;z-index:2;border-top:1px solid var(--line);margin-top:34px;padding:34px 0 8px}
+.topic-intro p{color:var(--ink-soft);margin-bottom:24px}
+.ai-case-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;margin-top:34px}
+.ai-case{border:1px solid var(--line);border-radius:18px;background:var(--card);padding:28px 26px}
+.ai-case h3{font:400 19px/1.6 var(--serif);color:var(--river-deep)}
+.ai-case p{font-size:13.5px;color:var(--ink-soft);margin-top:10px}
+@media(max-width:760px){.ai-case-grid{grid-template-columns:1fr}.topic-tab{padding:9px 18px}}
+
 /* cases 我們開過的花 */
 .cases{background:linear-gradient(180deg,var(--cases-t),var(--cases-b));position:relative}
 .case-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:22px;margin-top:46px}
@@ -396,6 +414,22 @@ footer .back-garden:hover{color:var(--pink-deep)}
 #bloomfx .fx-petal:nth-child(even){background:linear-gradient(135deg,#D5D8E4,#DFC3C7)}
 #bloomfx.on .fx-petal{animation:fx-petal 1.6s ease-out forwards}
 @keyframes fx-petal{0%{opacity:0;transform:translate(0,0) rotate(0) scale(.4)}25%{opacity:1}100%{opacity:0;transform:translate(var(--dx),var(--dy)) rotate(var(--rot)) scale(1.1)}}
+
+/* 新內容布幕，保留河岸與教室的原本樣式 */
+#feature{position:fixed;inset:0;z-index:1200;overflow-y:auto;overscroll-behavior:contain;visibility:hidden;opacity:0;transition:opacity .6s ease,visibility .6s;background:var(--sky)}
+#feature.open{visibility:visible;opacity:1}
+.feature-page{max-width:900px;margin:auto}
+.feature-page .st-back{display:inline-block;text-decoration:none}
+.feature-page h1{font:400 clamp(28px,4vw,42px)/1.6 var(--serif);color:var(--river-deep);letter-spacing:2px;overflow-wrap:anywhere}
+.feature-page h1:focus{outline:none}
+.feature-page .st-head p{max-width:620px;margin-top:18px}
+.feature-body{margin:44px auto 0;max-width:760px}
+.feature-placeholder{min-height:210px;border:1px dashed var(--line);border-radius:18px;padding:32px 24px;color:var(--ink-soft)}
+.feature-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:16px;margin-top:32px}
+.feature-actions .btn{min-width:180px;text-decoration:none;justify-content:center}
+.notes-list{list-style:none}
+footer .notes-link{margin-left:24px}
+@media(max-width:760px){.feature-actions{flex-direction:column;align-items:stretch}.feature-actions .btn{text-align:center}.feature-placeholder{min-height:180px}footer .notes-link{margin-left:16px}}
 
 /* ═════════ L3 · 開花教室 ═════════ */
 #studio{position:fixed;inset:0;z-index:1100;overflow-y:auto;visibility:hidden;opacity:0;transition:opacity .9s ease,visibility .9s;
@@ -703,6 +737,11 @@ footer .back-garden:hover{color:var(--pink-deep)}
       <div class="eyebrow reveal">WHAT WE DO</div>
       <h2 class="reveal">我們做的事</h2>
       <p class="lead reveal d1">把你的品牌，種進對的人心裡。</p>
+      <div class="topic-tabs" role="tablist" aria-label="服務分類" data-topic-tabs>
+        <button class="topic-tab" type="button" role="tab" id="services-brand-tab" aria-selected="true" aria-controls="services-brand" tabindex="0">品牌行銷</button>
+        <button class="topic-tab" type="button" role="tab" id="services-ai-tab" aria-selected="false" aria-controls="services-ai" tabindex="-1">AI 客製化</button>
+      </div>
+      <div class="topic-panel" id="services-brand" role="tabpanel" aria-labelledby="services-brand-tab">
       <div class="srv-grid">
         <article class="srv reveal">
           <svg class="fl-icon" viewBox="0 0 26 26" fill="none" aria-hidden="true"><circle cx="7" cy="9" r="2.6" fill="#D6DAE7"/><circle cx="14" cy="5.6" r="2.2" fill="#E2E5EF"/><circle cx="19.6" cy="10" r="2.7" fill="#CBD1E2"/><circle cx="11" cy="14" r="2.4" fill="#DDE1EC"/><circle cx="18" cy="17" r="2.1" fill="#D6DAE7"/><circle cx="8.4" cy="19.6" r="2.5" fill="#E2E5EF"/><circle cx="7" cy="9" r=".8" fill="#EBD3A4"/><circle cx="19.6" cy="10" r=".8" fill="#EBD3A4"/><circle cx="8.4" cy="19.6" r=".8" fill="#EBD3A4"/></svg>
@@ -717,6 +756,11 @@ footer .back-garden:hover{color:var(--pink-deep)}
           <svg class="fl-icon" viewBox="0 0 26 26" fill="none" aria-hidden="true"><path d="M13 21 C8 21 4.6 17 5.4 12.6 C6 9 9 6.4 13 6.4 C17 6.4 20 9 20.6 12.6 C21.4 17 18 21 13 21 Z" fill="#EBD5D7"/><path d="M13 20 C9.4 20 7 17 7.6 13.6 C8 11 10.4 9 13 9 C15.6 9 18 11 18.4 13.6 C19 17 16.6 20 13 20 Z" fill="#DFBEC2"/><path d="M13 19 C10.6 19 9 17 9.4 14.6 C9.8 13 11.4 11.6 13 11.6 C14.6 11.6 16.2 13 16.6 14.6 C17 17 15.4 19 13 19 Z" fill="#D2A7AD"/><circle cx="13" cy="15.4" r="1.6" fill="#EBD3A4"/></svg>
           <h3>品牌重塑<small>內容策略</small></h3><p>重新梳理品牌靈魂、受眾與溝通語言，建立一致的內容矩陣。讓老品牌長出新樣貌，也讓新品牌站穩自己的位置。</p></article>
       </div>
+      </div>
+      <div class="topic-panel topic-intro" id="services-ai" role="tabpanel" aria-labelledby="services-ai-tab" hidden>
+        <p>讓繁瑣的工作變簡單，把時間留給真正重要的事。</p>
+        <a class="btn" href="/chuanhua_site_v12_1/ai/" data-route>探索 AI 客製化服務 →</a>
+      </div>
     </div>
   </section>
 
@@ -726,10 +770,24 @@ footer .back-garden:hover{color:var(--pink-deep)}
       <div class="eyebrow reveal">WHAT WE BLOOMED</div>
       <h2 class="reveal">我們開過的花</h2>
       <p class="lead reveal d1">每一個品牌，都是我們聆聽完河聲，親手開出來的。</p>
+      <div class="topic-tabs" role="tablist" aria-label="案例分類" data-topic-tabs>
+        <button class="topic-tab" type="button" role="tab" id="cases-brand-tab" aria-selected="true" aria-controls="cases-brand" tabindex="0">品牌行銷</button>
+        <button class="topic-tab" type="button" role="tab" id="cases-ai-tab" aria-selected="false" aria-controls="cases-ai" tabindex="-1">AI 工具</button>
+      </div>
+      <div class="topic-panel" id="cases-brand" role="tabpanel" aria-labelledby="cases-brand-tab">
       <div class="case-grid">
         <article class="case reveal d1"><div class="ind">個性女裝</div><h3>Mosdress</h3><div class="strat">品牌年輕化內容策略</div><div class="nums"><div class="num"><b>↑ 57%</b><span>新客佔比成長</span></div><div class="num"><b>×2.1</b><span>社群自然觸及</span></div></div></article>
         <article class="case reveal d2"><div class="ind">質感服飾</div><h3>Harper</h3><div class="strat">品牌靈魂重塑 × 內容矩陣</div><div class="nums"><div class="num"><b>×3.0</b><span>內容留存率提升</span></div><div class="num"><b>重建</b><span>品牌識別體系</span></div></div></article>
         <article class="case reveal"><div class="ind">募資操盤</div><h3>小刺蝟</h3><div class="strat">早鳥策略 × 廣告轉換 × 節奏管理</div><div class="nums"><div class="num"><b>499 萬</b><span>上線 15 天達標</span></div><div class="num"><b>0→100</b><span>從冷啟動到熱銷</span></div></div><ul class="case-bullets"><li>市場定位</li><li>早鳥設計</li><li>募資達標</li></ul></article>
+      </div>
+      </div>
+      <div class="topic-panel" id="cases-ai" role="tabpanel" aria-labelledby="cases-ai-tab" hidden>
+        <div class="ai-case-grid">
+          <article class="ai-case"><h3>廣告上稿自動化</h3><p>更多內容，正在準備中。</p></article>
+          <article class="ai-case"><h3>AI 品牌文案師</h3><p>更多內容，正在準備中。</p></article>
+          <article class="ai-case"><h3>發票記帳小幫手</h3><p>更多內容，正在準備中。</p></article>
+          <article class="ai-case"><h3>QC 驗貨報告系統（開發中）</h3><p>更多內容，正在準備中。</p></article>
+        </div>
       </div>
     </div>
   </section>
@@ -896,8 +954,39 @@ footer .back-garden:hover{color:var(--pink-deep)}
       <span class="co-line">© 2026 川花有限公司・統一編號 60605921・台北市信義區忠孝東路五段 508 號 2 樓之 11</span><br>
       <span class="co-line">riverflower2025@gmail.com・02-2885-4268</span>
       <br><a class="back-garden" href="#" id="reGarden">回到花園，再選一朵花</a>
+      <a class="back-garden notes-link" href="/chuanhua_site_v12_1/notes/" data-route>花的筆記 →</a>
     </footer>
   </section>
+</div>
+
+<!-- AI 與筆記共用的內容布幕；只有對應網址的內容會顯示 -->
+<div id="feature" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="feature-ai-title" inert>
+  <div class="st-wrap">
+    <section class="feature-page" data-feature="ai" hidden>
+      <div class="st-top"><a class="st-back" href="/chuanhua_site_v12_1/services/" data-route>← 回到我們做的事</a></div>
+      <header class="st-head"><h1 id="feature-ai-title" tabindex="-1">AI 客製化服務</h1><p>讓繁瑣的工作變簡單，把時間留給真正重要的事。</p></header>
+      <div class="feature-body"><div class="feature-placeholder"><p>更多服務內容，正在準備中。</p></div></div>
+      <div class="feature-actions">
+        <a class="btn" href="/chuanhua_site_v12_1/ai/demo/" data-route>互動展示 →</a>
+        <a class="btn" href="/chuanhua_site_v12_1/ai/quote/" data-route>需求詢價 →</a>
+      </div>
+    </section>
+    <section class="feature-page" data-feature="demo" hidden>
+      <div class="st-top"><a class="st-back" href="/chuanhua_site_v12_1/ai/" data-route>← 回到 AI 客製化服務</a></div>
+      <header class="st-head"><h1 id="feature-demo-title" tabindex="-1">AI 工具互動展示</h1><p>互動展示功能準備中。</p></header>
+      <div class="feature-body"><div class="feature-placeholder" aria-label="互動展示預留區"></div></div>
+    </section>
+    <section class="feature-page" data-feature="notes" hidden>
+      <div class="st-top"><a class="st-back" href="/chuanhua_site_v12_1/home/" data-route>← 回到首頁</a></div>
+      <header class="st-head"><h1 id="feature-notes-title" tabindex="-1">花的筆記</h1><p>關於品牌、行銷與 AI 的一些觀察。</p></header>
+      <div class="feature-body"><ul class="notes-list feature-placeholder" aria-label="文章列表"></ul></div>
+    </section>
+    <section class="feature-page" data-feature="quote" hidden>
+      <div class="st-top"><a class="st-back" href="/chuanhua_site_v12_1/ai/" data-route>← 回到 AI 客製化服務</a></div>
+      <header class="st-head"><h1 id="feature-quote-title" tabindex="-1">告訴川花，你想改善哪件事？</h1><p>從工作中最繁瑣的地方開始，一起找到適合的解決方式。</p></header>
+      <div class="feature-body"><div class="feature-placeholder" aria-label="需求詢價預留區"></div></div>
+    </section>
+  </div>
 </div>
 
 <!-- ═════════ L3 · 開花教室 ═════════ -->
@@ -1263,6 +1352,33 @@ $('#navGarden').addEventListener('click',e=>{e.preventDefault();if($('#studio').
 $('#navLogo').addEventListener('click',e=>{e.preventDefault();if($('#studio').classList.contains('open')) closeStudio();$('#reGarden').click()});
 const stFlowLink=$('#stFlowLink');
 if(stFlowLink) stFlowLink.addEventListener('click',e=>{e.preventDefault();closeStudio('#flow')});
+
+/* 兩組分類各自切換；左右鍵、Home、End 都可使用 */
+$$('[data-topic-tabs]').forEach(list=>{
+  const tabs=[...list.querySelectorAll('[role="tab"]')];
+  function select(tab,focus){
+    tabs.forEach(item=>{
+      const active=item===tab;
+      item.setAttribute('aria-selected',String(active));
+      item.tabIndex=active?0:-1;
+      const panel=document.getElementById(item.getAttribute('aria-controls'));
+      panel.hidden=!active;
+      if(active) panel.querySelectorAll('.reveal').forEach(el=>el.classList.add('in'));
+    });
+    if(focus) tab.focus();
+  }
+  list.addEventListener('click',e=>{const tab=e.target.closest('[role="tab"]');if(tabs.includes(tab))select(tab,false)});
+  list.addEventListener('keydown',e=>{
+    const i=tabs.indexOf(e.target);if(i<0)return;
+    let next;
+    if(e.key==='ArrowRight')next=(i+1)%tabs.length;
+    else if(e.key==='ArrowLeft')next=(i+tabs.length-1)%tabs.length;
+    else if(e.key==='Home')next=0;
+    else if(e.key==='End')next=tabs.length-1;
+    else return;
+    e.preventDefault();select(tabs[next],true);
+  });
+});
 
 /* ═════════ 主頁互動 ═════════ */
 const nav=$('#nav');
@@ -2289,12 +2405,59 @@ async function submit(){
   const SECTION_ROUTE = {};
   Object.entries(META).forEach(([p,m])=>{ if(m.layer==='main' && m.section) SECTION_ROUTE[m.section]=p; });
   const studio = $id('studio');
+  const feature = $id('feature');
+  const featurePages = [...feature.querySelectorAll('[data-feature]')];
+  const featureBackground = [$id('garden'), $id('main'), $id('nav')];
+  function syncIndexing(path){
+    const managed = document.querySelector('meta[name="robots"][data-route-noindex]');
+    if (META[path] && META[path].noindex){
+      if (!managed){
+        const meta = document.createElement('meta');
+        meta.name = 'robots'; meta.content = 'noindex, follow';
+        meta.setAttribute('data-route-noindex',''); document.head.appendChild(meta);
+      }
+    } else if (managed) managed.remove();
+  }
+  function closeFeature(){
+    if (!feature.classList.contains('open')) return false;
+    if (feature.contains(document.activeElement)) document.activeElement.blur();
+    feature.classList.remove('open'); feature.inert = true;
+    feature.setAttribute('aria-hidden','true');
+    featureBackground.forEach(el=>{el.inert=false});
+    featurePages.forEach(el=>{el.hidden=true});
+    document.body.classList.remove('feature-open');
+    if (entered && !studio.classList.contains('open') && !consult.classList.contains('open')) document.body.classList.remove('lock');
+    return true;
+  }
+  function openFeature(name){
+    const panel = featurePages.find(el=>el.dataset.feature===name);
+    featurePages.forEach(el=>{el.hidden=el!==panel});
+    feature.dataset.page = name;
+    feature.setAttribute('aria-labelledby',`feature-${name}-title`);
+    feature.inert = false; feature.setAttribute('aria-hidden','false');
+    feature.classList.add('open');
+    document.body.classList.add('feature-open','lock');
+    featureBackground.forEach(el=>{el.inert=true});
+    feature.scrollTop=0;
+    panel.querySelector('h1').focus({preventScroll:true});
+  }
+  feature.addEventListener('keydown',e=>{
+    const panel=featurePages.find(el=>!el.hidden);
+    if (!panel) return;
+    if (e.key==='Escape'){e.preventDefault();panel.querySelector('.st-back').click();return}
+    if (e.key!=='Tab') return;
+    const links=[...panel.querySelectorAll('a[href],button:not([disabled])')];
+    const first=links[0], last=links[links.length-1];
+    if (e.shiftKey && (document.activeElement===first || document.activeElement===panel.querySelector('h1'))){e.preventDefault();last.focus()}
+    else if (!e.shiftKey && document.activeElement===last){e.preventDefault();first.focus()}
+  });
   const plantById = id => QUIZ_DATA.plants.find(p=>p.id===id);
   const wait = ms => new Promise(r=>setTimeout(r,ms));
   let applying = false;   // 正在照網址擺畫面時，不要再多記一筆足跡
   let section = null;     // 主頁目前停在哪一區
 
   function current(){
+    if (feature.classList.contains('open')) return Object.keys(META).find(p=>META[p].feature===feature.dataset.page) || '/ai/';
     if (consult.classList.contains('open')){
       if (page==='quiz'){
         if (quizState.stage==='questions') return `/quiz/q${Math.min(quizState.quizAnswers.length, QUIZ_DATA.questions.length-1)+1}/`;
@@ -2326,17 +2489,28 @@ async function submit(){
     const p = current();
     if (pagePath(p) !== location.pathname) history.pushState({p}, '', pagePath(p));
     document.title = titleFor(p);
+    syncIndexing(p);
   }
   let timer = null;
   const soon = () => { clearTimeout(timer); timer = setTimeout(record, 80); };
   const mo = new MutationObserver(soon);
   const watchClass = el => el && mo.observe(el, {attributes:true, attributeFilter:['class']});
-  [document.body, studio, consult, ...pages, ...consult.querySelectorAll('.cs-qstage')].forEach(watchClass);
+  [document.body, studio, feature, consult, ...pages, ...consult.querySelectorAll('.cs-qstage')].forEach(watchClass);
   mo.observe($id('qPos'), {childList:true, characterData:true, subtree:true});
   mo.observe($id('qResult'), {childList:true});
 
   /* 記下使用者要去哪一區；選單的 #about 這類連結改成換網址＋捲過去 */
   document.addEventListener('click', e=>{
+    const routeLink = e.target.closest('a[data-route]');
+    if (routeLink && e.button===0 && !e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey){
+      const url = new URL(routeLink.href, location.href);
+      const path = url.pathname.startsWith(BASE+'/') ? url.pathname.slice(BASE.length) : null;
+      if (url.origin===location.origin && META[path]){
+        e.preventDefault();
+        if (url.pathname!==location.pathname) history.pushState({p:path},'',url.pathname);
+        apply(path,false); return;
+      }
+    }
     const a = e.target.closest('a[href^="#"]');
     if (a && SECTION_ROUTE[a.getAttribute('href')]){
       e.preventDefault();
@@ -2354,7 +2528,7 @@ async function submit(){
 
   /* 在主頁上下捲動時，網址跟著停在眼前那一區（不多記足跡） */
   const io = new IntersectionObserver(es=>{
-    if (applying || !document.body.classList.contains('site-open') || studio.classList.contains('open')) return;
+    if (applying || !document.body.classList.contains('site-open') || studio.classList.contains('open') || feature.classList.contains('open')) return;
     const hit = es.filter(x=>x.isIntersecting).pop();
     if (!hit) return;
     section = '#' + hit.target.id;
@@ -2379,6 +2553,11 @@ async function submit(){
         else if ((r=path.match(/^\/consult\/(?:step([123])|done)\/$/))){ step = r[1] ? +r[1] : 'ok'; m = {layer:'quiz'}; }
         else m = META['/'];   // 不認得的網址 → 回花園
       }
+      if (m.layer==='feature'){
+        while (fxBusy){ if (await pause(100)) return; }
+      }
+      const leftFeature = m.layer!=='feature' && closeFeature();
+      syncIndexing(path);
       if (m.layer!=='quiz' && consult.classList.contains('open')) setOpen(false);
       if (m.layer!=='studio' && m.layer!=='quiz' && studio.classList.contains('open')){
         closeStudio();
@@ -2388,13 +2567,23 @@ async function submit(){
       if (m.layer==='garden'){
         section = null;
         if (entered) $id('reGarden').click();
+        if (leftFeature) $id('g-skip').focus({preventScroll:true});
+        return;
+      }
+      if (m.layer==='feature'){
+        section = null;
+        openFeature(m.feature);
         return;
       }
       if (!entered) enterMain(m.layer==='main' ? m.section : null);
       if (m.layer==='main'){
         section = m.section;
         if (!initial){ const el=document.querySelector(m.section); if (el) el.scrollIntoView({behavior: reduced?'auto':'smooth'}); }
-        await pause(initial ? 1200 : 700);
+        if (await pause(initial ? 1200 : 700)) return;
+        if (leftFeature){
+          const heading=document.querySelector(m.section+' h2') || document.querySelector(m.section+' h1') || document.querySelector(m.section);
+          if (heading){heading.tabIndex=-1;heading.focus({preventScroll:true})}
+        }
         return;
       }
       section = m.section || null;
@@ -2404,7 +2593,7 @@ async function submit(){
         if (await pause(reduced?60:1300)) return;
       }
       else if (m.section){ const el=document.querySelector(m.section); if (el) el.scrollIntoView({behavior:'auto', block:'start'}); }
-      if (m.layer!=='quiz') return;
+      if (m.layer!=='quiz'){if(leftFeature)$id('stBack').focus({preventScroll:true});return;}
 
       // 送出過後按返回：直接收起預約卡回到教室，不再顯示填好的表單（避免重複送出）
       if (step!==null && step!=='ok' && submitted){
@@ -2435,6 +2624,7 @@ async function submit(){
       const p = current();
       if (pagePath(p) !== location.pathname) history.replaceState({p}, '', pagePath(p));
       document.title = titleFor(p);
+      syncIndexing(p);
     }
   }
 

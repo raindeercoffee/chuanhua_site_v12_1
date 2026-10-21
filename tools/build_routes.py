@@ -53,6 +53,8 @@ def page_for(text: str, path: str, meta: dict) -> str:
     text = replace_once(text, r'<link rel="canonical" href="[^"]*">', f'<link rel="canonical" href="{url}">')
     text = replace_once(text, r'<meta name="twitter:title" content="[^"]*">', f'<meta name="twitter:title" content="{title}">')
     text = replace_once(text, r'<meta name="twitter:description" content="[^"]*">', f'<meta name="twitter:description" content="{desc}">')
+    if meta.get("noindex"):
+        text = replace_once(text, r"</head>", '<meta name="robots" content="noindex, follow" data-route-noindex>\n</head>')
     return text
 
 
@@ -87,7 +89,8 @@ def main() -> None:
 
     today = datetime.date.today().isoformat()
     urls = "".join(
-        f"  <url>\n    <loc>{SITE}{path}</loc>\n    <lastmod>{today}</lastmod>\n  </url>\n" for path in routes
+        f"  <url>\n    <loc>{SITE}{path}</loc>\n    <lastmod>{today}</lastmod>\n  </url>\n"
+        for path, meta in routes.items() if not meta.get("noindex")
     )
     write(ROOT / "sitemap.xml", f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{urls}</urlset>\n')
 
