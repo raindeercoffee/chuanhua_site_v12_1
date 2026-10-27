@@ -1177,7 +1177,7 @@ footer .notes-link{margin-left:24px}
 #consult.open{visibility:visible;opacity:1}
 .cs-wrap{max-width:640px;margin:0 auto;padding:46px 20px 70px;min-height:100%;display:flex;flex-direction:column;justify-content:center}
 .cs-card{position:relative;background:#FFF;border:1px solid #E2DACB;border-radius:22px;box-shadow:0 18px 50px rgba(90,80,60,.16);padding:38px 36px 30px}
-.cs-close{position:absolute;top:14px;right:16px;background:none;border:none;font-size:18px;color:#6E6A63;cursor:pointer;line-height:1;padding:4px;z-index:2}
+.cs-close{position:absolute;top:5px;right:7px;display:grid;place-items:center;min-width:44px;min-height:44px;background:none;border:none;font-size:18px;color:#6E6A63;cursor:pointer;line-height:1;padding:4px;z-index:2}
 .cs-close:hover{color:#4A5A7C}
 .cs-eyebrow{font-family:var(--eng);font-style:italic;font-size:12px;letter-spacing:4px;color:var(--gold-deep);text-transform:uppercase;margin-bottom:8px}
 .cs-card h3{font-family:var(--serif);font-size:22px;color:#4A5A7C;margin-bottom:6px}
@@ -1320,14 +1320,16 @@ footer .notes-link{margin-left:24px}
   .g-flower .g-img{max-width:min(160px,42vw);height:auto}
 }
 @media (max-width:1080px){
-  .nav-links{position:fixed;top:61px;right:-100%;flex-direction:column;background:rgba(246,242,233,.97);width:min(320px,72%);height:100vh;padding:34px 30px;gap:20px;transition:right .35s;box-shadow:-8px 0 30px rgba(90,80,60,.12);align-items:flex-start}
-  .nav-links.open{right:0}
+  .nav-links{position:fixed;top:61px;right:-100%;flex-direction:column;background:rgba(246,242,233,.97);width:min(320px,72%);height:calc(100vh - 61px);height:calc(100dvh - 61px);padding:34px 30px;gap:20px;transition:right .35s,visibility .35s;box-shadow:-8px 0 30px rgba(90,80,60,.12);align-items:flex-start;overflow-y:auto;visibility:hidden;pointer-events:none}
+  .nav-links.open{right:0;visibility:visible;pointer-events:auto}
   .burger{display:block}
   .nav-close-item{display:block;margin-bottom:14px;align-self:flex-end}
 }
 @media (max-width:640px){
   .srv-grid{grid-template-columns:1fr}
   .contact-card{padding:34px 24px}
+  .way{display:grid;grid-template-columns:84px minmax(0,1fr);align-items:start}
+  .way>span:not(.k){min-width:0;overflow-wrap:anywhere}
   .g-label{white-space:normal;width:min(96px,26vw)}
   #g-skip{top:1rem;right:1rem}
   .g-hint{display:none}
@@ -1451,7 +1453,7 @@ footer .notes-link{margin-left:24px}
 <nav id="nav">
   <div class="nav-in">
     <a class="nav-logo" href="#" id="navLogo"><img src="/chuanhua_site_v12_1/assets/logo-h-color.png" alt="川花 RIVER FLOWER"></a>
-    <button class="burger" id="burger" aria-label="選單"><span></span><span></span><span></span></button>
+    <button class="burger" id="burger" type="button" aria-label="選單" aria-controls="navLinks" aria-expanded="false"><span></span><span></span><span></span></button>
     <ul class="nav-links" id="navLinks">
       <li class="nav-close-item"><button class="nav-close" id="navClose" type="button" aria-label="摺疊選單">× 摺疊功能區</button></li>
       <li><a href="#about">關於我們</a></li>
@@ -1828,7 +1830,7 @@ footer .notes-link{margin-left:24px}
       </div>
       <div class="feature-actions">
         <a class="btn" href="/chuanhua_site_v12_1/ai/demo/" data-route>互動展示 →</a>
-        <a class="btn" href="/chuanhua_site_v12_1/ai/quote/" data-route>需求詢價 →</a>
+        <a class="btn" href="/chuanhua_site_v12_1/ai/quote/" data-route data-quote-kind="custom">需求詢價 →</a>
       </div>
     </section>
     <section class="feature-page service-page" data-feature="service-workflow" hidden>
@@ -1918,11 +1920,11 @@ footer .notes-link{margin-left:24px}
             <li><h3>挑選適合的工具與做法</h3><p>從實際工作裡卡住的地方開始，評估網站、AI 與流程工具，安排用得上的改變。</p></li>
             <li><h3>把方向，走成具體的下一步</h3><p>依目標、資源與步調拆解工作，讓每一步都有落點，再從實際回饋裡持續調整。</p></li>
           </ul>
-          <a class="btn service-detail-cta" href="/chuanhua_site_v12_1/ai/quote/" data-route>看如何開花 →</a>
+          <a class="btn service-detail-cta" href="/chuanhua_site_v12_1/ai/quote/" data-route data-quote-kind="custom">看如何開花 →</a>
       </div>
       <div class="feature-actions">
         <a class="btn" href="/chuanhua_site_v12_1/ai/demo/" data-route>互動展示 →</a>
-        <a class="btn" href="/chuanhua_site_v12_1/ai/quote/" data-route>需求詢價 →</a>
+        <a class="btn" href="/chuanhua_site_v12_1/ai/quote/" data-route data-quote-kind="custom">需求詢價 →</a>
       </div>
     </section>
     <section class="feature-page" data-feature="demo" hidden>
@@ -2382,7 +2384,7 @@ footer .notes-link{margin-left:24px}
 
         <div class="cs-page" data-page="1">
           <div class="cs-eyebrow">First Bloom・Step 1 / 3</div>
-          <h3 id="csTitle">現在的品牌，卡在哪裡？</h3>
+          <h3 id="csPainsTitle">現在的品牌，卡在哪裡？</h3>
           <p class="cs-sub">勾起來的，就是第一次見面我們優先聊的。可複選，憑直覺就好。</p>
           <div id="csPains">
             <button class="cs-check" type="button" aria-pressed="false"><span class="bx">✓</span><span class="tx">品牌長什麼樣子，連自己都說不太清楚</span></button>
@@ -2396,7 +2398,7 @@ footer .notes-link{margin-left:24px}
 
         <div class="cs-page" data-page="2">
           <div class="cs-eyebrow">First Bloom・Step 2 / 3</div>
-          <h3>這一次，你想往哪裡開？</h3>
+          <h3 id="csDirectionTitle">這一次，你想往哪裡開？</h3>
           <p class="cs-sub">沒有標準答案，把每一條拉到心裡的位置就好。</p>
           <div class="cs-slider">
             <div class="lab"><span>這次想要的改變</span><span class="val" style="color:var(--blue)" id="csV-change">50<small>%</small></span></div>
@@ -2417,7 +2419,7 @@ footer .notes-link{margin-left:24px}
 
         <div class="cs-page" data-page="3">
           <div class="cs-eyebrow">First Bloom・Step 3 / 3</div>
-          <h3>好了，讓川花來找你</h3>
+          <h3 id="csContactTitle">好了，讓川花來找你</h3>
           <p class="cs-sub">我們會在 1–2 個工作天內與你聯繫。</p>
           <div class="fm-field">
             <label for="csName">怎麼稱呼你 *</label>
@@ -2456,7 +2458,7 @@ footer .notes-link{margin-left:24px}
         <div class="cs-page" data-page="ok">
           <div class="cs-ok">
             <div class="okflower" aria-hidden="true">❀</div>
-            <h4>預約單已送出</h4>
+            <h4 id="csSuccessTitle">預約單已送出</h4>
             <p>川花收到了，會在 1–2 個工作天內與你聯繫，<br>約好第一次聊天的時間。</p>
             <p style="margin-top:10px">想更快約到？加入官方 LINE，跟我們說聲「我填好了」——</p>
             <a class="btn-line-cs" href="https://line.me/R/ti/p/@riverflower2025" target="_blank" rel="noopener">加入官方 LINE&nbsp;&nbsp;@riverflower2025</a>
@@ -2635,7 +2637,7 @@ function closeStudio(scrollTo_){
   document.body.classList.remove('lock');
   if(scrollTo_){const el=$(scrollTo_); if(el) el.scrollIntoView({behavior: reduced?'auto':'smooth'})}
 }
-$$('[data-studio]').forEach(el=>el.addEventListener('click',e=>{e.preventDefault();openStudio();$('#navLinks').classList.remove('open')}));
+$$('[data-studio]').forEach(el=>el.addEventListener('click',e=>{e.preventDefault();openStudio();setNavOpen(false)}));
 $('#stBack').addEventListener('click',()=>closeStudio('#courses'));
 $('#navGarden').addEventListener('click',e=>{e.preventDefault();if($('#studio').classList.contains('open')) closeStudio();$('#reGarden').click()});
 $('#navLogo').addEventListener('click',e=>{e.preventDefault();if($('#studio').classList.contains('open')) closeStudio();$('#reGarden').click()});
@@ -2838,10 +2840,16 @@ $$('[data-topic-tabs]').forEach(list=>{
 /* ═════════ 主頁互動 ═════════ */
 const nav=$('#nav');
 addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>10),{passive:true});
-$('#burger').addEventListener('click',()=>$('#navLinks').classList.toggle('open'));
-$('#navClose').addEventListener('click',()=>$('#navLinks').classList.remove('open'));
-$$('#navLinks a').forEach(a=>a.addEventListener('click',()=>$('#navLinks').classList.remove('open')));
-$$('#navLinks a').forEach(a=>a.addEventListener('click',()=>$('#navLinks').classList.remove('open')));
+function setNavOpen(open,returnFocus=false){
+  $('#navLinks').classList.toggle('open',open);
+  $('#burger').setAttribute('aria-expanded',String(open));
+  if(returnFocus)$('#burger').focus();
+}
+$('#burger').addEventListener('click',()=>setNavOpen(!$('#navLinks').classList.contains('open')));
+$('#navClose').addEventListener('click',()=>setNavOpen(false,true));
+$$('#navLinks a').forEach(a=>a.addEventListener('click',()=>setNavOpen(false)));
+addEventListener('keydown',e=>{if(e.key==='Escape'&&$('#navLinks').classList.contains('open')){e.preventDefault();setNavOpen(false,true)}});
+matchMedia('(max-width:1080px)').addEventListener('change',()=>setNavOpen(false));
 
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.16});
 $$('.reveal,#steps').forEach(el=>io.observe(el));
@@ -3508,11 +3516,19 @@ function scoreQuiz(state){
 
 const quizState = {stage:'intro', warmupPicks:[], quizAnswers:[], result:null};
 
+function labelConsult(){
+  const active=consult.querySelector('.cs-page.on');
+  const title=active?.dataset.page==='quiz'
+    ?active.querySelector('.cs-qstage.on h3'):active?.querySelector('h3,h4');
+  if(title?.id)consult.setAttribute('aria-labelledby',title.id);
+}
+
 function setQStage(stage){
   quizState.stage = stage;
   consult.querySelectorAll('.cs-qstage').forEach(el => {
     el.classList.toggle('on', el.dataset.qstage === stage);
   });
+  labelConsult();
   consult.scrollTop = 0;
   const wrap = consult.querySelector('.cs-wrap');
   if (wrap) consult.scrollTo({top:0});
@@ -3659,6 +3675,7 @@ function resetQuiz(){
 function show(p){
   page=p;
   pages.forEach(s=>s.classList.toggle('on',s.dataset.page===String(p)));
+  labelConsult();
   const nav=$id('csNav');
   if(p==='quiz'||p==='ok'){nav.style.display='none';return}
   nav.style.display='flex';
