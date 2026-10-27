@@ -1,0 +1,10 @@
+/* 測驗只換手繪圖：2×2 圖集的每格均為 2:3，不拉寬植物。 */
+.quiz-plant-art{display:grid;place-items:center}
+.cs-qcell .quiz-plant-art{width:100%;aspect-ratio:1;transition:transform .3s}
+.quiz-plant-art .quiz-plant-sprite{display:block;width:66.666667%;height:100%;background-repeat:no-repeat;background-size:200% 200%}
+.cs-qcell:hover .quiz-plant-art{transform:scale(1.05)}
+.quiz-plant-art.r-img{display:grid;place-items:center}
+@media(prefers-reduced-motion:reduce){
+  .cs-qcell .quiz-plant-art{transition:none}
+  .cs-qcell:hover .quiz-plant-art{transform:none}
+}

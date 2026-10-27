@@ -669,6 +669,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Noto+Serif+TC:wght@300;400;600;700&family=Noto+Sans+TC:wght@200;300;400;500;700&display=swap" rel="stylesheet">
+<link href="/chuanhua_site_v12_1/assets/quiz-handdrawn.css" rel="stylesheet">
 <style>
 /* ═════════ 川花 v3 ─ 三層空間 ═════════
    L1 花園(選一朵花) → L2 河岸主頁 → L3 開花教室 */
@@ -2488,10 +2489,10 @@ if(matchMedia('(hover:hover)').matches && !reduced){
 /* ═════════ L1 花園:五朵花逐朵綻放 ═════════ */
 /* img = 花朵圖檔名(從左到右 1~5),之後手繪同檔名覆蓋 /chuanhua_site_v12_1/assets/ 即可替換 */
 const FLOWERS=[
-  {label:"關於我們",  en:"WHO WE ARE",  target:"#shore",  img:"flower_1_farLeft.png",  petal:"#93323F", h:118, s:1.0},
-  {label:"如何開花",  en:"HOW IT WORKS",target:"#about",  img:"flower_2_left.png",     petal:"#B5636D", h:138, s:1.1},
-  {label:"我們開過的花",en:"CASES",     target:"#cases",  img:"flower_4_right.png",    petal:"#93323F", h:132, s:1.06},
-  {label:"找川花說話",en:"CONTACT",     target:"#contact",img:"flower_5_farRight.png", petal:"#B5636D", h:112, s:.94},
+  {label:"關於我們",  en:"WHO WE ARE",  target:"#shore",  img:"entry-1-handdrawn.png", petal:"#93323F", h:118, s:1.0},
+  {label:"如何開花",  en:"HOW IT WORKS",target:"#about",  img:"entry-2-handdrawn.png", petal:"#B5636D", h:138, s:1.1},
+  {label:"我們開過的花",en:"CASES",     target:"#cases",  img:"entry-4-handdrawn.png", petal:"#93323F", h:132, s:1.06},
+  {label:"找川花說話",en:"CONTACT",     target:"#contact",img:"entry-5-handdrawn.png", petal:"#B5636D", h:112, s:.94},
 ];
 const field=$('#g-field');
 const MB = innerWidth<640;           /* 手機:花整體縮小,2-2-1 排進一屏 */
@@ -3510,6 +3511,17 @@ function setQStage(stage){
   if (wrap) consult.scrollTo({top:0});
 }
 
+// 按每欄植物之間的實際留白分框，避免前一株的枝葉出現在下一格。
+function quizPlantArt(p, className=''){
+  const index=QUIZ_DATA.plants.indexOf(p), group=Math.floor(index/4)+1, slot=index%4;
+  const x=(slot%2)*100, y=Math.floor(slot/2)*100;
+  const cut=[[760,765],[828,857],[784,793],[781,789]][group-1][slot%2];
+  const height=slot<2?cut:1536-cut;
+  const splitX=[[551,501],[563,538],[524,533],[532,517]][group-1][Math.floor(slot/2)];
+  const width=slot%2?1024-splitX:splitX;
+  return `<span class="quiz-plant-art${className?' '+className:''}" role="img" aria-label="${p.name}"><span class="quiz-plant-sprite" aria-hidden="true" style="width:${width/height*100}%;background-size:${1024/width*100}% ${1536/height*100}%;background-image:url('/chuanhua_site_v12_1/assets/quiz-handdrawn-${group}.png');background-position:${x}% ${y}%"></span></span>`;
+}
+
 function renderWarmup(){
   const grid = $id('qWarmGrid');
   grid.innerHTML = '';
@@ -3518,7 +3530,7 @@ function renderWarmup(){
     cell.type = 'button';
     cell.className = 'cs-qcell';
     cell.dataset.pid = p.id;
-    cell.innerHTML = `<span class="idx">0</span><img src="${p.img}" alt="${p.name}" loading="lazy"><div class="en">${p.en}</div><div class="nm">${p.name}</div>`;
+    cell.innerHTML = `<span class="idx">0</span>${quizPlantArt(p)}<div class="en">${p.en}</div><div class="nm">${p.name}</div>`;
     cell.addEventListener('click', () => toggleWarmup(p.id));
     grid.appendChild(cell);
   });
@@ -3606,7 +3618,7 @@ function renderResult(){
   $id('qResultTitle').textContent = '你的品牌，是這種植物';
   $id('qResult').innerHTML = `
     <div class="r-hero">
-      <img class="r-img" src="${p.img}" alt="${p.name}">
+      ${quizPlantArt(p,'r-img')}
       <div class="r-name">${p.name}<span class="r-en">${p.en}</span></div>
       <div class="r-school">${p.school}・${p.schoolDesc}</div>
       <div class="r-traits">${p.traits.map(t => `<span>${t}</span>`).join('')}</div>
