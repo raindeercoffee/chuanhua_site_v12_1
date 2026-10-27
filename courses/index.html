@@ -2781,8 +2781,10 @@ $$('[data-topic-tabs]').forEach(list=>{
 /* ═════════ 主頁互動 ═════════ */
 const nav=$('#nav');
 addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>10),{passive:true});
+const navMobile=matchMedia('(max-width:1080px)');
 function setNavOpen(open,returnFocus=false){
   $('#navLinks').classList.toggle('open',open);
+  $('#navLinks').inert=navMobile.matches&&!open;
   $('#burger').setAttribute('aria-expanded',String(open));
   if(returnFocus)$('#burger').focus();
 }
@@ -2790,7 +2792,8 @@ $('#burger').addEventListener('click',()=>setNavOpen(!$('#navLinks').classList.c
 $('#navClose').addEventListener('click',()=>setNavOpen(false,true));
 $$('#navLinks a').forEach(a=>a.addEventListener('click',()=>setNavOpen(false)));
 addEventListener('keydown',e=>{if(e.key==='Escape'&&$('#navLinks').classList.contains('open')){e.preventDefault();setNavOpen(false,true)}});
-matchMedia('(max-width:1080px)').addEventListener('change',()=>setNavOpen(false));
+navMobile.addEventListener('change',()=>setNavOpen(false));
+setNavOpen(false);
 
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.16});
 $$('.reveal,#steps').forEach(el=>io.observe(el));
