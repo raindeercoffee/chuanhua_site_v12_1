@@ -2495,7 +2495,7 @@ const FLOWERS=[
   {label:"關於我們",  en:"WHO WE ARE",  target:"#shore",  img:"entry-1-handdrawn.png", petal:"#93323F", h:118, s:1.0},
   {label:"如何開花",  en:"HOW IT WORKS",target:"#about",  img:"entry-2-handdrawn.png", petal:"#B5636D", h:138, s:1.1},
   {label:"我們開過的花",en:"CASES",     target:"#cases",  img:"entry-4-handdrawn.png", petal:"#93323F", h:132, s:1.06},
-  {label:"找川花說話",en:"CONTACT",     target:"#contact",img:"entry-5-handdrawn.png", petal:"#B5636D", h:112, s:.94},
+  {label:"找川花說話",en:"CONTACT",     target:"#contact",img:"entry-5-xinyi.png", petal:"#B5636D", h:124, s:1.0},
 ];
 const field=$('#g-field');
 const MB = innerWidth<640;           /* 手機:花整體縮小,2-2-1 排進一屏 */
@@ -3140,22 +3140,22 @@ const CARE_META = [
 const QUIZ_DATA = {
   plants: [
     {
-      id:'agarwood', name:'沉香木', en:'Agarwood', img:'/chuanhua_site_v12_1/assets/quiz/01_Agarwood.png',
+      id:'frankincense', name:'乳香', en:'Frankincense', img:'/chuanhua_site_v12_1/assets/quiz-plants/frankincense.png',
       school:'堅忍派', schoolDesc:'明明累了還在扛的人',
       traits:['堅忍','扎根','內化','深植'],
-      tagline:'把每一次壓力都內化成獨特的香氣',
-      quote:'真正的深度，是願意在壓力裡繼續呼吸。',
-      depth:'你是沉香木型企業。你把每一次壓力都內化成獨特的香氣——外表沉穩、內在濃郁，市場的辛苦你不太喊，反而在別人放棄的地方繼續生根。像沉香木在受傷處結出香脂，所有承受都轉化成你獨有的品牌質地。但沉香木型的盲點是不會停；你的品牌可以更常允許自己「季節性休養」，讓香氣有時間發酵。',
+      tagline:'把每一道刻痕都凝成珍貴的香氣',
+      quote:'真正的珍貴，是在乾硬的土裡也願意慢慢凝香。',
+      depth:'你是乳香型企業。你把每一道刻痕都凝成珍貴的香氣——外表樸素、內在濃郁，市場的辛苦你不太喊，反而在別人放棄的乾硬岩地繼續生根。像乳香樹在樹皮受傷處滲出樹脂、一滴滴凝成香，所有承受都轉化成你獨有的品牌質地。但乳香型的盲點是不會停；你的品牌可以更常允許自己「季節性休養」，讓樹脂有時間慢慢凝結。',
       care:{
-        water:'穩定，可再集中。你已經知道長遠布局的節奏',
-        sun:'偏內斂，你的價值需要更多的翻譯給市場',
-        seed:'暫緩，先讓香氣結完這一輪',
-        prune:'定期，太多細節會稀釋香氣',
-        repot:'維持即可'
+        water:'穩定，可再集中。你已經習慣在乾地裡長遠布局的節奏',
+        sun:'偏內斂，凝好的香也要被點燃，市場才聞得到你的價值',
+        seed:'暫緩，先讓樹脂凝完這一輪',
+        prune:'定期，刻痕不在多，留在對的位置才凝得出好香',
+        repot:'維持即可，岩地就是你的風土'
       }
     },
     {
-      id:'rose', name:'玫瑰', en:'Rose', img:'/chuanhua_site_v12_1/assets/quiz/02_Rose.png',
+      id:'rose', name:'玫瑰', en:'Rose', img:'/chuanhua_site_v12_1/assets/quiz-plants/rose.png',
       school:'風格派', schoolDesc:'有自己的美感，也不急著討好所有人',
       traits:['風格','品味','界線','一致'],
       tagline:'有明確的品味、清楚的自我，客人來就是為了你的風格',
@@ -3170,37 +3170,37 @@ const QUIZ_DATA = {
       }
     },
     {
-      id:'cactus', name:'仙人掌', en:'Cactus', img:'/chuanhua_site_v12_1/assets/quiz/03_Cactus.png',
+      id:'rockrose', name:'岩玫瑰', en:'Rock Rose', img:'/chuanhua_site_v12_1/assets/quiz-plants/rockrose.png',
       school:'自律派', schoolDesc:'資源再少，也會想辦法把事情做完的人',
       traits:['自律','耐壓','效率','精簡'],
-      tagline:'在最乾的地方也能開花——紀律是你的美學',
-      quote:'你很會活，但別把「撐得住」當成不需要澆水。',
-      depth:'你是仙人掌型企業。你扎根、聚光、深植，卻用快長的節奏活著；在資源有限、環境嚴苛的地方，你反而更會生存。抗壓、精簡、效率高，別人撐不住的季節你照樣開花。但仙人掌型的盲點是把耐受度當成資源充足；因為你很能撐，團隊與品牌常常一路被推到極限才發現缺水。適度引入外部資源、合作與緩衝，不會削弱你的紀律，反而能把紀律轉成更大的成長槓桿。',
+      tagline:'花只開一天，隔天照樣再開——紀律是你的美學',
+      quote:'你天天都能再開一朵，但別把「撐得住」當成不需要澆水。',
+      depth:'你是岩玫瑰型企業。你扎根、聚光、深植，卻用快長的節奏活著；在乾燥的地中海岩坡上，資源越有限，你反而越會生存。抗壓、精簡、效率高，縐紙般的花一天就謝，隔天你照樣再開一朵；連被火燒過的土地，都是你的種子重新發芽的地方。但岩玫瑰型的盲點是把耐受度當成資源充足；因為你很能撐，團隊與品牌常常一路被推到極限才發現缺水。適度引入外部資源、合作與緩衝，不會削弱你的紀律，反而能把紀律轉成更大的成長槓桿。',
       care:{
-        water:'偏散，資源投得快卻容易分散，先對準最重要的那朵花',
-        sun:'不足，產品成熟度高，但市場看見你的機會還不夠',
-        seed:'可適度嘗試，核心夠穩，可以留一小塊苗床測試新方向',
-        prune:'維持即可，重點是不要再用更多工作證明自己能撐',
-        repot:'暫不需要，先補足資源再談擴張'
+        water:'偏散，每天都想開新花，資源容易分散，先對準最重要的那一朵',
+        sun:'不足，葉上的樹脂本來就是香氣原料，但市場聞到你的機會還不夠',
+        seed:'可適度嘗試，根夠穩，可以留一小塊岩縫測試新方向',
+        prune:'維持即可，花謝了就讓它謝，不必再用更多工作證明自己能撐',
+        repot:'暫不需要，岩坡就是你的主場，先補足資源再談擴張'
       }
     },
     {
-      id:'bamboo', name:'竹子', en:'Bamboo', img:'/chuanhua_site_v12_1/assets/quiz/04_Bamboo.png',
+      id:'rosemary', name:'迷迭香', en:'Rosemary', img:'/chuanhua_site_v12_1/assets/quiz-plants/rosemary.png',
       school:'穩向派', schoolDesc:'外面再吵，還是知道自己要往哪裡走的人',
       traits:['穩向','韌性','彈性','節奏'],
-      tagline:'彎而不折，在變動中保持自己的節奏',
-      quote:'真正的堅韌，是每一節都留了呼吸的空間。',
-      depth:'你是竹子型企業。你扎根穩、能量分散在整片竹林、慢慢積蓄爆發力，也會透過地下根系持續延展。你不容易被短期趨勢帶走，真正的優勢是有方向但不僵硬。竹子在颱風裡不斷，靠的是每一節都留了呼吸的空間。但竹子型的盲點是把穩定誤認成不需要更新；當外部環境真的改變，適度吸收新方法與新訊號，才能讓你的根系繼續有生命力。',
+      tagline:'風吹不亂，在變動中守住自己的方向',
+      quote:'真正的專注，是風再大也記得自己要往哪裡長。',
+      depth:'你是迷迭香型企業。你扎根穩、枝條向四方舒展、莖幹慢慢木質化積蓄底氣，而且越修剪越長得密實。你不容易被短期趨勢帶走，真正的優勢是有方向但不僵硬。迷迭香在海風吹拂的坡地也不亂，靠的是細細的針葉與一年年長硬的莖；它被叫做「記憶之草」，記得的正是自己要往哪裡長。但迷迭香型的盲點是把穩定誤認成不需要更新；當外部環境真的改變，適度吸收新方法與新訊號，才能讓你的枝條繼續有生命力。',
       care:{
-        water:'穩定，像地下竹根，看不見但一直累積',
-        sun:'分散，整片林都在光下，但缺少一支代表性的標誌',
-        seed:'適合，以相鄰能力與既有根系延伸，比跳躍式跨界更有利',
-        prune:'定期，該修枝時一定要修，避免資源被過時做法占住',
-        repot:'不急著換盆，但要確保架構能容納持續擴張的根系'
+        water:'穩定，像慢慢長硬的木質莖，看不見但一直累積',
+        sun:'分散，整叢都在光下，但缺少一枝代表性的標誌',
+        seed:'適合，像從老枝剪下扦插，以相鄰能力延伸，比跳躍式跨界更有利',
+        prune:'定期，越修越密，別讓老化的枝條占住新芽的位置',
+        repot:'不急著換盆，但要確保土壤透氣，架構能容納持續擴張的根系'
       }
     },
     {
-      id:'sunflower', name:'向日葵', en:'Sunflower', img:'/chuanhua_site_v12_1/assets/quiz/05_Sunflower.png',
+      id:'sunflower', name:'向日葵', en:'Sunflower', img:'/chuanhua_site_v12_1/assets/quiz-plants/sunflower.png',
       school:'使命派', schoolDesc:'有一個相信的方向，就會想把所有人一起帶過去的人',
       traits:['使命','熱情','感染力','速度'],
       tagline:'光是你的天賦——當花開遍之時，你就是最耀眼的',
@@ -3215,7 +3215,7 @@ const QUIZ_DATA = {
       }
     },
     {
-      id:'vine', name:'藤蔓', en:'Vine', img:'/chuanhua_site_v12_1/assets/quiz/06_Vine.png',
+      id:'vine', name:'藤蔓', en:'Vine', img:'/chuanhua_site_v12_1/assets/quiz-plants/vine.png',
       school:'領航派', schoolDesc:'看到空間就會開始佈局的人',
       traits:['領航','布局','連結','延伸'],
       tagline:'爬過牆、爬過樹——走到哪都佔一席之地',
@@ -3230,7 +3230,7 @@ const QUIZ_DATA = {
       }
     },
     {
-      id:'cedar', name:'雪松', en:'Cedar', img:'/chuanhua_site_v12_1/assets/quiz/07_Cedar.png',
+      id:'cedar', name:'雪松', en:'Cedar', img:'/chuanhua_site_v12_1/assets/quiz-plants/cedar.png',
       school:'擔當派', schoolDesc:'大家一有事就會先想到你的人',
       traits:['擔當','可信','專業','地標'],
       tagline:'市場的地標——很多人靠你決定行業走向',
@@ -3245,22 +3245,22 @@ const QUIZ_DATA = {
       }
     },
     {
-      id:'tea', name:'茶樹', en:'Tea', img:'/chuanhua_site_v12_1/assets/quiz/08_Tea.png',
+      id:'chamomile', name:'洋甘菊', en:'Chamomile', img:'/chuanhua_site_v12_1/assets/quiz-plants/chamomile.png',
       school:'夢想派', schoolDesc:'在別人沒注意的地方，默默把一件事做到很美的人',
       traits:['夢想','細節','回甘','深耕'],
-      tagline:'不靠喧嘩搶鏡，回甘才是你真正的辨識度',
-      quote:'不是每種價值都要第一口就很濃，但要讓人記得你的回甘。',
-      depth:'你是茶樹型企業。你扎根穩、能量散、成長其實很快，但真正的價值要在適合自己的風土裡慢慢長出來；你深耕某個利基，市場不一定第一眼就被你吸引，可是接觸過的人往往會記得你的細節與回甘。你做的是需要感受力、工序與累積的事，品牌價值常藏在體驗裡。但茶樹型的盲點是太相信好東西自然會被懂；如果入口、訊息與搜尋路徑太模糊，再好的風味也可能被埋沒。你的任務不是變得喧嘩，而是替對的人留一條清楚走進來的路。',
+      tagline:'不靠喧嘩搶鏡，越細品越回甘，才是你真正的辨識度',
+      quote:'不是每朵花都要開在最顯眼的地方，但要讓人記得你的溫柔。',
+      depth:'你是洋甘菊型企業。你扎根穩、能量散、成長其實很快，但真正的價值要在不起眼的角落裡慢慢開出來；你深耕某個利基，市場不一定第一眼就被你吸引，可是細細品過的人往往會記得你的溫和與回甘。像一杯慢慢泡開的洋甘菊花草茶，你做的是需要感受力、工序與累積的事，品牌價值常藏在體驗裡。但洋甘菊型的盲點是太相信好東西自然會被懂；如果入口、訊息與搜尋路徑太模糊，再好的風味也可能被埋沒。你的任務不是變得喧嘩，而是替對的人留一條清楚走進來的路。',
       care:{
-        water:'需要穩定而細緻的投入，不適合一次灌入大量資源',
-        sun:'不必強光式曝光，但至少要讓核心客群知道去哪裡找到你',
-        seed:'小範圍測試，從既有生態延伸，不追求大量廣播',
-        prune:'定期修剪，保留最有品質的新芽，移除會分散資源的雜訊',
-        repot:'不宜頻繁搬動，先保護能讓你長好的核心環境'
+        water:'需要穩定而細緻的投入，像慢慢泡開的花，不適合一次灌入大量資源',
+        sun:'不必強光式曝光，小白花開在角落也好，但要讓核心客群知道去哪裡找到你',
+        seed:'小範圍測試，像自己落下的種子在附近發芽，不追求大量廣播',
+        prune:'定期採收，摘下開得最好的花，移除會分散資源的雜訊',
+        repot:'不宜頻繁搬動，先保護能讓小花安心開的那塊土'
       }
     },
     {
-      id:'olive', name:'橄欖', en:'Olive', img:'/chuanhua_site_v12_1/assets/quiz/09_Olive.png',
+      id:'olive', name:'橄欖', en:'Olive', img:'/chuanhua_site_v12_1/assets/quiz-plants/olive.png',
       school:'耐力派', schoolDesc:'不是衝最快，但能一直做下去的人',
       traits:['耐力','長期','複利','穩健'],
       tagline:'時間是你的朋友——你做的是「做得久」的生意',
@@ -3275,22 +3275,22 @@ const QUIZ_DATA = {
       }
     },
     {
-      id:'pine', name:'黑松', en:'Pine', img:'/chuanhua_site_v12_1/assets/quiz/10_JapaneseBlackPine.png',
+      id:'immortelle', name:'永久花', en:'Immortelle', img:'/chuanhua_site_v12_1/assets/quiz-plants/immortelle.png',
       school:'原則派', schoolDesc:'寧可慢，也不想把標準做低的人',
       traits:['原則','標準','質地','經典'],
-      tagline:'老饕會找到你——姿態是幾十年風雨煉出來的',
-      quote:'經典不是舊，是禁得起被時代重新看一次。',
-      depth:'你是黑松型企業。你扎根深、姿態有結構、慢工細活，長期守住自己的核心根據地。市場知道你的東西不一定便宜，也不一定追新，但它有經過時間驗證的質地。你的優勢是標準與辨識力，不容易因風向改變就失去形。但黑松型的盲點是「把標準變成唯一答案」；真正的經典不是拒絕新世代，而是能保留核心，同時讓新的審美找到入口。你要守的是根，不是每一根舊枝。',
+      tagline:'識貨的人會找到你——顏色是經得起時間留下來的',
+      quote:'經典不是舊，是過了很多年，顏色還在。',
+      depth:'你是永久花型企業。你扎根深、姿態有結構、慢工細活，長期守住自己的核心根據地。市場知道你的東西不一定便宜，也不一定追新，但它有經過時間驗證的質地，就像永久花乾燥之後，顏色與形狀都不褪。你的優勢是標準與辨識力，不容易因風向改變就失去形。但永久花型的盲點是「把標準變成唯一答案」；真正的經典不是拒絕新世代，而是能保留核心，同時讓新的審美找到入口。你要守的是花色，不是每一片舊葉。',
       care:{
-        water:'穩、少、對的位置，把資源放在品質與長期資產上',
-        sun:'低調但有辨識度，可增加讓新客理解價值的內容翻譯',
-        seed:'極少，以能延續核心技藝與品牌標準的方向為主',
-        prune:'需要精準，保留樹形不是保留所有舊做法',
+        water:'少而精準，把資源放在品質與長期資產上',
+        sun:'低調但有辨識度，像銀灰葉不搶眼，可增加讓新客理解價值的內容翻譯',
+        seed:'極少，以能延續核心技藝、經得起時間的方向為主',
+        prune:'需要精準，留住花色不是留住所有舊做法',
         repot:'不必頻繁更換，但接班與通路世代更替要提前準備'
       }
     },
     {
-      id:'cinnamon', name:'肉桂', en:'Cinnamon', img:'/chuanhua_site_v12_1/assets/quiz/11_Cinnamon.png',
+      id:'cinnamon', name:'肉桂', en:'Cinnamon', img:'/chuanhua_site_v12_1/assets/quiz-plants/cinnamon.png',
       school:'多才派', schoolDesc:'很多事情都做得不錯，所以反而難選主角的人',
       traits:['多才','靈活','延伸','可塑'],
       tagline:'一種香氣，可以進入很多場景——但你仍需要一個主味',
@@ -3305,7 +3305,7 @@ const QUIZ_DATA = {
       }
     },
     {
-      id:'jasmine', name:'茉莉', en:'Jasmine', img:'/chuanhua_site_v12_1/assets/quiz/12_Jasmine.png',
+      id:'jasmine', name:'茉莉', en:'Jasmine', img:'/chuanhua_site_v12_1/assets/quiz-plants/jasmine.png',
       school:'關懷派', schoolDesc:'會記得每個客人細節，也希望每個人都被照顧好的人',
       traits:['關懷','溫度','信任','黏著'],
       tagline:'香氣會鑽進客人心裡——你跟每個客人都很近',
@@ -3320,7 +3320,7 @@ const QUIZ_DATA = {
       }
     },
     {
-      id:'mint', name:'薄荷', en:'Mint', img:'/chuanhua_site_v12_1/assets/quiz/13_Mint.png',
+      id:'mint', name:'薄荷', en:'Mint', img:'/chuanhua_site_v12_1/assets/quiz-plants/mint.png',
       school:'效率派', schoolDesc:'看到問題就想立刻處理，不喜歡繞路的人',
       traits:['效率','俐落','清楚','擴散'],
       tagline:'一種下去，整片園子都是薄荷',
@@ -3335,7 +3335,7 @@ const QUIZ_DATA = {
       }
     },
     {
-      id:'lavender', name:'薰衣草', en:'Lavender', img:'/chuanhua_site_v12_1/assets/quiz/14_Lavender.png',
+      id:'lavender', name:'薰衣草', en:'Lavender', img:'/chuanhua_site_v12_1/assets/quiz-plants/lavender.png',
       school:'療癒派', schoolDesc:'很會感受氣氛，也知道怎麼讓人慢下來的人',
       traits:['療癒','體驗','安全感','節奏'],
       tagline:'你的品牌是一種節奏，不是一個產品',
@@ -3350,7 +3350,7 @@ const QUIZ_DATA = {
       }
     },
     {
-      id:'ivy', name:'常春藤', en:'Ivy', img:'/chuanhua_site_v12_1/assets/quiz/15_Ivy.png',
+      id:'ivy', name:'常春藤', en:'Ivy', img:'/chuanhua_site_v12_1/assets/quiz-plants/ivy.png',
       school:'連結派', schoolDesc:'走到哪裡都能和人搭上線的人',
       traits:['連結','社群','合作','共創'],
       tagline:'你的社群是資產——認識的人多，喜歡你的人多',
@@ -3365,7 +3365,7 @@ const QUIZ_DATA = {
       }
     },
     {
-      id:'lemon', name:'檸檬', en:'Lemon', img:'/chuanhua_site_v12_1/assets/quiz/16_Lemon.png',
+      id:'lemon', name:'檸檬', en:'Lemon', img:'/chuanhua_site_v12_1/assets/quiz-plants/lemon.png',
       school:'重啟派', schoolDesc:'有高低起伏，但總能再開一次的人',
       traits:['重啟','爆發','恢復','週期'],
       tagline:'一輪開花、一輪結果，修枝之後再長新芽',
@@ -3386,9 +3386,9 @@ const QUIZ_DATA = {
     {
       q:'有人有問「你們家的強項是？」你第一個想回答的是——',
       options:[
-        {text:'「我們做很久了，產品耐看又耐用。」', weights:{pine:3, olive:1, agarwood:1}},
+        {text:'「我們做很久了，產品耐看又耐用。」', weights:{immortelle:3, olive:1, frankincense:1}},
         {text:'「我們的風格很獨特，一眼就知道是我們。」', weights:{rose:3, lavender:1}},
-        {text:'「我們擅長解決很多不同的問題，而且速度很快。」', weights:{mint:3, cactus:1}},
+        {text:'「我們擅長解決很多不同的問題，而且速度很快。」', weights:{mint:3, rockrose:1}},
         {text:'「我們認識很多人，什麼資源都能幫你串起來。」', weights:{vine:3, ivy:1}}
       ]
     },
@@ -3396,16 +3396,16 @@ const QUIZ_DATA = {
       q:'這個月忽然多了一筆預算，你會——',
       options:[
         {text:'加碼投廣告，把聲量一次拉到最大', weights:{sunflower:3, mint:1}},
-        {text:'投在產品跟細節上，先讓產品再升級', weights:{tea:3, pine:1, lavender:1}},
-        {text:'先留著，等到真的該用的時機', weights:{olive:3, agarwood:1, cactus:1}},
+        {text:'投在產品跟細節上，先讓產品再升級', weights:{chamomile:3, immortelle:1, lavender:1}},
+        {text:'先留著，等到真的該用的時機', weights:{olive:3, frankincense:1, rockrose:1}},
         {text:'不如，開一條新的線試試看？', weights:{cinnamon:3, lemon:1}}
       ]
     },
     {
       q:'團隊出事的時候，你第一時間會——',
       options:[
-        {text:'自己先默默扛起來，能不麻煩別人就別麻煩', weights:{agarwood:3, cactus:1}},
-        {text:'主動跳出來當大家的靠山，把狀況接過來', weights:{cedar:3, agarwood:1}},
+        {text:'自己先默默扛起來，能不麻煩別人就別麻煩', weights:{frankincense:3, rockrose:1}},
+        {text:'主動跳出來當大家的靠山，把狀況接過來', weights:{cedar:3, frankincense:1}},
         {text:'快速判斷之後，直接找方法處理', weights:{mint:3, vine:1}},
         {text:'先安撫大家情緒，搞清楚再慢慢處理', weights:{lavender:3, jasmine:1}}
       ]
@@ -3413,26 +3413,26 @@ const QUIZ_DATA = {
     {
       q:'你的客人，通常是怎麼找到你的？',
       options:[
-        {text:'老客人介紹的，一個帶一個', weights:{jasmine:3, tea:1, lavender:1}},
+        {text:'老客人介紹的，一個帶一個', weights:{jasmine:3, chamomile:1, lavender:1}},
         {text:'在網路上看到，被內容或活動吸引來的', weights:{sunflower:3, mint:1}},
-        {text:'業界本來就知道你，找你是理所當然的事', weights:{cedar:3, bamboo:1}},
+        {text:'業界本來就知道你，找你是理所當然的事', weights:{cedar:3, rosemary:1}},
         {text:'合作、聯名、活動這種場合認識的', weights:{ivy:3, vine:1}}
       ]
     },
     {
       q:'對你來說，理想的成長速度是——',
       options:[
-        {text:'慢慢來比較快。把根扎穩扎深，底子厚才不怕風吹', weights:{agarwood:3, bamboo:1, tea:1}},
+        {text:'慢慢來比較快。把根扎穩扎深，底子厚才不怕風吹', weights:{frankincense:3, rosemary:1, chamomile:1}},
         {text:'衝刺與休眠交替。順著四季的節奏，一輪一輪來', weights:{lemon:3, olive:1}},
         {text:'搭上風口直接起飛！趁勢一路狂飆，越快越好', weights:{sunflower:3, vine:1, ivy:1}},
-        {text:'按部就班穩定輸出，不求大起大落，每天成長一點點', weights:{bamboo:3, olive:1, cactus:1}}
+        {text:'按部就班穩定輸出，不求大起大落，每天成長一點點', weights:{rosemary:3, olive:1, rockrose:1}}
       ]
     },
     {
       q:'別人形容你的品牌，最常說的是——',
       options:[
-        {text:'審美與質感都很到位，像精緻高雅的觀葉植物', weights:{rose:3, lavender:1, tea:1}},
-        {text:'專業又值得信任，像可靠的大樹', weights:{pine:3, cedar:1, bamboo:1}},
+        {text:'審美與質感都很到位，像精緻高雅的觀葉植物', weights:{rose:3, lavender:1, chamomile:1}},
+        {text:'專業又值得信任，經得起時間的經典', weights:{immortelle:3, cedar:1, rosemary:1}},
         {text:'應變力極強，像隨風舒展、生機勃勃的藤蔓', weights:{cinnamon:3, vine:1, ivy:1}},
         {text:'細膩又溫柔，靜靜療癒人的暖心花草', weights:{jasmine:3, lavender:1}}
       ]
@@ -3440,34 +3440,34 @@ const QUIZ_DATA = {
     {
       q:'資源很少的時候，你的反應是——',
       options:[
-        {text:'即使雨水不夠，也要用極限發揮，默默撐過去', weights:{cactus:3, agarwood:1, mint:1}},
+        {text:'即使雨水不夠，也要用極限發揮，默默撐過去', weights:{rockrose:3, frankincense:1, mint:1}},
         {text:'尋找合拍的夥伴，借助彼此的力量一起成長', weights:{vine:3, ivy:1}},
-        {text:'先好好保護最珍貴的核心，等待時機成熟', weights:{pine:3, tea:1, cactus:1}},
-        {text:'給自己一點喘息空間，順一順思緒再重新出發', weights:{lemon:3, bamboo:1}}
+        {text:'先好好保護最珍貴的核心，等待時機成熟', weights:{immortelle:3, chamomile:1, rockrose:1}},
+        {text:'給自己一點喘息空間，順一順思緒再重新出發', weights:{lemon:3, rosemary:1}}
       ]
     },
     {
       q:'你最不喜歡的工作狀態是——',
       options:[
-        {text:'一直被打斷，沒辦法把一件事好好做深', weights:{tea:3, agarwood:1}},
-        {text:'步調被外界帶著跑，找不回自己的生長節奏', weights:{bamboo:3, rose:1}},
-        {text:'懸而未決的事堆積如山，效率窒礙難行', weights:{cactus:3, mint:1}},
+        {text:'一直被打斷，沒辦法把一件事好好做深', weights:{chamomile:3, frankincense:1}},
+        {text:'步調被外界帶著跑，找不回自己的生長節奏', weights:{rosemary:3, rose:1}},
+        {text:'懸而未決的事堆積如山，效率窒礙難行', weights:{rockrose:3, mint:1}},
         {text:'大家都很累，工作的氣氛也變得緊繃', weights:{lavender:3, jasmine:1}}
       ]
     },
     {
       q:'如果一定要砍掉一件正在做的事，你最捨不得——',
       options:[
-        {text:'多年累積的主線，那是好不容易才長成的年輪', weights:{olive:3, pine:1, bamboo:1}},
+        {text:'多年累積的主線，那是好不容易才長成的年輪', weights:{olive:3, immortelle:1, rosemary:1}},
         {text:'剛有起色的新方向，就像剛冒頭的新芽捨不得剪', weights:{cinnamon:3, lemon:1}},
         {text:'交織交纏的根系夥伴，多年合作早就分不開', weights:{ivy:3, jasmine:1}},
-        {text:'盛開得最燦爛的花朵！那可是公司代表作', weights:{rose:3, tea:1}}
+        {text:'盛開得最燦爛的花朵！那可是公司代表作', weights:{rose:3, chamomile:1}}
       ]
     },
     {
       q:'一年後，你最希望聽到別人說——',
       options:[
-        {text:'「看著你們一路挺過來，還變得更好。」', weights:{olive:3, agarwood:1, bamboo:1}},
+        {text:'「看著你們一路挺過來，還變得更好。」', weights:{olive:3, frankincense:1, rosemary:1}},
         {text:'「現在只要聊起這領域，第一個就想到你。」', weights:{cedar:3, sunflower:1, ivy:1}},
         {text:'「驚喜看到你們蛻變，展現出全新的模樣。」', weights:{lemon:3, cinnamon:1}},
         {text:'「一直以來我都很喜歡你們，沒有變過。」', weights:{jasmine:3, rose:1, lavender:1}}
@@ -3531,15 +3531,9 @@ function setQStage(stage){
   if (wrap) consult.scrollTo({top:0});
 }
 
-// 按每欄植物之間的實際留白分框，避免前一株的枝葉出現在下一格。
+// 每株植物一張透明圖，等比例放進格子裡。
 function quizPlantArt(p, className=''){
-  const index=QUIZ_DATA.plants.indexOf(p), group=Math.floor(index/4)+1, slot=index%4;
-  const x=(slot%2)*100, y=Math.floor(slot/2)*100;
-  const cut=[[760,765],[828,857],[784,793],[781,789]][group-1][slot%2];
-  const height=slot<2?cut:1536-cut;
-  const splitX=[[551,501],[563,538],[524,533],[532,517]][group-1][Math.floor(slot/2)];
-  const width=slot%2?1024-splitX:splitX;
-  return `<span class="quiz-plant-art${className?' '+className:''}" role="img" aria-label="${p.name}"><span class="quiz-plant-sprite" aria-hidden="true" style="width:${width/height*100}%;background-size:${1024/width*100}% ${1536/height*100}%;background-image:url('/chuanhua_site_v12_1/assets/quiz-handdrawn-${group}.png');background-position:${x}% ${y}%"></span></span>`;
+  return `<span class="quiz-plant-art${className?' '+className:''}" role="img" aria-label="${p.name}"><span class="quiz-plant-sprite" aria-hidden="true" style="background-image:url('/chuanhua_site_v12_1/assets/quiz-plants/${p.id}.png')"></span></span>`;
 }
 
 function renderWarmup(){
@@ -3875,7 +3869,7 @@ async function submit(){
 
 /* ═════════ 網址管理員 ═════════
    每拉開／收起一塊布幕、測驗每走一步，網址就跟著換；手機按「返回」回到上一步。
-   直接打開某個網址（例：/quiz/result/cactus/）會自動擺好那個畫面。
+   直接打開某個網址（例：/quiz/result/rockrose/）會自動擺好那個畫面。
    網址清單在 <head> 的 #route-meta；改完首頁要跑 python tools/build_routes.py 產生各網址的頁面。 */
 (()=>{
   const BASE = '/chuanhua_site_v12_1';

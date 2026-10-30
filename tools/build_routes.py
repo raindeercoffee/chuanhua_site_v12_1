@@ -1,7 +1,7 @@
 """產生川花每個網址的頁面＋網站地圖。
 
 為什麼要這支：網站其實只有一份 index.html，畫面靠「布幕」切換。
-為了讓 /about/、/quiz/result/cactus/ 這些網址「直接打開也找得到」、Google 也收得到，
+為了讓 /about/、/quiz/result/rockrose/ 這些網址「直接打開也找得到」、Google 也收得到，
 每個網址都放一份 index.html 的副本，只換掉 <head> 裡的標題、簡介和正牌網址。
 打開後由 index.html 最下面的「網址管理員」照網址擺好畫面。
 
