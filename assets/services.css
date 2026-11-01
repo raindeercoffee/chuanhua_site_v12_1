@@ -15,12 +15,13 @@
 .svc-breadcrumb [aria-current]{color:var(--ink-soft)}
 .svc-head-detail{text-align:left;max-width:none;margin:36px 0 52px}
 .svc-head-detail>p:not(.svc-kicker){margin:0;max-width:760px}
+.svc-head-detail .svc-head-flower{margin:0 0 18px;width:76px;height:90px}
 .svc-group{margin-top:64px}
 .svc-group>h2{padding-bottom:22px;border-bottom:1px solid var(--line);margin-bottom:28px}
 .svc-card-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
 .svc-card{display:flex;flex-direction:column;align-items:flex-start;position:relative;padding:30px 26px 26px;background:var(--card);border:1px solid var(--line);border-radius:20px;text-decoration:none;color:var(--ink);transition:transform .3s,border-color .3s,box-shadow .3s;min-width:0}
 .svc-card:hover{transform:translateY(-5px);border-color:var(--leaf);box-shadow:0 14px 30px color-mix(in srgb,var(--river-deep) 8%,transparent)}
-.svc-flower{width:36px;height:54px;object-fit:contain;object-position:left bottom;margin-bottom:14px}
+.svc-flower{width:64px;height:72px;object-fit:contain;object-position:left bottom;margin-bottom:14px}
 .svc-card h3{margin:0 0 4px}
 .svc-card-subtitle{display:block;font-size:12px;color:var(--pink-deep);letter-spacing:1px;margin:0 0 8px}
 .svc-card p{font-size:13px;line-height:1.95;color:var(--ink-soft);margin:10px 0 22px}
@@ -50,8 +51,9 @@
 .svc-child-link{display:inline-block;padding:11px 18px;border:1px solid var(--line);border-radius:12px;color:var(--river-deep);text-decoration:none;font-size:13px;background:var(--card);transition:border-color .25s}
 .svc-child-link:hover{border-color:var(--leaf)}
 .svc-steps{padding:0;list-style:none;display:grid;gap:28px}
-.svc-steps li{display:grid;grid-template-columns:38px 1fr;gap:20px;align-items:start}
-.svc-step-flower{width:32px;height:48px;object-fit:contain;margin-top:4px}
+.svc-steps li{display:grid;grid-template-columns:56px 1fr;gap:20px;align-items:start}
+.svc-step-flower{width:52px;height:62px;object-fit:contain;margin-top:4px}
+.svc-steps .svc-step-duration{color:var(--pink-deep);margin-top:8px;font-size:13px}
 .svc-step-number{font:400 12px/1.5 var(--eng);color:var(--pink-deep);letter-spacing:2px}
 .svc-steps h3{margin:2px 0 8px;font-size:18px}
 .svc-pricing{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:30px}
@@ -76,9 +78,8 @@
 .svc-child{max-width:940px}
 .svc-child .svc-head{margin-top:44px;margin-bottom:38px}
 .svc-construction{padding:50px 28px 46px;text-align:center;border:1px solid var(--line);border-radius:28px;background:var(--card);position:relative;overflow:hidden}
-.svc-construction::before{content:"";position:absolute;width:230px;height:230px;border-radius:50%;background:var(--pink-light);opacity:.25;left:calc(50% - 115px);top:2px;pointer-events:none}
 .svc-construction>*{position:relative}
-.svc-construction-flower{width:60px;height:90px;object-fit:contain;display:block;margin:0 auto 22px;animation:svc-flower-sway 6s ease-in-out infinite;transform-origin:bottom center}
+.svc-construction-flower{width:120px;height:130px;object-fit:contain;display:block;margin:0 auto 22px;animation:svc-flower-sway 6s ease-in-out infinite;transform-origin:bottom center}
 .svc-construction h2{margin:10px 0 18px}
 .svc-construction>p:not(.svc-kicker){font-size:14px;color:var(--ink-soft);margin-bottom:30px}
 @keyframes svc-flower-sway{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}

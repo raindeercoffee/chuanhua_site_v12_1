@@ -146,10 +146,9 @@ def render_notes(text: str, articles: list[dict]) -> str:
     routes = load_routes(text)
     if "/notes/" not in routes or routes["/notes/"].get("feature") != "notes":
         raise ValueError("首頁缺少既有開花筆記路由")
-    flower_match = re.search(r'<(?:svg\b[^>]*\bclass="fl-icon"[^>]*>.*?</svg>|img\b[^>]*\bclass="fl-icon"[^>]*>)', text, re.S)
-    if not flower_match:
-        raise ValueError("找不到可沿用的原有花朵圖示")
-    flower = flower_match.group(0)
+    # 筆記列表保留原圖，不隨首頁卡片所用插畫改變。
+    flower = ('<img class="fl-icon" src="/chuanhua_site_v12_1/assets/botanical/fl-a.png" '
+              'alt="" aria-hidden="true" loading="lazy" width="26" height="26">')
     cards, pages = [], []
     for article in articles:
         identity = article["id"]
@@ -186,8 +185,11 @@ def render_notes(text: str, articles: list[dict]) -> str:
             '</section>'
         )
     text = replace_marked(text, "NOTES-LIST", "\n".join(cards))
+    latest_plants = ("lavender", "chamomile", "rosemary")
     latest = [card.replace('<h2 class="note-card-title">', '<h3 class="note-card-title">')
-              .replace('</h2>', '</h3>').replace('閱讀筆記 →', '閱讀 →') for card in cards[:3]]
+              .replace('</h2>', '</h3>').replace('閱讀筆記 →', '閱讀 →')
+              .replace('assets/botanical/fl-a.png', f'assets/quiz-plants/{plant}.png')
+              for card, plant in zip(cards[:3], latest_plants)]
     text = replace_marked(text, "NOTES-LATEST", "\n".join(latest))
     text = replace_marked(text, "NOTE-ARTICLES", "\n".join(pages))
     # 只移除本生成器曾建立的筆記文章，不動其他頁面路由。
@@ -288,9 +290,32 @@ def write(path: Path, content: str) -> None:
     path.write_text(content, encoding="utf-8", newline="\n")
 
 
+def render_legacy_service_routes(text: str) -> str:
+    """Keep retired service addresses and their former child pages reachable."""
+    block = re.search(r'<script type="application/json" id="route-meta">(.*?)</script>', text, re.S)
+    if not block:
+        raise ValueError("首頁缺少 route-meta")
+    routes = json.loads(block.group(1), object_pairs_hook=unique_object)
+    redirects = {
+        "/services/marketing-planning/": "/services/brand-marketing/",
+        "/services/marketing-planning/campaigns/": "/services/brand-marketing/",
+        "/services/brand-strategy/": "/services/brand-marketing/",
+        "/services/brand-strategy/content-framework/": "/services/brand-marketing/",
+        "/services/copy-skill/": "/services/content/",
+        "/services/copy-skill/voice-guide/": "/services/content/",
+    }
+    for old, new in redirects.items():
+        if new not in routes:
+            raise ValueError(f"舊網址的目的地不存在：{new}")
+        routes[old] = {**routes[new], "redirectTo": new}
+    payload = safe_json(routes)
+    return text[:block.start(1)] + "\n" + payload + "\n" + text[block.end(1):]
+
+
 def main() -> None:
     text = SOURCE.read_text(encoding="utf-8")
     text = render_services(text)
+    text = render_legacy_service_routes(text)
     articles = load_notes()
     text = render_notes(text, articles)
     routes = load_routes(text)
@@ -322,7 +347,8 @@ def main() -> None:
     urls = "".join(
         f"  <url>\n    <loc>{SITE}{path}</loc>\n    <lastmod>{today}</lastmod>\n  </url>\n"
         # 測試站仍禁止收錄；網站地圖保留文章網址，供內容與連結驗收。
-        for path, meta in routes.items() if not meta.get("noindex") or path.startswith("/notes/")
+        for path, meta in routes.items()
+        if not meta.get("redirectTo") and (not meta.get("noindex") or path.startswith(("/notes/", "/services/")))
     )
     write(ROOT / "sitemap.xml", f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{urls}</urlset>\n')
 

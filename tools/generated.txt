@@ -26,6 +26,8 @@ notes/sme-ai-adoption-5-questions/index.html
 policy/index.html
 quiz/index.html
 resonance/index.html
+services/ad-ops/index.html
+services/ad-ops/sheet-spec/index.html
 services/ads-audit/index.html
 services/ads-audit/report/index.html
 services/ads/index.html

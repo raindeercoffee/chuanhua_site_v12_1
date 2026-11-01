@@ -33,10 +33,9 @@ def load_services() -> list[dict]:
     if not isinstance(data, dict) or set(data) != {"services"} or not isinstance(data["services"], list):
         raise ValueError("服務資料必須是 services 陣列")
     services = data["services"]
-    expected = {"ads", "marketing-planning", "brand-marketing", "brand-strategy", "ads-audit",
-                "website", "workflow", "content", "copy-skill", "tools"}
-    if len(services) != 10 or any(not isinstance(s, dict) for s in services):
-        raise ValueError("服務資料必須包含十個服務物件")
+    expected = {"ads", "brand-marketing", "ads-audit", "website", "workflow", "content", "tools", "ad-ops"}
+    if len(services) != 8 or any(not isinstance(s, dict) for s in services):
+        raise ValueError("服務資料必須包含八個服務物件")
     if {s.get("slug") for s in services} != expected:
         raise ValueError("服務代稱缺漏或重複")
     for service in services:
@@ -46,15 +45,17 @@ def load_services() -> list[dict]:
                 raise ValueError(f"{label}.{field} 必須有文字")
         if not isinstance(service.get("subtitle"), str) or service["group"] not in GROUPS:
             raise ValueError(f"{label} 副標或分組錯誤")
-        if service["flower"] not in {f"assets/botanical/fl-{c}.png" for c in "abcd"}:
+        if not (service["flower"].startswith("assets/quiz-plants/") or service["flower"] == "assets/entry-5-xinyi.png") or not (ROOT / service["flower"]).is_file():
             raise ValueError(f"{label} 必須使用既有手繪小花")
+        if not isinstance(service.get("intro"), list) or not 2 <= len(service["intro"]) <= 3 or any(not isinstance(p, str) or not p.strip() for p in service["intro"]):
+            raise ValueError(f"{label}.intro 必須有二至三段")
         for field in ("audience", "problems", "pricingFactors"):
             values = service.get(field)
             if not isinstance(values, list) or not values or any(not isinstance(v, str) or not v.strip() for v in values):
                 raise ValueError(f"{label}.{field} 必須是文字清單")
         for field, low, high, keys in (
             ("items", 4, 8, ("title", "description")),
-            ("steps", 3, 5, ("title", "description")),
+            ("steps", 4, 6, ("title", "description", "duration")),
             ("faqs", 3, 5, ("question", "answer")),
             ("children", 1, 2, ("slug", "title", "description")),
         ):
@@ -66,8 +67,10 @@ def load_services() -> list[dict]:
         child_slugs = [c["slug"] for c in service["children"]]
         if len(set(child_slugs)) != len(child_slugs) or any(not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", slug) for slug in child_slugs):
             raise ValueError(f"{label} 的子頁代稱不安全或重複")
-    if any(sum(s["group"] == group for s in services) != 5 for group in GROUPS):
-        raise ValueError("每組必須各有五個服務")
+    if any(sum(s["group"] == group for s in services) != 4 for group in GROUPS):
+        raise ValueError("每組必須各有四個服務")
+    if len({s["flower"] for s in services}) != 8:
+        raise ValueError("每個服務必須使用不同植物")
     return services
 
 
@@ -124,7 +127,7 @@ def detail(service: dict, services: list[dict]) -> str:
         f'<a href="#{prefix}{key}" data-svc-anchor>{label}</a>' for key, label in SECTIONS) + '</nav>'
     audience = "".join(f'<li>{esc(text)}</li>' for text in service["audience"])
     problems = "".join(f'<li>{esc(text)}</li>' for text in service["problems"])
-    intro = ('<p class="svc-intro">' + esc(service["description"]) + '</p><div class="svc-intro-grid">'
+    intro = (''.join('<p class="svc-intro">' + esc(p) + '</p>' for p in service["intro"]) + '<div class="svc-intro-grid">'
              '<div><h3>適合這樣的你</h3><ul>' + audience + '</ul></div>'
              '<div><h3>一起解開的事</h3><ul>' + problems + '</ul></div></div>')
     items = '<ul class="svc-items">' + "".join(
@@ -133,7 +136,7 @@ def detail(service: dict, services: list[dict]) -> str:
         link(service_path(service) + child["slug"] + "/", child["title"] + " →", "svc-child-link") for child in service["children"]) + '</nav>'
     process = '<ol class="svc-steps">' + "".join(
         f'<li>{flower(service, "svc-step-flower")}<div><span class="svc-step-number">{index:02}</span>'
-        f'<h3>{esc(step["title"])}</h3><p>{esc(step["description"])}</p></div></li>'
+        f'<h3>{esc(step["title"])}</h3><p>{esc(step["description"])}</p><p class="svc-step-duration">{esc(step["duration"])}</p></div></li>'
         for index, step in enumerate(service["steps"], 1)) + '</ol>'
     pricing = ('<div class="svc-pricing"><p class="svc-price">起價 NT$49,000</p>'
                '<p>費用會依實際工作範圍調整，以下是需求訪談時會一起確認的事：</p><ul>'
@@ -153,7 +156,7 @@ def detail(service: dict, services: list[dict]) -> str:
     subtitle = f'<p class="svc-kicker">{esc(service["subtitle"])}</p>' if service["subtitle"] else ""
     return (f'<section class="feature-page svc-page svc-detail" data-feature="{feature}" hidden>'
             '<div class="st-top">' + link("/services/", "← 回到服務項目", "st-back") + '</div>'
-            + breadcrumb(service) + '<header class="svc-head svc-head-detail">' + subtitle
+            + breadcrumb(service) + '<header class="svc-head svc-head-detail">' + flower(service, "svc-head-flower") + subtitle
             + f'<h1 id="feature-{feature}-title" tabindex="-1">{esc(service["name"])}</h1><p>{esc(service["summary"])}</p></header>'
             f'<div class="svc-layout">{toc}<div class="svc-body">{sections}</div></div>'
             '<nav class="svc-related" aria-label="其他服務"><h2>其他服務</h2><div class="svc-card-grid">'
@@ -193,7 +196,7 @@ def render_services(text: str) -> str:
     routes = json.loads(block.group(1), object_pairs_hook=unique_object)
     # 本產生器只管理服務樹；筆記、詢價與其他既有路由原樣保留。
     routes = {path: meta for path, meta in routes.items() if not path.startswith("/services/")}
-    routes["/services/"] = route_meta("services", "服務項目｜品牌行銷・AI 與數位工具", "川花的十項服務，從品牌行銷、數位廣告到官網製作與 AI 工具，依你的需要一步步了解。")
+    routes["/services/"] = route_meta("services", "服務項目｜品牌行銷・AI 與數位工具", "川花的八項服務，從品牌行銷、數位廣告到官網製作與 AI 工具，依你的需要一步步了解。")
     for service in services:
         path = service_path(service)
         meta = route_meta("service-" + service["slug"], service["name"], service["description"])
