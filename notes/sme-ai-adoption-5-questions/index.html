@@ -1045,6 +1045,7 @@ if (!['/chuanhua_site_v12_1', '/chuanhua_site_v12_1/', '/'].includes(location.pa
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Noto+Serif+TC:wght@300;400;600;700&family=Noto+Sans+TC:wght@200;300;400;500;700&display=swap" rel="stylesheet">
 <link href="/chuanhua_site_v12_1/assets/quiz-handdrawn.css" rel="stylesheet">
+<link href="/chuanhua_site_v12_1/assets/notes-transition.css" rel="stylesheet">
 <style>
 /* ═════════ 川花 v3 ─ 三層空間 ═════════
    L1 花園(選一朵花) → L2 河岸主頁 → L3 開花教室 */
@@ -3541,6 +3542,7 @@ if(!reduced){
 </script>
 
 <!-- 在見面之前・行銷諮詢・互動預約卡：Firebase + Google 試算表 -->
+<script src="/chuanhua_site_v12_1/assets/notes-transition.js"></script>
 <script type="module">
 const firebaseConfig = {
   apiKey:            "AIzaSyDm38xIAhr21bdccmcatjZOwViQ5LRxWOc",
@@ -4364,7 +4366,7 @@ async function submit(){
     if (entered && !studio.classList.contains('open') && !consult.classList.contains('open')) document.body.classList.remove('lock');
     return true;
   }
-  function openFeature(name){
+  function openFeature(name, direct=false){
     const panel = featurePages.find(el=>el.dataset.feature===name);
     if (!panel) return;
     featurePages.forEach(el=>{el.hidden=el!==panel});
@@ -4376,6 +4378,7 @@ async function submit(){
     featureBackground.forEach(el=>{el.inert=true});
     feature.scrollTop=0;
     panel.querySelectorAll('.reveal').forEach(el=>el.classList.add('in'));
+    window.RiverNotes.animateVisible(panel,direct);
     panel.querySelector('h1').focus({preventScroll:true});
     // 首次直接開網址時，等布幕完成第一個畫格後再確認焦點；舊頁不可搶回焦點。
     requestAnimationFrame(()=>requestAnimationFrame(()=>{
@@ -4461,7 +4464,7 @@ async function submit(){
       if (url.origin===location.origin && META[path]){
         e.preventDefault();
         if (url.pathname!==location.pathname) history.pushState({p:path},'',url.pathname);
-        apply(path,false); return;
+        apply(path,false,path==='/notes/'&&!feature.classList.contains('open')); return;
       }
     }
     const a = e.target.closest('a[href^="#"]');
@@ -4493,7 +4496,8 @@ async function submit(){
   /* 照網址擺好畫面（第一次打開，或按了返回／下一頁）
      連按返回時只聽最新那一次：每次編號 gen，舊的那次醒來發現不是最新就停手 */
   let gen = 0;
-  async function apply(path, initial){
+  async function apply(path, initial, notesFromMain=false){
+    window.RiverNotes.cancel();
     if (META[path] && META[path].redirectTo){
       path = META[path].redirectTo;
       history.replaceState({p:path}, '', pagePath(path));
@@ -4529,12 +4533,15 @@ async function submit(){
       }
       if (m.layer==='feature'){
         section = null;
-        const animatedEntry=!initial&&(m.feature==='cases'||m.feature==='notes');
-        if (animatedEntry){
+        if (!initial&&m.feature==='notes'&&notesFromMain){
+          await window.RiverNotes.play();
+          if(stale())return;
+          openFeature(m.feature);
+        } else if (!initial&&m.feature==='cases'){
           // 同用教室的花瓣。快速返回或改選時，舊回呼只結束等待，不再開啟舊頁。
           await new Promise(resolve=>bloomTransition(()=>{if(!stale())openFeature(m.feature);resolve()}));
           if(stale())return;
-        } else openFeature(m.feature);
+        } else openFeature(m.feature,initial);
         return;
       }
       if (!entered) enterMain(m.layer==='main' ? m.section : null);
