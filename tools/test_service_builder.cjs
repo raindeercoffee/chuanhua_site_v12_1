@@ -4,7 +4,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 const api = require('../assets/item-estimator.js');
-const { CONFIG, calculate, createState, setQuantity, moveItem, formatMoney, renderTotal } = api;
+const { CONFIG, COMPLETENESS, calculate, calculateCompleteness, createState, setQuantity, moveItem, formatMoney, renderTotal } = api;
 const copy = x => JSON.parse(JSON.stringify(x));
 const services = Object.entries(CONFIG);
 let checks = 0;
@@ -112,9 +112,33 @@ test('每個服務隨機操作 200 次，逐步獨立加總', () => {
     }
   }
 });
+test('規劃完整度依已選種類計算，與價格相互獨立', () => {
+  for (const [, original] of services) {
+    const service = copy(original), state = createState(service);
+    state.selected = [];
+    assert.equal(calculateCompleteness(service, state), 80);
+    const basePrice = calculate(service, state).subtotal;
+    assert.equal(basePrice, service.base);
+    const first = service.items[0];
+    moveItem(service, state, first.id, 'selected');
+    const afterOne = calculateCompleteness(service, state);
+    assert.ok(afterOne > 80);
+    assert.equal(calculate(service, state).subtotal, basePrice + first.price * first.min);
+    if (first.unit) { setQuantity(service, state, first.id, 3); assert.equal(calculateCompleteness(service, state), afterOne); }
+    moveItem(service, state, first.id, 'available');
+    assert.equal(calculateCompleteness(service, state), 80);
+    for (const item of service.items) moveItem(service, state, item.id, 'selected');
+    assert.equal(calculateCompleteness(service, state), 99);
+    moveItem(service, state, first.id, 'available');
+    assert.ok(calculateCompleteness(service, state) < 99);
+  }
+  assert.equal(calculateCompleteness({items:[]}, {selected:[]}), 80);
+  assert.equal(calculateCompleteness({items:[{id:'x'}]}, {selected:[{id:'x'}]}, {base:60, span:30}), 90);
+  assert.deepEqual(COMPLETENESS, {base:80, span:19, duration:800, badgeDuration:1500});
+});
 test('頁面實際渲染金額與調價輸入', () => {
   const elements = new Map();
-  function element(selector) { if (!elements.has(selector)) elements.set(selector, { textContent:'', innerHTML:'', hidden:false, value:'', classList:{ add(){}, remove(){} } }); return elements.get(selector); }
+  function element(selector) { if (!elements.has(selector)) elements.set(selector, { textContent:'', innerHTML:'', hidden:false, value:'', style:{setProperty(){}}, setAttribute(){}, classList:{ add(){}, remove(){} } }); return elements.get(selector); }
   const handlers = {};
   const root = { dataset:{service:'website'}, innerHTML:'', querySelector:element, addEventListener(type, fn){ handlers[type] = fn; } };
   const storage = {};
@@ -126,6 +150,7 @@ test('頁面實際渲染金額與調價輸入', () => {
     api.mountAll();
     const service = copy(CONFIG.website), state = createState(service), result = calculate(service, state);
     assert.equal(element('.ie-price').textContent, formatMoney(result.subtotal));
+    assert.equal(element('.ie-completion-number').textContent, calculateCompleteness(service, state) + '%');
     assert.ok(element('.ie-range').textContent.includes(formatMoney(result.high)));
     assert.ok(element('.ie-monthly').textContent.includes(formatMoney(result.monthly)));
     assert.equal(element('.ie-editor').hidden, false);

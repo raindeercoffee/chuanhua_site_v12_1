@@ -1232,15 +1232,20 @@ nav.scrolled{box-shadow:0 4px 24px rgba(90,80,60,.08)}
 .services{background:linear-gradient(180deg,var(--services-t),var(--services-b));color:var(--ink);position:relative;overflow:hidden}
 .services::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 50% 36% at 82% 8%,rgba(255,255,255,.28),transparent 70%)}
 .srv-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:46px;position:relative;z-index:2}
-.srv{position:relative;background:#fff;border:1px solid var(--line);border-radius:18px;padding:28px 26px;box-shadow:0 8px 26px rgba(90,80,60,.07);transition:transform .35s,box-shadow .35s,border-color .35s}
-.srv:hover{transform:translateY(-7px);box-shadow:0 18px 40px rgba(90,80,60,.12);border-color:rgba(147,50,63,.32)}
+.srv{position:relative;background:#fff;border:1px solid var(--line);border-radius:18px;padding:28px 26px;box-shadow:0 8px 26px rgba(90,80,60,.07);transition:transform .25s cubic-bezier(.22,.61,.36,1),box-shadow .25s ease,border-color .25s ease}
+@media (hover:hover) and (pointer:fine){.srv:hover{transform:translateY(-7px);box-shadow:0 18px 40px rgba(90,80,60,.16);border-color:rgba(147,50,63,.32)}.srv:hover .fl-icon{transform:scale(1.1) rotate(4deg)}}
+@media (hover:none), (pointer:coarse){.srv:active{transform:translateY(-4px);box-shadow:0 14px 32px rgba(90,80,60,.16)}.srv:active .fl-icon{transform:scale(1.06)}}
+@media (prefers-reduced-motion:reduce){.srv:hover,.srv:active{transform:none;border-color:var(--line);box-shadow:0 18px 40px rgba(90,80,60,.16)}.srv:hover .fl-icon,.srv:active .fl-icon{transform:none}}
 .srv[href]{display:block;text-decoration:none}
 .srv[href]:focus-visible{outline:2px solid var(--pink-deep);outline-offset:5px}
 .srv h3{font-family:var(--serif);font-size:19px;color:var(--river-deep);margin:8px 0 4px;line-height:1.5}
 .srv h3 small{display:block;font-size:13px;color:var(--river);font-weight:400}
 .srv p{font-size:13.5px;color:var(--ink-soft);font-weight:300;margin-top:10px}
 .fl-icon{object-fit:contain}
-.srv .fl-icon{position:absolute;top:-11px;right:18px;width:26px;height:26px;object-fit:contain;filter:drop-shadow(0 2px 5px rgba(90,80,60,.18))}
+.srv .fl-icon{position:absolute;top:-11px;right:18px;width:26px;height:26px;object-fit:contain;filter:drop-shadow(0 2px 5px rgba(90,80,60,.18));transform-origin:center;transition:transform .25s cubic-bezier(.22,.61,.36,1)}
+@media (pointer:coarse){.srv.is-touch-pressed{transform:translateY(-4px);box-shadow:0 14px 32px rgba(90,80,60,.16)}.srv.is-touch-pressed .fl-icon{transform:scale(1.06)}}
+@media (prefers-reduced-motion:reduce){.srv.is-touch-pressed{transform:none;border-color:var(--line);box-shadow:0 18px 40px rgba(90,80,60,.16)}.srv.is-touch-pressed .fl-icon{transform:none}}
+
 .srv .service-entry{display:inline-block;margin-top:20px;color:var(--river);font-size:13px;text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:4px;transition:color .3s,border-color .3s}
 .srv .service-entry:hover{color:var(--pink-deep);border-color:var(--pink-deep)}
 .srv .service-entry:focus-visible{outline:2px solid var(--pink-deep);outline-offset:5px}
@@ -4621,6 +4626,12 @@ async function submit(){
   addEventListener('popstate', ()=>apply(localPath(), false));
   if (localPath() !== '/') apply(localPath(), true);
 })();
+</script>
+<script>
+/* 觸碰時保留按下狀態，放開或捲動後立即還原。 */
+(()=>{let pressed=null;const clear=()=>{if(pressed){pressed.classList.remove('is-touch-pressed');pressed=null}};
+document.addEventListener('pointerdown',e=>{if(e.pointerType!=='touch')return;clear();const card=e.target.closest('.srv,.svc-card');if(card){pressed=card;card.classList.add('is-touch-pressed')}},{passive:true});
+document.addEventListener('pointerup',clear,{passive:true});document.addEventListener('pointercancel',clear,{passive:true});document.addEventListener('scroll',clear,{passive:true,capture:true});})();
 </script>
 </body>
 </html>

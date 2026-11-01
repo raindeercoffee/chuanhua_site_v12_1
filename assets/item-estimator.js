@@ -7,6 +7,8 @@
   'use strict';
   // 每項格式：名稱、說明、單價、是否預設加入、數量單位（有填才顯示計數）。
   const item = (name, description, price, selected = false, unit = '', group = '') => ({ id: name, name, description, price, selected, unit, min: 1, group });
+  // 規劃完整度只計算已選加值項目比例，不參與價格運算。
+  const COMPLETENESS = Object.freeze({ base: 80, span: 19, duration: 800, badgeDuration: 1500 });
   const commonMaintenance = { none: 0, basic: 3000, full: 8000 };
   const make = (name, flower, included, items) => ({ name, flower, base: 49000, included, items, maintenance: { ...commonMaintenance } });
   const CONFIG = {
@@ -34,6 +36,13 @@
     const subtotal = service.base + lines.reduce((sum, line) => sum + line.amount, 0);
     return { base: service.base, unitPrices: Object.fromEntries(service.items.map(i => [i.id, i.price])), lines, subtotal, low: subtotal, high: Math.round(subtotal * 12 / 1000) * 100, monthly: service.maintenance[state.maintenance] || 0 };
   }
+  function calculateCompleteness(service, state, config = COMPLETENESS) {
+    const total = service.items.length;
+    if (!total) return config.base;
+    const selected = new Set(state.selected.map(choice => choice.id));
+    const count = service.items.filter(item => selected.has(item.id)).length;
+    return Math.round(config.base + config.span * count / total);
+  }
   function formatMoney(value) { return 'NT$' + Math.round(value).toLocaleString('en-US'); }
   function renderTotal(result) { return `${formatMoney(result.low)} ～ ${formatMoney(result.high)}｜每月維護 ${formatMoney(result.monthly)}`; }
   function setQuantity(service, state, id, value) { const item = service.items.find(i => i.id === id), chosen = state.selected.find(i => i.id === id); if (item && chosen) chosen.quantity = Math.max(item.min, Math.floor(Number(value) || item.min)); }
@@ -50,14 +59,42 @@
     let service = clone(CONFIG[slug]), state = createState(service), drag = null, pending = null, ignoreClick = false, shown = null;
     const storageKey = 'ch-item-prices-v1';
     try { const saved = JSON.parse(localStorage.getItem(storageKey) || '{}')[slug]; if (saved) { if (Number.isSafeInteger(saved.base) && saved.base >= 0) service.base = saved.base; service.items.forEach(i => { if (Number.isSafeInteger(saved.items?.[i.id]) && saved.items[i.id] >= 0) i.price = saved.items[i.id]; }); Object.keys(service.maintenance).forEach(k => { if (Number.isSafeInteger(saved.maintenance?.[k]) && saved.maintenance[k] >= 0) service.maintenance[k] = saved.maintenance[k]; }); } } catch (_) {}
-    root.innerHTML = `<div class="ie-top"><div><p class="ie-kicker">為你的需求慢慢配置</p><h3>項目配置試算</h3><p>拖拉項目調整順序，也可以隨時加入或拿掉。</p></div><div class="ie-total" aria-live="polite"><span>目前預估</span><strong class="ie-price"></strong><small class="ie-range"></small><small class="ie-monthly"></small></div></div><div class="ie-base"><h4>基本方案 <span class="ie-base-price"></span> 起</h4><ul>${service.included.map(t => `<li>${escape(t)} <b>內含</b></li>`).join('')}</ul></div><div class="ie-columns"><section class="ie-area ie-selected"><h4>已選項目</h4><p>拖動把手，調整順序或移到右側。</p><div class="ie-list" data-zone="selected"></div></section><section class="ie-area ie-available"><h4>可加入的項目</h4><p>拖進已選區，或按加入。</p><div class="ie-list" data-zone="available"></div></section></div><div class="ie-footer"><label>每月維護 <select data-action="maintenance"><option value="none">不需要</option><option value="basic">基本</option><option value="full">完整</option></select></label><p>示範數字，正式報價以需求訪談為準。</p><button type="button" class="ie-contact" data-action="contact">帶著這份規劃找川花聊聊</button><p class="ie-status" role="status"></p><textarea class="ie-copy" aria-label="規劃內容，請手動複製" hidden readonly></textarea><a class="ie-link" href="https://line.me/R/ti/p/@riverflower2025" target="_blank" rel="noopener" hidden>開啟官方 LINE</a></div><div class="ie-editor" hidden><h4>示範價格調整</h4><p>只儲存在這個瀏覽器。</p><div class="ie-fields"></div><button type="button" data-action="reset">恢復預設</button></div>`;
+    root.innerHTML = `<div class="ie-top"><div><p class="ie-kicker">為你的需求慢慢配置</p><h3>項目配置試算</h3><p>拖拉項目調整順序，也可以隨時加入或拿掉。</p></div><div class="ie-overview"><div class="ie-completeness"><div class="ie-completion-ring" role="img" aria-label="規劃完整度"><strong class="ie-completion-number"></strong><span class="ie-completion-delta" hidden></span></div><small>規劃完整度</small></div><div class="ie-total" aria-live="polite"><span>目前預估</span><strong class="ie-price"></strong><small class="ie-range"></small><small class="ie-monthly"></small></div></div></div><div class="ie-base"><h4>基本方案 <span class="ie-base-price"></span> 起</h4><ul>${service.included.map(t => `<li>${escape(t)} <b>內含</b></li>`).join('')}</ul></div><div class="ie-columns"><section class="ie-area ie-selected"><h4>已選項目</h4><p>拖動把手，調整順序或移到右側。</p><div class="ie-list" data-zone="selected"></div></section><section class="ie-area ie-available"><h4>可加入的項目</h4><p>拖進已選區，或按加入。</p><div class="ie-list" data-zone="available"></div></section></div><div class="ie-footer"><label>每月維護 <select data-action="maintenance"><option value="none">不需要</option><option value="basic">基本</option><option value="full">完整</option></select></label><p>示範數字，正式報價以需求訪談為準。</p><button type="button" class="ie-contact" data-action="contact">帶著這份規劃找川花聊聊</button><p class="ie-status" role="status"></p><textarea class="ie-copy" aria-label="規劃內容，請手動複製" hidden readonly></textarea><a class="ie-link" href="https://line.me/R/ti/p/@riverflower2025" target="_blank" rel="noopener" hidden>開啟官方 LINE</a></div><div class="ie-editor" hidden><h4>示範價格調整</h4><p>只儲存在這個瀏覽器。</p><div class="ie-fields"></div><button type="button" data-action="reset">恢復預設</button></div>`;
     const $ = selector => root.querySelector(selector), selected = $('[data-zone="selected"]'), available = $('[data-zone="available"]');
     // 依服務的原始項目位置分配植物，移動或重新加入時不會換花。
     const flowers = ['lavender', 'rose', 'chamomile', 'rosemary', 'jasmine', 'sweetorange', 'geranium', 'mint', 'lemon', 'eucalyptus', 'olive', 'cedar', 'cinnamon', 'frankincense', 'immortelle', 'rockrose'];
     function row(i, chosen, result) { const flower = flowers[service.items.findIndex(item => item.id === i.id) % flowers.length]; return `<div class="ie-row" data-id="${escape(i.id)}"><img src="/chuanhua_site_v12_1/assets/quiz-plants/${flower}.png" alt="" aria-hidden="true"><div class="ie-info">${i.group ? `<small>${escape(i.group)}</small>` : ''}<strong>${escape(i.name)}</strong><p>${escape(i.description)}</p><span>＋${formatMoney(result.unitPrices[i.id])}${i.unit ? '／' + escape(i.unit) : ''}</span></div>${chosen && i.unit ? `<div class="ie-quantity" aria-label="數量"><button type="button" data-action="minus" aria-label="減少${escape(i.name)}">−</button><span>${chosen.quantity} ${escape(i.unit)}</span><button type="button" data-action="plus" aria-label="增加${escape(i.name)}">＋</button></div>` : ''}<button type="button" class="ie-handle" aria-label="拖動${escape(i.name)}" title="拖動調整">≡</button><button type="button" class="ie-row-action" data-action="${chosen ? 'remove' : 'add'}" aria-label="${chosen ? '拿掉' : '加入'}${escape(i.name)}">${chosen ? '×' : '＋ 加入'}</button></div>`; }
     function renderRows() { const result = calculate(service, state); selected.innerHTML = state.selected.map(c => row(service.items.find(i => i.id === c.id), c, result)).join('') || '<p class="ie-empty">把想加入的項目拖到這裡</p>'; available.innerHTML = service.items.filter(i => !state.selected.some(c => c.id === i.id)).map(i => row(i, null, result)).join('') || '<p class="ie-empty">目前沒有其他項目</p>'; }
     function renderPrice() { const result = calculate(service, state); $('.ie-base-price').textContent = formatMoney(result.base); $('.ie-range').textContent = `預估範圍 ${formatMoney(result.low)} ～ ${formatMoney(result.high)}`; $('.ie-monthly').textContent = `每月維護 ${formatMoney(result.monthly)}`; const start = shown == null ? result.subtotal : shown, end = result.subtotal; shown = end; const price = $('.ie-price'); if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) { price.textContent = formatMoney(end); return; } const time = performance.now(); const tick = now => { if (shown !== end) return; const p = Math.min(1, (now - time) / 350); price.textContent = formatMoney(start + (end - start) * (1 - Math.pow(1 - p, 3))); if (p < 1) requestAnimationFrame(tick); }; requestAnimationFrame(tick); }
-    function render() { renderRows(); renderPrice(); }
+    let completionTarget = null, completionShown = null, completionRun = 0, badgeTimer = null;
+    function renderCompleteness() {
+      const target = calculateCompleteness(service, state), oldTarget = completionTarget;
+      if (target === oldTarget) return;
+      completionTarget = target;
+      const ring = $('.ie-completion-ring'), number = $('.ie-completion-number'), badge = $('.ie-completion-delta');
+      ring.setAttribute('aria-label', `規劃完整度 ${target}%`);
+      const paint = value => { completionShown = value; number.textContent = Math.round(value) + '%'; ring.style.setProperty('--ie-progress', value); };
+      const run = ++completionRun;
+      if (oldTarget === null) { paint(target); return; }
+      const diff = target - oldTarget;
+      badge.textContent = (diff > 0 ? '↑' : '↓') + Math.abs(diff) + '%';
+      badge.hidden = false;
+      // 若快速連按，重新開始淡出，而不是沿用上一次的動畫進度。
+      badge.style.setProperty('--ie-badge-duration', COMPLETENESS.badgeDuration + 'ms');
+      badge.style.animation = 'none'; void badge.offsetWidth; badge.style.animation = '';
+      clearTimeout(badgeTimer);
+      badgeTimer = setTimeout(() => { badge.hidden = true; }, COMPLETENESS.badgeDuration);
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) { paint(target); return; }
+      const start = completionShown, started = performance.now();
+      const tick = now => {
+        if (run !== completionRun) return;
+        const fraction = Math.min(1, Math.max(0, (now - started) / COMPLETENESS.duration));
+        paint(start + (target - start) * (1 - Math.pow(1 - fraction, 3)));
+        if (fraction < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    }
+    function render() { renderRows(); renderPrice(); renderCompleteness(); }
     function save() { try { const all = JSON.parse(localStorage.getItem(storageKey) || '{}'); all[slug] = { base: service.base, items: Object.fromEntries(service.items.map(i => [i.id,i.price])), maintenance: service.maintenance }; localStorage.setItem(storageKey, JSON.stringify(all)); } catch (_) { $('.ie-status').textContent = '無法儲存價格，重新整理後會恢復預設。'; } }
     function editor() { const panel = $('.ie-editor'); panel.hidden = new URLSearchParams(location.search).get('price') !== 'edit'; if (panel.hidden) return; $('.ie-fields').innerHTML = `<label>基本方案 <input type="number" min="0" step="100" data-price="base" value="${service.base}"></label>${service.items.map(i => `<label>${escape(i.name)}${i.unit ? '（每' + escape(i.unit) + '）' : ''}<input type="number" min="0" step="100" data-price="item" data-id="${escape(i.id)}" value="${i.price}"></label>`).join('')}${Object.entries({none:'不需要',basic:'基本',full:'完整'}).map(([key, label]) => `<label>${label}維護費<input type="number" min="0" step="100" data-price="maintenance" data-id="${key}" value="${service.maintenance[key]}"></label>`).join('')}`; }
     root.addEventListener('input', e => { const input = e.target.closest('[data-price]'); if (!input || input.value === '') return; const n = Number(input.value); if (!Number.isSafeInteger(n) || n < 0) return; if (input.dataset.price === 'base') service.base = n; else if (input.dataset.price === 'item') service.items.find(i => i.id === input.dataset.id).price = n; else service.maintenance[input.dataset.id] = n; save(); render(); });
@@ -93,5 +130,5 @@
     root.addEventListener('pointerup',e => finish(e,false)); root.addEventListener('pointercancel',e => finish(e,true)); window.addEventListener('blur',() => finish(null,true));
     editor(); render();
   }
-  return { CONFIG, calculate, formatMoney, createState, setQuantity, moveItem, renderTotal, mountAll };
+  return { CONFIG, COMPLETENESS, calculate, calculateCompleteness, formatMoney, createState, setQuantity, moveItem, renderTotal, mountAll };
 });

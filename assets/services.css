@@ -20,9 +20,10 @@
 .svc-group{margin-top:64px}
 .svc-group>h2{padding-bottom:22px;border-bottom:1px solid var(--line);margin-bottom:28px}
 .svc-card-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
-.svc-card{display:flex;flex-direction:column;align-items:flex-start;position:relative;padding:30px 26px 26px;background:var(--card);border:1px solid var(--line);border-radius:20px;text-decoration:none;color:var(--ink);transition:transform .3s,border-color .3s,box-shadow .3s;min-width:0}
-.svc-card:hover{transform:translateY(-5px);border-color:var(--leaf);box-shadow:0 14px 30px color-mix(in srgb,var(--river-deep) 8%,transparent)}
-.svc-flower{width:64px;height:72px;object-fit:contain;object-position:left bottom;margin-bottom:14px}
+.svc-card{display:flex;flex-direction:column;align-items:flex-start;position:relative;padding:30px 26px 26px;background:var(--card);border:1px solid var(--line);border-radius:20px;text-decoration:none;color:var(--ink);transition:transform .25s cubic-bezier(.22,.61,.36,1),border-color .25s ease,box-shadow .25s ease;min-width:0}
+@media (hover:hover) and (pointer:fine){.svc-card:hover{transform:translateY(-7px);border-color:var(--leaf);box-shadow:0 18px 40px rgba(74,90,124,.16)}.svc-card:hover .svc-flower{transform:scale(1.08) rotate(3deg)}}
+@media (hover:none), (pointer:coarse){.svc-card:active{transform:translateY(-4px);box-shadow:0 14px 32px rgba(74,90,124,.16)}.svc-card:active .svc-flower{transform:scale(1.05)}}
+.svc-flower{width:64px;height:72px;object-fit:contain;object-position:left bottom;margin-bottom:14px;transform-origin:center bottom;transition:transform .25s cubic-bezier(.22,.61,.36,1)}
 .svc-card h3{margin:0 0 4px}
 .svc-card-subtitle{display:block;font-size:12px;color:var(--pink-deep);letter-spacing:1px;margin:0 0 8px}
 .svc-card p{font-size:13px;line-height:1.95;color:var(--ink-soft);margin:10px 0 22px}
@@ -121,3 +122,12 @@
 .svc-construction .svc-construction-flower{width:78px;height:90px;padding:10px;border-radius:18px;background:#eef1f8}
 .svc-construction .svc-button{max-width:360px;margin:auto}
 @media(max-width:760px){.svc-body .svc-section,.svc-body .svc-section:last-child{padding:26px 22px;border-radius:22px}.svc-body .svc-section{margin-bottom:22px}.svc-actions{grid-template-columns:1fr}.svc-steps li{gap:14px;padding:15px}.svc-steps li:not(:last-child)::after{left:34px}}
+
+@media (prefers-reduced-motion:reduce){
+  .svc-card:hover,.svc-card:active{transform:none;border-color:var(--line);box-shadow:0 18px 40px rgba(74,90,124,.16)}
+  .svc-card:hover .svc-flower,.svc-card:active .svc-flower{transform:none}
+  .svc-card:hover .svc-card-more,.svc-card:active .svc-card-more{background:#fffcf8;border-color:rgba(110,106,99,.32)}
+}
+
+@media (pointer:coarse){.svc-card.is-touch-pressed{transform:translateY(-4px);box-shadow:0 14px 32px rgba(74,90,124,.16)}.svc-card.is-touch-pressed .svc-flower{transform:scale(1.05)}}
+@media (prefers-reduced-motion:reduce){.svc-card.is-touch-pressed{transform:none;border-color:var(--line);box-shadow:0 18px 40px rgba(74,90,124,.16)}.svc-card.is-touch-pressed .svc-flower{transform:none}}

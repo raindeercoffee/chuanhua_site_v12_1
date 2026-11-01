@@ -7,3 +7,17 @@
 .ie-footer{padding:20px 4px}.ie-footer label{display:flex;align-items:center;gap:12px}.ie-footer select,.ie-fields input{border:1px solid #dfd2ca;background:white;border-radius:8px;padding:8px;color:#544d48}.ie-footer p{color:#88786e;font-size:13px}.ie-contact{border:0;border-radius:24px;background:#94505b;color:white;padding:13px 22px;cursor:pointer;font:inherit}.ie-copy{width:100%;min-height:150px}.ie-link{color:#94505b}.ie-editor{border:1px dashed #cfb6aa;border-radius:14px;padding:20px;margin:20px 0}.ie-fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px}.ie-fields label{display:grid;gap:5px;font-size:13px}.ie-editor button{margin-top:15px;text-decoration:underline}
 @media(max-width:700px){.ie-top{display:block}.ie-total{margin-top:16px}.ie-columns{grid-template-columns:1fr}.ie-row{flex-wrap:wrap}.ie-info{min-width:120px}.ie-quantity{order:2;margin-left:46px}.ie-handle{margin-left:auto}.ie-area{padding:14px}}
 @media(prefers-reduced-motion:reduce){.ie-list{transition:none}}
+
+/* 完整度為已選加值項目的比例，與金額分開呈現。 */
+.ie-overview{display:flex;align-items:center;gap:16px;min-width:0}
+.ie-completeness{display:grid;justify-items:center;gap:6px;flex:none;color:#4a5a7c}
+.ie-completeness>small{font-size:12px;letter-spacing:.04em;white-space:nowrap}
+.ie-completion-ring{--ie-progress:80;position:relative;display:grid;place-items:center;width:94px;height:94px;border-radius:50%;background:conic-gradient(#4a5a7c calc(var(--ie-progress) * 1%),#e9e1d4 0)}
+.ie-completion-ring::before{content:"";position:absolute;inset:7px;border-radius:50%;background:#fffefa}
+.ie-completion-number{position:relative;z-index:1;font-size:23px;line-height:1;color:#4a5a7c;font-variant-numeric:tabular-nums}
+.ie-completion-delta{position:absolute;z-index:2;right:-18px;top:-7px;border-radius:99px;padding:3px 7px;background:#f7e8e8;color:#93323f;font-size:12px;line-height:1.4;white-space:nowrap;animation:ie-delta-fade var(--ie-badge-duration,1500ms) ease forwards}
+.ie-completion-delta[hidden]{display:none}
+@keyframes ie-delta-fade{0%,70%{opacity:1}100%{opacity:0}}
+@media(prefers-reduced-motion:reduce){.ie-completion-delta{animation:none}}
+@media(max-width:700px){.ie-overview{margin-top:18px;gap:12px}.ie-overview .ie-total{margin-top:0;min-width:0;flex:1;padding:14px}.ie-completion-ring{width:82px;height:82px}.ie-completion-number{font-size:20px}}
+@media(max-width:350px){.ie-overview{flex-wrap:wrap}.ie-overview .ie-total{min-width:160px}}
