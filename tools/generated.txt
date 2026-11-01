@@ -7,6 +7,7 @@ ai/quote/index.html
 ai/tools/index.html
 ai/website/index.html
 ai/workflow/index.html
+build/index.html
 cases/index.html
 contact/index.html
 courses/index.html

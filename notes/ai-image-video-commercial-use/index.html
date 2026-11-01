@@ -80,6 +80,13 @@
     "desc": "數位廣告投放（Meta、Google、LINE）、整合行銷、品牌整合與品牌重塑。",
     "noindex": true
   },
+  "/build/": {
+    "layer": "feature",
+    "feature": "build",
+    "title": "服務積木試算｜把需要的服務排一排，價格馬上算給你看｜川花",
+    "desc": "拖拉排出服務先後順序，選擇方案和加購積木，即時看看你的品牌組合。數字僅供示範，正式報價以需求訪談為準。",
+    "noindex": true
+  },
   "/cases/": {
     "layer": "feature",
     "feature": "cases",
@@ -1362,6 +1369,8 @@ footer .notes-link{margin-left:24px}
   .g-flower .g-img,.g-label{opacity:1;transform:none}
 }
 </style>
+<link rel="stylesheet" href="/chuanhua_site_v12_1/assets/service-builder.css">
+<script defer src="/chuanhua_site_v12_1/assets/service-builder.js"></script>
 <script type="application/ld+json" id="note-schema">
 [
   {
@@ -1505,6 +1514,7 @@ footer .notes-link{margin-left:24px}
       <div class="eyebrow reveal">WHAT WE DO</div>
       <h2 class="reveal">我們做的事</h2>
       <p class="lead reveal d1">把你的品牌，種進對的人心裡。</p>
+      <div class="ch-build-entry reveal d1"><a class="btn" href="/chuanhua_site_v12_1/build/" data-route>排排看・算算看 →</a><span>拖一拖服務，拼出適合你的組合。</span></div>
       <div class="topic-tabs" role="tablist" aria-label="服務分類" data-topic-tabs>
         <button class="topic-tab" type="button" role="tab" id="services-brand-tab" aria-selected="true" aria-controls="services-brand" tabindex="0">品牌行銷</button>
         <button class="topic-tab" type="button" role="tab" id="services-ai-tab" aria-selected="false" aria-controls="services-ai" tabindex="-1">AI 客製化</button>
@@ -1783,6 +1793,66 @@ footer .notes-link{margin-left:24px}
   </section>
 
 
+    <!-- 服務積木：只透過既有內容布幕開啟，不接表單。 -->
+    <section class="feature-page ch-build" data-feature="build" id="ch-builder" hidden>
+      <div class="ch-live-price" aria-label="目前的示範預估總價">
+        <span>目前預估 <small>示範數字</small></span>
+        <output><span data-price-top-low>NT$0</span><span class="ch-live-range"> ～ <span data-price-top-high>NT$0</span></span></output>
+      </div>
+      <div class="st-top">
+        <a class="st-back" href="/chuanhua_site_v12_1/services/" data-route>← 回到我們做的事</a>
+        <span class="ch-site-mark" aria-hidden="true">川花・慢慢開花</span>
+      </div>
+      <header class="ch-hero">
+        <p class="ch-hero-eyebrow">把需要的，一塊一塊拼起來</p>
+        <h1 id="feature-build-title" tabindex="-1">服務積木試算</h1>
+        <p class="ch-hero-lead">先排出最想做的事，再加上剛剛好的細節。<br>讓品牌下一步的樣子，慢慢變清楚。</p>
+        <img class="ch-hero-flower" src="/chuanhua_site_v12_1/assets/botanical/fl-b.png" alt="" aria-hidden="true" width="68" height="106">
+        <div class="ch-route-steps" aria-label="試算步驟">
+          <span><b>01</b> 排出先後</span><span aria-hidden="true">→</span>
+          <span><b>02</b> 加上細節</span><span aria-hidden="true">→</span>
+          <span><b>03</b> 看看組合</span>
+        </div>
+        <p class="ch-demo-note">示範數字，正式報價以需求訪談為準。</p>
+      </header>
+      <section class="ch-scenario-section" aria-labelledby="ch-scenario-title">
+        <div class="ch-section-heading">
+          <span class="ch-step-number" aria-hidden="true">✦</span>
+          <div><h2 id="ch-scenario-title">你現在卡在哪？<span class="ch-optional">選填</span></h2><p>點一張，讓適合的服務先往前站。也可以直接往下排。</p></div>
+        </div>
+        <div id="ch-scenarios"></div>
+      </section>
+      <div class="ch-workspace">
+        <div class="ch-main">
+          <section aria-labelledby="ch-ranking-title">
+            <div class="ch-section-heading">
+              <span class="ch-step-number" aria-hidden="true">01</span>
+              <div><h2 id="ch-ranking-title">排出你最需要的服務</h2><p>留下這次想做的，排在前面的就先做。點服務名稱，往下選細項。</p></div>
+            </div>
+            <p class="ch-list-hint">按住 ≡ 拖拉，也能按上下箭頭；鍵盤移到把手後，按 ↑ ↓ 排序。</p>
+            <ol id="ch-active-list" aria-label="這次需要的服務，依優先順序排列"></ol>
+            <div class="ch-removed">
+              <h3>暫時不需要</h3>
+              <div id="ch-removed-list" aria-label="暫時不需要的服務，可加回清單"></div>
+            </div>
+          </section>
+          <section class="ch-detail-section" aria-labelledby="ch-details-title">
+            <div class="ch-section-heading">
+              <span class="ch-step-number" aria-hidden="true">02</span>
+              <div><h2 id="ch-details-title">再加上剛剛好的細節</h2><p>先選方案，再把想要的積木放進組合。點一下或拖拉都可以。</p></div>
+            </div>
+            <div id="ch-details"></div>
+          </section>
+          <p class="ch-closing">不必一次決定所有事。<br>先從最想開的那朵花開始。</p>
+        </div>
+        <aside class="ch-summary" id="ch-summary" aria-label="你的組合與示範總價"></aside>
+      </div>
+      <div class="ch-announce" id="ch-announcement" role="status" aria-live="polite" aria-atomic="true"></div>
+      <button type="button" id="ch-price-gear" aria-label="開啟示範調價面板" aria-controls="ch-price-editor" aria-expanded="false" hidden>⚙</button>
+      <div id="ch-price-editor" hidden></div>
+      <noscript><p>請開啟瀏覽器的 JavaScript（互動功能），就能拖拉服務和即時試算。</p></noscript>
+    </section>
+
     <section class="feature-page" data-feature="ai" hidden>
       <div class="st-top"><a class="st-back" href="/chuanhua_site_v12_1/services/" data-route>← 回到我們做的事</a></div>
       <header class="st-head"><h1 id="feature-ai-title" tabindex="-1">AI 客製化服務</h1><p>讓繁瑣的工作變簡單，把時間留給真正重要的事。</p></header>
@@ -1804,6 +1874,7 @@ footer .notes-link{margin-left:24px}
         <div class="service-secondary"><a href="/chuanhua_site_v12_1/ai/consulting/" data-route>合作與諮詢 →</a></div>
       </div>
       <div class="feature-actions">
+        <a class="btn" href="/chuanhua_site_v12_1/build/" data-route>排排看・算算看 →</a>
         <a class="btn" href="/chuanhua_site_v12_1/ai/demo/" data-route>互動展示 →</a>
         <a class="btn" href="/chuanhua_site_v12_1/ai/quote/" data-route data-quote-kind="custom">需求詢價 →</a>
       </div>
