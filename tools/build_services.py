@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 BASE = "/chuanhua_site_v12_1"
 GROUPS = ("品牌行銷", "AI 與數位工具")
 SECTIONS = (("intro", "服務介紹"), ("contents", "服務內容"), ("process", "交付流程"),
-            ("pricing", "報價說明"), ("faq", "常見問題"), ("contact", "聯絡與試算"))
+            ("pricing", "報價與試算"), ("contact", "聯絡我們"), ("faq", "常見問題"))
 
 
 def esc(value: str) -> str:
@@ -123,8 +123,6 @@ def detail(service: dict, services: list[dict]) -> str:
     slug = service["slug"]
     feature = "service-" + slug
     prefix = "svc-" + slug + "-"
-    toc = '<nav class="svc-toc" aria-label="本頁段落"><p>這一頁的路徑</p>' + "".join(
-        f'<a href="#{prefix}{key}" data-svc-anchor>{label}</a>' for key, label in SECTIONS) + '</nav>'
     audience = "".join(f'<li>{esc(text)}</li>' for text in service["audience"])
     problems = "".join(f'<li>{esc(text)}</li>' for text in service["problems"])
     intro = (''.join('<p class="svc-intro">' + esc(p) + '</p>' for p in service["intro"]) + '<div class="svc-intro-grid">'
@@ -141,15 +139,15 @@ def detail(service: dict, services: list[dict]) -> str:
     pricing = ('<div class="svc-pricing"><p class="svc-price">起價 NT$49,000</p>'
                '<p>費用會依實際工作範圍調整，以下是需求訪談時會一起確認的事：</p><ul>'
                + "".join(f'<li>{esc(text)}</li>' for text in service["pricingFactors"])
-               + '</ul><p class="svc-price-note">實際報價以需求訪談為準</p></div>')
+               + '</ul><p class="svc-price-note">實際報價以需求訪談為準</p></div>'
+               + f'<div class="svc-estimator" data-service="{slug}"><p>互動試算即將上線</p></div>')
     faq = '<div class="svc-faq">' + "".join(
         f'<details><summary>{esc(item["question"])}</summary><p>{esc(item["answer"])}</p></details>' for item in service["faqs"]) + '</div>'
     quote_kind = "website" if slug == "website" else "custom"
-    contact = (f'<div class="svc-estimator" data-service="{slug}"><p>互動試算即將上線</p></div>'
-               '<p>你可以先告訴我們現在的狀況，再一起整理需要的協助。</p><div class="svc-actions">'
+    contact = ('<p>你可以先告訴我們現在的狀況，再一起整理需要的協助。</p><div class="svc-actions">'
                + link("/ai/quote/", "填寫需求詢價 →", "btn svc-button", f' data-quote-kind="{quote_kind}"')
                + link("/contact/", "找川花聊聊 →", "btn svc-button svc-button-soft") + '</div>')
-    contents = dict(zip((key for key, _ in SECTIONS), (intro, items, process, pricing, faq, contact)))
+    contents = dict(intro=intro, contents=items, process=process, pricing=pricing, contact=contact, faq=faq)
     sections = "".join(f'<section class="svc-section" id="{prefix}{key}" tabindex="-1">'
                        f'<h2>{label}</h2>{contents[key]}</section>' for key, label in SECTIONS)
     related = sorted((other for other in services if other["slug"] != slug), key=lambda other: other["group"] != service["group"])[:3]
@@ -158,7 +156,7 @@ def detail(service: dict, services: list[dict]) -> str:
             '<div class="st-top">' + link("/services/", "← 回到服務項目", "st-back") + '</div>'
             + breadcrumb(service) + '<header class="svc-head svc-head-detail">' + flower(service, "svc-head-flower") + subtitle
             + f'<h1 id="feature-{feature}-title" tabindex="-1">{esc(service["name"])}</h1><p>{esc(service["summary"])}</p></header>'
-            f'<div class="svc-layout">{toc}<div class="svc-body">{sections}</div></div>'
+            f'<div class="svc-layout"><div class="svc-body">{sections}</div></div>'
             '<nav class="svc-related" aria-label="其他服務"><h2>其他服務</h2><div class="svc-card-grid">'
             + "".join(card(other) for other in related) + '</div></nav></section>')
 

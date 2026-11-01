@@ -1,4 +1,5 @@
 /* 三層服務頁，沿用川花的色票與手繪小花。 */
+#feature[data-page^="service"]{background:radial-gradient(ellipse 85% 40% at 84% 24%,rgba(205,216,231,.48),transparent 72%),linear-gradient(180deg,#fbf9f5 0%,#f6f3ec 38%,#e8ecf2 100%)}
 .svc-page{max-width:1100px;color:var(--ink);font-size:15px;line-height:2}
 /* 隔開主選單的全域 nav 規則，頁內導覽留在自己的版面。 */
 .svc-page nav{position:static;inset:auto;z-index:auto;backdrop-filter:none;background:none;border-bottom:0;transform:none;transition:none;box-shadow:none}
@@ -25,9 +26,10 @@
 .svc-card h3{margin:0 0 4px}
 .svc-card-subtitle{display:block;font-size:12px;color:var(--pink-deep);letter-spacing:1px;margin:0 0 8px}
 .svc-card p{font-size:13px;line-height:1.95;color:var(--ink-soft);margin:10px 0 22px}
-.svc-card-more{margin-top:auto;padding-top:6px;font-size:13px;color:var(--river-deep);border-bottom:1px solid var(--line)}
+.svc-card-more{margin-top:auto;padding:9px 20px;font-size:13px;color:var(--river-deep);border:1px solid rgba(110,106,99,.32);border-radius:99px;background:#fffcf8;transition:background .25s,border-color .25s}
+.svc-card:hover .svc-card-more{background:#f4eef0;border-color:#c7a8ae}
 .svc-card:focus-visible,.svc-child-link:focus-visible,.svc-toc a:focus-visible,.svc-button:focus-visible,.svc-faq summary:focus-visible{outline:2px solid var(--pink-deep);outline-offset:5px}
-.svc-layout{display:grid;grid-template-columns:180px minmax(0,1fr);gap:56px;align-items:start}
+.svc-layout{display:block;max-width:900px;margin:0 auto}
 .svc-page .svc-toc{position:sticky;top:28px;border-left:1px solid var(--line);padding-left:22px}
 .svc-toc p{color:var(--pink-deep);font-size:11px;letter-spacing:2px;margin-bottom:13px}
 .svc-toc a{display:block;text-decoration:none;color:var(--ink-soft);font-size:13px;padding:8px 0;transition:color .25s}
@@ -48,8 +50,8 @@
 .svc-items h3{font-size:17px;margin-bottom:10px}
 .svc-items p,.svc-steps p{font-size:14px;color:var(--ink-soft)}
 .svc-child-links{display:flex;flex-wrap:wrap;gap:14px;margin-top:30px}
-.svc-child-link{display:inline-block;padding:11px 18px;border:1px solid var(--line);border-radius:12px;color:var(--river-deep);text-decoration:none;font-size:13px;background:var(--card);transition:border-color .25s}
-.svc-child-link:hover{border-color:var(--leaf)}
+.svc-child-link{display:inline-block;padding:11px 22px;border:1px solid rgba(110,106,99,.35);border-radius:99px;color:var(--river-deep);text-decoration:none;font-size:13px;background:var(--card);transition:border-color .25s,background .25s}
+.svc-child-link:hover{border-color:#b88992;background:#f8f0ef}
 .svc-steps{padding:0;list-style:none;display:grid;gap:28px}
 .svc-steps li{display:grid;grid-template-columns:56px 1fr;gap:20px;align-items:start}
 .svc-step-flower{width:52px;height:62px;object-fit:contain;margin-top:4px}
@@ -68,9 +70,9 @@
 .svc-faq summary::after{content:"＋";position:absolute;right:2px;top:22px;color:var(--pink-deep);font-size:17px}
 .svc-faq details[open] summary::after{content:"−"}
 .svc-faq details>p{font-size:14px;color:var(--ink-soft);padding:0 28px 24px 0}
-.svc-estimator{padding:26px;border:1px dashed var(--leaf);border-radius:16px;background:var(--card);color:var(--river-deep);margin-bottom:24px;text-align:center}
+.svc-estimator{padding:26px;border:1px dashed var(--leaf);border-radius:16px;background:var(--card);color:var(--river-deep);margin-top:24px;text-align:center}
 .svc-actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:26px}
-.svc-button{background:var(--river-deep);color:var(--card);font-size:14px;text-align:center}
+.svc-button{background:linear-gradient(135deg,#5f6b94,#464f73);color:var(--card);font-size:14px;text-align:center}
 .svc-button-soft{background:var(--card);color:var(--river-deep);border:1px solid var(--line)}
 .svc-button:hover{transform:translateY(-2px)}
 .svc-related{margin-top:84px;padding-top:42px;border-top:1px solid var(--line)}
