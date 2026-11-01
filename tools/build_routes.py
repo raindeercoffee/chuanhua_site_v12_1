@@ -19,6 +19,8 @@ import json
 import re
 from pathlib import Path
 
+from build_services import render_services
+
 ROOT = Path(__file__).resolve().parents[1]
 SITE = "https://raindeercoffee.com/chuanhua_site_v12_1"
 SOURCE = ROOT / "index.html"
@@ -257,7 +259,7 @@ def page_for(text: str, path: str, meta: dict, articles: list[dict] | None = Non
     text = re.sub(r'<meta\b(?=[^>]*\bdata-route-noindex\b)[^>]*>\s*', "", text, flags=re.I)
     title = html.escape(meta["title"], quote=True)
     desc = html.escape(meta["desc"], quote=True)
-    url = SITE + path
+    url = SITE + meta.get("redirectTo", path)
     text = replace_once(text, r"<title>[^<]*</title>", f"<title>{title}</title>")
     text = replace_once(text, r'<meta name="description" content="[^"]*">', f'<meta name="description" content="{desc}">')
     text = replace_once(text, r'<meta property="og:title" content="[^"]*">', f'<meta property="og:title" content="{title}">')
@@ -288,6 +290,7 @@ def write(path: Path, content: str) -> None:
 
 def main() -> None:
     text = SOURCE.read_text(encoding="utf-8")
+    text = render_services(text)
     articles = load_notes()
     text = render_notes(text, articles)
     routes = load_routes(text)
