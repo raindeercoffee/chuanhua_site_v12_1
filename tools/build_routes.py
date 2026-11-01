@@ -144,7 +144,7 @@ def render_notes(text: str, articles: list[dict]) -> str:
     routes = load_routes(text)
     if "/notes/" not in routes or routes["/notes/"].get("feature") != "notes":
         raise ValueError("首頁缺少既有開花筆記路由")
-    flower_match = re.search(r'<svg\b[^>]*\bclass="fl-icon"[^>]*>.*?</svg>', text, re.S)
+    flower_match = re.search(r'<(?:svg\b[^>]*\bclass="fl-icon"[^>]*>.*?</svg>|img\b[^>]*\bclass="fl-icon"[^>]*>)', text, re.S)
     if not flower_match:
         raise ValueError("找不到可沿用的原有花朵圖示")
     flower = flower_match.group(0)
