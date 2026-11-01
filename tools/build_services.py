@@ -87,6 +87,15 @@ def flower(service: dict, classes: str = "svc-flower") -> str:
             'aria-hidden="true" loading="lazy" width="52" height="72">')
 
 
+PLANTS = ("rockrose", "frankincense", "immortelle", "cinnamon", "cedar", "eucalyptus", "lavender", "chamomile",
+          "rosemary", "rose", "jasmine", "olive", "mint", "lemon", "geranium", "sweetorange")
+
+
+def plant_mark(plant: str, classes: str) -> str:
+    return (f'<span class="{classes}" aria-hidden="true"><img src="{BASE}/assets/quiz-plants/{plant}.png" '
+            'alt="" loading="lazy" width="42" height="54"></span>')
+
+
 def card(service: dict) -> str:
     subtitle = f'<span class="svc-card-subtitle">{esc(service["subtitle"])}</span>' if service["subtitle"] else ""
     return (f'<a class="svc-card" href="{BASE}{service_path(service)}" data-route>'
@@ -123,6 +132,9 @@ def detail(service: dict, services: list[dict]) -> str:
     slug = service["slug"]
     feature = "service-" + slug
     prefix = "svc-" + slug + "-"
+    # 標題、各段與流程各自使用不同的既有手繪植物。
+    header_plant = service["flower"].rsplit("/", 1)[-1].removesuffix(".png")
+    plants = [plant for plant in PLANTS if plant != header_plant]
     audience = "".join(f'<li>{esc(text)}</li>' for text in service["audience"])
     problems = "".join(f'<li>{esc(text)}</li>' for text in service["problems"])
     intro = (''.join('<p class="svc-intro">' + esc(p) + '</p>' for p in service["intro"]) + '<div class="svc-intro-grid">'
@@ -133,7 +145,7 @@ def detail(service: dict, services: list[dict]) -> str:
     items += '<nav class="svc-child-links" aria-label="延伸服務說明">' + "".join(
         link(service_path(service) + child["slug"] + "/", child["title"] + " →", "svc-child-link") for child in service["children"]) + '</nav>'
     process = '<ol class="svc-steps">' + "".join(
-        f'<li>{flower(service, "svc-step-flower")}<div><span class="svc-step-number">{index:02}</span>'
+        f'<li>{plant_mark(plants[6 + index - 1], "svc-step-mark")}<div><span class="svc-step-number">{index:02}</span>'
         f'<h3>{esc(step["title"])}</h3><p>{esc(step["description"])}</p><p class="svc-step-duration">{esc(step["duration"])}</p></div></li>'
         for index, step in enumerate(service["steps"], 1)) + '</ol>'
     pricing = ('<div class="svc-pricing"><p class="svc-price">起價 NT$49,000</p>'
@@ -148,8 +160,9 @@ def detail(service: dict, services: list[dict]) -> str:
                + link("/ai/quote/", "填寫需求詢價 →", "btn svc-button", f' data-quote-kind="{quote_kind}"')
                + link("/contact/", "找川花聊聊 →", "btn svc-button svc-button-soft") + '</div>')
     contents = dict(intro=intro, contents=items, process=process, pricing=pricing, contact=contact, faq=faq)
-    sections = "".join(f'<section class="svc-section" id="{prefix}{key}" tabindex="-1">'
-                       f'<h2>{label}</h2>{contents[key]}</section>' for key, label in SECTIONS)
+    sections = "".join(f'<section class="svc-section svc-section-{key}" id="{prefix}{key}" tabindex="-1">'
+                       f'{plant_mark(plants[index], "svc-section-mark")}<h2>{label}</h2>{contents[key]}</section>'
+                       for index, (key, label) in enumerate(SECTIONS))
     related = sorted((other for other in services if other["slug"] != slug), key=lambda other: other["group"] != service["group"])[:3]
     subtitle = f'<p class="svc-kicker">{esc(service["subtitle"])}</p>' if service["subtitle"] else ""
     return (f'<section class="feature-page svc-page svc-detail" data-feature="{feature}" hidden>'
