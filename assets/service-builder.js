@@ -184,7 +184,7 @@ const CH_PRICING = {
     let pricing = resetPricing(), drawerOpen = false, drag = null, pending = null, ignoreClickUntil = 0;
     let animatedLow = 0, animatedHigh = 0, priceFrame = 0, dragFrame = 0, editorReturnFocus = null;
     const escape = value => String(value).replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[char]);
-    const flower = id => '/chuanhua_site_v12_1/assets/botanical/fl-' + ['a', 'b', 'c', 'd'][SERVICES.findIndex(item => item.id === id) % 4] + '.png';
+    const flower = id => '/chuanhua_site_v12_1/assets/quiz-plants/' + ['lavender', 'rose', 'rosemary', 'chamomile'][SERVICES.findIndex(item => item.id === id) % 4] + '.png';
     function announce(text) { if (announcer) announcer.textContent = text; }
     function mergeSaved(target, saved, path = []) {
       if (!saved || typeof saved !== 'object' || Array.isArray(saved)) return;

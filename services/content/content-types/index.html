@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script>
-// 試算網址先收起入口花園，等網址管理員打開內容後再交還正常顯示。
-if (location.pathname === '/chuanhua_site_v12_1/build/') document.documentElement.setAttribute('data-build-direct', '');
+// 直接打開內頁時先收起入口花園；首頁仍保留原本動畫。
+if (!['/chuanhua_site_v12_1', '/chuanhua_site_v12_1/', '/'].includes(location.pathname)) document.documentElement.setAttribute('data-inner-direct', '');
 </script>
 <title>內容類型與使用情境｜AI 文案與內容生成｜川花</title>
 <meta name="description" content="整理商品、社群與廣告文案，在不同位置需要怎麼安排。">
@@ -79,7 +79,8 @@ if (location.pathname === '/chuanhua_site_v12_1/build/') document.documentElemen
   },
   "/build/": {
     "layer": "feature",
-    "feature": "build",
+    "feature": "services",
+    "redirectTo": "/services/",
     "title": "服務規劃試算｜排出優先順序、選擇方案，即時估算預算｜川花",
     "desc": "依需求排出服務優先順序，選擇方案與加值項目，即時估算服務配置的預算。數字僅供示範，正式報價以需求訪談為準。",
     "noindex": true
@@ -1093,8 +1094,8 @@ h2 em{font-style:normal;color:var(--pink-deep)}
   background:linear-gradient(180deg,#FBF9F5 0%,#F8F5EF 40%,#F6F3EC 68%,#F2EFE7 86%,#EEEAE0 100%);
   transition:opacity 1.2s ease,visibility 1.2s}
 #garden.out{opacity:0;visibility:hidden;pointer-events:none}
-html[data-build-direct] #garden{opacity:0;visibility:hidden;pointer-events:none;transition:none}
-html[data-build-direct] #feature{transition:none}
+html[data-inner-direct] #garden{opacity:0;visibility:hidden;pointer-events:none;transition:none}
+html[data-inner-direct] #feature{transition:none}
 #garden::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:1;
   background:linear-gradient(180deg,rgba(255,255,255,.5) 0%,rgba(255,255,255,0) 42%)}
 #garden::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 70% 46% at 50% 26%,rgba(255,255,255,.45),transparent 72%);animation:g-glow 8s ease-in-out infinite alternate;pointer-events:none}
@@ -1237,6 +1238,7 @@ nav.scrolled{box-shadow:0 4px 24px rgba(90,80,60,.08)}
 .srv h3{font-family:var(--serif);font-size:19px;color:var(--river-deep);margin:8px 0 4px;line-height:1.5}
 .srv h3 small{display:block;font-size:13px;color:var(--river);font-weight:400}
 .srv p{font-size:13.5px;color:var(--ink-soft);font-weight:300;margin-top:10px}
+.fl-icon{object-fit:contain}
 .srv .fl-icon{position:absolute;top:-15px;right:16px;width:52px;height:62px;object-fit:contain;filter:drop-shadow(0 2px 5px rgba(90,80,60,.18))}
 .srv .service-entry{display:inline-block;margin-top:20px;color:var(--river);font-size:13px;text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:4px;transition:color .3s,border-color .3s}
 .srv .service-entry:hover{color:var(--pink-deep);border-color:var(--pink-deep)}
@@ -1450,7 +1452,7 @@ footer .back-garden:hover{color:var(--pink-deep)}
 .quote-range-limits{display:flex;justify-content:space-between;font-size:12px;margin-top:2px}
 .quote-range-help{font-size:13px;line-height:2;margin-top:22px;padding:18px 0;border-top:1px solid var(--line)}
 .quote-aside{position:sticky;top:24px;border:1px solid var(--line);border-radius:20px;background:var(--card);padding:26px 24px}
-.quote-aside-flower{width:26px;height:26px;display:block;margin-bottom:14px}
+.quote-aside-flower{width:26px;height:26px;display:block;margin-bottom:14px;object-fit:contain}
 .quote-price-label{font-size:13px;letter-spacing:1px;color:var(--river)}
 #quote-total{display:block;font:600 clamp(24px,3vw,32px)/1.7 var(--serif);color:var(--river-deep);overflow-wrap:anywhere;margin:8px 0 18px}
 .quote-breakdown{list-style:none;padding:0;margin:0;font-size:12.5px;line-height:1.9}
@@ -1494,7 +1496,7 @@ footer .back-garden:hover{color:var(--pink-deep)}
 @media(max-width:760px){.latest-notes-list{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:100%;gap:18px;width:100%;max-width:100%;padding:14px 1px 12px;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain}.latest-notes-list .note-card{scroll-snap-align:start}.latest-notes{padding:60px 0 0}}
 .note-card{position:relative;display:flex;flex-direction:column;min-width:0;padding:32px 28px;background:var(--card);border:1px solid var(--line);border-radius:22px;text-decoration:none;transition:border-color .3s,transform .3s}
 .note-card:hover{border-color:var(--pink);transform:translateY(-3px)}
-.note-card .fl-icon{position:absolute;top:-11px;right:18px;width:26px;height:26px}
+.note-card .fl-icon{position:absolute;top:-11px;right:18px;width:26px;height:26px;object-fit:contain}
 .latest-notes .note-card .fl-icon{top:-15px;right:16px;width:46px;height:54px;object-fit:contain}
 .note-category{font-size:12px;letter-spacing:2px;color:var(--river);margin-bottom:16px}
 .note-card-title{font:600 21px/1.8 var(--serif);letter-spacing:.5px;color:var(--river-deep);margin-bottom:16px;overflow-wrap:anywhere}
@@ -1746,8 +1748,8 @@ footer .notes-link{margin-left:24px}
   .g-flower .g-img,.g-label{opacity:1;transform:none}
 }
 </style>
-<link rel="stylesheet" href="/chuanhua_site_v12_1/assets/service-builder.css">
-<script defer src="/chuanhua_site_v12_1/assets/service-builder.js"></script>
+<link rel="stylesheet" href="/chuanhua_site_v12_1/assets/item-estimator.css">
+<script defer src="/chuanhua_site_v12_1/assets/item-estimator.js"></script>
 <link rel="stylesheet" href="/chuanhua_site_v12_1/assets/services.css">
 <script defer src="/chuanhua_site_v12_1/assets/services.js"></script>
 <meta name="robots" content="noindex, follow" data-route-noindex>
@@ -1841,7 +1843,7 @@ footer .notes-link{margin-left:24px}
       <div class="eyebrow reveal">WHAT WE DO</div>
       <h2 class="reveal">我們做的事</h2>
       <p class="lead reveal d1">把你的品牌，種進對的人心裡。</p>
-      <div class="ch-build-entry reveal d1"><a class="btn" href="/chuanhua_site_v12_1/services/" data-route>看全部服務 →</a><a class="btn" href="/chuanhua_site_v12_1/build/" data-route>規劃服務・試算預算 →</a><span>依需求排序，規劃適合你的服務。</span></div>
+      <div class="ch-build-entry reveal d1"><a class="btn" href="/chuanhua_site_v12_1/services/" data-route>看全部服務 →</a><span>依需求排序，規劃適合你的服務。</span></div>
       <div class="topic-tabs" role="tablist" aria-label="服務分類" data-topic-tabs>
         <button class="topic-tab" type="button" role="tab" id="services-brand-tab" aria-selected="true" aria-controls="services-brand" tabindex="0">品牌行銷</button>
         <button class="topic-tab" type="button" role="tab" id="services-ai-tab" aria-selected="false" aria-controls="services-ai" tabindex="-1">AI 與數位工具</button>
@@ -1960,32 +1962,32 @@ footer .notes-link{margin-left:24px}
       <p class="lead reveal">開始之前，你也許想先問問。</p>
       <div class="srv-grid">
         <article class="srv reveal">
-          <img class="fl-icon" src="/chuanhua_site_v12_1/assets/botanical/fl-a.png" alt="" aria-hidden="true" loading="lazy" width="26" height="26">
+          <img class="fl-icon" src="/chuanhua_site_v12_1/assets/quiz-plants/lavender.png" alt="" aria-hidden="true" loading="lazy" width="26" height="26">
           <h3>我不知道 AI 能怎麼幫公司，該從哪裡開始？</h3>
           <p>不必先懂工具。先告訴川花，哪件事最花時間、最常重做；我們陪你梳理流程，從一個能減輕日常負擔的小地方開始，慢慢找到適合的做法。</p>
         </article>
         <article class="srv reveal">
-          <img class="fl-icon" src="/chuanhua_site_v12_1/assets/botanical/fl-d.png" alt="" aria-hidden="true" loading="lazy" width="26" height="26">
+          <img class="fl-icon" src="/chuanhua_site_v12_1/assets/quiz-plants/chamomile.png" alt="" aria-hidden="true" loading="lazy" width="26" height="26">
           <h3>我們沒有工程師，也可以導入 AI 嗎？</h3>
           <p>可以先從需求聊起。把目前的工作方式、常用工具與卡住的地方告訴我們；川花會依團隊的使用習慣規劃，讓技術回到你看得懂、用得上的地方。</p>
         </article>
         <article class="srv reveal">
-          <img class="fl-icon" src="/chuanhua_site_v12_1/assets/botanical/fl-c.png" alt="" aria-hidden="true" loading="lazy" width="26" height="26">
+          <img class="fl-icon" src="/chuanhua_site_v12_1/assets/quiz-plants/rosemary.png" alt="" aria-hidden="true" loading="lazy" width="26" height="26">
           <h3>已經在用的表單、試算表和系統，需要全部換掉嗎？</h3>
           <p>不一定。我們會先看既有工具是否提供串接方式，再評估保留、整合或調整。讓新流程接住原本的工作，不急著把熟悉的一切推倒重來。</p>
         </article>
         <article class="srv reveal">
-          <img class="fl-icon" src="/chuanhua_site_v12_1/assets/botanical/fl-b.png" alt="" aria-hidden="true" loading="lazy" width="26" height="26">
+          <img class="fl-icon" src="/chuanhua_site_v12_1/assets/quiz-plants/rose.png" alt="" aria-hidden="true" loading="lazy" width="26" height="26">
           <h3>AI 寫的內容，會不會失去品牌自己的味道？</h3>
           <p>我們會先整理品牌語氣、商品特色與參考內容，再安排 AI 協助草擬。保留人工確認與修整的步驟，讓效率向前走，品牌的聲音也被好好留下。</p>
         </article>
         <article class="srv reveal">
-          <img class="fl-icon" src="/chuanhua_site_v12_1/assets/botanical/fl-a.png" alt="" aria-hidden="true" loading="lazy" width="26" height="26">
+          <img class="fl-icon" src="/chuanhua_site_v12_1/assets/quiz-plants/lavender.png" alt="" aria-hidden="true" loading="lazy" width="26" height="26">
           <h3>做官網或 AI 客製化，需要準備多少預算？</h3>
-          <p>品牌官網建置從 NT$30,000 起，依頁數與選項試算；軟體客製化專案 NT$49,000 起，完整費用依功能與串接需求評估。網域、主機與第三方服務費另計，開始前先把範圍與費用說清楚。</p>
+          <p>品牌官網建置從 NT$49,000 起，依頁數與選項試算；軟體客製化專案 NT$49,000 起，完整費用依功能與串接需求評估。網域、主機與第三方服務費另計，開始前先把範圍與費用說清楚。</p>
         </article>
         <article class="srv reveal">
-          <img class="fl-icon" src="/chuanhua_site_v12_1/assets/botanical/fl-d.png" alt="" aria-hidden="true" loading="lazy" width="26" height="26">
+          <img class="fl-icon" src="/chuanhua_site_v12_1/assets/quiz-plants/chamomile.png" alt="" aria-hidden="true" loading="lazy" width="26" height="26">
           <h3>要多久能開始使用？上線後還能調整嗎？</h3>
           <p>時程會依資料準備、功能範圍與確認進度安排。我們會先一起確認階段與交付內容；後續若需要更新、維護或增加功能，再依實際需求討論，讓工具跟著品牌的步調慢慢長大。</p>
         </article>
@@ -2121,88 +2123,28 @@ footer .notes-link{margin-left:24px}
   </section>
 
 
-    <!-- 服務規劃試算：只透過既有內容布幕開啟，不接表單。 -->
-    <section class="feature-page ch-build" data-feature="build" id="ch-builder" hidden>
-      <div class="ch-live-price" aria-label="目前的示範預估總價">
-        <span>目前預估 <small>示範數字</small></span>
-        <output><span data-price-top-low>NT$0</span><span class="ch-live-range"> ～ <span data-price-top-high>NT$0</span></span></output>
-      </div>
-      <div class="st-top">
-        <a class="st-back" href="/chuanhua_site_v12_1/services/" data-route>← 回到我們做的事</a>
-        <span class="ch-site-mark" aria-hidden="true">川花・慢慢開花</span>
-      </div>
-      <header class="ch-hero">
-        <p class="ch-hero-eyebrow">依需求排序，逐項規劃</p>
-        <h1 id="feature-build-title" tabindex="-1">服務規劃試算</h1>
-        <p class="ch-hero-lead">先排出最想做的事，再加上剛剛好的細節。<br>讓品牌下一步的樣子，慢慢變清楚。</p>
-        <img class="ch-hero-flower" src="/chuanhua_site_v12_1/assets/botanical/fl-b.png" alt="" aria-hidden="true" width="68" height="106">
-        <div class="ch-route-steps" aria-label="試算步驟">
-          <span><b>01</b> 排出先後</span><span aria-hidden="true">→</span>
-          <span><b>02</b> 加上細節</span><span aria-hidden="true">→</span>
-          <span><b>03</b> 查看配置</span>
-        </div>
-        <p class="ch-demo-note">示範數字，正式報價以需求訪談為準。</p>
-      </header>
-      <section class="ch-scenario-section" aria-labelledby="ch-scenario-title">
-        <div class="ch-section-heading">
-          <span class="ch-step-number" aria-hidden="true">✦</span>
-          <div><h2 id="ch-scenario-title">你現在卡在哪？<span class="ch-optional">選填</span></h2><p>點一張，讓適合的服務先往前站。也可以直接往下排。</p></div>
-        </div>
-        <div id="ch-scenarios"></div>
-      </section>
-      <div class="ch-workspace">
-        <div class="ch-main">
-          <section aria-labelledby="ch-ranking-title">
-            <div class="ch-section-heading">
-              <span class="ch-step-number" aria-hidden="true">01</span>
-              <div><h2 id="ch-ranking-title">排出你最需要的服務</h2><p>留下這次想做的，排在前面的就先做。點服務名稱，往下選細項。</p></div>
-            </div>
-            <p class="ch-list-hint">按住 ≡ 拖拉，也能按上下箭頭；鍵盤移到把手後，按 ↑ ↓ 排序。</p>
-            <ol id="ch-active-list" aria-label="這次需要的服務，依優先順序排列"></ol>
-            <div class="ch-removed">
-              <h3>暫時不需要</h3>
-              <div id="ch-removed-list" aria-label="暫時不需要的服務，可加回清單"></div>
-            </div>
-          </section>
-          <section class="ch-detail-section" aria-labelledby="ch-details-title">
-            <div class="ch-section-heading">
-              <span class="ch-step-number" aria-hidden="true">02</span>
-              <div><h2 id="ch-details-title">再加上剛剛好的細節</h2><p>先選方案，再加入需要的加值項目。點一下或拖拉都可以。</p></div>
-            </div>
-            <div id="ch-details"></div>
-          </section>
-          <p class="ch-closing">不必一次決定所有事。<br>先從最想開的那朵花開始。</p>
-        </div>
-        <aside class="ch-summary" id="ch-summary" aria-label="你的服務配置與示範總價"></aside>
-      </div>
-      <div class="ch-announce" id="ch-announcement" role="status" aria-live="polite" aria-atomic="true"></div>
-      <button type="button" id="ch-price-gear" aria-label="開啟示範調價面板" aria-controls="ch-price-editor" aria-expanded="false" hidden>⚙</button>
-      <div id="ch-price-editor" hidden></div>
-      <noscript><p>請開啟瀏覽器的 JavaScript（互動功能），就能拖拉服務和即時試算。</p></noscript>
-    </section>
-
-    <section class="feature-page" data-feature="ai" hidden>
+<section class="feature-page" data-feature="ai" hidden>
       <div class="st-top"><a class="st-back" href="/chuanhua_site_v12_1/services/" data-route>← 回到我們做的事</a></div>
       <header class="st-head"><h1 id="feature-ai-title" tabindex="-1">AI 客製化服務</h1><p>讓繁瑣的工作變簡單，把時間留給真正重要的事。</p></header>
       <div class="feature-body service-details">
         <div class="srv-grid service-overview-grid">
 <article class="srv">
-          <img class="fl-icon" src="/chuanhua_site_v12_1/assets/botanical/fl-a.png" alt="" aria-hidden="true" loading="lazy" width="26" height="26">
+          <img class="fl-icon" src="/chuanhua_site_v12_1/assets/quiz-plants/lavender.png" alt="" aria-hidden="true" loading="lazy" width="26" height="26">
           <h3>AI 工作流程自動化<small>AI 代理・流程串接</small></h3><p>把資料整理、表單彙整與重複上稿串成清楚的工作流程，依你的做事方式規劃，讓每天重複的操作少一點。</p><a class="service-entry" href="/chuanhua_site_v12_1/ai/workflow/" data-route>看如何開花 →</a></article>
 <article class="srv">
-          <img class="fl-icon" src="/chuanhua_site_v12_1/assets/botanical/fl-d.png" alt="" aria-hidden="true" loading="lazy" width="26" height="26">
+          <img class="fl-icon" src="/chuanhua_site_v12_1/assets/quiz-plants/chamomile.png" alt="" aria-hidden="true" loading="lazy" width="26" height="26">
           <h3>AI 內容與文案生成<small>品牌文案・社群內容</small></h3><p>從品牌語氣、商品文案到社群貼文，建立適合你的內容生成流程。讓 AI 協助打底，保留品牌自己的聲音。</p><a class="service-entry" href="/chuanhua_site_v12_1/ai/content/" data-route>看如何開花 →</a></article>
 <article class="srv">
-          <img class="fl-icon" src="/chuanhua_site_v12_1/assets/botanical/fl-b.png" alt="" aria-hidden="true" loading="lazy" width="26" height="26">
+          <img class="fl-icon" src="/chuanhua_site_v12_1/assets/quiz-plants/rose.png" alt="" aria-hidden="true" loading="lazy" width="26" height="26">
           <h3>AI 客製工具開發<small>報表工具・系統串接</small></h3><p>依實際需求規劃報表、記帳或資料查詢工具，串接既有表單與系統。從最卡手的小事開始，做出真正用得上的幫手。</p><a class="service-entry" href="/chuanhua_site_v12_1/ai/tools/" data-route>看如何開花 →</a></article>
 <article class="srv">
-          <img class="fl-icon" src="/chuanhua_site_v12_1/assets/botanical/fl-a.png" alt="" aria-hidden="true" loading="lazy" width="26" height="26">
+          <img class="fl-icon" src="/chuanhua_site_v12_1/assets/quiz-plants/lavender.png" alt="" aria-hidden="true" loading="lazy" width="26" height="26">
           <h3>品牌官網製作<small>形象官網・手機版網站</small></h3><p>從品牌風格、內容架構到手機版排版，協助規劃與製作官網，並依需求串接表單、預約與 AI 工具。</p><a class="service-entry" href="/chuanhua_site_v12_1/ai/website/" data-route>看如何開花 →</a></article>
         </div>
         <div class="service-secondary"><a href="/chuanhua_site_v12_1/ai/consulting/" data-route>合作與諮詢 →</a></div>
       </div>
       <div class="feature-actions">
-        <a class="btn" href="/chuanhua_site_v12_1/build/" data-route>規劃服務・試算預算 →</a>
+
         <a class="btn" href="/chuanhua_site_v12_1/ai/demo/" data-route>互動展示 →</a>
         <a class="btn" href="/chuanhua_site_v12_1/ai/quote/" data-route data-quote-kind="custom">需求詢價 →</a>
       </div>
@@ -2264,16 +2206,16 @@ footer .notes-link{margin-left:24px}
         <p id="notes-count" class="notes-count" role="status" aria-live="polite"></p>
         <div class="notes-list" aria-label="文章列表">
           <!-- NOTES-LIST:START -->
-<a class="note-card" href="/chuanhua_site_v12_1/notes/small-business-website-inquiry-design/" data-route data-note-id="06" data-note-category="網站建置"><img class="fl-icon" src="/chuanhua_site_v12_1/assets/botanical/fl-a.png" alt="" aria-hidden="true" loading="lazy" width="26" height="26"><p class="note-category">網站建置</p><h2 class="note-card-title">中小企業官網怎麼做？從品牌形象到有效詢價的網站規劃</h2><p class="note-excerpt">中小企業官網不只要好看，更要讓客戶找得到、看得懂、願意詢價。從頁面動線、案例展示、SEO 到表單與數據追蹤，整理官網規劃重點。</p><span class="note-read">閱讀筆記 →</span></a>
-<a class="note-card" href="/chuanhua_site_v12_1/notes/line-chatbot-website-customer-service/" data-route data-note-id="07" data-note-category="流程自動化"><img class="fl-icon" src="/chuanhua_site_v12_1/assets/botanical/fl-a.png" alt="" aria-hidden="true" loading="lazy" width="26" height="26"><p class="note-category">流程自動化</p><h2 class="note-card-title">LINE 機器人怎麼做？從自動回覆到官網詢問流程</h2><p class="note-excerpt">LINE 官方帳號機器人不只是設定自動回覆。從常見問題、關鍵字選單、官網導流到人工接手，了解中小企業如何規劃不讓客戶卡住的 LINE 詢問流程。</p><span class="note-read">閱讀筆記 →</span></a>
-<a class="note-card" href="/chuanhua_site_v12_1/notes/custom-business-app-web-vs-mobile/" data-route data-note-id="10" data-note-category="AI 導入"><img class="fl-icon" src="/chuanhua_site_v12_1/assets/botanical/fl-a.png" alt="" aria-hidden="true" loading="lazy" width="26" height="26"><p class="note-category">AI 導入</p><h2 class="note-card-title">企業自製 App 值得嗎？網頁 App、手機 App 怎麼選</h2><p class="note-excerpt">企業想做自己的 App，不一定要先上架應用程式商店。比較網頁 App、手機 App 與內部小工具的差異，從使用情境、資料整合、維護成本決定怎麼開發。</p><span class="note-read">閱讀筆記 →</span></a>
-<a class="note-card" href="/chuanhua_site_v12_1/notes/ai-ad-upload-automation/" data-route data-note-id="01" data-note-category="流程自動化"><img class="fl-icon" src="/chuanhua_site_v12_1/assets/botanical/fl-a.png" alt="" aria-hidden="true" loading="lazy" width="26" height="26"><p class="note-category">流程自動化</p><h2 class="note-card-title">服飾品牌怎麼用 AI 一天上完 10 支廣告？上稿自動化實戰</h2><p class="note-excerpt">服飾品牌新品週要上一整批廣告？用 AI 上稿自動化，影片自動上傳 Meta 廣告素材庫、編號自動填進上稿 Excel，搬運交給機器，判斷留給人。</p><span class="note-read">閱讀筆記 →</span></a>
-<a class="note-card" href="/chuanhua_site_v12_1/notes/ai-ad-copy-brand-voice/" data-route data-note-id="02" data-note-category="品牌內容"><img class="fl-icon" src="/chuanhua_site_v12_1/assets/botanical/fl-a.png" alt="" aria-hidden="true" loading="lazy" width="26" height="26"><p class="note-category">品牌內容</p><h2 class="note-card-title">AI 寫廣告文案，品牌語氣怎麼守住？服飾品牌實戰做法</h2><p class="note-excerpt">AI 寫廣告文案很快，但常常寫得不像自己的品牌。服飾品牌怎麼用語氣規則本、範例和人工微調，讓 AI 文案師批次產出初稿又守住品牌語氣。</p><span class="note-read">閱讀筆記 →</span></a>
-<a class="note-card" href="/chuanhua_site_v12_1/notes/ai-receipt-photo-bookkeeping/" data-route data-note-id="03" data-note-category="流程自動化"><img class="fl-icon" src="/chuanhua_site_v12_1/assets/botanical/fl-a.png" alt="" aria-hidden="true" loading="lazy" width="26" height="26"><p class="note-category">流程自動化</p><h2 class="note-card-title">發票整理太花時間？AI 拍照記帳怎麼做</h2><p class="note-excerpt">發票一張一張手打太花時間？AI 拍照記帳可以自動辨識店家、日期、金額並整理成 Excel，看不清楚的標出來給人工確認。</p><span class="note-read">閱讀筆記 →</span></a>
-<a class="note-card" href="/chuanhua_site_v12_1/notes/sme-ai-adoption-5-questions/" data-route data-note-id="04" data-note-category="AI 導入"><img class="fl-icon" src="/chuanhua_site_v12_1/assets/botanical/fl-a.png" alt="" aria-hidden="true" loading="lazy" width="26" height="26"><p class="note-category">AI 導入</p><h2 class="note-card-title">中小企業導入 AI 前，先問自己 5 個問題</h2><p class="note-excerpt">中小企業導入 AI 不必一開始就買大系統。先問清楚哪個工作最麻煩、資料在哪、誰來確認、怎樣算成功，再決定要不要做 AI 客製化小工具。</p><span class="note-read">閱讀筆記 →</span></a>
-<a class="note-card" href="/chuanhua_site_v12_1/notes/ai-custom-tool-pricing-guide/" data-route data-note-id="05" data-note-category="AI 導入"><img class="fl-icon" src="/chuanhua_site_v12_1/assets/botanical/fl-a.png" alt="" aria-hidden="true" loading="lazy" width="26" height="26"><p class="note-category">AI 導入</p><h2 class="note-card-title">AI 客製化工具要多少錢？報價單怎麼看才不吃虧</h2><p class="note-excerpt">AI 客製化工具報價怎麼看？拆解需求評估、開發、維護、AI 用量與主機費、修改次數與驗收，教你簽約前該問哪些問題。</p><span class="note-read">閱讀筆記 →</span></a>
-<a class="note-card" href="/chuanhua_site_v12_1/notes/no-code-marketing-automation/" data-route data-note-id="08" data-note-category="流程自動化"><img class="fl-icon" src="/chuanhua_site_v12_1/assets/botanical/fl-a.png" alt="" aria-hidden="true" loading="lazy" width="26" height="26"><p class="note-category">流程自動化</p><h2 class="note-card-title">不會寫程式也能做：行銷人的 3 個自動化流程</h2><p class="note-excerpt">不會寫程式的行銷人，也能把素材整理、文案初稿、單據記帳交給自動化。三個服飾電商常見流程，教你從哪裡開始、什麼時候該找人幫忙。</p><span class="note-read">閱讀筆記 →</span></a>
-<a class="note-card" href="/chuanhua_site_v12_1/notes/ai-image-video-commercial-use/" data-route data-note-id="09" data-note-category="品牌內容"><img class="fl-icon" src="/chuanhua_site_v12_1/assets/botanical/fl-a.png" alt="" aria-hidden="true" loading="lazy" width="26" height="26"><p class="note-category">品牌內容</p><h2 class="note-card-title">AI 做的商品圖和影片可以商用嗎？授權注意事項</h2><p class="note-excerpt">AI 商品圖、AI 影片能不能放進廣告和商品頁？從工具條款、付費方案、真人肖像、商標四個面向，整理服飾品牌商用前該檢查的事。</p><span class="note-read">閱讀筆記 →</span></a>
+<a class="note-card" href="/chuanhua_site_v12_1/notes/small-business-website-inquiry-design/" data-route data-note-id="06" data-note-category="網站建置"><img class="fl-icon" src="/chuanhua_site_v12_1/assets/quiz-plants/lavender.png" alt="" aria-hidden="true" loading="lazy" width="26" height="26"><p class="note-category">網站建置</p><h2 class="note-card-title">中小企業官網怎麼做？從品牌形象到有效詢價的網站規劃</h2><p class="note-excerpt">中小企業官網不只要好看，更要讓客戶找得到、看得懂、願意詢價。從頁面動線、案例展示、SEO 到表單與數據追蹤，整理官網規劃重點。</p><span class="note-read">閱讀筆記 →</span></a>
+<a class="note-card" href="/chuanhua_site_v12_1/notes/line-chatbot-website-customer-service/" data-route data-note-id="07" data-note-category="流程自動化"><img class="fl-icon" src="/chuanhua_site_v12_1/assets/quiz-plants/lavender.png" alt="" aria-hidden="true" loading="lazy" width="26" height="26"><p class="note-category">流程自動化</p><h2 class="note-card-title">LINE 機器人怎麼做？從自動回覆到官網詢問流程</h2><p class="note-excerpt">LINE 官方帳號機器人不只是設定自動回覆。從常見問題、關鍵字選單、官網導流到人工接手，了解中小企業如何規劃不讓客戶卡住的 LINE 詢問流程。</p><span class="note-read">閱讀筆記 →</span></a>
+<a class="note-card" href="/chuanhua_site_v12_1/notes/custom-business-app-web-vs-mobile/" data-route data-note-id="10" data-note-category="AI 導入"><img class="fl-icon" src="/chuanhua_site_v12_1/assets/quiz-plants/lavender.png" alt="" aria-hidden="true" loading="lazy" width="26" height="26"><p class="note-category">AI 導入</p><h2 class="note-card-title">企業自製 App 值得嗎？網頁 App、手機 App 怎麼選</h2><p class="note-excerpt">企業想做自己的 App，不一定要先上架應用程式商店。比較網頁 App、手機 App 與內部小工具的差異，從使用情境、資料整合、維護成本決定怎麼開發。</p><span class="note-read">閱讀筆記 →</span></a>
+<a class="note-card" href="/chuanhua_site_v12_1/notes/ai-ad-upload-automation/" data-route data-note-id="01" data-note-category="流程自動化"><img class="fl-icon" src="/chuanhua_site_v12_1/assets/quiz-plants/lavender.png" alt="" aria-hidden="true" loading="lazy" width="26" height="26"><p class="note-category">流程自動化</p><h2 class="note-card-title">服飾品牌怎麼用 AI 一天上完 10 支廣告？上稿自動化實戰</h2><p class="note-excerpt">服飾品牌新品週要上一整批廣告？用 AI 上稿自動化，影片自動上傳 Meta 廣告素材庫、編號自動填進上稿 Excel，搬運交給機器，判斷留給人。</p><span class="note-read">閱讀筆記 →</span></a>
+<a class="note-card" href="/chuanhua_site_v12_1/notes/ai-ad-copy-brand-voice/" data-route data-note-id="02" data-note-category="品牌內容"><img class="fl-icon" src="/chuanhua_site_v12_1/assets/quiz-plants/lavender.png" alt="" aria-hidden="true" loading="lazy" width="26" height="26"><p class="note-category">品牌內容</p><h2 class="note-card-title">AI 寫廣告文案，品牌語氣怎麼守住？服飾品牌實戰做法</h2><p class="note-excerpt">AI 寫廣告文案很快，但常常寫得不像自己的品牌。服飾品牌怎麼用語氣規則本、範例和人工微調，讓 AI 文案師批次產出初稿又守住品牌語氣。</p><span class="note-read">閱讀筆記 →</span></a>
+<a class="note-card" href="/chuanhua_site_v12_1/notes/ai-receipt-photo-bookkeeping/" data-route data-note-id="03" data-note-category="流程自動化"><img class="fl-icon" src="/chuanhua_site_v12_1/assets/quiz-plants/lavender.png" alt="" aria-hidden="true" loading="lazy" width="26" height="26"><p class="note-category">流程自動化</p><h2 class="note-card-title">發票整理太花時間？AI 拍照記帳怎麼做</h2><p class="note-excerpt">發票一張一張手打太花時間？AI 拍照記帳可以自動辨識店家、日期、金額並整理成 Excel，看不清楚的標出來給人工確認。</p><span class="note-read">閱讀筆記 →</span></a>
+<a class="note-card" href="/chuanhua_site_v12_1/notes/sme-ai-adoption-5-questions/" data-route data-note-id="04" data-note-category="AI 導入"><img class="fl-icon" src="/chuanhua_site_v12_1/assets/quiz-plants/lavender.png" alt="" aria-hidden="true" loading="lazy" width="26" height="26"><p class="note-category">AI 導入</p><h2 class="note-card-title">中小企業導入 AI 前，先問自己 5 個問題</h2><p class="note-excerpt">中小企業導入 AI 不必一開始就買大系統。先問清楚哪個工作最麻煩、資料在哪、誰來確認、怎樣算成功，再決定要不要做 AI 客製化小工具。</p><span class="note-read">閱讀筆記 →</span></a>
+<a class="note-card" href="/chuanhua_site_v12_1/notes/ai-custom-tool-pricing-guide/" data-route data-note-id="05" data-note-category="AI 導入"><img class="fl-icon" src="/chuanhua_site_v12_1/assets/quiz-plants/lavender.png" alt="" aria-hidden="true" loading="lazy" width="26" height="26"><p class="note-category">AI 導入</p><h2 class="note-card-title">AI 客製化工具要多少錢？報價單怎麼看才不吃虧</h2><p class="note-excerpt">AI 客製化工具報價怎麼看？拆解需求評估、開發、維護、AI 用量與主機費、修改次數與驗收，教你簽約前該問哪些問題。</p><span class="note-read">閱讀筆記 →</span></a>
+<a class="note-card" href="/chuanhua_site_v12_1/notes/no-code-marketing-automation/" data-route data-note-id="08" data-note-category="流程自動化"><img class="fl-icon" src="/chuanhua_site_v12_1/assets/quiz-plants/lavender.png" alt="" aria-hidden="true" loading="lazy" width="26" height="26"><p class="note-category">流程自動化</p><h2 class="note-card-title">不會寫程式也能做：行銷人的 3 個自動化流程</h2><p class="note-excerpt">不會寫程式的行銷人，也能把素材整理、文案初稿、單據記帳交給自動化。三個服飾電商常見流程，教你從哪裡開始、什麼時候該找人幫忙。</p><span class="note-read">閱讀筆記 →</span></a>
+<a class="note-card" href="/chuanhua_site_v12_1/notes/ai-image-video-commercial-use/" data-route data-note-id="09" data-note-category="品牌內容"><img class="fl-icon" src="/chuanhua_site_v12_1/assets/quiz-plants/lavender.png" alt="" aria-hidden="true" loading="lazy" width="26" height="26"><p class="note-category">品牌內容</p><h2 class="note-card-title">AI 做的商品圖和影片可以商用嗎？授權注意事項</h2><p class="note-excerpt">AI 商品圖、AI 影片能不能放進廣告和商品頁？從工具條款、付費方案、真人肖像、商標四個面向，整理服飾品牌商用前該檢查的事。</p><span class="note-read">閱讀筆記 →</span></a>
 <!-- NOTES-LIST:END -->
         </div>
       </div>
@@ -2315,7 +2257,7 @@ footer .notes-link{margin-left:24px}
 <p>如果你的網站已經有內容，卻不知道怎麼整理成清楚的服務動線，歡迎告訴川花目前的網站狀況與想改善的地方。我們可先評估頁面架構、互動需求與技術可行性；專案範圍及費用依正式需求評估，歡迎透過官方 LINE @riverflower2025 預約初步諮詢。</p>
 </div>
 <nav class="note-related" aria-label="相關筆記"><h2>讓想法繼續開花</h2><a href="/chuanhua_site_v12_1/notes/line-chatbot-website-customer-service/" data-route>LINE 機器人怎麼做？從自動回覆到官網詢問流程</a><a href="/chuanhua_site_v12_1/notes/custom-business-app-web-vs-mobile/" data-route>企業自製 App 值得嗎？網頁 App、手機 App 怎麼選</a></nav>
-<div class="note-service-link"><a class="btn" href="/chuanhua_site_v12_1/ai/website/" data-route>品牌官網製作 →</a><a class="btn" href="/chuanhua_site_v12_1/build/" data-route>規劃服務・試算預算 →</a></div>
+<div class="note-service-link"><a class="btn" href="/chuanhua_site_v12_1/services/website/" data-route>品牌官網製作 →</a></div>
 </section>
 <section class="feature-page note-article" data-feature="note-07" data-note-id="07" hidden>
 <div class="st-top"><a class="st-back" href="/chuanhua_site_v12_1/notes/" data-route>← 回到開花筆記</a></div>
@@ -2702,7 +2644,7 @@ footer .notes-link{margin-left:24px}
             </div>
           </div>
           <aside class="quote-aside" aria-label="目前需求與預估">
-            <img class="quote-aside-flower" src="/chuanhua_site_v12_1/assets/botanical/fl-a.png" alt="" aria-hidden="true" loading="lazy" width="26" height="26">
+            <img class="quote-aside-flower" src="/chuanhua_site_v12_1/assets/quiz-plants/lavender.png" alt="" aria-hidden="true" loading="lazy" width="26" height="26">
             <p class="quote-price-label" id="quote-total-label">官網建置預估</p>
             <output id="quote-total" aria-live="off">請先選擇方案</output>
             <ul class="quote-breakdown" id="quote-breakdown"></ul>
@@ -4541,8 +4483,6 @@ async function submit(){
           await new Promise(resolve=>bloomTransition(()=>{if(!stale())openFeature(m.feature);resolve()}));
           if(stale())return;
         } else openFeature(m.feature);
-        // 先讓不透明的試算布幕畫出一個畫格，再恢復一般轉場，避免入口花園閃現。
-        if (initial && m.feature==='build') requestAnimationFrame(()=>requestAnimationFrame(()=>document.documentElement.removeAttribute('data-build-direct')));
         return;
       }
       if (!entered) enterMain(m.layer==='main' ? m.section : null);
@@ -4591,6 +4531,8 @@ async function submit(){
       await wait(150);
       if (stale()) return;
       applying = false;
+      // 內頁已就位，還原花園控制，之後返回首頁時可以正常顯示。
+      if (initial) document.documentElement.removeAttribute('data-inner-direct');
       const p = current();
       if (pagePath(p) !== location.pathname) history.replaceState({p}, '', pagePath(p));
       document.title = titleFor(p);

@@ -1,248 +1,141 @@
-'use strict';
-
-// 不需安裝套件。從專案資料夾執行：node tools/test_service_builder.cjs
-// 直接呼叫網站使用的模型；畫面與手指拖曳仍由瀏覽器驗收。
+﻿'use strict';
+// 獨立驗算：預期金額由測試自行逐項相加，不使用試算函式的計算過程。
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
-const vm = require('node:vm');
-const ROOT = path.resolve(__dirname, '..');
-const html = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
-const source = fs.readFileSync(path.join(ROOT, 'assets/service-builder.js'), 'utf8');
-const sandbox = { console, setTimeout, clearTimeout };
-vm.createContext(sandbox);
-vm.runInContext(source, sandbox, { filename: 'service-builder.js' });
-const api = sandbox.CHBuild;
-assert.ok(api, '網站應提供可在沒有畫面時測試的生產模型');
-const copy = value => JSON.parse(JSON.stringify(value));
+const api = require('../assets/item-estimator.js');
+const { CONFIG, calculate, createState, setQuantity, moveItem, formatMoney, renderTotal } = api;
+const copy = x => JSON.parse(JSON.stringify(x));
+const services = Object.entries(CONFIG);
 let checks = 0;
-function check(name, fn) {
-  try { fn(); checks += 1; console.log(`通過：${name}`); }
-  catch (error) { error.message = `${name}：${error.message}`; throw error; }
+function test(name, fn) { try { fn(); checks++; console.log('通過：' + name); } catch (e) { e.message = name + '：' + e.message; throw e; } }
+function independent(service, state) {
+  let sum = service.base;
+  for (const choice of state.selected) {
+    const item = service.items.find(i => i.id === choice.id);
+    assert.ok(item, '所選項目必須存在');
+    sum += item.price * choice.quantity;
+  }
+  return { subtotal: sum, low: sum, high: Math.round(sum * 1.2 / 100) * 100, monthly: service.maintenance[state.maintenance] };
 }
-
-// 這是開工時存在的全部產生頁。新增服務規劃頁不可刪掉任何一頁。
-const previousPaths = [
-  '/about/', '/ai/consulting/', '/ai/content/', '/ai/demo/', '/ai/',
-  '/ai/quote/', '/ai/tools/', '/ai/website/', '/ai/workflow/', '/cases/',
-  '/contact/', '/courses/', '/home/', '/notes/ai-ad-copy-brand-voice/',
-  '/notes/ai-ad-upload-automation/', '/notes/ai-custom-tool-pricing-guide/',
-  '/notes/ai-image-video-commercial-use/', '/notes/ai-receipt-photo-bookkeeping/',
-  '/notes/', '/notes/no-code-marketing-automation/', '/notes/sme-ai-adoption-5-questions/',
-  '/policy/', '/quiz/', '/resonance/', '/services/', '/studio/flow/', '/studio/', '/team/'
-];
-
-check('舊網址全數保留，新網址使用既有布幕', () => {
-  const block = html.match(/<script type="application\/json" id="route-meta">([\s\S]*?)<\/script>/);
-  assert.ok(block, '應有網址資料表');
-  const routes = JSON.parse(block[1]);
-  assert.ok(routes['/']);
-  for (const route of previousPaths) {
-    assert.ok(routes[route], `缺少 ${route}`);
-    assert.ok(fs.existsSync(path.join(ROOT, route, 'index.html')), `未產生 ${route}`);
+function verify(service, state) {
+  const actual = calculate(service, state), expected = independent(service, state);
+  for (const key of Object.keys(expected)) assert.equal(actual[key], expected[key], key);
+  if (actual.lines) {
+    assert.equal(actual.base, service.base);
+    assert.deepEqual(actual.lines, state.selected.map(c => ({ id: c.id, amount: service.items.find(i => i.id === c.id).price * c.quantity })));
   }
-  assert.equal(routes['/build/'].layer, 'feature');
-  assert.equal(routes['/build/'].feature, 'build');
-  assert.ok(fs.existsSync(path.join(ROOT, 'build/index.html')), '未產生 /build/');
-  assert.match(html, /data-feature="build"/);
-  assert.match(html, /id="feature-build-title"/);
-});
-
-check('頁面容器與兩處入口齊全', () => {
-  for (const id of ['ch-builder', 'ch-scenarios', 'ch-active-list', 'ch-removed-list',
-    'ch-details', 'ch-summary', 'ch-announcement', 'ch-price-editor', 'ch-price-gear']) {
-    assert.match(html, new RegExp(`id="${id}"`), `缺少 ${id}`);
+  const shown = renderTotal(actual);
+  for (const value of [expected.low, expected.high, expected.monthly]) {
+    const independentlyFormatted = 'NT$' + String(value).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    assert.ok(shown.includes(independentlyFormatted), shown + ' 缺少 ' + independentlyFormatted);
+    assert.equal(formatMoney(value), independentlyFormatted);
   }
-  assert.ok((html.match(/>規劃服務・試算預算 →<\/a>/g) || []).length >= 2, '服務與 AI 頁皆應有入口');
-  assert.match(html, /assets\/service-builder\.css/);
-  assert.match(html, /assets\/service-builder\.js/);
-});
-
-// 下方是金額與狀態測試，刻意使用正式程式的公開函數。
-function selection(ids) {
-  const state = api.createState();
-  for (const id of [...state.active]) if (!ids.includes(id)) api.removeService(state, id);
-  ids.forEach((id, index) => api.moveService(state, id, index));
-  return state;
 }
-function freshPricing() { return copy(api.DEFAULT_PRICING); }
-function totalFor(ids, pricing = freshPricing()) { return api.calculate(selection(ids), pricing); }
-
-check('八項服務基本級距都由 49,000 起，預設金額正確', () => {
-  assert.equal(api.SERVICES.length, 8);
-  for (const service of api.SERVICES) {
-    const prices = api.DEFAULT_PRICING.services[service.id];
-    assert.equal(prices.tiers.basic, 49000, service.name);
-    assert.ok(service.addons.length >= 4 && service.addons.length <= 6, `${service.name} 應有四至六項加值項目`);
-    for (const addon of service.addons) assert.equal(typeof prices.addons[addon.id], 'number');
+test('八個服務的預設狀態與設定', () => {
+  assert.equal(services.length, 8);
+  for (const [slug, service] of services) {
+    assert.equal(service.base, 49000, slug);
+    assert.ok(service.included.length > 0);
+    assert.ok(service.items.some(i => i.selected));
+    assert.ok(service.items.some(i => !i.selected));
+    assert.ok(service.items.length >= (slug === 'website' ? 14 : 5));
+    if (slug !== 'website') assert.ok(service.items.length <= 8);
+    for (const item of service.items) { assert.ok(Number.isSafeInteger(item.price) && item.price >= 0); assert.ok(Number.isSafeInteger(item.min) && item.min >= 1); }
+    verify(service, createState(service));
   }
-  const result = api.calculate(api.createState(), freshPricing());
-  assert.equal(result.rawSubtotal, 392000);
-  assert.equal(result.discountRate, 0.9);
-  assert.equal(result.onceLow, 352800);
-  assert.equal(result.onceHigh, 423360);
+  assert.equal(formatMoney(49000), 'NT$49,000');
 });
-
-check('排序會改變名次與第一階段，價錢保持一致', () => {
-  const state = api.createState();
-  const pricing = freshPricing();
-  const before = api.calculate(state, pricing).onceLow;
-  api.moveService(state, 'website', 0);
-  const result = api.calculate(state, pricing);
-  assert.equal(state.active[0], 'website');
-  assert.equal(result.breakdown[0].id, 'website');
-  assert.deepEqual(Array.from(result.breakdown, entry => entry.rank), [1, 2, 3, 4, 5, 6, 7, 8]);
-  assert.equal(new Set(state.active).size, 8);
-  assert.equal(result.onceLow, before);
-  assert.match(api.buildSummary(state, pricing), /第一階段先做：品牌官網製作/);
-});
-
-check('拿掉與加回不重複，並保留原本選過的細項', () => {
-  const state = api.createState();
-  api.toggleAddon(state, 'ads', 'creative', true);
-  api.removeService(state, 'ads');
-  api.removeService(state, 'ads');
-  assert.equal(state.active.includes('ads'), false);
-  assert.equal(Array.from(state.removed).filter(id => id === 'ads').length, 1);
-  api.restoreService(state, 'ads', 1);
-  api.restoreService(state, 'ads', 1);
-  assert.equal(Array.from(state.active).filter(id => id === 'ads').length, 1);
-  assert.equal(state.active[1], 'ads');
-  assert.equal(state.removed.includes('ads'), false);
-  const ads = api.calculate(state, freshPricing()).breakdown.find(entry => entry.id === 'ads');
-  assert.equal(ads.subtotal, 61000);
-});
-
-check('情境把適合服務排到前面，保留已拿掉服務', () => {
-  const state = api.createState();
-  api.removeService(state, 'brand');
-  assert.ok(api.selectScenario(state, 'website'));
-  assert.equal(state.active[0], 'website');
-  assert.equal(state.expanded, 'website');
-  assert.equal(state.active.includes('brand'), false);
-  assert.equal(state.removed.includes('brand'), true);
-  assert.equal(new Set(state.active).size, 7);
-  const ordered = copy(state.active);
-  assert.equal(api.selectScenario(state, '不存在的情境'), false);
-  assert.deepEqual(copy(state.active), ordered);
-});
-
-check('級距、加購與數量使用同一個正式加總公式', () => {
-  const state = selection(['ads']);
-  const pricing = freshPricing();
-  api.setTier(state, 'ads', 'advanced');
-  assert.equal(api.calculate(state, pricing).onceLow, 69000);
-  api.setTier(state, 'ads', 'complete');
-  assert.equal(api.calculate(state, pricing).onceLow, 99000);
-  api.setTier(state, 'ads', 'basic');
-  api.toggleAddon(state, 'ads', 'creative', true);
-  api.toggleAddon(state, 'ads', 'pixel', true);
-  assert.equal(api.calculate(state, pricing).onceLow, 67000);
-  api.toggleAddon(state, 'ads', 'creative', false);
-  assert.equal(api.calculate(state, pricing).onceLow, 55000);
-  api.setQuantity(state, 'ads', 3);
-  const result = api.calculate(state, pricing);
-  assert.equal(result.breakdown[0].quantityCost, 36000);
-  assert.equal(result.onceLow, 91000);
-  assert.equal(result.onceHigh, 109200);
-});
-
-check('兩項九五折、三項九折，關掉優惠恢復原價', () => {
-  const pricing = freshPricing();
-  assert.equal(totalFor(['ads'], pricing).onceLow, 49000);
-  let result = totalFor(['ads', 'website'], pricing);
-  assert.equal(result.rawSubtotal, 98000);
-  assert.equal(result.discountRate, 0.95);
-  assert.equal(result.discountAmount, 4900);
-  assert.equal(result.onceLow, 93100);
-  result = totalFor(['ads', 'website', 'workflow'], pricing);
-  assert.equal(result.discountRate, 0.9);
-  assert.equal(result.onceLow, 132300);
-  assert.ok(api.updatePrice(pricing, 'discount.enabled', false));
-  assert.equal(totalFor(['ads', 'website', 'workflow'], pricing).onceLow, 147000);
-});
-
-check('全部拿掉為零，維護費獨立按月列出', () => {
-  const state = selection([]);
-  const pricing = freshPricing();
-  let result = api.calculate(state, pricing);
-  assert.equal(result.rawSubtotal, 0);
-  assert.equal(result.onceLow, 0);
-  assert.equal(result.onceHigh, 0);
-  assert.equal(result.breakdown.length, 0);
-  api.setMaintenance(state, 'basic');
-  assert.equal(api.calculate(state, pricing).monthly, 0, '沒有選服務時不收維護費');
-  api.restoreService(state, 'ads');
-  assert.equal(api.calculate(state, pricing).monthly, 3000);
-  api.setMaintenance(state, 'complete');
-  assert.equal(api.calculate(state, pricing).monthly, 8000);
-  api.setMaintenance(state, 'none');
-  assert.equal(api.calculate(state, pricing).monthly, 0);
-});
-
-check('調價函數立刻改變起價、級距、加值項目與數量金額', () => {
-  const state = selection(['ads']);
-  const pricing = freshPricing();
-  assert.ok(api.updatePrice(pricing, 'services.ads.tiers.basic', 59000));
-  assert.equal(api.calculate(state, pricing).onceLow, 59000);
-  assert.ok(api.updatePrice(pricing, ['services', 'ads', 'tiers', 'advanced'], 79000));
-  api.setTier(state, 'ads', 'advanced');
-  assert.equal(api.calculate(state, pricing).onceLow, 79000);
-  api.toggleAddon(state, 'ads', 'creative', true);
-  assert.ok(api.updatePrice(pricing, 'services.ads.addons.creative', 22000));
-  assert.equal(api.calculate(state, pricing).onceLow, 101000);
-  api.setQuantity(state, 'ads', 2);
-  assert.ok(api.updatePrice(pricing, 'services.ads.quantityPrice', 28000));
-  assert.equal(api.calculate(state, pricing).onceLow, 129000);
-});
-
-check('調價函數立刻改變折扣、區間與維護費', () => {
-  const state = selection(['ads', 'website']);
-  const pricing = freshPricing();
-  assert.ok(api.updatePrice(pricing, 'discount.twoServices', 0.8));
-  assert.equal(api.calculate(state, pricing).onceLow, 78400);
-  assert.ok(api.updatePrice(pricing, 'rangeMultiplier', 1.5));
-  assert.equal(api.calculate(state, pricing).onceHigh, 117600);
-  assert.ok(api.updatePrice(pricing, 'maintenance.basic', 6000));
-  api.setMaintenance(state, 'basic');
-  assert.equal(api.calculate(state, pricing).monthly, 6000);
-  api.restoreService(state, 'workflow');
-  assert.ok(api.updatePrice(pricing, 'discount.threeOrMore', 0.85));
-  assert.equal(api.calculate(state, pricing).onceLow, 124950);
-});
-
-check('非法調價不污染設定，恢復預設使用獨立副本', () => {
-  const pricing = freshPricing();
-  const before = JSON.stringify(pricing);
-  for (const value of [-1, NaN, Infinity, '無效', null, [], [59000], {}, '   ']) {
-    assert.equal(api.updatePrice(pricing, 'services.ads.tiers.basic', value), false, String(value));
+test('拿掉、加回、從可加入區新增與拖放移除', () => {
+  for (const [, service] of services) {
+    const state = createState(service), start = calculate(service, state).subtotal;
+    const chosen = service.items.find(i => i.selected), extra = service.items.find(i => !i.selected);
+    moveItem(service, state, chosen.id, 'available');
+    assert.equal(calculate(service, state).subtotal, start - chosen.price * chosen.min); verify(service, state);
+    moveItem(service, state, chosen.id, 'selected');
+    assert.equal(calculate(service, state).subtotal, start); verify(service, state);
+    moveItem(service, state, extra.id, 'selected');
+    assert.equal(calculate(service, state).subtotal, start + extra.price * extra.min); verify(service, state);
+    moveItem(service, state, extra.id, 'available');
+    assert.ok(!state.selected.some(c => c.id === extra.id));
+    assert.equal(calculate(service, state).subtotal, start); verify(service, state);
+    const before = JSON.stringify(state);
+    for (const included of service.included) moveItem(service, state, included, 'available');
+    assert.equal(JSON.stringify(state), before, '內含項目不可拿掉');
   }
-  assert.equal(api.updatePrice(pricing, 'services.unknown.tiers.basic', 1000), false);
-  assert.equal(api.updatePrice(pricing, '__proto__.polluted', 1000), false);
-  assert.equal(api.updatePrice(pricing, 'discount.twoServices', 1.5), false);
-  assert.equal(JSON.stringify(pricing), before);
-  const reset = api.resetPricing();
-  assert.deepEqual(copy(reset), copy(api.DEFAULT_PRICING));
-  reset.services.ads.tiers.basic = 1;
-  assert.equal(api.DEFAULT_PRICING.services.ads.tiers.basic, 49000);
 });
-
-check('聊天摘要包含順位、細項、費用與示範提醒', () => {
-  const state = selection(['website', 'ads']);
-  const pricing = freshPricing();
-  api.setTier(state, 'ads', 'advanced');
-  api.toggleAddon(state, 'ads', 'creative', true);
-  api.setMaintenance(state, 'basic');
-  const summary = api.buildSummary(state, pricing);
-  assert.match(summary, /品牌官網製作/);
-  assert.match(summary, /數位廣告投放/);
-  assert.match(summary, /進階/);
-  assert.match(summary, /第一階段先做：品牌官網製作/);
-  assert.match(summary, /示範/);
-  assert.match(summary, /3,000/);
-  assert.ok(summary.includes(api.SERVICES.find(service => service.id === 'ads').addons.find(addon => addon.id === 'creative').name));
-  assert.match(summary, /123,500/);
+test('數量增減與最小數量', () => {
+  let count = 0;
+  for (const [, service] of services) for (const item of service.items.filter(i => i.unit)) {
+    count++; const state = createState(service); moveItem(service, state, item.id, 'selected');
+    let previous = calculate(service, state).subtotal;
+    for (const diff of [1, 1, -1]) {
+      const chosen = state.selected.find(c => c.id === item.id);
+      setQuantity(service, state, item.id, chosen.quantity + diff);
+      assert.equal(calculate(service, state).subtotal, previous + diff * item.price);
+      previous = calculate(service, state).subtotal; verify(service, state);
+    }
+    setQuantity(service, state, item.id, -100);
+    assert.equal(state.selected.find(c => c.id === item.id).quantity, item.min); verify(service, state);
+  }
+  assert.ok(count >= 4);
 });
-
-console.log(`共 ${checks} 組檢查通過。畫面拖曳、手機手感與剪貼簿仍須瀏覽器驗收。`);
-
+test('維護方案不影響一次費用', () => {
+  for (const [, service] of services) {
+    const state = createState(service), initial = calculate(service, state).subtotal;
+    for (const plan of Object.keys(service.maintenance)) {
+      state.maintenance = plan; const r = calculate(service, state);
+      assert.equal(r.subtotal, initial); assert.equal(r.monthly, service.maintenance[plan]); verify(service, state);
+    }
+  }
+});
+test('調整價格後立即重新計價', () => {
+  const service = copy(CONFIG.website), state = createState(service), item = service.items.find(i => i.selected);
+  const start = calculate(service, state).subtotal; item.price += 1300;
+  assert.equal(calculate(service, state).subtotal, start + 1300 * item.min); verify(service, state);
+  service.base += 700; assert.equal(calculate(service, state).subtotal, start + 1300 * item.min + 700); verify(service, state);
+  service.maintenance.basic = 4700; state.maintenance = 'basic'; verify(service, state);
+});
+test('每個服務隨機操作 200 次，逐步獨立加總', () => {
+  let seed = 438153; const rand = n => ((seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0) % n);
+  for (const [, original] of services) {
+    const service = copy(original), state = createState(service);
+    for (let step = 0; step < 200; step++) {
+      const item = service.items[rand(service.items.length)], action = rand(5);
+      if (action === 0) moveItem(service, state, item.id, 'available');
+      if (action === 1) moveItem(service, state, item.id, 'selected', rand(state.selected.length + 1));
+      if (action === 2 && state.selected.length) { const choice = state.selected[rand(state.selected.length)]; setQuantity(service, state, choice.id, choice.quantity + (rand(2) ? 1 : -1)); }
+      if (action === 3 && state.selected.length) { const choice = state.selected[rand(state.selected.length)]; moveItem(service, state, choice.id, 'selected', rand(state.selected.length)); }
+      if (action === 4) state.maintenance = ['none', 'basic', 'full'][rand(3)];
+      assert.equal(new Set(state.selected.map(c => c.id)).size, state.selected.length);
+      verify(service, state);
+    }
+  }
+});
+test('頁面實際渲染金額與調價輸入', () => {
+  const elements = new Map();
+  function element(selector) { if (!elements.has(selector)) elements.set(selector, { textContent:'', innerHTML:'', hidden:false, value:'', classList:{ add(){}, remove(){} } }); return elements.get(selector); }
+  const handlers = {};
+  const root = { dataset:{service:'website'}, innerHTML:'', querySelector:element, addEventListener(type, fn){ handlers[type] = fn; } };
+  const storage = {};
+  global.document = { querySelectorAll(){ return [root]; } };
+  global.window = { matchMedia(){ return {matches:true}; }, addEventListener(){} };
+  global.location = { search:'?price=edit' };
+  global.localStorage = { getItem(k){ return storage[k] || null; }, setItem(k,v){ storage[k]=v; } };
+  try {
+    api.mountAll();
+    const service = copy(CONFIG.website), state = createState(service), result = calculate(service, state);
+    assert.equal(element('.ie-price').textContent, formatMoney(result.subtotal));
+    assert.ok(element('.ie-range').textContent.includes(formatMoney(result.high)));
+    assert.ok(element('.ie-monthly').textContent.includes(formatMoney(result.monthly)));
+    assert.equal(element('.ie-editor').hidden, false);
+    const chosen = service.items.find(i => i.selected);
+    const input = { value: String(chosen.price + 1700), dataset:{price:'item',id:chosen.id}, closest(){ return this; } };
+    handlers.input({target:input}); chosen.price += 1700;
+    const changed = calculate(service,state);
+    assert.equal(element('.ie-price').textContent, formatMoney(changed.subtotal));
+    assert.ok(element('.ie-range').textContent.includes(formatMoney(changed.high)));
+    assert.equal(JSON.parse(storage['ch-item-prices-v1']).website.items[chosen.id], chosen.price);
+  } finally { delete global.document; delete global.window; delete global.location; delete global.localStorage; }
+});
+console.log(`共 ${checks} 組檢查通過。`);

@@ -146,8 +146,8 @@ def render_notes(text: str, articles: list[dict]) -> str:
     routes = load_routes(text)
     if "/notes/" not in routes or routes["/notes/"].get("feature") != "notes":
         raise ValueError("首頁缺少既有開花筆記路由")
-    # 筆記列表保留原圖，不隨首頁卡片所用插畫改變。
-    flower = ('<img class="fl-icon" src="/chuanhua_site_v12_1/assets/botanical/fl-a.png" '
+    # 筆記列表使用既有手繪植物。
+    flower = ('<img class="fl-icon" src="/chuanhua_site_v12_1/assets/quiz-plants/lavender.png" '
               'alt="" aria-hidden="true" loading="lazy" width="26" height="26">')
     cards, pages = [], []
     for article in articles:
@@ -165,7 +165,7 @@ def render_notes(text: str, articles: list[dict]) -> str:
                          key=lambda other: other["category"] != article["category"])[:2]
         prose = "\n".join(render_block(block) for block in article["blocks"])
         services = {
-            "06": [("/ai/website/", "品牌官網製作 →"), ("/build/", "規劃服務・試算預算 →")],
+            "06": [("/services/website/", "品牌官網製作 →")],
             "07": [("/ai/workflow/", "AI 工作流程自動化 →")],
             "10": [("/ai/tools/", "AI 客製工具開發 →")],
         }.get(identity, [("/ai/", "探索 AI 客製化服務 →")])
@@ -188,7 +188,7 @@ def render_notes(text: str, articles: list[dict]) -> str:
     latest_plants = ("lavender", "chamomile", "rosemary")
     latest = [card.replace('<h2 class="note-card-title">', '<h3 class="note-card-title">')
               .replace('</h2>', '</h3>').replace('閱讀筆記 →', '閱讀 →')
-              .replace('assets/botanical/fl-a.png', f'assets/quiz-plants/{plant}.png')
+              .replace('assets/quiz-plants/lavender.png', f'assets/quiz-plants/{plant}.png')
               for card, plant in zip(cards[:3], latest_plants)]
     text = replace_marked(text, "NOTES-LATEST", "\n".join(latest))
     text = replace_marked(text, "NOTE-ARTICLES", "\n".join(pages))
