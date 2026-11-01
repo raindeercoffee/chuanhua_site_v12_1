@@ -21,7 +21,7 @@ function check(name, fn) {
   catch (error) { error.message = `${name}：${error.message}`; throw error; }
 }
 
-// 這是開工時存在的全部產生頁。新增積木頁不可刪掉任何一頁。
+// 這是開工時存在的全部產生頁。新增服務規劃頁不可刪掉任何一頁。
 const previousPaths = [
   '/about/', '/ai/consulting/', '/ai/content/', '/ai/demo/', '/ai/',
   '/ai/quote/', '/ai/tools/', '/ai/website/', '/ai/workflow/', '/cases/',
@@ -53,7 +53,7 @@ check('頁面容器與兩處入口齊全', () => {
     'ch-details', 'ch-summary', 'ch-announcement', 'ch-price-editor', 'ch-price-gear']) {
     assert.match(html, new RegExp(`id="${id}"`), `缺少 ${id}`);
   }
-  assert.ok((html.match(/>排排看・算算看 →<\/a>/g) || []).length >= 2, '服務與 AI 頁皆應有入口');
+  assert.ok((html.match(/>規劃服務・試算預算 →<\/a>/g) || []).length >= 2, '服務與 AI 頁皆應有入口');
   assert.match(html, /assets\/service-builder\.css/);
   assert.match(html, /assets\/service-builder\.js/);
 });
@@ -73,7 +73,7 @@ check('八項服務基本級距都由 49,000 起，預設金額正確', () => {
   for (const service of api.SERVICES) {
     const prices = api.DEFAULT_PRICING.services[service.id];
     assert.equal(prices.tiers.basic, 49000, service.name);
-    assert.ok(service.addons.length >= 4 && service.addons.length <= 6, `${service.name} 應有四至六塊積木`);
+    assert.ok(service.addons.length >= 4 && service.addons.length <= 6, `${service.name} 應有四至六項加值項目`);
     for (const addon of service.addons) assert.equal(typeof prices.addons[addon.id], 'number');
   }
   const result = api.calculate(api.createState(), freshPricing());
@@ -180,7 +180,7 @@ check('全部拿掉為零，維護費獨立按月列出', () => {
   assert.equal(api.calculate(state, pricing).monthly, 0);
 });
 
-check('調價函數立刻改變起價、級距、積木與數量金額', () => {
+check('調價函數立刻改變起價、級距、加值項目與數量金額', () => {
   const state = selection(['ads']);
   const pricing = freshPricing();
   assert.ok(api.updatePrice(pricing, 'services.ads.tiers.basic', 59000));

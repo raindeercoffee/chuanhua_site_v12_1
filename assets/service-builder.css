@@ -1,4 +1,4 @@
-/* 服務積木試算：只影響這一頁，沿用川花既有色票與字體。 */
+/* 服務規劃試算：只影響這一頁，沿用川花既有色票與字體。 */
 #feature[data-page="build"] > .st-wrap{max-width:1320px;padding-top:28px}
 #feature .ch-build{max-width:none;--ch-shadow:0 18px 44px color-mix(in srgb,var(--river-deep) 12%,transparent)}
 .ch-build .ch-live-price{display:none}
@@ -84,7 +84,7 @@
 .ch-addon small{font-size:11px;color:var(--ink-soft);white-space:nowrap}
 .ch-addon.is-added,.ch-pop{animation:ch-block-pop .24s ease-out}
 .ch-tray{min-height:112px;border:2px dashed var(--pink);border-radius:18px;padding:18px;background:color-mix(in srgb,var(--pink-light) 15%,var(--card));display:flex;align-items:center;align-content:center;flex-wrap:wrap;gap:9px;margin:16px 0 21px;transition:background .18s,border-color .18s}
-.ch-tray:empty::before{content:"把想要的積木拖進來，也可以直接點選";color:var(--ink-soft);font-size:12px}
+.ch-tray:empty::before{content:"把需要的項目拖進來，也可以直接點選";color:var(--ink-soft);font-size:12px}
 .ch-tray .ch-empty{width:100%;text-align:center}
 .ch-tray.is-over,.ch-tray.ch-drop-active{background:color-mix(in srgb,var(--pink-light) 55%,var(--card));border-color:var(--pink-deep)}
 .ch-counter{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:17px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin:23px 0;font-size:13px}
@@ -146,7 +146,7 @@
 .ch-editor-panel header button,.ch-editor-top button{font-size:20px;min-width:44px}
 .ch-editor-panel details{border-top:1px solid var(--line);margin-top:16px;padding-top:9px}
 .ch-editor-panel summary{font-size:14px;color:var(--river);cursor:pointer;min-height:44px;display:flex;align-items:center}
-/* 動態積木結構的對應樣式。 */
+/* 動態項目結構的對應樣式。 */
 .ch-row-copy{display:block;min-width:0;width:100%;min-height:44px;padding:3px 3px 3px 0;border:0;background:transparent;text-align:left;border-radius:8px}
 .ch-row-copy .ch-row-title{min-height:0;padding:0}
 .ch-expand{display:inline-flex;align-items:center;min-height:28px;margin-top:4px;color:var(--river);font-size:10px;text-decoration:underline;text-underline-offset:3px}

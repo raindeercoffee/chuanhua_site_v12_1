@@ -3,6 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>
+// 試算網址先收起入口花園，等網址管理員打開內容後再交還正常顯示。
+if (location.pathname === '/chuanhua_site_v12_1/build/') document.documentElement.setAttribute('data-build-direct', '');
+</script>
 <title>開花的流程｜開花教室｜川花 RIVER FLOWER</title>
 <meta name="description" content="從付款到開花，只要四步：預約付款、付款成功、加入官方 LINE、專人確認時段。">
 <link rel="icon" href="/chuanhua_site_v12_1/assets/favicon.ico" sizes="any">
@@ -83,8 +87,8 @@
   "/build/": {
     "layer": "feature",
     "feature": "build",
-    "title": "服務積木試算｜把需要的服務排一排，價格馬上算給你看｜川花",
-    "desc": "拖拉排出服務先後順序，選擇方案和加購積木，即時看看你的品牌組合。數字僅供示範，正式報價以需求訪談為準。",
+    "title": "服務規劃試算｜排出優先順序、選擇方案，即時估算預算｜川花",
+    "desc": "依需求排出服務優先順序，選擇方案與加值項目，即時估算服務配置的預算。數字僅供示範，正式報價以需求訪談為準。",
     "noindex": true
   },
   "/cases/": {
@@ -176,42 +180,60 @@
             {
               "@type": "ListItem",
               "position": 1,
+              "name": "中小企業官網怎麼做？從品牌形象到有效詢價的網站規劃",
+              "url": "https://raindeercoffee.com/chuanhua_site_v12_1/notes/small-business-website-inquiry-design/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "LINE 機器人怎麼做？從自動回覆到官網詢問流程",
+              "url": "https://raindeercoffee.com/chuanhua_site_v12_1/notes/line-chatbot-website-customer-service/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "企業自製 App 值得嗎？網頁 App、手機 App 怎麼選",
+              "url": "https://raindeercoffee.com/chuanhua_site_v12_1/notes/custom-business-app-web-vs-mobile/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 4,
               "name": "服飾品牌怎麼用 AI 一天上完 10 支廣告？上稿自動化實戰",
               "url": "https://raindeercoffee.com/chuanhua_site_v12_1/notes/ai-ad-upload-automation/"
             },
             {
               "@type": "ListItem",
-              "position": 2,
+              "position": 5,
               "name": "AI 寫廣告文案，品牌語氣怎麼守住？服飾品牌實戰做法",
               "url": "https://raindeercoffee.com/chuanhua_site_v12_1/notes/ai-ad-copy-brand-voice/"
             },
             {
               "@type": "ListItem",
-              "position": 3,
+              "position": 6,
               "name": "發票整理太花時間？AI 拍照記帳怎麼做",
               "url": "https://raindeercoffee.com/chuanhua_site_v12_1/notes/ai-receipt-photo-bookkeeping/"
             },
             {
               "@type": "ListItem",
-              "position": 4,
+              "position": 7,
               "name": "中小企業導入 AI 前，先問自己 5 個問題",
               "url": "https://raindeercoffee.com/chuanhua_site_v12_1/notes/sme-ai-adoption-5-questions/"
             },
             {
               "@type": "ListItem",
-              "position": 5,
+              "position": 8,
               "name": "AI 客製化工具要多少錢？報價單怎麼看才不吃虧",
               "url": "https://raindeercoffee.com/chuanhua_site_v12_1/notes/ai-custom-tool-pricing-guide/"
             },
             {
               "@type": "ListItem",
-              "position": 6,
+              "position": 9,
               "name": "不會寫程式也能做：行銷人的 3 個自動化流程",
               "url": "https://raindeercoffee.com/chuanhua_site_v12_1/notes/no-code-marketing-automation/"
             },
             {
               "@type": "ListItem",
-              "position": 7,
+              "position": 10,
               "name": "AI 做的商品圖和影片可以商用嗎？授權注意事項",
               "url": "https://raindeercoffee.com/chuanhua_site_v12_1/notes/ai-image-video-commercial-use/"
             }
@@ -267,6 +289,180 @@
     "noindex": true,
     "title": "合作與諮詢｜川花 RIVER FLOWER",
     "desc": "陪你的想法，找到開花的方向。從品牌定位、工作流程與工具選擇，一起安排適合的下一步。"
+  },
+  "/notes/small-business-website-inquiry-design/": {
+    "layer": "feature",
+    "feature": "note-06",
+    "noindex": true,
+    "title": "中小企業官網怎麼做？從品牌形象到有效詢價的網站規劃｜開花筆記｜川花",
+    "desc": "中小企業官網不只要好看，更要讓客戶找得到、看得懂、願意詢價。從頁面動線、案例展示、SEO 到表單與數據追蹤，整理官網規劃重點。",
+    "schema": [
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "@id": "https://raindeercoffee.com/chuanhua_site_v12_1/notes/small-business-website-inquiry-design/#article",
+        "name": "中小企業官網怎麼做？從品牌形象到有效詢價的網站規劃",
+        "headline": "中小企業官網怎麼做？從品牌形象到有效詢價的網站規劃",
+        "description": "中小企業官網不只要好看，更要讓客戶找得到、看得懂、願意詢價。從頁面動線、案例展示、SEO 到表單與數據追蹤，整理官網規劃重點。",
+        "url": "https://raindeercoffee.com/chuanhua_site_v12_1/notes/small-business-website-inquiry-design/",
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://raindeercoffee.com/chuanhua_site_v12_1/notes/small-business-website-inquiry-design/"
+        },
+        "keywords": [
+          "中小企業官網",
+          "企業官網設計",
+          "網站建置",
+          "官網 SEO",
+          "網站詢價流程"
+        ],
+        "publisher": {
+          "@type": "Organization",
+          "@id": "https://raindeercoffee.com/chuanhua_site_v12_1/#organization",
+          "name": "川花有限公司"
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "川花",
+            "item": "https://raindeercoffee.com/chuanhua_site_v12_1/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "開花筆記",
+            "item": "https://raindeercoffee.com/chuanhua_site_v12_1/notes/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "中小企業官網怎麼做？從品牌形象到有效詢價的網站規劃",
+            "item": "https://raindeercoffee.com/chuanhua_site_v12_1/notes/small-business-website-inquiry-design/"
+          }
+        ]
+      }
+    ]
+  },
+  "/notes/line-chatbot-website-customer-service/": {
+    "layer": "feature",
+    "feature": "note-07",
+    "noindex": true,
+    "title": "LINE 機器人怎麼做？從自動回覆到官網詢問流程｜開花筆記｜川花",
+    "desc": "LINE 官方帳號機器人不只是設定自動回覆。從常見問題、關鍵字選單、官網導流到人工接手，了解中小企業如何規劃不讓客戶卡住的 LINE 詢問流程。",
+    "schema": [
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "@id": "https://raindeercoffee.com/chuanhua_site_v12_1/notes/line-chatbot-website-customer-service/#article",
+        "name": "LINE 機器人怎麼做？從自動回覆到官網詢問流程",
+        "headline": "LINE 機器人怎麼做？從自動回覆到官網詢問流程",
+        "description": "LINE 官方帳號機器人不只是設定自動回覆。從常見問題、關鍵字選單、官網導流到人工接手，了解中小企業如何規劃不讓客戶卡住的 LINE 詢問流程。",
+        "url": "https://raindeercoffee.com/chuanhua_site_v12_1/notes/line-chatbot-website-customer-service/",
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://raindeercoffee.com/chuanhua_site_v12_1/notes/line-chatbot-website-customer-service/"
+        },
+        "keywords": [
+          "LINE 機器人",
+          "LINE 官方帳號自動回覆",
+          "LINE 客服機器人",
+          "LINE Messaging API",
+          "官網 LINE 整合"
+        ],
+        "publisher": {
+          "@type": "Organization",
+          "@id": "https://raindeercoffee.com/chuanhua_site_v12_1/#organization",
+          "name": "川花有限公司"
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "川花",
+            "item": "https://raindeercoffee.com/chuanhua_site_v12_1/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "開花筆記",
+            "item": "https://raindeercoffee.com/chuanhua_site_v12_1/notes/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "LINE 機器人怎麼做？從自動回覆到官網詢問流程",
+            "item": "https://raindeercoffee.com/chuanhua_site_v12_1/notes/line-chatbot-website-customer-service/"
+          }
+        ]
+      }
+    ]
+  },
+  "/notes/custom-business-app-web-vs-mobile/": {
+    "layer": "feature",
+    "feature": "note-10",
+    "noindex": true,
+    "title": "企業自製 App 值得嗎？網頁 App、手機 App 怎麼選｜開花筆記｜川花",
+    "desc": "企業想做自己的 App，不一定要先上架應用程式商店。比較網頁 App、手機 App 與內部小工具的差異，從使用情境、資料整合、維護成本決定怎麼開發。",
+    "schema": [
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "@id": "https://raindeercoffee.com/chuanhua_site_v12_1/notes/custom-business-app-web-vs-mobile/#article",
+        "name": "企業自製 App 值得嗎？網頁 App、手機 App 怎麼選",
+        "headline": "企業自製 App 值得嗎？網頁 App、手機 App 怎麼選",
+        "description": "企業想做自己的 App，不一定要先上架應用程式商店。比較網頁 App、手機 App 與內部小工具的差異，從使用情境、資料整合、維護成本決定怎麼開發。",
+        "url": "https://raindeercoffee.com/chuanhua_site_v12_1/notes/custom-business-app-web-vs-mobile/",
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://raindeercoffee.com/chuanhua_site_v12_1/notes/custom-business-app-web-vs-mobile/"
+        },
+        "keywords": [
+          "自製 App",
+          "客製化 App",
+          "企業 App 開發",
+          "網頁 App",
+          "App 開發費用"
+        ],
+        "publisher": {
+          "@type": "Organization",
+          "@id": "https://raindeercoffee.com/chuanhua_site_v12_1/#organization",
+          "name": "川花有限公司"
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "川花",
+            "item": "https://raindeercoffee.com/chuanhua_site_v12_1/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "開花筆記",
+            "item": "https://raindeercoffee.com/chuanhua_site_v12_1/notes/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "企業自製 App 值得嗎？網頁 App、手機 App 怎麼選",
+            "item": "https://raindeercoffee.com/chuanhua_site_v12_1/notes/custom-business-app-web-vs-mobile/"
+          }
+        ]
+      }
+    ]
   },
   "/notes/ai-ad-upload-automation/": {
     "layer": "feature",
@@ -726,6 +922,8 @@ h2 em{font-style:normal;color:var(--pink-deep)}
   background:linear-gradient(180deg,#FBF9F5 0%,#F8F5EF 40%,#F6F3EC 68%,#F2EFE7 86%,#EEEAE0 100%);
   transition:opacity 1.2s ease,visibility 1.2s}
 #garden.out{opacity:0;visibility:hidden;pointer-events:none}
+html[data-build-direct] #garden{opacity:0;visibility:hidden;pointer-events:none;transition:none}
+html[data-build-direct] #feature{transition:none}
 #garden::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:1;
   background:linear-gradient(180deg,rgba(255,255,255,.5) 0%,rgba(255,255,255,0) 42%)}
 #garden::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 70% 46% at 50% 26%,rgba(255,255,255,.45),transparent 72%);animation:g-glow 8s ease-in-out infinite alternate;pointer-events:none}
@@ -1116,6 +1314,11 @@ footer .back-garden:hover{color:var(--pink-deep)}
 .notes-count{font-size:12px;color:var(--ink-soft);margin-bottom:28px;letter-spacing:1px}
 .notes-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:26px 24px;list-style:none}
 .notes-list [hidden]{display:none!important}
+.latest-notes{background:var(--services-b);padding:72px 0}
+.latest-notes-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;padding-top:14px;margin-top:32px;min-width:0}
+.latest-notes-actions{margin-top:30px}
+.latest-notes-actions .btn{text-decoration:none}
+@media(max-width:760px){.latest-notes-list{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:100%;gap:18px;width:100%;max-width:100%;padding:14px 1px 12px;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain}.latest-notes-list .note-card{scroll-snap-align:start}.latest-notes{padding:60px 0}}
 .note-card{position:relative;display:flex;flex-direction:column;min-width:0;padding:32px 28px;background:var(--card);border:1px solid var(--line);border-radius:22px;text-decoration:none;transition:border-color .3s,transform .3s}
 .note-card:hover{border-color:var(--pink);transform:translateY(-3px)}
 .note-card .fl-icon{position:absolute;top:-11px;right:18px;width:26px;height:26px}
@@ -1462,7 +1665,7 @@ footer .notes-link{margin-left:24px}
       <div class="eyebrow reveal">WHAT WE DO</div>
       <h2 class="reveal">我們做的事</h2>
       <p class="lead reveal d1">把你的品牌，種進對的人心裡。</p>
-      <div class="ch-build-entry reveal d1"><a class="btn" href="/chuanhua_site_v12_1/build/" data-route>排排看・算算看 →</a><span>拖一拖服務，拼出適合你的組合。</span></div>
+      <div class="ch-build-entry reveal d1"><a class="btn" href="/chuanhua_site_v12_1/build/" data-route>規劃服務・試算預算 →</a><span>依需求排序，規劃適合你的服務。</span></div>
       <div class="topic-tabs" role="tablist" aria-label="服務分類" data-topic-tabs>
         <button class="topic-tab" type="button" role="tab" id="services-brand-tab" aria-selected="true" aria-controls="services-brand" tabindex="0">品牌行銷</button>
         <button class="topic-tab" type="button" role="tab" id="services-ai-tab" aria-selected="false" aria-controls="services-ai" tabindex="-1">AI 客製化</button>
@@ -1503,6 +1706,22 @@ footer .notes-link{margin-left:24px}
           <a class="btn" href="/chuanhua_site_v12_1/ai/" data-route>探索 AI 客製化服務 →</a>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section class="latest-notes" id="latest-notes" aria-labelledby="latest-notes-title">
+    <div class="wrap">
+      <div class="eyebrow reveal">讓想法慢慢開花</div>
+      <h2 class="reveal" id="latest-notes-title">開花筆記・最新文章</h2>
+      <p class="lead reveal d1">從品牌官網到 AI 工具，把實際工作裡的觀察，一篇篇留下來。</p>
+      <div class="latest-notes-list" aria-label="最新三篇開花筆記">
+        <!-- NOTES-LATEST:START -->
+<a class="note-card" href="/chuanhua_site_v12_1/notes/small-business-website-inquiry-design/" data-route data-note-id="06" data-note-category="網站建置"><img class="fl-icon" src="/chuanhua_site_v12_1/assets/botanical/fl-a.png" alt="" aria-hidden="true" loading="lazy" width="26" height="26"><p class="note-category">網站建置</p><h3 class="note-card-title">中小企業官網怎麼做？從品牌形象到有效詢價的網站規劃</h3><p class="note-excerpt">中小企業官網不只要好看，更要讓客戶找得到、看得懂、願意詢價。從頁面動線、案例展示、SEO 到表單與數據追蹤，整理官網規劃重點。</p><span class="note-read">閱讀 →</span></a>
+<a class="note-card" href="/chuanhua_site_v12_1/notes/line-chatbot-website-customer-service/" data-route data-note-id="07" data-note-category="流程自動化"><img class="fl-icon" src="/chuanhua_site_v12_1/assets/botanical/fl-a.png" alt="" aria-hidden="true" loading="lazy" width="26" height="26"><p class="note-category">流程自動化</p><h3 class="note-card-title">LINE 機器人怎麼做？從自動回覆到官網詢問流程</h3><p class="note-excerpt">LINE 官方帳號機器人不只是設定自動回覆。從常見問題、關鍵字選單、官網導流到人工接手，了解中小企業如何規劃不讓客戶卡住的 LINE 詢問流程。</p><span class="note-read">閱讀 →</span></a>
+<a class="note-card" href="/chuanhua_site_v12_1/notes/custom-business-app-web-vs-mobile/" data-route data-note-id="10" data-note-category="AI 導入"><img class="fl-icon" src="/chuanhua_site_v12_1/assets/botanical/fl-a.png" alt="" aria-hidden="true" loading="lazy" width="26" height="26"><p class="note-category">AI 導入</p><h3 class="note-card-title">企業自製 App 值得嗎？網頁 App、手機 App 怎麼選</h3><p class="note-excerpt">企業想做自己的 App，不一定要先上架應用程式商店。比較網頁 App、手機 App 與內部小工具的差異，從使用情境、資料整合、維護成本決定怎麼開發。</p><span class="note-read">閱讀 →</span></a>
+<!-- NOTES-LATEST:END -->
+      </div>
+      <div class="latest-notes-actions reveal"><a class="btn" href="/chuanhua_site_v12_1/notes/" data-route>看全部 10 篇筆記 →</a></div>
     </div>
   </section>
 
@@ -1741,7 +1960,7 @@ footer .notes-link{margin-left:24px}
   </section>
 
 
-    <!-- 服務積木：只透過既有內容布幕開啟，不接表單。 -->
+    <!-- 服務規劃試算：只透過既有內容布幕開啟，不接表單。 -->
     <section class="feature-page ch-build" data-feature="build" id="ch-builder" hidden>
       <div class="ch-live-price" aria-label="目前的示範預估總價">
         <span>目前預估 <small>示範數字</small></span>
@@ -1752,14 +1971,14 @@ footer .notes-link{margin-left:24px}
         <span class="ch-site-mark" aria-hidden="true">川花・慢慢開花</span>
       </div>
       <header class="ch-hero">
-        <p class="ch-hero-eyebrow">把需要的，一塊一塊拼起來</p>
-        <h1 id="feature-build-title" tabindex="-1">服務積木試算</h1>
+        <p class="ch-hero-eyebrow">依需求排序，逐項規劃</p>
+        <h1 id="feature-build-title" tabindex="-1">服務規劃試算</h1>
         <p class="ch-hero-lead">先排出最想做的事，再加上剛剛好的細節。<br>讓品牌下一步的樣子，慢慢變清楚。</p>
         <img class="ch-hero-flower" src="/chuanhua_site_v12_1/assets/botanical/fl-b.png" alt="" aria-hidden="true" width="68" height="106">
         <div class="ch-route-steps" aria-label="試算步驟">
           <span><b>01</b> 排出先後</span><span aria-hidden="true">→</span>
           <span><b>02</b> 加上細節</span><span aria-hidden="true">→</span>
-          <span><b>03</b> 看看組合</span>
+          <span><b>03</b> 查看配置</span>
         </div>
         <p class="ch-demo-note">示範數字，正式報價以需求訪談為準。</p>
       </header>
@@ -1787,13 +2006,13 @@ footer .notes-link{margin-left:24px}
           <section class="ch-detail-section" aria-labelledby="ch-details-title">
             <div class="ch-section-heading">
               <span class="ch-step-number" aria-hidden="true">02</span>
-              <div><h2 id="ch-details-title">再加上剛剛好的細節</h2><p>先選方案，再把想要的積木放進組合。點一下或拖拉都可以。</p></div>
+              <div><h2 id="ch-details-title">再加上剛剛好的細節</h2><p>先選方案，再加入需要的加值項目。點一下或拖拉都可以。</p></div>
             </div>
             <div id="ch-details"></div>
           </section>
           <p class="ch-closing">不必一次決定所有事。<br>先從最想開的那朵花開始。</p>
         </div>
-        <aside class="ch-summary" id="ch-summary" aria-label="你的組合與示範總價"></aside>
+        <aside class="ch-summary" id="ch-summary" aria-label="你的服務配置與示範總價"></aside>
       </div>
       <div class="ch-announce" id="ch-announcement" role="status" aria-live="polite" aria-atomic="true"></div>
       <button type="button" id="ch-price-gear" aria-label="開啟示範調價面板" aria-controls="ch-price-editor" aria-expanded="false" hidden>⚙</button>
@@ -1822,7 +2041,7 @@ footer .notes-link{margin-left:24px}
         <div class="service-secondary"><a href="/chuanhua_site_v12_1/ai/consulting/" data-route>合作與諮詢 →</a></div>
       </div>
       <div class="feature-actions">
-        <a class="btn" href="/chuanhua_site_v12_1/build/" data-route>排排看・算算看 →</a>
+        <a class="btn" href="/chuanhua_site_v12_1/build/" data-route>規劃服務・試算預算 →</a>
         <a class="btn" href="/chuanhua_site_v12_1/ai/demo/" data-route>互動展示 →</a>
         <a class="btn" href="/chuanhua_site_v12_1/ai/quote/" data-route data-quote-kind="custom">需求詢價 →</a>
       </div>
@@ -1935,10 +2154,14 @@ footer .notes-link{margin-left:24px}
           <button class="topic-tab" type="button" data-notes-filter="流程自動化" aria-pressed="false">流程自動化</button>
           <button class="topic-tab" type="button" data-notes-filter="品牌內容" aria-pressed="false">品牌內容</button>
           <button class="topic-tab" type="button" data-notes-filter="AI 導入" aria-pressed="false">AI 導入</button>
+          <button class="topic-tab" type="button" data-notes-filter="網站建置" aria-pressed="false">網站建置</button>
         </div>
         <p id="notes-count" class="notes-count" role="status" aria-live="polite"></p>
         <div class="notes-list" aria-label="文章列表">
           <!-- NOTES-LIST:START -->
+<a class="note-card" href="/chuanhua_site_v12_1/notes/small-business-website-inquiry-design/" data-route data-note-id="06" data-note-category="網站建置"><img class="fl-icon" src="/chuanhua_site_v12_1/assets/botanical/fl-a.png" alt="" aria-hidden="true" loading="lazy" width="26" height="26"><p class="note-category">網站建置</p><h2 class="note-card-title">中小企業官網怎麼做？從品牌形象到有效詢價的網站規劃</h2><p class="note-excerpt">中小企業官網不只要好看，更要讓客戶找得到、看得懂、願意詢價。從頁面動線、案例展示、SEO 到表單與數據追蹤，整理官網規劃重點。</p><span class="note-read">閱讀筆記 →</span></a>
+<a class="note-card" href="/chuanhua_site_v12_1/notes/line-chatbot-website-customer-service/" data-route data-note-id="07" data-note-category="流程自動化"><img class="fl-icon" src="/chuanhua_site_v12_1/assets/botanical/fl-a.png" alt="" aria-hidden="true" loading="lazy" width="26" height="26"><p class="note-category">流程自動化</p><h2 class="note-card-title">LINE 機器人怎麼做？從自動回覆到官網詢問流程</h2><p class="note-excerpt">LINE 官方帳號機器人不只是設定自動回覆。從常見問題、關鍵字選單、官網導流到人工接手，了解中小企業如何規劃不讓客戶卡住的 LINE 詢問流程。</p><span class="note-read">閱讀筆記 →</span></a>
+<a class="note-card" href="/chuanhua_site_v12_1/notes/custom-business-app-web-vs-mobile/" data-route data-note-id="10" data-note-category="AI 導入"><img class="fl-icon" src="/chuanhua_site_v12_1/assets/botanical/fl-a.png" alt="" aria-hidden="true" loading="lazy" width="26" height="26"><p class="note-category">AI 導入</p><h2 class="note-card-title">企業自製 App 值得嗎？網頁 App、手機 App 怎麼選</h2><p class="note-excerpt">企業想做自己的 App，不一定要先上架應用程式商店。比較網頁 App、手機 App 與內部小工具的差異，從使用情境、資料整合、維護成本決定怎麼開發。</p><span class="note-read">閱讀筆記 →</span></a>
 <a class="note-card" href="/chuanhua_site_v12_1/notes/ai-ad-upload-automation/" data-route data-note-id="01" data-note-category="流程自動化"><img class="fl-icon" src="/chuanhua_site_v12_1/assets/botanical/fl-a.png" alt="" aria-hidden="true" loading="lazy" width="26" height="26"><p class="note-category">流程自動化</p><h2 class="note-card-title">服飾品牌怎麼用 AI 一天上完 10 支廣告？上稿自動化實戰</h2><p class="note-excerpt">服飾品牌新品週要上一整批廣告？用 AI 上稿自動化，影片自動上傳 Meta 廣告素材庫、編號自動填進上稿 Excel，搬運交給機器，判斷留給人。</p><span class="note-read">閱讀筆記 →</span></a>
 <a class="note-card" href="/chuanhua_site_v12_1/notes/ai-ad-copy-brand-voice/" data-route data-note-id="02" data-note-category="品牌內容"><img class="fl-icon" src="/chuanhua_site_v12_1/assets/botanical/fl-a.png" alt="" aria-hidden="true" loading="lazy" width="26" height="26"><p class="note-category">品牌內容</p><h2 class="note-card-title">AI 寫廣告文案，品牌語氣怎麼守住？服飾品牌實戰做法</h2><p class="note-excerpt">AI 寫廣告文案很快，但常常寫得不像自己的品牌。服飾品牌怎麼用語氣規則本、範例和人工微調，讓 AI 文案師批次產出初稿又守住品牌語氣。</p><span class="note-read">閱讀筆記 →</span></a>
 <a class="note-card" href="/chuanhua_site_v12_1/notes/ai-receipt-photo-bookkeeping/" data-route data-note-id="03" data-note-category="流程自動化"><img class="fl-icon" src="/chuanhua_site_v12_1/assets/botanical/fl-a.png" alt="" aria-hidden="true" loading="lazy" width="26" height="26"><p class="note-category">流程自動化</p><h2 class="note-card-title">發票整理太花時間？AI 拍照記帳怎麼做</h2><p class="note-excerpt">發票一張一張手打太花時間？AI 拍照記帳可以自動辨識店家、日期、金額並整理成 Excel，看不清楚的標出來給人工確認。</p><span class="note-read">閱讀筆記 →</span></a>
@@ -1951,6 +2174,120 @@ footer .notes-link{margin-left:24px}
       </div>
     </section>
     <!-- NOTE-ARTICLES:START -->
+<section class="feature-page note-article" data-feature="note-06" data-note-id="06" hidden>
+<div class="st-top"><a class="st-back" href="/chuanhua_site_v12_1/notes/" data-route>← 回到開花筆記</a></div>
+<header class="st-head"><h1 id="feature-note-06-title" tabindex="-1">中小企業官網怎麼做？從品牌形象到有效詢價的網站規劃</h1><p class="note-category">網站建置</p><p class="note-deck">中小企業官網不只要好看，更要讓客戶找得到、看得懂、願意詢價。從頁面動線、案例展示、SEO 到表單與數據追蹤，整理官網規劃重點。</p></header>
+<div class="note-prose">
+<h2>官網做得漂亮，為什麼客戶還是不詢價？</h2>
+<p>一位老闆打開剛完成的官網，首頁照片漂亮、動畫順暢，自己看了很滿意。過了幾週卻發現，來問服務的客戶沒有明顯變多。問題可能不在美感，而是訪客進站後不知道下一步要做什麼。</p>
+<p>有些網站把公司故事寫得很完整，服務卻藏在第三層選單；有些網站滿滿都是按鈕，點進去卻看不到實際案例。客戶不是不喜歡，只是看了半天，仍然無法判斷這家公司能不能解決自己的問題。</p>
+<p>川花認為，官網既是品牌的門面，也是客戶理解服務的路線圖。要做的不只是放進更多內容，而是讓客戶用最少的時間找到他需要的答案。以下從五個面向談官網怎麼規劃。</p>
+<h2>第一步：先決定網站要幫誰解決什麼</h2>
+<p>做官網前，先別急著選模板或討論特效。最重要的問題是：你希望哪種客戶進來？他們最常問你什麼？看完之後，想讓他採取哪個行動？</p>
+<p>例如服飾品牌希望客戶看新品，服務型公司則希望客戶了解專業、看案例並提出詢價。兩種網站都需要美感，但頁面順序和按鈕設計不會一樣。</p>
+<p>如果服務很多，也不用全部擠在首頁。首頁負責說清楚「我們是誰、能幫你什麼」，其他細節留給獨立服務頁。讓訪客看得明白，比把所有內容一次塞滿更重要。</p>
+<h2>第二步：讓案例和詢價入口找得到</h2>
+<p>客戶想合作前，通常會先確認兩件事：你做過什麼？我要怎麼跟你聯絡？所以服務介紹旁邊，最好能找到對應案例，而不是只看到一句「提供專業解決方案」。</p>
+<p>案例不一定非得公布客戶名稱，但要有可以公開的背景、遇到的問題、處理方法和成果。正在開發的功能，也應如實標明狀態，不要把概念示意當成正式交付。</p>
+<p>詢價按鈕同樣要容易找到。有人習慣填表單，有人想用 LINE 問幾句；可以依客群提供入口，但不必在每個段落都跳出視窗催促留下資料。</p>
+<h2>第三步：SEO 不是寫幾個關鍵字就好</h2>
+<p>官網做完之後，還要讓搜尋引擎能理解每個頁面在說什麼。不同服務應有清楚的頁面標題、網址和內容，不能十個頁面都只叫「專業服務」。</p>
+<p>網站地圖 Sitemap、Google Search Console 和 GA4 各有不同工作：網站地圖協助搜尋引擎發現網址，Search Console 查看搜尋與索引狀況，GA4 則觀察訪客在站內的行為。</p>
+<p>這些設定完成，也不代表隔天就會排到第一名。內容是否解答問題、網站是否好用、客戶能否找到可信證據，才是後續需要持續改善的地方。</p>
+<h2>第四步：互動功能要有用，不只是會動</h2>
+<p>川花喜歡有個性的網站：按鈕切換、案例篩選、滑桿試算，都能讓訪客更願意探索。但動畫不應該搶走內容的焦點，也不能讓手機版變得難操作。</p>
+<p>例如客戶切換「品牌行銷」與「AI 客製化」，馬上看到不同案例；或在需求面板選擇工作困擾，系統就推薦相關服務。互動能幫忙理解內容，才算真正有價值。</p>
+<p>做這類功能時，還要確認操作速度、鍵盤與手機操作、文字對比，以及網站原本的視覺風格。讓功能自然融入品牌，比直接搬一套科技感介面更好。</p>
+<h2>第五步：上線後要知道哪裡卡住</h2>
+<p>官網不是「完成上線」就結束。你需要知道哪些頁面有人看、哪些服務被點擊、詢價入口有沒有人使用，才能決定下次先改什麼。</p>
+<p>可以先追蹤幾個簡單指標：服務頁瀏覽、案例頁點擊、表單送出與 LINE 連結點擊。點擊不代表成交，還要由團隊確認哪些諮詢是真正有需求的客戶。</p>
+<p>如果有測試站，先在測試環境檢查版面與互動，再更新正式官網。測試站也要避免讓搜尋引擎把尚未完成的內容當成正式文章收錄。</p>
+<h2>常見問題</h2>
+<dl class="note-qa"><dt>公司規模小，只做一頁官網可以嗎？</dt><dd>可以先從清楚的一頁開始，但如果有多種服務、案例和文章，適度拆成獨立頁面會比較好整理，也方便客戶直接找到需要的資訊。</dd></dl>
+<dl class="note-qa"><dt>有 IG 和 Facebook，還需要官網嗎？</dt><dd>社群適合曝光與互動，官網適合集中說明品牌、服務與合作方式。兩者可以互相導流，不必把所有資訊都押在單一平台。</dd></dl>
+<dl class="note-qa"><dt>官網加了互動功能，會不會比較慢？</dt><dd>有可能，所以要依裝置測試載入速度，控制動畫與圖片資源。互動不是越多越好，真正重要的是訪客能不能順利閱讀與完成詢價。</dd></dl>
+<h2>想讓官網不只好看，也能接住客戶？</h2>
+<p>如果你的網站已經有內容，卻不知道怎麼整理成清楚的服務動線，歡迎告訴川花目前的網站狀況與想改善的地方。我們可先評估頁面架構、互動需求與技術可行性；專案範圍及費用依正式需求評估，歡迎透過官方 LINE @riverflower2025 預約初步諮詢。</p>
+</div>
+<nav class="note-related" aria-label="相關筆記"><h2>讓想法繼續開花</h2><a href="/chuanhua_site_v12_1/notes/line-chatbot-website-customer-service/" data-route>LINE 機器人怎麼做？從自動回覆到官網詢問流程</a><a href="/chuanhua_site_v12_1/notes/custom-business-app-web-vs-mobile/" data-route>企業自製 App 值得嗎？網頁 App、手機 App 怎麼選</a></nav>
+<div class="note-service-link"><a class="btn" href="/chuanhua_site_v12_1/ai/website/" data-route>品牌官網製作 →</a><a class="btn" href="/chuanhua_site_v12_1/build/" data-route>規劃服務・試算預算 →</a></div>
+</section>
+<section class="feature-page note-article" data-feature="note-07" data-note-id="07" hidden>
+<div class="st-top"><a class="st-back" href="/chuanhua_site_v12_1/notes/" data-route>← 回到開花筆記</a></div>
+<header class="st-head"><h1 id="feature-note-07-title" tabindex="-1">LINE 機器人怎麼做？從自動回覆到官網詢問流程</h1><p class="note-category">流程自動化</p><p class="note-deck">LINE 官方帳號機器人不只是設定自動回覆。從常見問題、關鍵字選單、官網導流到人工接手，了解中小企業如何規劃不讓客戶卡住的 LINE 詢問流程。</p></header>
+<div class="note-prose">
+<h2>LINE 機器人怎麼做？先別急著讓它什麼都回答</h2>
+<p>晚上十點，顧客傳訊息問「這件洋裝還有尺寸嗎？」另一位客戶問「服務報價怎麼算？」隔天一早，同事才看到訊息，還要一個一個回。老闆想裝 LINE 機器人，第一個念頭通常是：能不能讓它全部自動回答？</p>
+<p>但如果機器人不知道庫存、看不懂客戶需求，硬是給出一個很肯定的答案，反而會製造更多問題。真正有效的 LINE 自動化，應該先處理最常重複的問題，再讓複雜案件順利交回真人。</p>
+<p>LINE 是許多台灣顧客熟悉的聯絡方式。把官網和 LINE 串起來，可以降低詢問門檻；但要做好，重點並不是放進越多 AI，而是把回覆的界線設計清楚。</p>
+<h2>第一步：先盤點客戶最常問的問題</h2>
+<p>別一開始就要求機器人能回答所有事情。可以先整理過去常收到的問題，例如營業時間、出貨方式、常見服務、預約流程，挑出答案固定又容易核對的部分。</p>
+<p>這些問題很適合先做選單或關鍵字回覆。客戶點「報價方式」，系統就說明要提供哪些資料；點「售後服務」，就顯示對應的聯絡指引。</p>
+<p>至於特殊折扣、個別商品庫存、申訴或複雜專案需求，就不要靠固定答案硬撐。回答不確定時，清楚說明需要由人員確認，比快速答錯更值得信任。</p>
+<h2>第二步：分清楚官方帳號和進階機器人</h2>
+<p>LINE 官方帳號本身就有部分聊天與自動回覆功能；如果想依照外部資料、表單資訊或事件執行更複雜的流程，才需要評估 Messaging API 等串接方式。</p>
+<p>例如客戶在官網點選「AI 客製化」，跳到 LINE 後看到需求選單。選了「廣告自動化」，系統可以先告知評估需要的資訊，再由專人接手。</p>
+<p>不過「自動回覆」、「AI 讀懂語意」和「自動查詢訂單」是不同層級，涉及的資料權限與維護工作也不相同。先把業務需求說清楚，才能知道要不要真的開發一套機器人。</p>
+<h2>第三步：從官網到 LINE，不能讓人迷路</h2>
+<p>有些官網每頁都有 LINE 按鈕，客戶點進去卻只看到一句「你好」，不知道接下來該提供什麼。這樣雖然有導流，客服仍然要從頭問起。</p>
+<p>比較好的做法，是依照服務情境設計入口。從品牌顧問頁來的，先問品牌問題；從 AI 工具頁來的，先問目前最耗時的工作。資訊只問必要項目，不要把訪客變成填問卷。</p>
+<p>如果需要記錄來源或需求，應先確認相關技術與使用者告知方式。不能假設點了 LINE 連結，就一定能取得客戶身分或所有網站瀏覽資料。</p>
+<h2>第四步：一定要設計「交回真人」的出口</h2>
+<p>機器人最怕把客戶困在選單裡。當客戶選「其他問題」、連續問了幾次仍找不到答案，或涉及客訴、金額與個人資料時，應提供清楚的人工接手管道。</p>
+<p>如果使用 AI 回答，也要讓它依照經過確認的服務內容作答，遇到不知道的問題就明確表示需要確認，不能自行承諾價格、交期、退換貨條件。</p>
+<p>這也是川花在設計自動化流程時重視的原則：讓系統處理重複的工作，但把需要商業判斷和責任的地方留給人。</p>
+<h2>第五步：上線前用真實問題測試</h2>
+<p>機器人做好後，不是測試一兩句「你好」就能交付。最好整理一份問題清單，讓同事輪流用不同說法詢問，看看會不會答非所問或卡在錯誤選單。</p>
+<p>也要測試服務時間外的情況：客戶詢問後會收到什麼？多久能等到真人？如果連結失效或 API 發生問題，有沒有備援聯絡方式？</p>
+<p>衡量成果時可以看重複問題減少多少、人工接手是否順利，以及客戶是否真正完成諮詢。只看機器人發出了幾則訊息，無法判斷客服體驗好不好。</p>
+<h2>常見問題</h2>
+<dl class="note-qa"><dt>有 LINE 官方帳號，就一定要做 AI 機器人嗎？</dt><dd>不一定。常見問題固定、詢問量不大時，先用原生回覆功能就可能足夠；需要更複雜的流程再考慮客製化。</dd></dl>
+<dl class="note-qa"><dt>LINE 機器人能直接報價或查訂單嗎？</dt><dd>技術上可能可以，但前提是有可靠的資料來源、權限和例外處理。正式報價及個資相關查詢，應經過適當身分確認和業務規則設計。</dd></dl>
+<dl class="note-qa"><dt>機器人能完全取代客服嗎？</dt><dd>不建議以此為目標。系統適合回覆固定問題、整理需求；情緒、爭議、例外訂單與特殊條件，仍需要真人判斷。</dd></dl>
+<h2>想讓官網和 LINE 接得更順？</h2>
+<p>如果你的團隊每天花很多時間回覆重複問題，可以先整理最常見的十個提問和目前的回覆方式。川花可協助評估官網入口、LINE 回覆流程與進階串接需求；是否需要 AI、開發範圍及費用都應在需求釐清後確認。歡迎加入官方 LINE @riverflower2025 預約初步諮詢。</p>
+</div>
+<nav class="note-related" aria-label="相關筆記"><h2>讓想法繼續開花</h2><a href="/chuanhua_site_v12_1/notes/ai-ad-upload-automation/" data-route>服飾品牌怎麼用 AI 一天上完 10 支廣告？上稿自動化實戰</a><a href="/chuanhua_site_v12_1/notes/ai-receipt-photo-bookkeeping/" data-route>發票整理太花時間？AI 拍照記帳怎麼做</a></nav>
+<div class="note-service-link"><a class="btn" href="/chuanhua_site_v12_1/ai/workflow/" data-route>AI 工作流程自動化 →</a></div>
+</section>
+<section class="feature-page note-article" data-feature="note-10" data-note-id="10" hidden>
+<div class="st-top"><a class="st-back" href="/chuanhua_site_v12_1/notes/" data-route>← 回到開花筆記</a></div>
+<header class="st-head"><h1 id="feature-note-10-title" tabindex="-1">企業自製 App 值得嗎？網頁 App、手機 App 怎麼選</h1><p class="note-category">AI 導入</p><p class="note-deck">企業想做自己的 App，不一定要先上架應用程式商店。比較網頁 App、手機 App 與內部小工具的差異，從使用情境、資料整合、維護成本決定怎麼開發。</p></header>
+<div class="note-prose">
+<h2>公司想做自己的 App，先別急著找人上架</h2>
+<p>某天老闆突然說：「我們也來做一個 App 吧！」想像很美好：同事拿起手機就能看報表、客戶隨時預約、資料不用再散落在各個群組和 Excel 裡。</p>
+<p>但做 App 前，第一件事不是選顏色，也不是討論要上架 iPhone 還是 Android，而是問清楚：到底誰會用？每天需要完成哪幾個工作？如果沒有 App，現在是怎麼處理的？</p>
+<p>不少企業真正需要的是一套好用的工作工具，不一定是人人都能下載的手機應用程式。本文用白話說明三種常見做法，幫你在花錢前先選對方向。</p>
+<h2>問題一：你的使用者是誰？</h2>
+<p>先分清楚使用對象：是公司內十位同事，還是成千上萬位消費者？是每天使用，還是一個月只打開幾次？需求不同，開發方式就會差很多。</p>
+<p>例如驗貨人員想用手機拍照、填品號、產生報告，可能只需要一個操作簡單的內部系統。若是會員每天要收推播、兌換優惠、反覆登入使用，需求就更接近完整的消費者 App。</p>
+<p>不要因為「App 聽起來比較厲害」就先決定形式。對內部工具來說，能不能快速完成工作，往往比有沒有商店下載頁更重要。</p>
+<h2>問題二：網頁 App、原生 App 差在哪？</h2>
+<p>網頁 App 是透過瀏覽器使用的互動網站，通常只要分享網址就能開啟，更新也比較集中。若設計得好，手機操作可以很接近一般 App。</p>
+<p>原生手機 App 則需要針對 iOS、Android 的平台需求開發、測試與維護。當功能高度依賴裝置能力、通知、背景作業或商店發佈時，可能更值得採用。</p>
+<p>也有介於兩者之間的 PWA 等方式，但不是所有手機與瀏覽器都支援一樣的功能。離線、推播、相機與檔案操作，都要依實際裝置測試，不能只看簡報上的功能清單。</p>
+<h2>問題三：先把最常用的三個畫面做出來</h2>
+<p>一開始最容易失控的是功能太多：登入、會員、聊天、付款、通知、報表全部想放進去。看起來完整，卻可能把真正重要的流程做得很難用。</p>
+<p>比較務實的做法，是先挑一件高頻工作，設計三個核心畫面。例如「選擇品號 → 拍照填資料 → 確認送出」，確認同事可以順利完成，再決定要不要增加其他功能。</p>
+<p>這個可以操作的最小版本，能讓使用者真的試，而不是只在會議上對著流程圖想像。若大家連這三步都覺得麻煩，就應先調整流程，別急著增加動畫。</p>
+<h2>問題四：真正花錢的是整個生命週期</h2>
+<p>自製 App 的成本不只是第一筆開發費。後續可能還有主機、第三方 API、帳號權限、資料備份、系統更新、錯誤修復，以及新需求的修改費用。</p>
+<p>如果要讓多人同時操作，更要先決定資料誰能看、誰能改、操作錯誤如何還原。需要上架商店的 App，也要考慮審核、版本更新和平台規範。</p>
+<p>報價前不妨問清楚：交付的是原始碼、安裝檔還是可使用的線上服務？系統壞了誰處理？第三方費用算誰的？這些答案，比單看總價更能評估值不值得。</p>
+<h2>問題五：先測試，再談完整版本</h2>
+<p>一套 App 是否成功，不應只看能不能打開，而要看使用者能不能少做幾個步驟、資料是否正確、遇到異常時有沒有處理方式。</p>
+<p>例如原本需要把照片傳到 LINE、再回辦公室整理報表，新的工具若能讓照片和品號一次記錄，至少就有明確的改善方向。至於省了多少時間，仍要用真實測試結果驗證。</p>
+<p>川花規劃這類工具時，會優先討論流程與使用者，不先預設一定要做成手機商店的 App。把需求切小、先測核心功能，再擴充，才有機會避免花了預算卻沒人用。</p>
+<h2>常見問題</h2>
+<dl class="note-qa"><dt>不會寫程式，也可以委託做自己的 App 嗎？</dt><dd>可以，但需求要能用日常工作描述清楚。先準備現在的作業流程、範例資料和最常發生的錯誤，開發者才能評估合適方案。</dd></dl>
+<dl class="note-qa"><dt>做網頁 App 就一定比較便宜嗎？</dt><dd>不一定。費用還是取決於功能、資料串接、使用人數與安全要求。網頁 App 通常能省去部分平台維護工作，但不能保證所有案子都比較便宜。</dd></dl>
+<dl class="note-qa"><dt>自製 App 一定要上架 App Store 或 Google Play 嗎？</dt><dd>不一定。內部工作工具可以評估透過網址使用，或其他合適的企業部署方式；是否需要上架，應取決於使用者與功能需求。</dd></dl>
+<h2>有一個工作，想做成自己的小工具嗎？</h2>
+<p>不需要先把需求寫成技術規格。先告訴川花誰會用、目前怎麼做、最想改善哪個步驟，我們再評估該用網頁 App、手機 App 或更簡單的自動化方式。開發與維護費用依需求評估，歡迎加入官方 LINE @riverflower2025 預約初步諮詢。</p>
+</div>
+<nav class="note-related" aria-label="相關筆記"><h2>讓想法繼續開花</h2><a href="/chuanhua_site_v12_1/notes/sme-ai-adoption-5-questions/" data-route>中小企業導入 AI 前，先問自己 5 個問題</a><a href="/chuanhua_site_v12_1/notes/ai-custom-tool-pricing-guide/" data-route>AI 客製化工具要多少錢？報價單怎麼看才不吃虧</a></nav>
+<div class="note-service-link"><a class="btn" href="/chuanhua_site_v12_1/ai/tools/" data-route>AI 客製工具開發 →</a></div>
+</section>
 <section class="feature-page note-article" data-feature="note-01" data-note-id="01" hidden>
 <div class="st-top"><a class="st-back" href="/chuanhua_site_v12_1/notes/" data-route>← 回到開花筆記</a></div>
 <header class="st-head"><h1 id="feature-note-01-title" tabindex="-1">服飾品牌怎麼用 AI 一天上完 10 支廣告？上稿自動化實戰</h1><p class="note-category">流程自動化</p><p class="note-deck">服飾品牌新品週要上一整批廣告？用 AI 上稿自動化，影片自動上傳 Meta 廣告素材庫、編號自動填進上稿 Excel，搬運交給機器，判斷留給人。</p></header>
@@ -1985,7 +2322,7 @@ footer .notes-link{margin-left:24px}
 <h2>想把哪個工作交給 AI？</h2>
 <p>如果你也有一份每週都在重複、做到眼睛發花的工作，告訴我們哪一個最麻煩，川花幫你評估能不能做成小工具。專案 NT$49,000 起，正式報價依需求評估，歡迎加入官方 LINE @riverflower2025 預約初步諮詢。</p>
 </div>
-<nav class="note-related" aria-label="相關筆記"><h2>讓想法繼續開花</h2><a href="/chuanhua_site_v12_1/notes/ai-receipt-photo-bookkeeping/" data-route>發票整理太花時間？AI 拍照記帳怎麼做</a><a href="/chuanhua_site_v12_1/notes/no-code-marketing-automation/" data-route>不會寫程式也能做：行銷人的 3 個自動化流程</a></nav>
+<nav class="note-related" aria-label="相關筆記"><h2>讓想法繼續開花</h2><a href="/chuanhua_site_v12_1/notes/line-chatbot-website-customer-service/" data-route>LINE 機器人怎麼做？從自動回覆到官網詢問流程</a><a href="/chuanhua_site_v12_1/notes/ai-receipt-photo-bookkeeping/" data-route>發票整理太花時間？AI 拍照記帳怎麼做</a></nav>
 <div class="note-service-link"><a class="btn" href="/chuanhua_site_v12_1/ai/" data-route>探索 AI 客製化服務 →</a></div>
 </section>
 <section class="feature-page note-article" data-feature="note-02" data-note-id="02" hidden>
@@ -2023,7 +2360,7 @@ footer .notes-link{margin-left:24px}
 <h2>想把哪個工作交給 AI？</h2>
 <p>寫文案、改文案是不是也占掉你們很多時間？告訴我們哪個工作最麻煩，川花幫你評估能不能做成小工具。專案 NT$49,000 起，正式報價依需求評估，歡迎加入官方 LINE @riverflower2025 預約初步諮詢。</p>
 </div>
-<nav class="note-related" aria-label="相關筆記"><h2>讓想法繼續開花</h2><a href="/chuanhua_site_v12_1/notes/ai-image-video-commercial-use/" data-route>AI 做的商品圖和影片可以商用嗎？授權注意事項</a><a href="/chuanhua_site_v12_1/notes/ai-ad-upload-automation/" data-route>服飾品牌怎麼用 AI 一天上完 10 支廣告？上稿自動化實戰</a></nav>
+<nav class="note-related" aria-label="相關筆記"><h2>讓想法繼續開花</h2><a href="/chuanhua_site_v12_1/notes/ai-image-video-commercial-use/" data-route>AI 做的商品圖和影片可以商用嗎？授權注意事項</a><a href="/chuanhua_site_v12_1/notes/small-business-website-inquiry-design/" data-route>中小企業官網怎麼做？從品牌形象到有效詢價的網站規劃</a></nav>
 <div class="note-service-link"><a class="btn" href="/chuanhua_site_v12_1/ai/" data-route>探索 AI 客製化服務 →</a></div>
 </section>
 <section class="feature-page note-article" data-feature="note-03" data-note-id="03" hidden>
@@ -2059,7 +2396,7 @@ footer .notes-link{margin-left:24px}
 <h2>想把哪個工作交給 AI？</h2>
 <p>發票只是其中一個例子。告訴我們哪個工作最麻煩，川花幫你評估能不能做成小工具；專案 NT$49,000 起，加入官方 LINE @riverflower2025 預約初步諮詢。</p>
 </div>
-<nav class="note-related" aria-label="相關筆記"><h2>讓想法繼續開花</h2><a href="/chuanhua_site_v12_1/notes/ai-ad-upload-automation/" data-route>服飾品牌怎麼用 AI 一天上完 10 支廣告？上稿自動化實戰</a><a href="/chuanhua_site_v12_1/notes/no-code-marketing-automation/" data-route>不會寫程式也能做：行銷人的 3 個自動化流程</a></nav>
+<nav class="note-related" aria-label="相關筆記"><h2>讓想法繼續開花</h2><a href="/chuanhua_site_v12_1/notes/line-chatbot-website-customer-service/" data-route>LINE 機器人怎麼做？從自動回覆到官網詢問流程</a><a href="/chuanhua_site_v12_1/notes/ai-ad-upload-automation/" data-route>服飾品牌怎麼用 AI 一天上完 10 支廣告？上稿自動化實戰</a></nav>
 <div class="note-service-link"><a class="btn" href="/chuanhua_site_v12_1/ai/" data-route>探索 AI 客製化服務 →</a></div>
 </section>
 <section class="feature-page note-article" data-feature="note-04" data-note-id="04" hidden>
@@ -2097,7 +2434,7 @@ footer .notes-link{margin-left:24px}
 <h2>想把哪個工作交給 AI？</h2>
 <p>回答完這 5 個問題，你心裡大概已經有答案了。告訴我們哪個工作最麻煩，川花幫你評估能不能做成小工具；專案 NT$49,000 起，加入官方 LINE @riverflower2025 預約初步諮詢。</p>
 </div>
-<nav class="note-related" aria-label="相關筆記"><h2>讓想法繼續開花</h2><a href="/chuanhua_site_v12_1/notes/ai-custom-tool-pricing-guide/" data-route>AI 客製化工具要多少錢？報價單怎麼看才不吃虧</a><a href="/chuanhua_site_v12_1/notes/ai-ad-upload-automation/" data-route>服飾品牌怎麼用 AI 一天上完 10 支廣告？上稿自動化實戰</a></nav>
+<nav class="note-related" aria-label="相關筆記"><h2>讓想法繼續開花</h2><a href="/chuanhua_site_v12_1/notes/custom-business-app-web-vs-mobile/" data-route>企業自製 App 值得嗎？網頁 App、手機 App 怎麼選</a><a href="/chuanhua_site_v12_1/notes/ai-custom-tool-pricing-guide/" data-route>AI 客製化工具要多少錢？報價單怎麼看才不吃虧</a></nav>
 <div class="note-service-link"><a class="btn" href="/chuanhua_site_v12_1/ai/" data-route>探索 AI 客製化服務 →</a></div>
 </section>
 <section class="feature-page note-article" data-feature="note-05" data-note-id="05" hidden>
@@ -2135,7 +2472,7 @@ footer .notes-link{margin-left:24px}
 <h2>想把哪個工作交給 AI？</h2>
 <p>告訴我們你每週最麻煩、最花時間的那個工作，川花幫你評估能不能做成小工具。專案 NT$49,000 起，加入官方 LINE @riverflower2025 預約初步諮詢。</p>
 </div>
-<nav class="note-related" aria-label="相關筆記"><h2>讓想法繼續開花</h2><a href="/chuanhua_site_v12_1/notes/sme-ai-adoption-5-questions/" data-route>中小企業導入 AI 前，先問自己 5 個問題</a><a href="/chuanhua_site_v12_1/notes/ai-ad-upload-automation/" data-route>服飾品牌怎麼用 AI 一天上完 10 支廣告？上稿自動化實戰</a></nav>
+<nav class="note-related" aria-label="相關筆記"><h2>讓想法繼續開花</h2><a href="/chuanhua_site_v12_1/notes/custom-business-app-web-vs-mobile/" data-route>企業自製 App 值得嗎？網頁 App、手機 App 怎麼選</a><a href="/chuanhua_site_v12_1/notes/sme-ai-adoption-5-questions/" data-route>中小企業導入 AI 前，先問自己 5 個問題</a></nav>
 <div class="note-service-link"><a class="btn" href="/chuanhua_site_v12_1/ai/" data-route>探索 AI 客製化服務 →</a></div>
 </section>
 <section class="feature-page note-article" data-feature="note-08" data-note-id="08" hidden>
@@ -2171,7 +2508,7 @@ footer .notes-link{margin-left:24px}
 <h2>想把哪個工作交給 AI？</h2>
 <p>告訴我們你最麻煩的那個工作，川花幫你評估能不能做成小工具。專案 NT$49,000 起，正式報價依需求評估。歡迎加入官方 LINE @riverflower2025 預約初步諮詢。</p>
 </div>
-<nav class="note-related" aria-label="相關筆記"><h2>讓想法繼續開花</h2><a href="/chuanhua_site_v12_1/notes/ai-ad-upload-automation/" data-route>服飾品牌怎麼用 AI 一天上完 10 支廣告？上稿自動化實戰</a><a href="/chuanhua_site_v12_1/notes/ai-receipt-photo-bookkeeping/" data-route>發票整理太花時間？AI 拍照記帳怎麼做</a></nav>
+<nav class="note-related" aria-label="相關筆記"><h2>讓想法繼續開花</h2><a href="/chuanhua_site_v12_1/notes/line-chatbot-website-customer-service/" data-route>LINE 機器人怎麼做？從自動回覆到官網詢問流程</a><a href="/chuanhua_site_v12_1/notes/ai-ad-upload-automation/" data-route>服飾品牌怎麼用 AI 一天上完 10 支廣告？上稿自動化實戰</a></nav>
 <div class="note-service-link"><a class="btn" href="/chuanhua_site_v12_1/ai/" data-route>探索 AI 客製化服務 →</a></div>
 </section>
 <section class="feature-page note-article" data-feature="note-09" data-note-id="09" hidden>
@@ -2208,7 +2545,7 @@ footer .notes-link{margin-left:24px}
 <h2>想把哪個工作交給 AI？</h2>
 <p>AI 素材用得安心之後，像廣告上稿、文案初稿這類重複的工作，也可以交給 AI 小工具。告訴我們哪個工作最麻煩，川花幫你評估能不能做成小工具，專案 NT$49,000 起。加入官方 LINE @riverflower2025，預約初步諮詢。</p>
 </div>
-<nav class="note-related" aria-label="相關筆記"><h2>讓想法繼續開花</h2><a href="/chuanhua_site_v12_1/notes/ai-ad-copy-brand-voice/" data-route>AI 寫廣告文案，品牌語氣怎麼守住？服飾品牌實戰做法</a><a href="/chuanhua_site_v12_1/notes/ai-ad-upload-automation/" data-route>服飾品牌怎麼用 AI 一天上完 10 支廣告？上稿自動化實戰</a></nav>
+<nav class="note-related" aria-label="相關筆記"><h2>讓想法繼續開花</h2><a href="/chuanhua_site_v12_1/notes/ai-ad-copy-brand-voice/" data-route>AI 寫廣告文案，品牌語氣怎麼守住？服飾品牌實戰做法</a><a href="/chuanhua_site_v12_1/notes/small-business-website-inquiry-design/" data-route>中小企業官網怎麼做？從品牌形象到有效詢價的網站規劃</a></nav>
 <div class="note-service-link"><a class="btn" href="/chuanhua_site_v12_1/ai/" data-route>探索 AI 客製化服務 →</a></div>
 </section>
 <!-- NOTE-ARTICLES:END -->
@@ -4094,6 +4431,8 @@ async function submit(){
           await new Promise(resolve=>bloomTransition(()=>{if(!stale())openFeature(m.feature);resolve()}));
           if(stale())return;
         } else openFeature(m.feature);
+        // 先讓不透明的試算布幕畫出一個畫格，再恢復一般轉場，避免入口花園閃現。
+        if (initial && m.feature==='build') requestAnimationFrame(()=>requestAnimationFrame(()=>document.documentElement.removeAttribute('data-build-direct')));
         return;
       }
       if (!entered) enterMain(m.layer==='main' ? m.section : null);

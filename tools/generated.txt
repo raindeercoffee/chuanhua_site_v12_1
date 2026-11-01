@@ -17,8 +17,11 @@ notes/ai-ad-upload-automation/index.html
 notes/ai-custom-tool-pricing-guide/index.html
 notes/ai-image-video-commercial-use/index.html
 notes/ai-receipt-photo-bookkeeping/index.html
+notes/custom-business-app-web-vs-mobile/index.html
 notes/index.html
+notes/line-chatbot-website-customer-service/index.html
 notes/no-code-marketing-automation/index.html
+notes/small-business-website-inquiry-design/index.html
 notes/sme-ai-adoption-5-questions/index.html
 policy/index.html
 quiz/index.html

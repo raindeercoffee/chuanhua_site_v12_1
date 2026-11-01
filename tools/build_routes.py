@@ -24,7 +24,7 @@ SITE = "https://raindeercoffee.com/chuanhua_site_v12_1"
 SOURCE = ROOT / "index.html"
 MANIFEST = ROOT / "tools" / "generated.txt"
 NOTES = ROOT / "content" / "notes.json"
-NOTE_IDS = ["01", "02", "03", "04", "05", "08", "09"]
+NOTE_IDS = ["06", "07", "10", "01", "02", "03", "04", "05", "08", "09"]
 NOTE_SCHEMA_ID = "note-schema"
 
 
@@ -57,7 +57,7 @@ def load_notes() -> list[dict]:
     if not isinstance(articles, list) or any(not isinstance(a, dict) for a in articles):
         raise ValueError("articles 必須是文章物件陣列")
     if [a.get("id") for a in articles] != NOTE_IDS:
-        raise ValueError("文章編號與順序必須恰為 01、02、03、04、05、08、09")
+        raise ValueError("文章編號與順序必須恰為 " + "、".join(NOTE_IDS))
     slugs = set()
     article_fields = {"id", "slug", "title", "description", "keywords", "category", "sourceFile", "blocks"}
     for article in articles:
@@ -70,7 +70,7 @@ def load_notes() -> list[dict]:
         if len(slug) > 120 or not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", slug) or slug in slugs:
             raise ValueError(f"{label} 網址代稱不安全或重複")
         slugs.add(slug)
-        if article["category"] not in {"流程自動化", "品牌內容", "AI 導入"}:
+        if article["category"] not in {"流程自動化", "品牌內容", "AI 導入", "網站建置"}:
             raise ValueError(f"{label} 分類不在允許清單")
         if any(c in article["sourceFile"] for c in "/\\:") or not article["sourceFile"].endswith(".txt"):
             raise ValueError(f"{label} 來源只可記錄文字稿檔名")
@@ -163,6 +163,15 @@ def render_notes(text: str, articles: list[dict]) -> str:
         related = sorted((other for other in articles if other["id"] != identity),
                          key=lambda other: other["category"] != article["category"])[:2]
         prose = "\n".join(render_block(block) for block in article["blocks"])
+        services = {
+            "06": [("/ai/website/", "品牌官網製作 →"), ("/build/", "規劃服務・試算預算 →")],
+            "07": [("/ai/workflow/", "AI 工作流程自動化 →")],
+            "10": [("/ai/tools/", "AI 客製工具開發 →")],
+        }.get(identity, [("/ai/", "探索 AI 客製化服務 →")])
+        service_links = "".join(
+            f'<a class="btn" href="/chuanhua_site_v12_1{path}" data-route>{html.escape(label)}</a>'
+            for path, label in services
+        )
         pages.append(
             f'<section class="feature-page note-article" data-feature="note-{identity}" data-note-id="{identity}" hidden>\n'
             '<div class="st-top"><a class="st-back" href="/chuanhua_site_v12_1/notes/" data-route>← 回到開花筆記</a></div>\n'
@@ -171,10 +180,13 @@ def render_notes(text: str, articles: list[dict]) -> str:
             f'<div class="note-prose">\n{prose}\n</div>\n'
             '<nav class="note-related" aria-label="相關筆記"><h2>讓想法繼續開花</h2>'
             + "".join(note_link(other) for other in related) + '</nav>\n'
-            '<div class="note-service-link"><a class="btn" href="/chuanhua_site_v12_1/ai/" data-route>探索 AI 客製化服務 →</a></div>\n'
+            f'<div class="note-service-link">{service_links}</div>\n'
             '</section>'
         )
     text = replace_marked(text, "NOTES-LIST", "\n".join(cards))
+    latest = [card.replace('<h2 class="note-card-title">', '<h3 class="note-card-title">')
+              .replace('</h2>', '</h3>').replace('閱讀筆記 →', '閱讀 →') for card in cards[:3]]
+    text = replace_marked(text, "NOTES-LATEST", "\n".join(latest))
     text = replace_marked(text, "NOTE-ARTICLES", "\n".join(pages))
     # 只移除本生成器曾建立的筆記文章，不動其他頁面路由。
     routes = {path: meta for path, meta in routes.items()
@@ -306,7 +318,8 @@ def main() -> None:
     today = datetime.date.today().isoformat()
     urls = "".join(
         f"  <url>\n    <loc>{SITE}{path}</loc>\n    <lastmod>{today}</lastmod>\n  </url>\n"
-        for path, meta in routes.items() if not meta.get("noindex")
+        # 測試站仍禁止收錄；網站地圖保留文章網址，供內容與連結驗收。
+        for path, meta in routes.items() if not meta.get("noindex") or path.startswith("/notes/")
     )
     write(ROOT / "sitemap.xml", f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{urls}</urlset>\n')
 
