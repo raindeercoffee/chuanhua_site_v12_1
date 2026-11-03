@@ -161,6 +161,28 @@ test('頁面實際渲染金額與調價輸入', () => {
     assert.equal(element('.ie-price').textContent, formatMoney(changed.subtotal));
     assert.ok(element('.ie-range').textContent.includes(formatMoney(changed.high)));
     assert.equal(JSON.parse(storage['ch-item-prices-v1']).website.items[chosen.id], chosen.price);
+    // 按下摘要時傳給畫面的結果，和目前試算同一份資料。
+    let summary; window.openPlanSummary = value => { summary = value; };
+    const click = (action, id) => {
+      const button = {dataset:{action}, closest(selector){ return selector === '[data-id]' ? (id ? {dataset:{id}} : null) : this; }};
+      handlers.click({target:button});
+    };
+    const checkSummary = () => {
+      click('contact'); assert.ok(summary);
+      const expected = calculate(service,state);
+      assert.deepEqual(summary.result, expected);
+      assert.equal(summary.completeness, calculateCompleteness(service,state));
+      assert.equal(element('.ie-price').textContent, formatMoney(summary.result.subtotal));
+      assert.ok(element('.ie-range').textContent.includes(formatMoney(summary.result.low)));
+      assert.ok(element('.ie-range').textContent.includes(formatMoney(summary.result.high)));
+      assert.ok(element('.ie-monthly').textContent.includes(formatMoney(summary.result.monthly)));
+    };
+    checkSummary();
+    click('remove',chosen.id); moveItem(service,state,chosen.id,'available'); checkSummary();
+    click('add',chosen.id); moveItem(service,state,chosen.id,'selected'); checkSummary();
+    const withUnit = service.items.find(i => i.selected && i.unit);
+    if (withUnit) { click('plus',withUnit.id); setQuantity(service,state,withUnit.id,2); checkSummary(); }
+    handlers.change({target:{dataset:{action:'maintenance'},value:'basic'}}); state.maintenance='basic'; checkSummary();
   } finally { delete global.document; delete global.window; delete global.location; delete global.localStorage; }
 });
 console.log(`共 ${checks} 組檢查通過。`);
