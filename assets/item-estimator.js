@@ -65,8 +65,18 @@
     const flowers = ['lavender', 'rose', 'chamomile', 'rosemary', 'jasmine', 'sweetorange', 'geranium', 'mint', 'lemon', 'eucalyptus', 'olive', 'cedar', 'cinnamon', 'frankincense', 'immortelle', 'rockrose'];
     function row(i, chosen, result) { const flower = flowers[service.items.findIndex(item => item.id === i.id) % flowers.length]; return `<div class="ie-row" data-id="${escape(i.id)}"><img src="/chuanhua_site_v12_1/assets/quiz-plants/${flower}.png" alt="" aria-hidden="true"><div class="ie-info">${i.group ? `<small>${escape(i.group)}</small>` : ''}<strong>${escape(i.name)}</strong><p>${escape(i.description)}</p><span>＋${formatMoney(result.unitPrices[i.id])}${i.unit ? '／' + escape(i.unit) : ''}</span></div>${chosen && i.unit ? `<div class="ie-quantity" aria-label="數量"><button type="button" data-action="minus" aria-label="減少${escape(i.name)}">−</button><span>${chosen.quantity} ${escape(i.unit)}</span><button type="button" data-action="plus" aria-label="增加${escape(i.name)}">＋</button></div>` : ''}<button type="button" class="ie-handle" aria-label="拖動${escape(i.name)}" title="拖動調整">≡</button><button type="button" class="ie-row-action" data-action="${chosen ? 'remove' : 'add'}" aria-label="${chosen ? '拿掉' : '加入'}${escape(i.name)}">${chosen ? '×' : '＋ 加入'}</button></div>`; }
     function renderRows() { const result = calculate(service, state); selected.innerHTML = state.selected.map(c => row(service.items.find(i => i.id === c.id), c, result)).join('') || '<p class="ie-empty">把想加入的項目拖到這裡</p>'; available.innerHTML = service.items.filter(i => !state.selected.some(c => c.id === i.id)).map(i => row(i, null, result)).join('') || '<p class="ie-empty">目前沒有其他項目</p>'; }
-    function renderPrice() { const result = calculate(service, state); $('.ie-base-price').textContent = formatMoney(result.base); $('.ie-range').textContent = `預估範圍 ${formatMoney(result.low)} ～ ${formatMoney(result.high)}`; $('.ie-monthly').textContent = `每月維護 ${formatMoney(result.monthly)}`; const start = shown == null ? result.subtotal : shown, end = result.subtotal; shown = end; const price = $('.ie-price'); if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) { price.textContent = formatMoney(end); return; } const time = performance.now(); const tick = now => { if (shown !== end) return; const p = Math.min(1, (now - time) / 350); price.textContent = formatMoney(start + (end - start) * (1 - Math.pow(1 - p, 3))); if (p < 1) requestAnimationFrame(tick); }; requestAnimationFrame(tick); }
-    let completionTarget = null, completionShown = null, completionRun = 0, badgeTimer = null;
+    let priceRun = 0, priceTimer;
+    function renderPrice() {
+      const result = calculate(service, state); $('.ie-base-price').textContent = formatMoney(result.base); $('.ie-range').textContent = `預估範圍 ${formatMoney(result.low)} ～ ${formatMoney(result.high)}`; $('.ie-monthly').textContent = `每月維護 ${formatMoney(result.monthly)}`;
+      const start = shown == null ? result.subtotal : shown, end = result.subtotal; shown = end; const price = $('.ie-price'), run = ++priceRun;
+      clearTimeout(priceTimer); price.textContent = formatMoney(end);
+      if (start === end || document.hidden || (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) return;
+      const finish = () => { if (run !== priceRun) return; ++priceRun; price.textContent = formatMoney(end); };
+      priceTimer = setTimeout(finish, 1000);
+      const time = performance.now(); const tick = now => { if (run !== priceRun) return; if (document.hidden) { finish(); return; } const p = Math.min(1, Math.max(0, (now-time)/350)); price.textContent = formatMoney(start+(end-start)*(1-Math.pow(1-p,3))); if (p < 1) requestAnimationFrame(tick); else { clearTimeout(priceTimer); finish(); } }; requestAnimationFrame(tick);
+    }
+    if (document.addEventListener) document.addEventListener('visibilitychange', () => { if (document.hidden) { ++priceRun; clearTimeout(priceTimer); $('.ie-price').textContent = formatMoney(shown); ++completionRun; clearTimeout(completionTimer); if (completionTarget !== null) { completionShown = completionTarget; $('.ie-completion-number').textContent = completionTarget + '%'; $('.ie-completion-ring').style.setProperty('--ie-progress', completionTarget); } } });
+    let completionTarget = null, completionShown = null, completionRun = 0, badgeTimer = null, completionTimer = null;
     function renderCompleteness() {
       const target = calculateCompleteness(service, state), oldTarget = completionTarget;
       if (target === oldTarget) return;
@@ -75,6 +85,7 @@
       ring.setAttribute('aria-label', `規劃完整度 ${target}%`);
       const paint = value => { completionShown = value; number.textContent = Math.round(value) + '%'; ring.style.setProperty('--ie-progress', value); };
       const run = ++completionRun;
+      const start = completionShown; clearTimeout(completionTimer); paint(target);
       if (oldTarget === null) { paint(target); return; }
       const diff = target - oldTarget;
       badge.textContent = (diff > 0 ? '↑' : '↓') + Math.abs(diff) + '%';
@@ -85,12 +96,14 @@
       clearTimeout(badgeTimer);
       badgeTimer = setTimeout(() => { badge.hidden = true; }, COMPLETENESS.badgeDuration);
       if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) { paint(target); return; }
-      const start = completionShown, started = performance.now();
+      if (document.hidden) return;
+      const started = performance.now();
+      completionTimer = setTimeout(() => { if (run === completionRun) { ++completionRun; paint(target); } }, 1000);
       const tick = now => {
         if (run !== completionRun) return;
         const fraction = Math.min(1, Math.max(0, (now - started) / COMPLETENESS.duration));
         paint(start + (target - start) * (1 - Math.pow(1 - fraction, 3)));
-        if (fraction < 1) requestAnimationFrame(tick);
+        if (fraction < 1) requestAnimationFrame(tick); else clearTimeout(completionTimer);
       };
       requestAnimationFrame(tick);
     }

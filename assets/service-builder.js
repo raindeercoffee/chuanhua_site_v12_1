@@ -182,7 +182,7 @@ const CH_PRICING = {
     const storeKey = 'chuanhua-service-builder-pricing-v1';
     const state = createState();
     let pricing = resetPricing(), drawerOpen = false, drag = null, pending = null, ignoreClickUntil = 0;
-    let animatedLow = 0, animatedHigh = 0, priceFrame = 0, dragFrame = 0, editorReturnFocus = null;
+    let animatedLow = 0, animatedHigh = 0, priceFrame = 0, priceTimer = 0, priceRun = 0, finishPrice = null, dragFrame = 0, editorReturnFocus = null;
     const escape = value => String(value).replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[char]);
     const flower = id => '/chuanhua_site_v12_1/assets/quiz-plants/' + ['lavender', 'rose', 'rosemary', 'chamomile'][SERVICES.findIndex(item => item.id === id) % 4] + '.png';
     function announce(text) { if (announcer) announcer.textContent = text; }
@@ -247,20 +247,40 @@ const CH_PRICING = {
       const tierNotes = { basic: '核心規劃・一次交付', advanced: '加深規劃・兩輪優化', complete: '整體整合・交付陪跑' };
       details.innerHTML = `<div class="ch-detail-heading"><img class="ch-flower" src="${flower(id)}" width="36" height="44" alt=""><div><p class="ch-price-caption">第 ${state.active.indexOf(id) + 1} 名・往下一層搭配</p><h3>${service.name}</h3></div></div><fieldset class="ch-tier-field"><legend>先選方案級距</legend><div class="ch-tier-grid">${Object.entries(TIERS).map(([tier, label]) => `<button type="button" class="ch-tier${choice.tier === tier ? ' is-selected' : ''}" data-action="tier" data-service="${id}" data-tier="${tier}" data-focus="tier-${tier}" aria-pressed="${choice.tier === tier}"><strong>${label}</strong><span>${tierNotes[tier]}</span><b>${money(price.tiers[tier])}</b></button>`).join('')}</div></fieldset><div class="ch-tray" data-service="${id}" aria-label="${service.name}已選項目區"><p class="ch-tray-label">已選項目 <span>把項目拖進來，或直接點選下方項目</span></p><span class="ch-tray-base">${TIERS[choice.tier]}方案</span>${choice.addons.map(key => { const addon = service.addons.find(item => item.id === key); return `<button type="button" class="ch-tray-block${bounceId === key ? ' ch-pop' : ''}" data-action="tray-addon" data-service="${id}" data-addon="${key}" data-focus="tray-${key}" aria-label="拿掉${addon.name}，也可以拖出已選項目區">${addon.name}<span>${money(price.addons[key])} ×</span></button>`; }).join('')}${choice.addons.length ? '' : '<p class="ch-tray-empty">加入你需要的加值項目。</p>'}</div><h4 class="ch-addon-title">加值項目</h4><div class="ch-addon-grid">${service.addons.map(addon => `<button type="button" class="ch-addon${choice.addons.includes(addon.id) ? ' is-selected' : ''}" data-action="addon" data-service="${id}" data-addon="${addon.id}" data-focus="addon-${addon.id}" aria-pressed="${choice.addons.includes(addon.id)}"><span>${choice.addons.includes(addon.id) ? '✓' : '＋'} ${addon.name}</span><b>＋${money(price.addons[addon.id])}</b></button>`).join('')}</div>${service.quantity ? `<div class="ch-quantity"><div><h4>${service.quantity.label}</h4><p>方案內含 ${service.quantity.included} ${service.quantity.unit}；增加每${service.quantity.unit} ${money(price.quantityPrice)}</p></div><div class="ch-counter"><button type="button" data-action="minus" data-service="${id}" data-focus="quantity-minus" aria-label="減少${service.quantity.label}" ${choice.quantity <= service.quantity.min ? 'disabled' : ''}>−</button><output aria-label="${service.quantity.label}">${choice.quantity} ${service.quantity.unit}</output><button type="button" data-action="plus" data-service="${id}" data-focus="quantity-plus" aria-label="增加${service.quantity.label}" ${choice.quantity >= service.quantity.max ? 'disabled' : ''}>＋</button></div></div>` : ''}<p class="ch-subtotal"><span>這項服務小計</span><strong>${money(subtotal)}</strong><small>尚未套用多項服務優惠</small></p>`;
     }
+    document.addEventListener('visibilitychange', () => { if (document.hidden && finishPrice) finishPrice(); });
     function animatePrice(low, high) {
       cancelAnimationFrame(priceFrame);
+      clearTimeout(priceTimer);
+      const run = ++priceRun;
       const lowNode = summary.querySelector('[data-price-low]'), highNode = summary.querySelector('[data-price-high]');
       const topLowNode = root.querySelector('[data-price-top-low]'), topHighNode = root.querySelector('[data-price-top-high]');
       if (!lowNode || !highNode) return;
-      const startLow = animatedLow, startHigh = animatedHigh, start = performance.now();
+      const startLow = animatedLow, startHigh = animatedHigh;
+      function paint(a, b) {
+        animatedLow = a; animatedHigh = b;
+        lowNode.textContent = money(a); highNode.textContent = money(b);
+        if (topLowNode) topLowNode.textContent = money(a);
+        if (topHighNode) topHighNode.textContent = money(b);
+      }
+      let finished = false;
+      function finish() {
+        if (finished || run !== priceRun) return;
+        finished = true; clearTimeout(priceTimer); cancelAnimationFrame(priceFrame);
+        paint(low, high); finishPrice = null;
+      }
+      // Always paint the final value first; animation is only an enhancement.
+      paint(low, high);
+      finishPrice = finish;
+      if (reduced || document.hidden) { finish(); return; }
+      priceTimer = setTimeout(finish, 1000);
+      const start = performance.now();
       const draw = now => {
-        const progress = reduced ? 1 : Math.min(1, (now - start) / 260);
+        if (finished || run !== priceRun) return;
+        const progress = Math.min(1, Math.max(0, (now - start) / 260));
         const eased = 1 - Math.pow(1 - progress, 3);
-        animatedLow = startLow + (low - startLow) * eased; animatedHigh = startHigh + (high - startHigh) * eased;
-        lowNode.textContent = money(animatedLow); highNode.textContent = money(animatedHigh);
-        if (topLowNode) topLowNode.textContent = money(animatedLow);
-        if (topHighNode) topHighNode.textContent = money(animatedHigh);
+        paint(startLow + (low - startLow) * eased, startHigh + (high - startHigh) * eased);
         if (progress < 1) priceFrame = requestAnimationFrame(draw);
+        else finish();
       };
       priceFrame = requestAnimationFrame(draw);
     }
