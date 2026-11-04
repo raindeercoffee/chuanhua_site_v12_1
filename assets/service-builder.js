@@ -7,13 +7,13 @@
 const CH_PRICING = {
   services: {
     ads: { tiers: { basic: 49000, advanced: 69000, complete: 99000 }, addons: { creative: 12000, pixel: 6000, report: 5000, landing: 18000 }, quantityPrice: 18000 },
-    planning: { tiers: { basic: 49000, advanced: 79000, complete: 119000 }, addons: { research: 15000, campaign: 18000, calendar: 8000, workshop: 12000 }, quantityPrice: 0 },
     brand: { tiers: { basic: 49000, advanced: 89000, complete: 139000 }, addons: { positioning: 18000, identity: 22000, guide: 12000, launch: 20000 }, quantityPrice: 0 },
-    rebrand: { tiers: { basic: 49000, advanced: 79000, complete: 129000 }, addons: { audit: 12000, voice: 10000, matrix: 15000, story: 18000 }, quantityPrice: 0 },
     workflow: { tiers: { basic: 49000, advanced: 79000, complete: 119000 }, addons: { line: 12000, sheets: 8000, training: 10000, monitor: 12000 }, quantityPrice: 18000 },
     content: { tiers: { basic: 49000, advanced: 69000, complete: 99000 }, addons: { voice: 10000, product: 8000, social: 12000, library: 15000 }, quantityPrice: 6000 },
     tools: { tiers: { basic: 49000, advanced: 89000, complete: 149000 }, addons: { dashboard: 18000, api: 20000, access: 12000, training: 10000 }, quantityPrice: 25000 },
-    website: { tiers: { basic: 49000, advanced: 89000, complete: 139000 }, addons: { cart: 25000, member: 18000, booking: 15000, language: 20000, seo: 12000 }, quantityPrice: 6000 }
+    website: { tiers: { basic: 49000, advanced: 89000, complete: 139000 }, addons: { cart: 25000, member: 18000, booking: 15000, language: 20000, seo: 12000 }, quantityPrice: 6000 },
+    'ads-audit': { tiers: { basic: null, advanced: null, complete: null }, addons: {}, quantityPrice: null },
+    'ad-ops': { tiers: { basic: null, advanced: null, complete: null }, addons: {}, quantityPrice: null }
   },
   maintenance: { none: 0, basic: 3000, complete: 8000 },
   discount: { enabled: true, twoServices: 0.95, threeOrMore: 0.9 },
@@ -26,20 +26,20 @@ const CH_PRICING = {
   const DEFAULT_PRICING = clone(CH_PRICING);
   const SERVICES = [
     { id: 'ads', name: '數位廣告投放', description: '從預算配置、素材測試到 ROAS 與廣告占比管理，Meta、Google、LINE 廣告一起看。不是花錢買流量，是找到最對的那群人。', addons: [{ id: 'creative', name: '廣告素材製作' }, { id: 'pixel', name: '追蹤碼設定' }, { id: 'report', name: '成效月報' }, { id: 'landing', name: '活動落地頁' }], quantity: { label: '廣告代操月數', unit: '個月', included: 1, min: 1, max: 24 } },
-    { id: 'planning', name: '整合行銷企劃', description: '從策略到執行，我們最懂消費者心理。讓品牌的靈魂穿透每個觸點，長出自己的根，留下深刻印記。', addons: [{ id: 'research', name: '受眾研究' }, { id: 'campaign', name: '活動企劃' }, { id: 'calendar', name: '行銷行事曆' }, { id: 'workshop', name: '團隊共創工作坊' }], quantity: null },
     { id: 'brand', name: '品牌整合行銷', description: '從企業轉型、內容企劃到廣告轉換，串起每一個消費者的完美購物體驗。讓商品不只是被販售，而是品牌能被記住的完美記憶點。', addons: [{ id: 'positioning', name: '品牌定位' }, { id: 'identity', name: '視覺識別整合' }, { id: 'guide', name: '品牌溝通指南' }, { id: 'launch', name: '品牌上市企劃' }], quantity: null },
-    { id: 'rebrand', name: '品牌重塑與內容策略', description: '重新梳理品牌靈魂、受眾與溝通語言，建立一致的內容矩陣。讓老品牌長出新樣貌，也讓新品牌站穩自己的位置。', addons: [{ id: 'audit', name: '品牌現況健檢' }, { id: 'voice', name: '品牌語氣設定' }, { id: 'matrix', name: '內容矩陣規劃' }, { id: 'story', name: '品牌故事改寫' }], quantity: null },
+    { id: "ads-audit", name: "廣告帳戶健檢", description: "把帳戶、素材與再行銷一起看，用白話說清楚問題，列出先處理哪一件。", addons: [], quantity: null },
+    { id: 'website', name: '品牌官網製作', description: '從品牌風格、內容架構到手機版排版，協助規劃與製作官網，並依需求串接表單、預約與 AI 工具。', addons: [{ id: 'cart', name: '購物車' }, { id: 'member', name: '會員功能' }, { id: 'booking', name: '預約系統' }, { id: 'language', name: '多語系' }, { id: 'seo', name: 'SEO 架構' }], quantity: { label: '官網頁數', unit: '頁', included: 5, min: 5, max: 50 } },
     { id: 'workflow', name: 'AI 工作流程自動化', description: '把資料整理、表單彙整與重複上稿串成清楚的工作流程，依你的做事方式規劃，讓每天重複的操作少一點。', addons: [{ id: 'line', name: 'LINE 串接' }, { id: 'sheets', name: 'Google Sheet 串接' }, { id: 'training', name: '員工教學' }, { id: 'monitor', name: '流程異常提醒' }], quantity: { label: '自動化流程條數', unit: '條', included: 1, min: 1, max: 20 } },
-    { id: 'content', name: 'AI 內容與文案生成', description: '從品牌語氣、商品文案到社群貼文，建立適合你的內容生成流程。讓 AI 協助打底，保留品牌自己的聲音。', addons: [{ id: 'voice', name: '品牌語氣訓練' }, { id: 'product', name: '商品文案範本' }, { id: 'social', name: '社群貼文範本' }, { id: 'library', name: '品牌素材知識庫' }], quantity: { label: '內容範本組數', unit: '組', included: 1, min: 1, max: 30 } },
+    { id: 'content', name: 'AI 文案與內容生成', description: '從品牌語氣、商品文案到社群貼文，建立適合你的內容生成流程。讓 AI 協助打底，保留品牌自己的聲音。', addons: [{ id: 'voice', name: '品牌語氣訓練' }, { id: 'product', name: '商品文案範本' }, { id: 'social', name: '社群貼文範本' }, { id: 'library', name: '品牌素材知識庫' }], quantity: { label: '內容範本組數', unit: '組', included: 1, min: 1, max: 30 } },
     { id: 'tools', name: 'AI 客製工具開發', description: '依實際需求規劃報表、記帳或資料查詢工具，串接既有表單與系統。從最卡手的小事開始，做出真正用得上的幫手。', addons: [{ id: 'dashboard', name: '報表儀表板' }, { id: 'api', name: '既有系統串接' }, { id: 'access', name: '使用者權限' }, { id: 'training', name: '操作教學' }], quantity: { label: '客製工具數量', unit: '個', included: 1, min: 1, max: 10 } },
-    { id: 'website', name: '品牌官網製作', description: '從品牌風格、內容架構到手機版排版，協助規劃與製作官網，並依需求串接表單、預約與 AI 工具。', addons: [{ id: 'cart', name: '購物車' }, { id: 'member', name: '會員功能' }, { id: 'booking', name: '預約系統' }, { id: 'language', name: '多語系' }, { id: 'seo', name: 'SEO 架構' }], quantity: { label: '官網頁數', unit: '頁', included: 5, min: 5, max: 50 } }
+    { id: "ad-ops", name: "廣告上稿自動化", description: "將上稿表轉成可匯入檔案，批次處理影片與檢查欄位，讓團隊把時間留給判斷。", addons: [], quantity: null }
   ];
   const byId = id => SERVICES.find(service => service.id === id);
   const TIERS = { basic: '基本', advanced: '進階', complete: '完整' };
   const MAINTENANCE = { none: '不需要', basic: '基本維護', complete: '完整維護' };
   const SCENARIOS = [
-    { id: 'ads', label: '廣告花了錢，卻不知道有沒有效', priority: ['ads', 'planning', 'content'] },
-    { id: 'brand', label: '品牌看起來和別人一樣', priority: ['rebrand', 'brand', 'planning'] },
+    { id: 'ads', label: '廣告花了錢，卻不知道有沒有效', priority: ['ads', 'content'] },
+    { id: 'brand', label: '品牌看起來和別人一樣', priority: ['brand'] },
     { id: 'repeat', label: '每天花很多時間做重複的事', priority: ['workflow', 'tools', 'content'] },
     { id: 'website', label: '需要一個能代表品牌的官網', priority: ['website', 'brand', 'content'] },
     { id: 'ai', label: '想用 AI，但不知道從哪開始', priority: ['workflow', 'content', 'tools'] }
@@ -111,12 +111,15 @@ const CH_PRICING = {
       const tierPrice = price.tiers[choice.tier];
       const quantityCost = service.quantity ? Math.max(0, choice.quantity - service.quantity.included) * price.quantityPrice : 0;
       const addons = choice.addons.map(key => ({ id: key, name: service.addons.find(addon => addon.id === key).name, price: price.addons[key] }));
-      return { id, name: service.name, rank: index + 1, tier: choice.tier, tierPrice, quantity: choice.quantity, quantityCost, addons, subtotal: tierPrice + quantityCost + addons.reduce((sum, addon) => sum + addon.price, 0) };
+      return { id, name: service.name, rank: index + 1, tier: choice.tier, tierPrice, quantity: choice.quantity, quantityCost, addons, subtotal: Number.isFinite(tierPrice) ? tierPrice + quantityCost + addons.reduce((sum, addon) => sum + addon.price, 0) : null };
     });
-    const rawSubtotal = breakdown.reduce((sum, item) => sum + item.subtotal, 0);
-    const discountRate = !pricing.discount.enabled ? 1 : breakdown.length >= 3 ? pricing.discount.threeOrMore : breakdown.length === 2 ? pricing.discount.twoServices : 1;
-    const onceLow = Math.round(rawSubtotal * discountRate);
-    return { breakdown, rawSubtotal, discountRate, discountAmount: rawSubtotal - onceLow, onceLow, onceHigh: Math.round(onceLow * pricing.rangeMultiplier), monthly: state.active.length ? pricing.maintenance[state.maintenance] : 0 };
+    const quoted = breakdown.filter(item => Number.isFinite(item.subtotal));
+    const unquoted = breakdown.filter(item => !Number.isFinite(item.subtotal));
+    const rawSubtotal = quoted.reduce((sum, item) => sum + item.subtotal, 0);
+    const discountRate = !pricing.discount.enabled ? 1 : quoted.length >= 3 ? pricing.discount.threeOrMore : quoted.length === 2 ? pricing.discount.twoServices : 1;
+    const knownLow = Math.round(rawSubtotal * discountRate);
+    const onceLow = unquoted.length ? null : knownLow;
+    return { breakdown, unquoted, rawSubtotal, discountRate, discountAmount: rawSubtotal - knownLow, onceLow, onceHigh: unquoted.length ? null : Math.round(onceLow * pricing.rangeMultiplier), monthly: state.active.length ? pricing.maintenance[state.maintenance] : 0 };
   }
   function updatePrice(pricing, path, value) {
     const keys = Array.isArray(path) ? path.slice() : String(path).split('.');
@@ -140,7 +143,7 @@ const CH_PRICING = {
     target[key] = number; return true;
   }
   const resetPricing = () => clone(DEFAULT_PRICING);
-  const money = amount => 'NT$' + Math.round(amount).toLocaleString('en-US');
+  const money = amount => Number.isFinite(amount) ? 'NT$' + Math.round(amount).toLocaleString('en-US') : '洽詢';
   function buildSummary(state, pricing = CH_PRICING) {
     const total = calculate(state, pricing);
     const lines = ['川花｜我的服務規劃', '示範數字，正式報價以需求訪談為準', ''];
@@ -153,7 +156,8 @@ const CH_PRICING = {
     });
     lines.push(`第一階段先做：${total.breakdown.length ? total.breakdown[0].name : '尚未選擇服務'}`);
     lines.push(`原始小計：${money(total.rawSubtotal)}；多項服務優惠省下 ${money(total.discountAmount)}`);
-    lines.push(`一次費用預估：${money(total.onceLow)} ～ ${money(total.onceHigh)}`);
+    if (total.unquoted.length) lines.push('待洽詢服務：' + total.unquoted.map(item => item.name).join('、') + '；上述已定價小計不含洽詢項目。');
+    lines.push(total.unquoted.length ? '一次費用預估：洽詢（含未定價服務）' : `一次費用預估：${money(total.onceLow)} ～ ${money(total.onceHigh)}`);
     lines.push(`每月維護：${MAINTENANCE[state.maintenance]}，${money(total.monthly)}／月`);
     return lines.join('\n');
   }
@@ -271,7 +275,7 @@ const CH_PRICING = {
       // Always paint the final value first; animation is only an enhancement.
       paint(low, high);
       finishPrice = finish;
-      if (reduced || document.hidden) { finish(); return; }
+      if (reduced || document.hidden || !Number.isFinite(low) || !Number.isFinite(high)) { finish(); return; }
       priceTimer = setTimeout(finish, 1000);
       const start = performance.now();
       const draw = now => {
@@ -287,7 +291,7 @@ const CH_PRICING = {
     function renderSummary() {
       const total = calculate(state, pricing);
       summary.classList.toggle('is-open', drawerOpen);
-      summary.innerHTML = `<button type="button" class="ch-summary-toggle" data-action="drawer" aria-expanded="${drawerOpen}" aria-controls="ch-summary-body" data-focus="drawer"><span>目前預估・一次費用</span><strong class="ch-total-number" aria-label="${money(total.onceLow)} 至 ${money(total.onceHigh)}"><span data-price-low>${money(animatedLow)}</span><span class="ch-price-range">～ <span data-price-high>${money(animatedHigh)}</span></span></strong><span class="ch-drawer-label">${drawerOpen ? '收起明細 ↓' : '展開明細 ↑'}</span></button><div class="ch-summary-body" id="ch-summary-body"><h3>你的服務配置</h3><p class="ch-first-phase">第一階段先做：<strong>${total.breakdown.length ? total.breakdown[0].name : '還沒選擇'}</strong></p><div class="ch-summary-items">${total.breakdown.map(item => `<div class="ch-summary-item"><span>${item.rank}. ${item.name}<small>${TIERS[item.tier]}${byId(item.id).quantity ? '・' + item.quantity + byId(item.id).quantity.unit : ''}${item.addons.length ? '・加購 ' + item.addons.length + ' 項' : ''}</small></span><b>${money(item.subtotal)}</b></div>`).join('') || '<p class="ch-empty">還沒有服務，從左邊加回一項吧。</p>'}</div><div class="ch-discount"><p><span>服務小計</span><b>${money(total.rawSubtotal)}</b></p><p><span>${total.discountRate < 1 ? `多項服務優惠・${total.breakdown.length === 2 ? '兩項' : '三項以上'} ${Number((total.discountRate * 10).toFixed(2))} 折示範` : '多項服務優惠'}</span><b>−${money(total.discountAmount)}</b></p></div><label class="ch-maintenance-label" for="ch-maintenance">每月維護（選填，不計入一次費用）</label><select class="ch-maintenance" id="ch-maintenance" data-action="maintenance" data-focus="maintenance">${Object.entries(MAINTENANCE).map(([key, label]) => `<option value="${key}" ${state.maintenance === key ? 'selected' : ''}>${label}${key === 'none' ? '' : '・' + money(pricing.maintenance[key]) + '／月'}</option>`).join('')}</select><p class="ch-monthly">每月維護 <strong>${money(total.monthly)}／月</strong></p><p class="ch-demo-note">示範數字，正式報價以需求訪談為準。<br>方案內容、加購與多項服務優惠皆為展示用途。</p><button type="button" class="ch-contact btn" data-action="contact" data-focus="contact" ${state.active.length ? '' : 'disabled'}>帶著這份規劃找川花聊聊 ↗</button><p class="ch-copy-status" role="status" aria-live="polite"></p><div class="ch-copy-help" hidden><label for="ch-copy-text">若無法自動複製，請選取下方文字後複製：</label><textarea id="ch-copy-text" class="ch-copy-fallback" readonly rows="7"></textarea><a href="https://line.me/R/ti/p/@riverflower2025" target="_blank" rel="noopener">開啟川花官方 LINE →</a></div></div>`;
+      summary.innerHTML = `<button type="button" class="ch-summary-toggle" data-action="drawer" aria-expanded="${drawerOpen}" aria-controls="ch-summary-body" data-focus="drawer"><span>目前預估・一次費用</span><strong class="ch-total-number" aria-label="${money(total.onceLow)} 至 ${money(total.onceHigh)}"><span data-price-low>${money(animatedLow)}</span><span class="ch-price-range">～ <span data-price-high>${money(animatedHigh)}</span></span></strong><span class="ch-drawer-label">${drawerOpen ? '收起明細 ↓' : '展開明細 ↑'}</span></button><div class="ch-summary-body" id="ch-summary-body"><h3>你的服務配置</h3>${total.unquoted.length ? '<p>洽詢項目：' + total.unquoted.map(item => escape(item.name)).join('、') + '；已定價小計不含這些項目。</p>' : ''}<p class="ch-first-phase">第一階段先做：<strong>${total.breakdown.length ? total.breakdown[0].name : '還沒選擇'}</strong></p><div class="ch-summary-items">${total.breakdown.map(item => `<div class="ch-summary-item"><span>${item.rank}. ${item.name}<small>${TIERS[item.tier]}${byId(item.id).quantity ? '・' + item.quantity + byId(item.id).quantity.unit : ''}${item.addons.length ? '・加購 ' + item.addons.length + ' 項' : ''}</small></span><b>${money(item.subtotal)}</b></div>`).join('') || '<p class="ch-empty">還沒有服務，從左邊加回一項吧。</p>'}</div><div class="ch-discount"><p><span>已定價服務小計</span><b>${money(total.rawSubtotal)}</b></p><p><span>${total.discountRate < 1 ? `多項服務優惠・${total.breakdown.length - total.unquoted.length === 2 ? '兩項' : '三項以上'} ${Number((total.discountRate * 10).toFixed(2))} 折示範` : '多項服務優惠'}</span><b>−${money(total.discountAmount)}</b></p></div><label class="ch-maintenance-label" for="ch-maintenance">每月維護（選填，不計入一次費用）</label><select class="ch-maintenance" id="ch-maintenance" data-action="maintenance" data-focus="maintenance">${Object.entries(MAINTENANCE).map(([key, label]) => `<option value="${key}" ${state.maintenance === key ? 'selected' : ''}>${label}${key === 'none' ? '' : '・' + money(pricing.maintenance[key]) + '／月'}</option>`).join('')}</select><p class="ch-monthly">每月維護 <strong>${money(total.monthly)}／月</strong></p><p class="ch-demo-note">示範數字，正式報價以需求訪談為準。<br>方案內容、加購與多項服務優惠皆為展示用途。</p><button type="button" class="ch-contact btn" data-action="contact" data-focus="contact" ${state.active.length ? '' : 'disabled'}>帶著這份規劃找川花聊聊 ↗</button><p class="ch-copy-status" role="status" aria-live="polite"></p><div class="ch-copy-help" hidden><label for="ch-copy-text">若無法自動複製，請選取下方文字後複製：</label><textarea id="ch-copy-text" class="ch-copy-fallback" readonly rows="7"></textarea><a href="https://line.me/R/ti/p/@riverflower2025" target="_blank" rel="noopener">開啟川花官方 LINE →</a></div></div>`;
       const toggle = summary.querySelector('.ch-summary-toggle');
       toggle.setAttribute('aria-expanded', String(!isMobile() || drawerOpen));
       toggle.querySelector('.ch-drawer-label').classList.add('ch-summary-toggle-icon');
@@ -332,6 +336,7 @@ const CH_PRICING = {
     function renderEditor() {
       editor.innerHTML = `<div class="ch-editor-panel"><div class="ch-editor-head"><div><h2 id="ch-editor-title">示範調價工具</h2><p>修改立即生效，只存在這台裝置的瀏覽器。</p></div><button type="button" data-action="editor-close" aria-label="關閉調價工具">×</button></div><div class="ch-editor-fields">${SERVICES.map(service => {
         const price = pricing.services[service.id];
+        if (!Number.isFinite(price.tiers.basic)) return `<fieldset><legend>${service.name}</legend><p>洽詢</p></fieldset>`;
         return `<fieldset><legend>${service.name}</legend>${Object.entries(TIERS).map(([key, label]) => priceInput(['services', service.id, 'tiers', key], label + '方案總價', price.tiers[key])).join('')}${service.quantity ? priceInput(['services', service.id, 'quantityPrice'], '每增加一' + service.quantity.unit, price.quantityPrice) : ''}${service.addons.map(addon => priceInput(['services', service.id, 'addons', addon.id], addon.name, price.addons[addon.id])).join('')}</fieldset>`;
       }).join('')}<fieldset><legend>維護與優惠</legend>${Object.entries(MAINTENANCE).map(([key, label]) => priceInput(['maintenance', key], label + '／月', pricing.maintenance[key])).join('')}<label class="ch-editor-check"><span>啟用多項服務優惠</span><input type="checkbox" data-price-path="discount.enabled" ${pricing.discount.enabled ? 'checked' : ''}></label>${priceInput(['discount', 'twoServices'], '兩項服務折扣倍率（0.95＝九五折）', pricing.discount.twoServices, { max: 1, step: 0.01 })}${priceInput(['discount', 'threeOrMore'], '三項以上折扣倍率（0.9＝九折）', pricing.discount.threeOrMore, { max: 1, step: 0.01 })}${priceInput(['rangeMultiplier'], '預估上限倍率', pricing.rangeMultiplier, { min: 1, max: 5, step: 0.1 })}</fieldset></div><p class="ch-editor-status" role="status" aria-live="polite"></p><div class="ch-editor-actions"><button type="button" class="btn" data-action="editor-reset">恢復預設價格</button><button type="button" class="btn" data-action="editor-close">完成調價</button></div></div>`;
     }

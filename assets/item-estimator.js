@@ -11,7 +11,7 @@
   const COMPLETENESS = Object.freeze({ base: 80, span: 19, duration: 800, badgeDuration: 1500 });
   const commonMaintenance = { none: 0, basic: 3000, full: 8000 };
   const make = (name, flower, included, items) => ({ name, flower, base: 49000, included, items, maintenance: { ...commonMaintenance } });
-  const CONFIG = {
+  const RAW_CONFIG = {
     website: make('品牌官網製作', 'assets/entry-5-xinyi.png', ['網站架構與 5 頁製作', '聯絡表單', '基礎搜尋設定'], [
       item('增加頁面','依內容增加網站頁面',3000,true,'頁','頁面與架構'), item('多頁架構規劃','安排清楚的頁面與導覽層次',6000,false,'','頁面與架構'),
       item('地圖與社群嵌入','讓訪客快速找到品牌',2000,true,'','基礎元件'), item('常見問題展開區','整理訪客常問的問題',3000,true,'','基礎元件'), item('首頁輪播','輪播呈現重點資訊',4000,false,'','基礎元件'),
@@ -29,6 +29,7 @@
     tools: make('AI 客製工具開發','assets/quiz-plants/cedar.png',['需求訪談','工具功能規劃'],[item('操作介面設計','規劃易於使用的畫面',10000,true),item('資料匯入與整理','整理輸入資料的方式',8000,true),item('AI 生成與分析','依需求處理內容或資料',12000,true),item('結果匯出','將結果匯出供後續使用',5000),item('帳號與權限','規劃使用者權限',10000),item('操作教學','陪團隊熟悉工具',6000)]),
     'ad-ops': make('廣告上稿自動化','assets/quiz-plants/mint.png',['上稿流程訪談','基本需求規劃'],[item('上稿表規格設計','整理上稿欄位與規則',8000,true),item('匯入檔自動轉換','將資料整理成所需格式',10000,true),item('影片批次上傳與編號回填','減少重複搬運與填寫',12000,true),item('上稿前逐項檢查','檢查必要欄位與資料',8000,true),item('團隊操作教學','說明上稿流程與操作',6000),item('錯誤提示與紀錄','保留可追查的處理紀錄',6000)])
   };
+  const CONFIG = Object.fromEntries(['ads', 'brand-marketing', 'ads-audit', 'website', 'workflow', 'content', 'tools', 'ad-ops'].map(id => [id, RAW_CONFIG[id]]));
   const clone = x => JSON.parse(JSON.stringify(x));
   function createState(service) { return { selected: service.items.filter(i => i.selected).map(i => ({ id: i.id, quantity: i.min })), maintenance: 'none' }; }
   function calculate(service, state) {
