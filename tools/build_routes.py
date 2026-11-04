@@ -262,6 +262,9 @@ def page_for(text: str, path: str, meta: dict, articles: list[dict] | None = Non
     title = html.escape(meta["title"], quote=True)
     desc = html.escape(meta["desc"], quote=True)
     url = SITE + meta.get("redirectTo", path)
+    if path in {"/services/marketing-planning/", "/services/brand-strategy/"}:
+        target = "/chuanhua_site_v12_1/services/brand-marketing/"
+        text = replace_once(text, r"</head>", f'<meta http-equiv="refresh" content="0;url={target}">\n<script>location.replace({json.dumps(target)});</script>\n</head>')
     text = replace_once(text, r"<title>[^<]*</title>", f"<title>{title}</title>")
     text = replace_once(text, r'<meta name="description" content="[^"]*">', f'<meta name="description" content="{desc}">')
     text = replace_once(text, r'<meta property="og:title" content="[^"]*">', f'<meta property="og:title" content="{title}">')
