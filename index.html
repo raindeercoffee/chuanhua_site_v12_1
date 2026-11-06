@@ -1494,7 +1494,7 @@ footer .ft-bottom .back-garden{margin-top:0}
 #quote-total{display:block;font:600 clamp(24px,3vw,32px)/1.7 var(--serif);color:var(--river-deep);overflow-wrap:anywhere;margin:8px 0 18px}
 .quote-breakdown{list-style:none;padding:0;margin:0;font-size:12.5px;line-height:1.9}
 .quote-breakdown li{padding:10px 0;border-top:1px solid var(--line)}
-.quote-disclaimer{font-size:11.5px;line-height:1.95;margin-top:20px;color:var(--ink-soft)}
+.quote-disclaimer{font-size:14px;line-height:1.85;margin-top:20px;padding:14px 16px;border-left:4px solid var(--pink);border-radius:0 12px 12px 0;background:#FBF1EF;color:var(--river-deep)}
 .quote-controls{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:30px;padding-top:24px;border-top:1px solid var(--line)}
 .quote-controls button{font:inherit;font-size:14px;min-height:48px;cursor:pointer}
 .quote-controls .btn{border:1px solid var(--line);padding:10px 22px}
@@ -3269,7 +3269,7 @@ $$('[data-topic-tabs]').forEach(list=>{
     const list=data.rows.map(row=>'<li>'+row+'</li>').join('');
     $q('quote-breakdown').innerHTML=list;
     $q('quote-disclaimer').textContent=data.disclaimer;
-    $q('quote-summary').innerHTML='<h3>'+data.label+'：'+data.amount+'</h3><ul class="quote-breakdown">'+list+'</ul><p class="quote-summary-note">'+(kind==='website'?CONFIG.included+' '+CONFIG.excluded+' ':'')+data.disclaimer+'</p>';
+    $q('quote-summary').innerHTML='<h3>'+data.label+'：'+data.amount+'</h3><ul class="quote-breakdown">'+list+'</ul>'+(kind==='website'?'<p class="quote-summary-note">'+CONFIG.included+' '+CONFIG.excluded+'</p>':'')+'<p class="quote-disclaimer">'+data.disclaimer+'</p>';
     $q('quote-prev').hidden=state.step===1;
     $q('quote-next').hidden=state.step===4;
     $q('quote-next').disabled=kind==='website'&&!plan;
