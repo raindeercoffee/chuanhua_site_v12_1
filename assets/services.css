@@ -150,3 +150,35 @@
 
 @media (pointer:coarse){.svc-card.is-touch-pressed{transform:translateY(-4px);box-shadow:0 14px 32px rgba(74,90,124,.16)}.svc-card.is-touch-pressed .svc-flower{transform:scale(1.05)}}
 @media (prefers-reduced-motion:reduce){.svc-card.is-touch-pressed{transform:none;border-color:var(--line);box-shadow:0 18px 40px rgba(74,90,124,.16)}.svc-card.is-touch-pressed .svc-flower{transform:none}}
+
+/* T2 月維護方案比較表（基本／進階）：放在「報價與試算」區，手機上三欄縮窄、字自動換行，不必左右滑。 */
+.svc-maint{margin-top:28px;padding:30px;border:1px solid var(--line);border-radius:20px;background:var(--card)}
+.svc-maint h3{font:400 clamp(20px,2.4vw,24px)/1.6 var(--serif);color:var(--river-deep);margin:0 0 6px}
+.svc-maint>p{margin:0 0 20px;font-size:14px;line-height:1.85;color:var(--ink-soft)}
+.svc-maint-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.svc-maint-table{width:100%;border-collapse:separate;border-spacing:0;font-size:14px;line-height:1.7;color:var(--ink)}
+.svc-maint-table caption{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.svc-maint-table th,.svc-maint-table td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:middle}
+.svc-maint-table tbody th{text-align:left;font-weight:500;color:var(--ink)}
+.svc-maint-table td{width:22%;text-align:center;color:var(--river-deep);white-space:nowrap}
+.svc-maint-table thead th{border-bottom:0;text-align:center;font:500 15px/1.5 var(--serif);color:var(--river-deep);letter-spacing:.06em}
+.svc-maint-table thead th:first-child{text-align:left;font-family:inherit;font-size:13px;color:var(--ink-soft);letter-spacing:.1em}
+.svc-maint-table thead th small{display:block;margin-top:2px;font-family:var(--sans,inherit);font-weight:400;font-size:12.5px;letter-spacing:.02em;color:var(--ink-soft)}
+.svc-maint-table thead th:nth-child(2){background:#eef1f8;border-radius:14px 14px 0 0}
+.svc-maint-table thead th:nth-child(3){background:#f9eff0;border-radius:14px 14px 0 0;color:var(--pink-deep)}
+.svc-maint-table td:nth-child(2){background:#f8f9fc}
+.svc-maint-table td:nth-child(3){background:#fdf7f7}
+.svc-maint-table tbody tr:last-child>*{border-bottom:0}
+.svc-maint-table tbody tr:last-child td{border-radius:0 0 14px 14px}
+.svc-maint-yes{color:var(--leaf);font-weight:700;font-size:16px}
+.svc-maint-no{color:#b9b3a8}
+@media(max-width:760px){
+  .svc-maint{margin-top:22px;padding:20px 12px;border-radius:18px}
+  .svc-maint h3,.svc-maint>p{padding:0 4px}
+  .svc-maint-table{font-size:13.5px}
+  .svc-maint-table th,.svc-maint-table td{padding:11px 6px}
+  .svc-maint-table tbody th{padding-left:4px}
+  .svc-maint-table td{width:72px;white-space:normal}
+  .svc-maint-table thead th small{font-size:11.5px}
+  .svc-maint-table thead th{font-size:14px;letter-spacing:.02em}
+}

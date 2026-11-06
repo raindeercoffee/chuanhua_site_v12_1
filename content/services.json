@@ -68,6 +68,51 @@
         "素材企劃、製作與測試的範圍。",
         "追蹤設定、報告與合作期間的需求。"
       ],
+      "maintenance": {
+        "basic": {
+          "price": 3000
+        },
+        "advanced": {
+          "price": 8000
+        },
+        "rows": [
+          {
+            "item": "投放狀態巡查與異常提醒",
+            "basic": true,
+            "advanced": true
+          },
+          {
+            "item": "追蹤設定（像素、轉換事件）定期確認",
+            "basic": true,
+            "advanced": true
+          },
+          {
+            "item": "白話成效月報",
+            "basic": true,
+            "advanced": true
+          },
+          {
+            "item": "預算與受眾配置調整",
+            "basic": false,
+            "advanced": true
+          },
+          {
+            "item": "新素材與文案輪替測試",
+            "basic": false,
+            "advanced": "每月 2 組"
+          },
+          {
+            "item": "每月線上回顧",
+            "basic": false,
+            "advanced": true
+          },
+          {
+            "item": "下個月該加碼、該停下的建議",
+            "basic": false,
+            "advanced": true
+          }
+        ]
+      },
       "faqs": [
         {
           "question": "服務費包含付給平台的廣告費嗎？",
@@ -172,6 +217,51 @@
         "需要統整的內容與團隊協作範圍。",
         "策略規劃、執行協調與後續合作期間。"
       ],
+      "maintenance": {
+        "basic": {
+          "price": 3000
+        },
+        "advanced": {
+          "price": 8000
+        },
+        "rows": [
+          {
+            "item": "各通路品牌訊息一致性檢查",
+            "basic": true,
+            "advanced": true
+          },
+          {
+            "item": "內容與檔期行事曆更新",
+            "basic": "每季",
+            "advanced": "每月"
+          },
+          {
+            "item": "重要檔期活動企劃",
+            "basic": false,
+            "advanced": true
+          },
+          {
+            "item": "品牌定調報告",
+            "basic": false,
+            "advanced": true
+          },
+          {
+            "item": "同業動態整理",
+            "basic": false,
+            "advanced": true
+          },
+          {
+            "item": "團隊交接與審稿協助",
+            "basic": false,
+            "advanced": true
+          },
+          {
+            "item": "「該做什麼、少做什麼」建議",
+            "basic": "每季",
+            "advanced": "每月"
+          }
+        ]
+      },
       "faqs": [
         {
           "question": "一定要把所有行銷工作都交給川花嗎？",
@@ -272,6 +362,46 @@
         "素材、受眾及追蹤設定的複雜程度。",
         "報告說明、文案建議與後續協助的範圍。"
       ],
+      "maintenance": {
+        "basic": {
+          "price": 3000
+        },
+        "advanced": {
+          "price": 8000
+        },
+        "rows": [
+          {
+            "item": "帳戶與追蹤設定複檢",
+            "basic": true,
+            "advanced": true
+          },
+          {
+            "item": "上次健檢待辦的處理追蹤",
+            "basic": true,
+            "advanced": true
+          },
+          {
+            "item": "問題清單與先後順序更新",
+            "basic": "精簡摘要",
+            "advanced": "詳細報告"
+          },
+          {
+            "item": "新上架素材強弱診斷",
+            "basic": false,
+            "advanced": true
+          },
+          {
+            "item": "再行銷與受眾重疊檢查",
+            "basic": false,
+            "advanced": true
+          },
+          {
+            "item": "文案溝通方向測試建議",
+            "basic": false,
+            "advanced": true
+          }
+        ]
+      },
       "faqs": [
         {
           "question": "健檢會直接修改或關閉廣告嗎？",
@@ -372,6 +502,51 @@
         "表單、預約與外部系統串接的需求。",
         "素材準備、語言版本及後續維護安排。"
       ],
+      "maintenance": {
+        "basic": {
+          "price": 3000
+        },
+        "advanced": {
+          "price": 8000
+        },
+        "rows": [
+          {
+            "item": "網站運作、表單與手機版檢查",
+            "basic": true,
+            "advanced": true
+          },
+          {
+            "item": "SEO 偵測週報",
+            "basic": true,
+            "advanced": true
+          },
+          {
+            "item": "網站文章撰寫與上架",
+            "basic": "每月 2 篇",
+            "advanced": "每月 10 篇"
+          },
+          {
+            "item": "頁面文字與圖片小幅更新",
+            "basic": false,
+            "advanced": true
+          },
+          {
+            "item": "品牌定調報告",
+            "basic": false,
+            "advanced": true
+          },
+          {
+            "item": "競品週報",
+            "basic": false,
+            "advanced": true
+          },
+          {
+            "item": "「該做什麼、少做什麼」建議",
+            "basic": false,
+            "advanced": true
+          }
+        ]
+      },
       "faqs": [
         {
           "question": "還沒有完整文案和照片，可以開始嗎？",
@@ -477,6 +652,51 @@
         "需要串接的工具、權限與系統限制。",
         "人工確認、操作說明及維護的範圍。"
       ],
+      "maintenance": {
+        "basic": {
+          "price": 3000
+        },
+        "advanced": {
+          "price": 8000
+        },
+        "rows": [
+          {
+            "item": "流程運作巡查與失敗提醒",
+            "basic": true,
+            "advanced": true
+          },
+          {
+            "item": "例外狀況排除與人工接手協助",
+            "basic": true,
+            "advanced": true
+          },
+          {
+            "item": "使用狀況月報",
+            "basic": true,
+            "advanced": true
+          },
+          {
+            "item": "串接工具改版時的流程調整",
+            "basic": false,
+            "advanced": true
+          },
+          {
+            "item": "欄位、通知條件等小幅修改",
+            "basic": false,
+            "advanced": "每月 2 項"
+          },
+          {
+            "item": "操作說明同步更新",
+            "basic": false,
+            "advanced": true
+          },
+          {
+            "item": "下一段可以變順的流程建議",
+            "basic": false,
+            "advanced": "每季 1 次"
+          }
+        ]
+      },
       "faqs": [
         {
           "question": "所有工作都可以完全自動完成嗎？",
@@ -577,6 +797,46 @@
         "品牌語氣與商品資料的整理程度。",
         "修改、審稿及流程串接的需求。"
       ],
+      "maintenance": {
+        "basic": {
+          "price": 3000
+        },
+        "advanced": {
+          "price": 8000
+        },
+        "rows": [
+          {
+            "item": "人工審稿與事實核對提醒",
+            "basic": true,
+            "advanced": true
+          },
+          {
+            "item": "品牌語氣與寫作範例更新",
+            "basic": "每季",
+            "advanced": "每月"
+          },
+          {
+            "item": "商品與社群內容草稿",
+            "basic": "每月 4 則",
+            "advanced": "每月 12 則"
+          },
+          {
+            "item": "檔期內容主題建議",
+            "basic": false,
+            "advanced": true
+          },
+          {
+            "item": "新商品、新口吻的 AI 文案技能調校",
+            "basic": false,
+            "advanced": true
+          },
+          {
+            "item": "廣告溝通方向提案",
+            "basic": false,
+            "advanced": true
+          }
+        ]
+      },
       "faqs": [
         {
           "question": "生成的內容可以直接發布嗎？",
@@ -677,6 +937,51 @@
         "AI 辨識、系統串接與例外處理的需求。",
         "部署環境、操作教學及後續維護安排。"
       ],
+      "maintenance": {
+        "basic": {
+          "price": 3000
+        },
+        "advanced": {
+          "price": 8000
+        },
+        "rows": [
+          {
+            "item": "工具運作檢查與錯誤排除",
+            "basic": true,
+            "advanced": true
+          },
+          {
+            "item": "資料備份狀態確認",
+            "basic": true,
+            "advanced": true
+          },
+          {
+            "item": "使用問題回覆",
+            "basic": true,
+            "advanced": true
+          },
+          {
+            "item": "系統或 AI 服務更新時的相容調整",
+            "basic": false,
+            "advanced": true
+          },
+          {
+            "item": "辨識規則與例外提示調校",
+            "basic": false,
+            "advanced": true
+          },
+          {
+            "item": "小功能調整",
+            "basic": false,
+            "advanced": "每月 1 項"
+          },
+          {
+            "item": "新同事操作教學",
+            "basic": false,
+            "advanced": true
+          }
+        ]
+      },
       "faqs": [
         {
           "question": "只是小需求，也值得做客製工具嗎？",
@@ -730,6 +1035,46 @@
         "影片上傳、編號回填與使用工具的需求。",
         "測試、交接與後續調整的範圍。"
       ],
+      "maintenance": {
+        "basic": {
+          "price": 3000
+        },
+        "advanced": {
+          "price": 8000
+        },
+        "rows": [
+          {
+            "item": "匯入與檢查流程巡查",
+            "basic": true,
+            "advanced": true
+          },
+          {
+            "item": "廣告平台欄位改版時的格式更新",
+            "basic": true,
+            "advanced": true
+          },
+          {
+            "item": "上稿異常協助排查",
+            "basic": true,
+            "advanced": true
+          },
+          {
+            "item": "上稿表欄位與命名調整",
+            "basic": false,
+            "advanced": true
+          },
+          {
+            "item": "新品項、新活動的檢查規則新增",
+            "basic": false,
+            "advanced": true
+          },
+          {
+            "item": "影片上傳與編號回填流程調整",
+            "basic": false,
+            "advanced": true
+          }
+        ]
+      },
       "faqs": [
         {
           "question": "自動化後會直接啟用廣告嗎？",

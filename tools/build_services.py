@@ -27,6 +27,43 @@ def unique_object(pairs: list[tuple]) -> dict:
     return result
 
 
+PLANS = (("basic", "基本"), ("advanced", "進階"))
+
+
+def check_maintenance(service: dict) -> None:
+    """月維護比較表：價格跟 item-estimator.js 的每月維護同步；每格是 true（✓）、false（—）或一小段文字（次數）。"""
+    label = service["slug"] + ".maintenance"
+    plan = service.get("maintenance")
+    if not isinstance(plan, dict) or set(plan) != {"basic", "advanced", "rows"}:
+        raise ValueError(f"{label} 必須有 basic、advanced、rows")
+    for key, _ in PLANS:
+        price = plan[key].get("price") if isinstance(plan[key], dict) else None
+        if type(price) is not int or price < 0:
+            raise ValueError(f"{label}.{key}.price 必須是整數金額")
+    rows = plan["rows"]
+    if not isinstance(rows, list) or not 4 <= len(rows) <= 8:
+        raise ValueError(f"{label}.rows 必須有四到八列")
+    for row in rows:
+        if not isinstance(row, dict) or set(row) != {"item", "basic", "advanced"} or not isinstance(row["item"], str) or not row["item"].strip():
+            raise ValueError(f"{label}.rows 每列要有 item、basic、advanced")
+        if any(not isinstance(row[key], bool) and (not isinstance(row[key], str) or not row[key].strip()) for key, _ in PLANS):
+            raise ValueError(f"{label}.rows「{row['item']}」的格子要是 true、false 或文字")
+
+
+def maintenance_table(service: dict) -> str:
+    plan = service["maintenance"]
+    cell = lambda value: ('<span class="svc-maint-yes" aria-label="包含">✓</span>' if value is True else
+                          '<span class="svc-maint-no" aria-label="不包含">—</span>' if value is False else esc(value))
+    head = "".join(f'<th scope="col">{name}<small>NT${plan[key]["price"]:,}／月</small></th>' for key, name in PLANS)
+    rows = "".join(f'<tr><th scope="row">{esc(row["item"])}</th>'
+                   + "".join(f'<td>{cell(row[key])}</td>' for key, _ in PLANS) + '</tr>' for row in plan["rows"])
+    return ('<div class="svc-maint"><h3>月維護方案</h3>'
+            '<p>上線之後，川花繼續陪著照顧。依需要選基本或進階，內容與費用在需求訪談時一起確認。</p>'
+            '<div class="svc-maint-scroll"><table class="svc-maint-table">'
+            f'<caption>{esc(service["name"])}・月維護方案比較</caption>'
+            f'<thead><tr><th scope="col">項目</th>{head}</tr></thead><tbody>{rows}</tbody></table></div></div>')
+
+
 def load_services() -> list[dict]:
     data = json.loads((ROOT / "content" / "services.json").read_text(encoding="utf-8"),
                       object_pairs_hook=unique_object)
@@ -64,6 +101,7 @@ def load_services() -> list[dict]:
                 raise ValueError(f"{label}.{field} 數量錯誤")
             if any(not isinstance(v, dict) or any(not isinstance(v.get(k), str) or not v[k].strip() for k in keys) for v in values):
                 raise ValueError(f"{label}.{field} 欄位錯誤")
+        check_maintenance(service)
         child_slugs = [c["slug"] for c in service["children"]]
         if len(set(child_slugs)) != len(child_slugs) or any(not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", slug) for slug in child_slugs):
             raise ValueError(f"{label} 的子頁代稱不安全或重複")
@@ -193,7 +231,8 @@ def detail(service: dict, services: list[dict]) -> str:
                '<p>費用會依實際工作範圍調整，以下是需求訪談時會一起確認的事：</p><ul>'
                + "".join(f'<li>{esc(text)}</li>' for text in service["pricingFactors"])
                + '</ul><p class="svc-price-note">實際報價以需求訪談為準</p></div>'
-               + f'<div class="svc-estimator" data-service="{slug}"><p>互動試算即將上線</p></div>')
+               + f'<div class="svc-estimator" data-service="{slug}"><p>互動試算即將上線</p></div>'
+               + maintenance_table(service))
     faq = '<div class="svc-faq">' + "".join(
         f'<details><summary>{esc(item["question"])}</summary><p>{esc(item["answer"])}</p></details>' for item in service["faqs"]) + '</div>'
     quote_kind = "website" if slug == "website" else "custom"
