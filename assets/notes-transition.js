@@ -24,9 +24,7 @@
         img.style.setProperty('--angle',(i*360/plants.length)+'deg');
         ring.appendChild(img);
       });
-
-      const hint=document.createElement('span'); hint.className='notes-opening-hint'; hint.textContent='點一下跳過';
-      layer.append(ring,hint); document.body.appendChild(layer);
+      layer.append(ring);document.body.appendChild(layer);
       layer.focus({preventScroll:true});
       let done=false, timer;
       function finish(){
