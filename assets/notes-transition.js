@@ -37,7 +37,7 @@
       finishCurrent=finish;
       layer.addEventListener('click',finish);
       layer.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '||e.key==='Escape'){e.preventDefault();finish();}});
-      timer=setTimeout(finish,1350);
+      timer=setTimeout(finish,2400);
     });
   }
   function animateVisible(){}
