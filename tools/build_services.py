@@ -112,6 +112,28 @@ def breadcrumb(service: dict, child: dict | None = None) -> str:
     return '<nav class="svc-breadcrumb" aria-label="麵包屑">' + '<span aria-hidden="true"> / </span>'.join(parts) + '</nav>'
 
 
+# 川花的體質：放在客人「決定要不要聯絡」之前，是一段不催促的信任說明。
+# 不寫客戶名稱或可辨認的客戶故事（客戶在意）。
+NATURE = (
+    ("01", "細心", "像替幼苗澆水", "動手之前，我們先聽懂你的品牌在意什麼、擔心什麼。每一則文案、每一次上稿，水量都抓得剛剛好，不急，也不粗魯。"),
+    ("02", "溫柔", "不催你，也不丟下你", "品牌卡住的時候，我們不說教，也不急著推銷。陪你一起找出卡在哪裡，再一步一步往前走。"),
+    ("03", "靈活", "跟著季節換土", "市場換季、平台改規則、品牌長大了，我們就陪你換盆、換土。昨天適合的方法，今天不合適，就換一個。"),
+    ("04", "穩定", "根扎得夠深", "我們的客戶，大多一起走了十年以上。從品牌剛起步的那一天，一路陪到現在。花會換季，根一直都在。"),
+)
+
+
+def nature_block() -> str:
+    cards = "".join(f'<article class="nature-card"><span class="nature-no">{no}</span>'
+                    f'<h4>{esc(name)}<small>{esc(hint)}</small></h4><p>{esc(text)}</p></article>'
+                    for no, name, hint, text in NATURE)
+    return ('<div class="nature">'
+            '<p class="nature-kicker">OUR NATURE</p>'
+            '<h3 class="nature-title">跟川花合作，你會感覺到的<em>體質</em></h3>'
+            '<p class="nature-lead">不用急著決定。先認識我們是什麼樣的人，再看看要不要一起走。</p>'
+            f'<div class="nature-grid">{cards}</div>'
+            '<p class="nature-quote">像一條川流：表面柔軟，遇到石頭會轉彎；底下的方向，從來沒有變。</p></div>')
+
+
 def overview(services: list[dict]) -> str:
     groups = []
     for group in GROUPS:
@@ -125,7 +147,10 @@ def overview(services: list[dict]) -> str:
             f'{flower(services[0], "svc-head-flower")}<p class="svc-kicker">陪品牌慢慢開花</p>'
             '<h1 id="feature-services-title" tabindex="-1">服務項目</h1>'
             '<p>從品牌想說的話，到每天想少做一點的雜事。<br>一起找到適合你的下一步。</p></header>'
-            + "".join(groups) + '</section>')
+            + "".join(groups)
+            + '<section class="svc-group svc-trust" aria-label="跟川花合作">' + nature_block()
+            + '<div class="svc-actions svc-trust-actions">' + link("/contact/", "找川花聊聊 →", "btn svc-button svc-button-soft")
+            + '</div></section></section>')
 
 
 def detail(service: dict, services: list[dict]) -> str:
@@ -156,7 +181,7 @@ def detail(service: dict, services: list[dict]) -> str:
     faq = '<div class="svc-faq">' + "".join(
         f'<details><summary>{esc(item["question"])}</summary><p>{esc(item["answer"])}</p></details>' for item in service["faqs"]) + '</div>'
     quote_kind = "website" if slug == "website" else "custom"
-    contact = ('<p>你可以先告訴我們現在的狀況，再一起整理需要的協助。</p><div class="svc-actions">'
+    contact = (nature_block() + '<p>你可以先告訴我們現在的狀況，再一起整理需要的協助。</p><div class="svc-actions">'
                + link("/ai/quote/", "填寫需求詢價 →", "btn svc-button", f' data-quote-kind="{quote_kind}"')
                + link("/contact/", "找川花聊聊 →", "btn svc-button svc-button-soft") + '</div>')
     contents = dict(intro=intro, contents=items, process=process, pricing=pricing, contact=contact, faq=faq)
