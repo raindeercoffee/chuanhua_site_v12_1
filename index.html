@@ -1492,7 +1492,7 @@ footer .ft-bottom .back-garden{margin-top:0}
 #quote-total{display:block;font:600 clamp(24px,3vw,32px)/1.7 var(--serif);color:var(--river-deep);overflow-wrap:anywhere;margin:8px 0 18px}
 .quote-breakdown{list-style:none;padding:0;margin:0;font-size:12.5px;line-height:1.9}
 .quote-breakdown li{padding:10px 0;border-top:1px solid var(--line)}
-.quote-disclaimer{font-size:11.5px;line-height:1.95;margin-top:20px;color:var(--ink-soft)}
+.quote-disclaimer{font-size:14px;line-height:1.85;margin-top:20px;padding:14px 16px;border-left:4px solid var(--pink);border-radius:0 12px 12px 0;background:#FBF1EF;color:var(--river-deep)}
 .quote-controls{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:30px;padding-top:24px;border-top:1px solid var(--line)}
 .quote-controls button{font:inherit;font-size:14px;min-height:48px;cursor:pointer}
 .quote-controls .btn{border:1px solid var(--line);padding:10px 22px}
@@ -3154,22 +3154,24 @@ $$('[data-topic-tabs]').forEach(list=>{
 (()=>{
   const wizard=document.getElementById('quote-wizard');
   if(!wizard)return;
+  /* 官網價格跟 assets/item-estimator.js 的 website 資料同步：起價 49,000 含 5 頁、「增加頁面」每頁 3,000、
+     與試算器同名的加購同價。改價格時兩邊一起改，tools/test_T1_quote_price.cjs 會檢查。 */
   const CONFIG={
-    pagePrice:5000,maxPages:10,customStart:49000,
+    pagePrice:3000,maxPages:10,customStart:49000,
     plans:{
-      single:{title:'一頁式品牌頁',price:30000,pages:1,description:'把一個主題說清楚，適合品牌起步、活動介紹與單一服務。以一頁為起點，可增加獨立內頁。'},
-      brand:{title:'品牌形象官網',price:45000,pages:4,description:'安排品牌介紹、服務與聯絡入口，讓訪客循著清楚的路認識你。'},
-      story:{title:'品牌故事官網',price:60000,pages:6,description:'給品牌故事與內容更多空間，細細呈現自己的樣子。'}
+      brand:{title:'品牌形象官網',price:49000,pages:5,description:'安排品牌介紹、服務與聯絡入口，讓訪客循著清楚的路認識你。'},
+      /* 49,000 起價＋試算器「最新消息與部落格」12,000 */
+      story:{title:'品牌故事官網',price:61000,pages:5,description:'在品牌形象官網之外，加上最新消息與部落格，給品牌故事與內容持續生長的空間。'}
     },
     addons:{
       copy:{title:'品牌文案整理',price:5000,description:'依你提供的素材，整理一組網站內容。'},
-      motion:{title:'細緻互動動效',price:5000,description:'安排輕量動效，讓畫面保有舒服的節奏。'},
-      form:{title:'表單與通知串接',price:5000,description:'串接單一表單與單一通知通路。'},
+      motion:{title:'輕動畫',price:5000,description:'為重要畫面加入細緻動態，讓畫面保有舒服的節奏。'},
+      'line-notify':{title:'LINE 通知',price:6000,description:'聯絡表單有新訊息時，傳送通知給你。'},
       'ai-search':{title:'AI 搜尋內容整理',price:5000,description:'整理常見問答與基礎結構化內容，不保證搜尋排名。'}
     },
     goals:{automation:'流程自動化',content:'AI 內容與文案',reports:'資料報表工具',other:'其他客製需求'},
     customFeatures:{content:'AI 內容生成',reports:'報表彙整',notifications:'通知串接',permissions:'使用者權限'},
-    included:'基本方案含品牌版面、手機排版、基礎搜尋設定與聯絡入口。',
+    included:'基本方案含網站架構與 5 頁製作、品牌版面、手機排版、聯絡表單與基礎搜尋設定。',
     excluded:'不含自製金流、會員、商城與後台開發。',
     disclaimer:'此為建置預估，非正式報價。網域、主機及第三方服務費依實際使用另計。',
     customDisclaimer:'此為專案起價，並非完整報價。功能與串接需求待評估，實際費用依需求確認；第三方服務費依實際使用另計。'
@@ -3188,7 +3190,7 @@ $$('[data-topic-tabs]').forEach(list=>{
   $q('quote-goals').innerHTML=Object.entries(CONFIG.goals).map(([key,title])=>option('q-goal-'+key,'custom-goal',key,title,'','')).join('');
   $q('quote-custom-features').innerHTML=Object.entries(CONFIG.customFeatures).map(([key,title])=>option('q-custom-'+key,'custom-feature',key,title,'先記下希望的功能，實作範圍與新增費用待評估。','','checkbox')).join('');
   const steps={
-    website:[['先選一種網站的模樣',CONFIG.included+' '+CONFIG.excluded],['給品牌，剛剛好的內容空間','方案已包含基本頁數，可依需要增加。每增加一頁 '+money(CONFIG.pagePrice)+'。'],['還想為網站添上什麼？','四項加購各 '+money(CONFIG.addons.copy.price)+'，可以依需要選擇，也可以保留最初的樣子。'],['這是你想種下的網站','一起看看內容與預估費用，再和川花確認適合的做法。']],
+    website:[['先選一種網站的模樣',CONFIG.included+' '+CONFIG.excluded],['給品牌，剛剛好的內容空間','方案已包含基本頁數，可依需要增加。每增加一頁 '+money(CONFIG.pagePrice)+'。'],['還想為網站添上什麼？','每項加購的費用寫在旁邊，可以依需要選擇，也可以保留最初的樣子。'],['這是你想種下的網站','一起看看內容與預估費用，再和川花確認適合的做法。']],
     custom:[['先從最想改善的工作開始','軟體專案客製化 '+money(CONFIG.customStart)+' 起。先整理方向，完整費用依需求確認。'],['讓哪些工具，開始彼此說話？','選擇預計串接的工具或平台數量，幫助我們了解需求範圍。'],['希望 AI 與系統，幫上哪些忙？','這裡整理的是需求方向，並非起價已包含的功能承諾；新增需求待評估。'],['把想法帶來，一起找到做法','以下是已知起價與希望討論的需求，新增項目尚未估價。']]
   };
   function details(){
@@ -3246,7 +3248,7 @@ $$('[data-topic-tabs]').forEach(list=>{
     const list=data.rows.map(row=>'<li>'+row+'</li>').join('');
     $q('quote-breakdown').innerHTML=list;
     $q('quote-disclaimer').textContent=data.disclaimer;
-    $q('quote-summary').innerHTML='<h3>'+data.label+'：'+data.amount+'</h3><ul class="quote-breakdown">'+list+'</ul><p class="quote-summary-note">'+(kind==='website'?CONFIG.included+' '+CONFIG.excluded+' ':'')+data.disclaimer+'</p>';
+    $q('quote-summary').innerHTML='<h3>'+data.label+'：'+data.amount+'</h3><ul class="quote-breakdown">'+list+'</ul>'+(kind==='website'?'<p class="quote-summary-note">'+CONFIG.included+' '+CONFIG.excluded+'</p>':'')+'<p class="quote-disclaimer">'+data.disclaimer+'</p>';
     $q('quote-prev').hidden=state.step===1;
     $q('quote-next').hidden=state.step===4;
     $q('quote-next').disabled=kind==='website'&&!plan;
