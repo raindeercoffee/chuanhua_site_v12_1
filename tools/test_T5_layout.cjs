@@ -68,7 +68,16 @@ const checkCards = (cards, cols, label) => {
         return t.top >= Math.max(...cards) && !!v.querySelector('.svc-trust .svc-button-soft');
       });
       assert.ok(trustLast, `/services/@${width} 體質區＋找川花聊聊在最下面`);
-      if (shotDir) await page.screenshot({path: path.join(shotDir, `T5_services_${width}.png`), fullPage: true});
+      if (shotDir) {
+        // 區塊捲到才淡入，所以一段一段捲過去再拍。
+        for (const [name, sel] of [['head', '.svc-head'], ['brand', 'section[aria-labelledby="svc-group-brand"]'],
+          ['digital', 'section[aria-labelledby="svc-group-digital"]'], ['trust', '.svc-trust']]) {
+          const area = view.locator(sel);
+          await area.scrollIntoViewIfNeeded();
+          await page.waitForTimeout(900);
+          await area.screenshot({path: path.join(shotDir, `T5_services_${width}_${name}.png`)});
+        }
+      }
       await page.close();
     }
 
@@ -79,7 +88,7 @@ const checkCards = (cards, cols, label) => {
     await related.scrollIntoViewIfNeeded();
     await page.waitForTimeout(400);
     checkCards(await related.locator('.svc-card-grid').evaluate(measure), 3, '/services/ads/ 其他服務@1280');
-    if (shotDir) await related.screenshot({path: path.join(shotDir, 'T5_ads_related_1280.png')});
+    if (shotDir) { await page.waitForTimeout(500); await related.screenshot({path: path.join(shotDir, 'T5_ads_related_1280.png')}); }
     await page.close();
     console.log('T5 排版檢查通過：總覽 1280/820/390 = 4/2/1 欄、小花右上角；其他服務 3 張一排');
   } finally { await browser.close(); }
