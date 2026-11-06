@@ -28,13 +28,19 @@
 .svc-overview .svc-head>p:not(.svc-kicker){line-height:1.8}
 .svc-overview .svc-group{padding-top:0;margin-top:80px;scroll-margin-top:92px}
 .svc-overview>.svc-group:first-of-type{margin-top:0}
-.svc-overview .svc-group>h2{padding-bottom:12px;margin-bottom:22px}
-.svc-card-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
-.svc-card{display:flex;flex-direction:column;align-items:flex-start;position:relative;padding:30px 26px 26px;background:var(--card);border:1px solid var(--line);border-radius:20px;text-decoration:none;color:var(--ink);transition:transform .25s cubic-bezier(.22,.61,.36,1),border-color .25s ease,box-shadow .25s ease;min-width:0}
+.svc-overview .svc-group>h2{padding-bottom:12px;margin-bottom:18px}
+/* 每組：大標 → 小標 → 約 100 字說明 → 服務卡 */
+.svc-group-subtitle{font:500 17px/1.7 var(--serif);color:var(--pink-deep);letter-spacing:1px;margin:0 0 8px}
+.svc-group-intro{max-width:760px;font-size:14px;line-height:2;color:var(--ink-soft);font-weight:300;margin:0 0 28px}
+/* 服務卡：電腦 4 張一排（總覽每組剛好一排）、平板 2 張、手機 1 張；服務頁底部「其他服務」3 張一排。 */
+.svc-card-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
+.svc-related .svc-card-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.svc-card{display:flex;flex-direction:column;align-items:flex-start;position:relative;padding:28px 22px 24px;background:var(--card);border:1px solid var(--line);border-radius:20px;text-decoration:none;color:var(--ink);transition:transform .25s cubic-bezier(.22,.61,.36,1),border-color .25s ease,box-shadow .25s ease;min-width:0}
 @media (hover:hover) and (pointer:fine){.svc-card:hover{transform:translateY(-7px);border-color:var(--leaf);box-shadow:0 18px 40px rgba(74,90,124,.16)}.svc-card:hover .svc-flower{transform:scale(1.08) rotate(3deg)}}
 @media (hover:none), (pointer:coarse){.svc-card:active{transform:translateY(-4px);box-shadow:0 14px 32px rgba(74,90,124,.16)}.svc-card:active .svc-flower{transform:scale(1.05)}}
-.svc-flower{width:64px;height:72px;object-fit:contain;object-position:left bottom;margin-bottom:14px;transform-origin:center bottom;transition:transform .25s cubic-bezier(.22,.61,.36,1)}
-.svc-card h3{margin:0 0 4px}
+/* 卡片小花：縮小放右上角當點綴，標題右邊留位置不讓花壓到字。 */
+.svc-flower{position:absolute;top:16px;right:16px;width:34px;height:42px;object-fit:contain;object-position:center top;margin:0;transform-origin:center bottom;transition:transform .25s cubic-bezier(.22,.61,.36,1)}
+.svc-card h3{margin:0 0 4px;padding-right:40px;font-size:17px}
 .svc-card-subtitle{display:block;font-size:12px;color:var(--pink-deep);letter-spacing:1px;margin:0 0 8px}
 .svc-card p{font-size:13px;line-height:1.95;color:var(--ink-soft);margin:10px 0 22px}
 .svc-card-more{margin-top:auto;padding:9px 20px;font-size:13px;color:var(--river-deep);border:1px solid rgba(110,106,99,.32);border-radius:99px;background:#fffcf8;transition:background .25s,border-color .25s}
@@ -97,8 +103,8 @@
 .svc-construction>p:not(.svc-kicker){font-size:14px;color:var(--ink-soft);margin-bottom:30px}
 @keyframes svc-flower-sway{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
 @media(max-width:960px){.svc-card-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.svc-layout{grid-template-columns:150px minmax(0,1fr);gap:32px}.svc-related .svc-card-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.svc-related .svc-card{padding:24px 18px}}
-@media(max-width:760px){.svc-head{margin-bottom:42px}.svc-head-detail{margin-top:26px}.svc-group{margin-top:46px}.svc-layout{grid-template-columns:1fr;gap:36px}.svc-page .svc-toc{position:static;top:auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:3px 12px;border:1px solid var(--line);padding:18px;border-radius:16px;background:var(--card)}.svc-toc p{grid-column:1/-1;margin-bottom:4px}.svc-toc a{padding:7px 0;font-size:12px}.svc-section{padding-bottom:38px;margin-bottom:38px;scroll-margin-top:18px}.svc-intro-grid{gap:22px}.svc-related{margin-top:52px}.svc-related .svc-card-grid{grid-template-columns:1fr}.svc-related .svc-card{padding:26px}.svc-related .svc-flower{position:absolute;right:22px;top:20px}.svc-related .svc-card h3{padding-right:44px}.svc-pricing{padding:24px}.svc-construction{padding:38px 20px}.svc-construction h2{font-size:23px}}
-@media(max-width:520px){.svc-card-grid,.svc-items,.svc-intro-grid{grid-template-columns:1fr}.svc-card{padding:26px}.svc-card-grid{gap:20px}.svc-group>h2{font-size:24px}.svc-head h1{font-size:30px}.svc-page .svc-toc{gap:3px 6px;padding:16px 12px}.svc-toc a{font-size:11.5px}.svc-actions{flex-direction:column}.svc-actions .btn{width:100%}.svc-steps li{gap:14px}.svc-breadcrumb{font-size:11px}}
+@media(max-width:760px){.svc-head{margin-bottom:42px}.svc-head-detail{margin-top:26px}.svc-group{margin-top:46px}.svc-layout{grid-template-columns:1fr;gap:36px}.svc-page .svc-toc{position:static;top:auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:3px 12px;border:1px solid var(--line);padding:18px;border-radius:16px;background:var(--card)}.svc-toc p{grid-column:1/-1;margin-bottom:4px}.svc-toc a{padding:7px 0;font-size:12px}.svc-section{padding-bottom:38px;margin-bottom:38px;scroll-margin-top:18px}.svc-intro-grid{gap:22px}.svc-related{margin-top:52px}.svc-related .svc-card-grid{grid-template-columns:1fr}.svc-related .svc-card{padding:26px 22px 24px}.svc-pricing{padding:24px}.svc-construction{padding:38px 20px}.svc-construction h2{font-size:23px}}
+@media(max-width:520px){.svc-card-grid,.svc-items,.svc-intro-grid{grid-template-columns:1fr}.svc-card{padding:26px 22px 24px}.svc-card-grid{gap:20px}.svc-group>h2{font-size:24px}.svc-head h1{font-size:30px}.svc-page .svc-toc{gap:3px 6px;padding:16px 12px}.svc-toc a{font-size:11.5px}.svc-actions{flex-direction:column}.svc-actions .btn{width:100%}.svc-steps li{gap:14px}.svc-breadcrumb{font-size:11px}}
 @media(prefers-reduced-motion:reduce){.svc-construction-flower{animation:none}.svc-card,.svc-button,.svc-child-link,.svc-toc a{transition:none}.svc-card:hover,.svc-button:hover{transform:none}}
 
 /* 服務內頁：延續開花教室的白卡、淡色圓角與植物標記。 */
