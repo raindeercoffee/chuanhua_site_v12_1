@@ -171,12 +171,29 @@ def nature_block() -> str:
             '<p class="nature-quote">像一條川流：表面柔軟，遇到石頭會轉彎；底下的方向，從來沒有變。</p></div>')
 
 
+# 服務總覽頁（中層文案）：每組大標下面的小標與約 100 字說明。
+# 比首頁卡片深、比各服務專屬頁淺；不寫客戶名稱、不寫成果數字。
+GROUP_INTROS = {
+    "品牌行銷": ("先聽懂品牌，再讓它被看見",
+              "每個品牌都有自己的土壤和花期。川花會先花時間聽懂你的品牌，看清市場與競品，"
+              "再用長年親手操作廣告與行銷的實戰經驗，決定在哪裡播種、什麼時候澆水。"
+              "從定位、廣告到官網，我們一路陪著，讓品牌在對的地方慢慢開花。"),
+    "AI 與數位工具": ("把重複的事交給工具，把時間還給品牌",
+                 "工具不是越多越好，而是要剛好順手。川花會先陪你看懂每天的工作怎麼流動，"
+                 "哪裡總是卡住、哪裡一直重做，再帶著長年在行銷第一線的實戰經驗，把 AI 與自動化接進真實的流程。"
+                 "像替河道清開石頭，讓團隊的時間流回更重要的事。"),
+}
+
+
 def overview(services: list[dict]) -> str:
     groups = []
     for group in GROUPS:
         identity = "brand" if group == GROUPS[0] else "digital"
+        subtitle, intro = GROUP_INTROS[group]
         groups.append(f'<section class="svc-group" aria-labelledby="svc-group-{identity}">'
-                      f'<h2 id="svc-group-{identity}">{esc(group)}</h2><div class="svc-card-grid">'
+                      f'<h2 id="svc-group-{identity}">{esc(group)}</h2>'
+                      f'<p class="svc-group-subtitle">{esc(subtitle)}</p><p class="svc-group-intro">{esc(intro)}</p>'
+                      '<div class="svc-card-grid">'
                       + "".join(card(s) for s in services if s["group"] == group) + '</div></section>')
     return ('<section class="feature-page svc-page svc-overview" data-feature="services" hidden>'
             '<div class="st-top">' + link("/home/", "← 回到首頁", "st-back") + '</div>'
