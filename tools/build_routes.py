@@ -187,10 +187,6 @@ def render_notes(text: str, articles: list[dict]) -> str:
             '</section>'
         )
     text = replace_marked(text, "NOTES-LIST", "\n".join(cards))
-    latest = [card.replace('<h2 class="note-card-title">', '<h3 class="note-card-title">')
-              .replace('</h2>', '</h3>').replace('閱讀筆記 →', '閱讀 →')
-              for card in cards[:3]]
-    text = replace_marked(text, "NOTES-LATEST", "\n".join(latest))
     text = replace_marked(text, "NOTE-ARTICLES", "\n".join(pages))
     # 只移除本生成器曾建立的筆記文章，不動其他頁面路由。
     routes = {path: meta for path, meta in routes.items()
