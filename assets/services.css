@@ -123,9 +123,12 @@
 .svc-steps .svc-step-mark{position:relative;margin:0;background:#edf0f7}
 .svc-steps li:nth-child(even) .svc-step-mark{background:#f9ecec}
 .svc-steps li:not(:last-child)::after{content:"↓";position:absolute;left:37px;bottom:-18px;z-index:1;color:#a17b82;background:#fffefa;font-size:15px;line-height:20px}
-.svc-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+/* 聯絡按鈕：主按鈕（填寫需求詢價）＋柔和按鈕（找川花聊聊）一起置中，柔和按鈕依字寬、淡色外框。 */
+.svc-actions{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:14px}
 .svc-page .svc-actions .svc-button,.svc-page .ie-contact,.svc-construction .svc-button{display:block;width:100%;padding:15px 22px;border:0;border-radius:99px;color:#fff;text-align:center;font-weight:600;letter-spacing:.04em;background:linear-gradient(135deg,#a24d5b,#75658a);box-shadow:0 8px 18px rgba(119,72,86,.18)}
-.svc-page .svc-actions .svc-button-soft{background:linear-gradient(135deg,#5f6b94,#464f73);color:#fff}
+.svc-page .svc-actions .svc-button:not(.svc-button-soft){flex:none;width:min(100%,320px)}
+.svc-page .svc-actions .svc-button-soft{display:inline-block;flex:none;width:auto;padding:11px 26px;background:#fffdf9;color:var(--river-deep);border:1px solid #d6cbbd;box-shadow:none;font-weight:500}
+.svc-page .svc-actions .svc-button-soft:hover{background:#fff;border-color:#c9a9ae}
 .svc-page .ie-contact{margin-top:16px;cursor:pointer;background:linear-gradient(135deg,#5f6b94,#464f73)}
 .svc-page .ie-contact:focus-visible{outline:2px solid #93323f;outline-offset:4px}
 .svc-construction{isolation:isolate;box-shadow:0 12px 32px rgba(80,70,62,.08);background:rgba(255,254,252,.96)}
