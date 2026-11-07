@@ -170,6 +170,7 @@ if (!['/chuanhua_site_v12_1', '/chuanhua_site_v12_1/', '/'].includes(location.pa
         "url": "https://raindeercoffee.com/chuanhua_site_v12_1/notes/",
         "mainEntity": {
           "@type": "ItemList",
+          "numberOfItems": 9,
           "itemListElement": [
             {
               "@type": "ListItem",
@@ -224,12 +225,6 @@ if (!['/chuanhua_site_v12_1', '/chuanhua_site_v12_1/', '/'].includes(location.pa
               "position": 9,
               "name": "不會寫程式也能做：行銷人的 3 個自動化流程",
               "url": "https://raindeercoffee.com/chuanhua_site_v12_1/notes/no-code-marketing-automation/"
-            },
-            {
-              "@type": "ListItem",
-              "position": 10,
-              "name": "AI 做的商品圖和影片可以商用嗎？授權注意事項",
-              "url": "https://raindeercoffee.com/chuanhua_site_v12_1/notes/ai-image-video-commercial-use/"
             }
           ]
         }
@@ -981,63 +976,6 @@ if (!['/chuanhua_site_v12_1', '/chuanhua_site_v12_1/', '/'].includes(location.pa
         ]
       }
     ]
-  },
-  "/notes/ai-image-video-commercial-use/": {
-    "layer": "feature",
-    "feature": "note-09",
-    "noindex": true,
-    "title": "AI 做的商品圖和影片可以商用嗎？授權注意事項｜開花筆記｜川花",
-    "desc": "AI 商品圖、AI 影片能不能放進廣告和商品頁？從工具條款、付費方案、真人肖像、商標四個面向，整理服飾品牌商用前該檢查的事。",
-    "schema": [
-      {
-        "@context": "https://schema.org",
-        "@type": "Article",
-        "@id": "https://raindeercoffee.com/chuanhua_site_v12_1/notes/ai-image-video-commercial-use/#article",
-        "name": "AI 做的商品圖和影片可以商用嗎？授權注意事項",
-        "headline": "AI 做的商品圖和影片可以商用嗎？授權注意事項",
-        "description": "AI 商品圖、AI 影片能不能放進廣告和商品頁？從工具條款、付費方案、真人肖像、商標四個面向，整理服飾品牌商用前該檢查的事。",
-        "url": "https://raindeercoffee.com/chuanhua_site_v12_1/notes/ai-image-video-commercial-use/",
-        "mainEntityOfPage": {
-          "@type": "WebPage",
-          "@id": "https://raindeercoffee.com/chuanhua_site_v12_1/notes/ai-image-video-commercial-use/"
-        },
-        "keywords": [
-          "AI 商品圖商用",
-          "AI 影片授權",
-          "AI 生成圖片著作權",
-          "服飾電商廣告素材"
-        ],
-        "publisher": {
-          "@type": "Organization",
-          "@id": "https://raindeercoffee.com/chuanhua_site_v12_1/#organization",
-          "name": "川花有限公司"
-        }
-      },
-      {
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "川花",
-            "item": "https://raindeercoffee.com/chuanhua_site_v12_1/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "開花筆記",
-            "item": "https://raindeercoffee.com/chuanhua_site_v12_1/notes/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 3,
-            "name": "AI 做的商品圖和影片可以商用嗎？授權注意事項",
-            "item": "https://raindeercoffee.com/chuanhua_site_v12_1/notes/ai-image-video-commercial-use/"
-          }
-        ]
-      }
-    ]
   }
 }
 </script>
@@ -1400,8 +1338,11 @@ nav.scrolled{box-shadow:0 4px 24px rgba(90,80,60,.08)}
 .terms .t-body p{margin-bottom:8px}
 footer{background:#E6E2D8;color:#4A4844;padding:56px 24px 30px;font-size:13px;border-top:1px solid rgba(255,255,255,.35)}
 footer .ft-grid{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1.35fr 1.1fr .85fr 1fr .85fr;gap:36px}
-footer .ft-brand img{height:76px;width:auto;margin-bottom:16px}
-footer .ft-intro{font-family:var(--serif);font-size:14px;line-height:1.95;color:var(--river-deep);margin-bottom:16px}
+footer .ft-brand-head{display:flex;align-items:center;gap:18px;margin-bottom:20px}
+footer .ft-brand img{height:76px;width:auto;margin:0}
+footer .ft-slogan{font-family:var(--serif);font-size:16px;letter-spacing:4px;line-height:1.7;color:var(--river-deep);margin:0}
+footer .ft-col .ft-line{margin-top:14px;color:var(--pink-deep);white-space:nowrap;padding:7px 14px;font-size:12px;letter-spacing:.3px}
+footer .ft-col .ft-line:hover{color:#fff;transform:none}
 footer .ft-contact{list-style:none;padding:0;margin:0 0 14px;line-height:1.9;color:#5E5A53;letter-spacing:.3px}
 footer .ft-line{display:inline-block;padding:7px 16px;border:1px solid rgba(147,50,63,.35);border-radius:99px;color:var(--pink-deep);text-decoration:none;font-size:12.5px;letter-spacing:.5px;transition:background .3s,color .3s}
 footer .ft-line:hover{background:var(--pink-deep);color:#fff}
@@ -1566,8 +1507,10 @@ footer .ft-bottom .back-garden{margin-top:0}
 .note-related h2{font:600 22px/1.8 var(--serif);margin:0 0 18px;color:var(--river-deep)}
 .note-related a{display:block;padding:12px 0;font-size:14px;line-height:1.9;color:var(--river);text-decoration:none}
 .note-related a:hover{text-decoration:underline;text-underline-offset:5px}
-.note-service-link{max-width:720px;margin:30px auto 0;padding-top:26px;border-top:1px solid var(--line)}
-.note-service-link .btn{text-decoration:none}
+.note-service-link{max-width:720px;margin:8px auto 0;padding:22px 26px;background:var(--card);border:1px solid var(--line);border-radius:18px}
+.note-service-link p{margin:0;font:400 15px/2 var(--sans);color:var(--ink-soft);overflow-wrap:anywhere}
+.note-service-link a{color:var(--river);text-decoration:underline;text-underline-offset:4px}
+.note-service-link a:hover,.note-service-link a:focus-visible{color:var(--pink-deep)}
 @media(max-width:760px){.bloom-entry-actions{flex-direction:column;align-items:flex-start;gap:14px}.notes-list{grid-template-columns:1fr;gap:26px}.note-card{padding:28px 24px}.note-card-title{font-size:20px}.notes-filters{gap:8px}.notes-filters .topic-tab{padding:9px 14px;font-size:12px;letter-spacing:0}.note-prose{font-size:15px;line-height:2.05}.note-prose h2{font-size:22px;margin-top:36px}.note-prose h3{font-size:18px}.note-deck{font-size:15px}.note-qa dt{font-size:17px}}
 @media(prefers-reduced-motion:reduce){.note-card{transition:none}.note-card:hover{transform:none}}
 footer .notes-link{margin-left:24px}
@@ -2148,19 +2091,21 @@ body p, body h1, body h2, body h3, body h4, body span, body li, body article { -
     <footer>
       <div class="ft-grid">
         <div class="ft-brand">
-          <img src="/chuanhua_site_v12_1/assets/logo-v-color.png" alt="川花 RIVER FLOWER">
-          <p class="ft-intro">從河川長出花。<br>我們陪品牌找到最懂它的那群人，<br>再一起，慢慢開出自己的花季。</p>
+          <div class="ft-brand-head">
+            <img src="/chuanhua_site_v12_1/assets/logo-v-color.png" alt="川花 RIVER FLOWER">
+            <p class="ft-slogan">川流不息，花開有時</p>
+          </div>
           <ul class="ft-contact">
             <li>riverflower2025@gmail.com</li>
             <li>02-2885-4268</li>
             <li>週一至週五 10：00–18：00</li>
           </ul>
-          <a class="ft-line" href="https://line.me/R/ti/p/@riverflower2025" target="_blank" rel="noopener">LINE 找川花 @riverflower2025</a>
         </div>
         <div class="ft-col" role="navigation" aria-label="服務項目">
           <h4>服務項目<small>SERVICES</small></h4>
           <a href="/chuanhua_site_v12_1/services/" data-route data-svc-group="brand">品牌行銷</a>
           <a href="/chuanhua_site_v12_1/services/" data-route data-svc-group="digital">AI 與數位工具</a>
+          <a class="ft-line" href="https://line.me/R/ti/p/@riverflower2025" target="_blank" rel="noopener">LINE 找川花 @riverflower2025</a>
         </div>
         <div class="ft-col" role="navigation" aria-label="開過的花">
           <h4>開過的花<small>CASES</small></h4>
@@ -2177,11 +2122,9 @@ body p, body h1, body h2, body h3, body h4, body span, body li, body article { -
         </div>
         <div class="ft-col" role="navigation" aria-label="關於川花">
           <h4>關於川花<small>ABOUT</small></h4>
-          <a href="#about">關於我們</a>
           <a href="/chuanhua_site_v12_1/team/" data-route>川花團隊</a>
           <a href="#courses">開花教室</a>
           <a href="/chuanhua_site_v12_1/policy/" data-route>退款規則</a>
-          <a href="#contact">找川花說話</a>
         </div>
       </div>
       <div class="ft-bottom">
@@ -2269,11 +2212,13 @@ body p, body h1, body h2, body h3, body h4, body span, body li, body article { -
       <header class="st-head notes-head"><div class="st-eyebrow">BLOOM NOTES</div><h1 id="feature-notes-title" tabindex="-1">開花筆記</h1><p>關於品牌、行銷與 AI 的一些觀察。<br>讓每個想法，在這裡慢慢開花。</p></header>
       <div class="feature-body notes-body">
         <div class="notes-filters" role="group" aria-label="文章分類">
-          <button class="topic-tab" type="button" data-notes-filter="全部" aria-pressed="true">全部</button>
-          <button class="topic-tab" type="button" data-notes-filter="流程自動化" aria-pressed="false">流程自動化</button>
-          <button class="topic-tab" type="button" data-notes-filter="品牌內容" aria-pressed="false">品牌內容</button>
-          <button class="topic-tab" type="button" data-notes-filter="AI 導入" aria-pressed="false">AI 導入</button>
-          <button class="topic-tab" type="button" data-notes-filter="網站建置" aria-pressed="false">網站建置</button>
+          <!-- NOTES-FILTERS:START -->
+<button class="topic-tab" type="button" data-notes-filter="全部" aria-pressed="true">全部</button>
+<button class="topic-tab" type="button" data-notes-filter="流程自動化" aria-pressed="false">流程自動化</button>
+<button class="topic-tab" type="button" data-notes-filter="品牌內容" aria-pressed="false">品牌內容</button>
+<button class="topic-tab" type="button" data-notes-filter="AI 導入" aria-pressed="false">AI 導入</button>
+<button class="topic-tab" type="button" data-notes-filter="網站建置" aria-pressed="false">網站建置</button>
+<!-- NOTES-FILTERS:END -->
         </div>
         <p id="notes-count" class="notes-count" role="status" aria-live="polite"></p>
         <div class="notes-list" aria-label="文章列表">
@@ -2287,7 +2232,6 @@ body p, body h1, body h2, body h3, body h4, body span, body li, body article { -
 <a class="note-card" href="/chuanhua_site_v12_1/notes/sme-ai-adoption-5-questions/" data-route data-note-id="04" data-note-category="AI 導入"><img class="fl-icon" src="/chuanhua_site_v12_1/assets/quiz-plants/mint.png" alt="" aria-hidden="true" loading="lazy" width="26" height="26"><p class="note-category">AI 導入</p><h2 class="note-card-title">中小企業導入 AI 前，先問自己 5 個問題</h2><p class="note-excerpt">中小企業導入 AI 不必一開始就買大系統。先問清楚哪個工作最麻煩、資料在哪、誰來確認、怎樣算成功，再決定要不要做 AI 客製化小工具。</p><span class="note-read">閱讀筆記 →</span></a>
 <a class="note-card" href="/chuanhua_site_v12_1/notes/ai-custom-tool-pricing-guide/" data-route data-note-id="05" data-note-category="AI 導入"><img class="fl-icon" src="/chuanhua_site_v12_1/assets/quiz-plants/lemon.png" alt="" aria-hidden="true" loading="lazy" width="26" height="26"><p class="note-category">AI 導入</p><h2 class="note-card-title">AI 客製化工具要多少錢？報價單怎麼看才不吃虧</h2><p class="note-excerpt">AI 客製化工具報價怎麼看？拆解需求評估、開發、維護、AI 用量與主機費、修改次數與驗收，教你簽約前該問哪些問題。</p><span class="note-read">閱讀筆記 →</span></a>
 <a class="note-card" href="/chuanhua_site_v12_1/notes/no-code-marketing-automation/" data-route data-note-id="08" data-note-category="流程自動化"><img class="fl-icon" src="/chuanhua_site_v12_1/assets/quiz-plants/geranium.png" alt="" aria-hidden="true" loading="lazy" width="26" height="26"><p class="note-category">流程自動化</p><h2 class="note-card-title">不會寫程式也能做：行銷人的 3 個自動化流程</h2><p class="note-excerpt">不會寫程式的行銷人，也能把素材整理、文案初稿、單據記帳交給自動化。三個服飾電商常見流程，教你從哪裡開始、什麼時候該找人幫忙。</p><span class="note-read">閱讀筆記 →</span></a>
-<a class="note-card" href="/chuanhua_site_v12_1/notes/ai-image-video-commercial-use/" data-route data-note-id="09" data-note-category="品牌內容"><img class="fl-icon" src="/chuanhua_site_v12_1/assets/quiz-plants/eucalyptus.png" alt="" aria-hidden="true" loading="lazy" width="26" height="26"><p class="note-category">品牌內容</p><h2 class="note-card-title">AI 做的商品圖和影片可以商用嗎？授權注意事項</h2><p class="note-excerpt">AI 商品圖、AI 影片能不能放進廣告和商品頁？從工具條款、付費方案、真人肖像、商標四個面向，整理服飾品牌商用前該檢查的事。</p><span class="note-read">閱讀筆記 →</span></a>
 <!-- NOTES-LIST:END -->
         </div>
       </div>
@@ -2328,8 +2272,8 @@ body p, body h1, body h2, body h3, body h4, body span, body li, body article { -
 <h2>想讓官網不只好看，也能接住客戶？</h2>
 <p>如果你的網站已經有內容，卻不知道怎麼整理成清楚的服務動線，歡迎告訴川花目前的網站狀況與想改善的地方。我們可先評估頁面架構、互動需求與技術可行性；專案範圍及費用依正式需求評估，歡迎透過官方 LINE @riverflower2025 預約初步諮詢。</p>
 </div>
+<div class="note-service-link"><p>官網從規劃、排版到詢價表單要怎麼一路接起來，川花在「<a href="/chuanhua_site_v12_1/services/website/" data-route>品牌官網製作</a>」那頁寫得更完整，有空可以順手翻翻。</p></div>
 <nav class="note-related" aria-label="相關筆記"><h2>讓想法繼續開花</h2><a href="/chuanhua_site_v12_1/notes/line-chatbot-website-customer-service/" data-route>LINE 機器人怎麼做？從自動回覆到官網詢問流程</a><a href="/chuanhua_site_v12_1/notes/custom-business-app-web-vs-mobile/" data-route>企業自製 App 值得嗎？網頁 App、手機 App 怎麼選</a></nav>
-<div class="note-service-link"><a class="btn" href="/chuanhua_site_v12_1/services/website/" data-route>品牌官網製作 →</a></div>
 </section>
 <section class="feature-page note-article" data-feature="note-07" data-note-id="07" hidden>
 <div class="st-top"><a class="st-back" href="/chuanhua_site_v12_1/notes/" data-route>← 回到開花筆記</a></div>
@@ -2366,8 +2310,8 @@ body p, body h1, body h2, body h3, body h4, body span, body li, body article { -
 <h2>想讓官網和 LINE 接得更順？</h2>
 <p>如果你的團隊每天花很多時間回覆重複問題，可以先整理最常見的十個提問和目前的回覆方式。川花可協助評估官網入口、LINE 回覆流程與進階串接需求；是否需要 AI、開發範圍及費用都應在需求釐清後確認。歡迎加入官方 LINE @riverflower2025 預約初步諮詢。</p>
 </div>
+<div class="note-service-link"><p>常見問題交給機器人回覆、詢問資料自動整理進表單，這類串接都收在「<a href="/chuanhua_site_v12_1/services/workflow/" data-route>AI 工作流程自動化</a>」裡；想知道實際怎麼進行，那頁有完整流程可以參考。</p></div>
 <nav class="note-related" aria-label="相關筆記"><h2>讓想法繼續開花</h2><a href="/chuanhua_site_v12_1/notes/ai-ad-upload-automation/" data-route>服飾品牌怎麼用 AI 一天上完 10 支廣告？加速下廣告實戰</a><a href="/chuanhua_site_v12_1/notes/ai-receipt-photo-bookkeeping/" data-route>發票整理太花時間？AI 拍照記帳怎麼做</a></nav>
-<div class="note-service-link"><a class="btn" href="/chuanhua_site_v12_1/ai/workflow/" data-route>AI 工作流程自動化 →</a></div>
 </section>
 <section class="feature-page note-article" data-feature="note-10" data-note-id="10" hidden>
 <div class="st-top"><a class="st-back" href="/chuanhua_site_v12_1/notes/" data-route>← 回到開花筆記</a></div>
@@ -2404,8 +2348,8 @@ body p, body h1, body h2, body h3, body h4, body span, body li, body article { -
 <h2>有一個工作，想做成自己的小工具嗎？</h2>
 <p>不需要先把需求寫成技術規格。先告訴川花誰會用、目前怎麼做、最想改善哪個步驟，我們再評估該用網頁 App、手機 App 或更簡單的自動化方式。開發與維護費用依需求評估，歡迎加入官方 LINE @riverflower2025 預約初步諮詢。</p>
 </div>
+<div class="note-service-link"><p>讀到這裡，如果心裡已經浮現某件想做成小工具的工作，「<a href="/chuanhua_site_v12_1/services/tools/" data-route>AI 客製工具開發</a>」那頁整理了常見的工具類型和合作步驟，可以先看看有沒有相近的例子。</p></div>
 <nav class="note-related" aria-label="相關筆記"><h2>讓想法繼續開花</h2><a href="/chuanhua_site_v12_1/notes/sme-ai-adoption-5-questions/" data-route>中小企業導入 AI 前，先問自己 5 個問題</a><a href="/chuanhua_site_v12_1/notes/ai-custom-tool-pricing-guide/" data-route>AI 客製化工具要多少錢？報價單怎麼看才不吃虧</a></nav>
-<div class="note-service-link"><a class="btn" href="/chuanhua_site_v12_1/ai/tools/" data-route>AI 客製工具開發 →</a></div>
 </section>
 <section class="feature-page note-article" data-feature="note-01" data-note-id="01" hidden>
 <div class="st-top"><a class="st-back" href="/chuanhua_site_v12_1/notes/" data-route>← 回到開花筆記</a></div>
@@ -2441,8 +2385,8 @@ body p, body h1, body h2, body h3, body h4, body span, body li, body article { -
 <h2>想把哪個工作交給 AI？</h2>
 <p>如果你也有一份每週都在重複、做到眼睛發花的工作，告訴我們哪一個最麻煩，川花幫你評估能不能做成小工具。專案 NT$49,000 起，正式報價依需求評估，歡迎加入官方 LINE @riverflower2025 預約初步諮詢。</p>
 </div>
+<div class="note-service-link"><p>文中這套從上稿表到整批上線的做法，川花整理成「<a href="/chuanhua_site_v12_1/services/ad-ops/" data-route>加速下廣告</a>」，流程細節和需要準備的表格都放在那一頁。</p></div>
 <nav class="note-related" aria-label="相關筆記"><h2>讓想法繼續開花</h2><a href="/chuanhua_site_v12_1/notes/line-chatbot-website-customer-service/" data-route>LINE 機器人怎麼做？從自動回覆到官網詢問流程</a><a href="/chuanhua_site_v12_1/notes/ai-receipt-photo-bookkeeping/" data-route>發票整理太花時間？AI 拍照記帳怎麼做</a></nav>
-<div class="note-service-link"><a class="btn" href="/chuanhua_site_v12_1/ai/" data-route>探索 AI 客製化服務 →</a></div>
 </section>
 <section class="feature-page note-article" data-feature="note-02" data-note-id="02" hidden>
 <div class="st-top"><a class="st-back" href="/chuanhua_site_v12_1/notes/" data-route>← 回到開花筆記</a></div>
@@ -2479,8 +2423,8 @@ body p, body h1, body h2, body h3, body h4, body span, body li, body article { -
 <h2>想把哪個工作交給 AI？</h2>
 <p>寫文案、改文案是不是也占掉你們很多時間？告訴我們哪個工作最麻煩，川花幫你評估能不能做成小工具。專案 NT$49,000 起，正式報價依需求評估，歡迎加入官方 LINE @riverflower2025 預約初步諮詢。</p>
 </div>
-<nav class="note-related" aria-label="相關筆記"><h2>讓想法繼續開花</h2><a href="/chuanhua_site_v12_1/notes/ai-image-video-commercial-use/" data-route>AI 做的商品圖和影片可以商用嗎？授權注意事項</a><a href="/chuanhua_site_v12_1/notes/small-business-website-inquiry-design/" data-route>中小企業官網怎麼做？從品牌形象到有效詢價的網站規劃</a></nav>
-<div class="note-service-link"><a class="btn" href="/chuanhua_site_v12_1/ai/" data-route>探索 AI 客製化服務 →</a></div>
+<div class="note-service-link"><p>品牌語氣怎麼整理成 AI 讀得懂的寫作規則，「<a href="/chuanhua_site_v12_1/services/content/" data-route>AI 文案與內容生成</a>」那頁有更多說明，也列了能一起處理的內容類型。</p></div>
+<nav class="note-related" aria-label="相關筆記"><h2>讓想法繼續開花</h2><a href="/chuanhua_site_v12_1/notes/small-business-website-inquiry-design/" data-route>中小企業官網怎麼做？從品牌形象到有效詢價的網站規劃</a><a href="/chuanhua_site_v12_1/notes/line-chatbot-website-customer-service/" data-route>LINE 機器人怎麼做？從自動回覆到官網詢問流程</a></nav>
 </section>
 <section class="feature-page note-article" data-feature="note-03" data-note-id="03" hidden>
 <div class="st-top"><a class="st-back" href="/chuanhua_site_v12_1/notes/" data-route>← 回到開花筆記</a></div>
@@ -2515,8 +2459,8 @@ body p, body h1, body h2, body h3, body h4, body span, body li, body article { -
 <h2>想把哪個工作交給 AI？</h2>
 <p>發票只是其中一個例子。告訴我們哪個工作最麻煩，川花幫你評估能不能做成小工具；專案 NT$49,000 起，加入官方 LINE @riverflower2025 預約初步諮詢。</p>
 </div>
+<div class="note-service-link"><p>拍照記帳只是其中一種做法。報表、對帳、資料查詢這些天天要碰的瑣事，也能量身做成工具，「<a href="/chuanhua_site_v12_1/services/tools/" data-route>AI 客製工具開發</a>」那頁有更多例子。</p></div>
 <nav class="note-related" aria-label="相關筆記"><h2>讓想法繼續開花</h2><a href="/chuanhua_site_v12_1/notes/line-chatbot-website-customer-service/" data-route>LINE 機器人怎麼做？從自動回覆到官網詢問流程</a><a href="/chuanhua_site_v12_1/notes/ai-ad-upload-automation/" data-route>服飾品牌怎麼用 AI 一天上完 10 支廣告？加速下廣告實戰</a></nav>
-<div class="note-service-link"><a class="btn" href="/chuanhua_site_v12_1/ai/" data-route>探索 AI 客製化服務 →</a></div>
 </section>
 <section class="feature-page note-article" data-feature="note-04" data-note-id="04" hidden>
 <div class="st-top"><a class="st-back" href="/chuanhua_site_v12_1/notes/" data-route>← 回到開花筆記</a></div>
@@ -2553,8 +2497,8 @@ body p, body h1, body h2, body h3, body h4, body span, body li, body article { -
 <h2>想把哪個工作交給 AI？</h2>
 <p>回答完這 5 個問題，你心裡大概已經有答案了。告訴我們哪個工作最麻煩，川花幫你評估能不能做成小工具；專案 NT$49,000 起，加入官方 LINE @riverflower2025 預約初步諮詢。</p>
 </div>
+<div class="note-service-link"><p>問完這五題，若發現卡住的是一段重複的流程，可以看看「<a href="/chuanhua_site_v12_1/services/workflow/" data-route>AI 工作流程自動化</a>」；若缺的是一個順手的小工具，「<a href="/chuanhua_site_v12_1/services/tools/" data-route>AI 客製工具開發</a>」那頁會更對味。</p></div>
 <nav class="note-related" aria-label="相關筆記"><h2>讓想法繼續開花</h2><a href="/chuanhua_site_v12_1/notes/custom-business-app-web-vs-mobile/" data-route>企業自製 App 值得嗎？網頁 App、手機 App 怎麼選</a><a href="/chuanhua_site_v12_1/notes/ai-custom-tool-pricing-guide/" data-route>AI 客製化工具要多少錢？報價單怎麼看才不吃虧</a></nav>
-<div class="note-service-link"><a class="btn" href="/chuanhua_site_v12_1/ai/" data-route>探索 AI 客製化服務 →</a></div>
 </section>
 <section class="feature-page note-article" data-feature="note-05" data-note-id="05" hidden>
 <div class="st-top"><a class="st-back" href="/chuanhua_site_v12_1/notes/" data-route>← 回到開花筆記</a></div>
@@ -2591,8 +2535,8 @@ body p, body h1, body h2, body h3, body h4, body span, body li, body article { -
 <h2>想把哪個工作交給 AI？</h2>
 <p>告訴我們你每週最麻煩、最花時間的那個工作，川花幫你評估能不能做成小工具。專案 NT$49,000 起，加入官方 LINE @riverflower2025 預約初步諮詢。</p>
 </div>
+<div class="note-service-link"><p>報價單上的每一項，都跟著工具的需求而定。想先了解一個客製工具從討論到交付的步驟和起價，可以到「<a href="/chuanhua_site_v12_1/services/tools/" data-route>AI 客製工具開發</a>」那頁看看。</p></div>
 <nav class="note-related" aria-label="相關筆記"><h2>讓想法繼續開花</h2><a href="/chuanhua_site_v12_1/notes/custom-business-app-web-vs-mobile/" data-route>企業自製 App 值得嗎？網頁 App、手機 App 怎麼選</a><a href="/chuanhua_site_v12_1/notes/sme-ai-adoption-5-questions/" data-route>中小企業導入 AI 前，先問自己 5 個問題</a></nav>
-<div class="note-service-link"><a class="btn" href="/chuanhua_site_v12_1/ai/" data-route>探索 AI 客製化服務 →</a></div>
 </section>
 <section class="feature-page note-article" data-feature="note-08" data-note-id="08" hidden>
 <div class="st-top"><a class="st-back" href="/chuanhua_site_v12_1/notes/" data-route>← 回到開花筆記</a></div>
@@ -2627,45 +2571,8 @@ body p, body h1, body h2, body h3, body h4, body span, body li, body article { -
 <h2>想把哪個工作交給 AI？</h2>
 <p>告訴我們你最麻煩的那個工作，川花幫你評估能不能做成小工具。專案 NT$49,000 起，正式報價依需求評估。歡迎加入官方 LINE @riverflower2025 預約初步諮詢。</p>
 </div>
+<div class="note-service-link"><p>這三個流程跑順了，下一步多半會想把更多表單和資料串在一起。川花在「<a href="/chuanhua_site_v12_1/services/workflow/" data-route>AI 工作流程自動化</a>」整理了常見的串接方式，想往下延伸時可以參考。</p></div>
 <nav class="note-related" aria-label="相關筆記"><h2>讓想法繼續開花</h2><a href="/chuanhua_site_v12_1/notes/line-chatbot-website-customer-service/" data-route>LINE 機器人怎麼做？從自動回覆到官網詢問流程</a><a href="/chuanhua_site_v12_1/notes/ai-ad-upload-automation/" data-route>服飾品牌怎麼用 AI 一天上完 10 支廣告？加速下廣告實戰</a></nav>
-<div class="note-service-link"><a class="btn" href="/chuanhua_site_v12_1/ai/" data-route>探索 AI 客製化服務 →</a></div>
-</section>
-<section class="feature-page note-article" data-feature="note-09" data-note-id="09" hidden>
-<div class="st-top"><a class="st-back" href="/chuanhua_site_v12_1/notes/" data-route>← 回到開花筆記</a></div>
-<header class="st-head"><h1 id="feature-note-09-title" tabindex="-1">AI 做的商品圖和影片可以商用嗎？授權注意事項</h1><p class="note-category">品牌內容</p><p class="note-deck">AI 商品圖、AI 影片能不能放進廣告和商品頁？從工具條款、付費方案、真人肖像、商標四個面向，整理服飾品牌商用前該檢查的事。</p></header>
-<div class="note-prose">
-<p>AI 做的商品圖、影片，可以直接拿去打廣告嗎？</p>
-<p>新品下週要上，模特兒檔期排不到，攝影棚也滿了。你打開 AI 工具，輸入幾句描述，幾分鐘後就有一張模特兒穿著新款洋裝、站在咖啡廳窗邊的圖，看起來比去年外拍還有氣氛。</p>
-<p>問題來了：這張圖可以直接放進廣告和官網商品頁嗎？</p>
-<p>先說在前面：以下是一般原則，不是法律意見。金額大、要長期使用，或已經有人來信的情況，請找熟悉智慧財產的律師確認。</p>
-<h2>第一關：先看工具自己的條款</h2>
-<p>AI 圖能不能商用，第一個要看的是你用的那個工具的使用條款。每家規定不一樣，而且條款會更新，去年可以的今年不一定。</p>
-<p>最常見的差別在免費版和付費版。不少工具的免費或試用方案不開放商業使用，付費後才可以；有些還會依公司規模要求較高階的方案。</p>
-<p>建議做法：決定用哪個工具前，打開條款找「商業使用」那一段，截圖存檔並記下日期和方案。公司裡大家用同一個方案，不要有人用免費版偷偷做圖。</p>
-<h2>第二關：能用，不代表是「你的」</h2>
-<p>目前許多國家的主流看法是：完全由 AI 自動生成、人幾乎沒有參與創作的內容，不一定能主張著作權。也就是說，你可以用，但別人拿去用，你也不一定擋得住。</p>
-<p>如果你在 AI 圖上做了大量修圖、重新構圖，或結合自己拍的照片，人參與的部分比較有機會受保護。這塊各國都還在討論。</p>
-<p>實際建議：主視覺、品牌識別這類要長期用、怕被抄的素材，還是以真人拍攝或設計師作品為主；AI 適合做背景、情境圖和大量測試的廣告變化版。</p>
-<h2>第三關：真人臉孔，碰不得</h2>
-<p>這是服飾品牌最容易踩的雷。用 AI 做出很像某位藝人的模特兒，或把網紅照片丟進去換衣服，就算工具做得出來，也可能涉及肖像權和個資問題。</p>
-<ul><li>不要用真實人物的名字下指令。</li><li>不要把別人的照片拿去 AI 改圖，合作過的模特兒也一樣，除非合約寫清楚。</li><li>生成的人物意外很像某位名人，就換一張。</li><li>要用自家模特兒照片做 AI 變化版，先拿到書面同意，寫清楚用途和期間。</li></ul>
-<h2>第四關：別人的商標，和你自己的商品</h2>
-<p>AI 是看過大量圖片學出來的，有時會順手畫出很像某品牌的標誌、花紋或動畫角色。放進廣告裡，看起來就像在蹭別人的品牌。</p>
-<p>上架前用肉眼看一遍：衣服上的字、背景招牌、配件圖案，有沒有別人的商標？提示詞裡也不要寫「某某品牌風格」。</p>
-<p>另一個重點：圖裡的商品必須跟實品一致。顏色、版型差很多，客人收到會失望，也可能引來消費糾紛。AI 可以換背景、換情境，但商品本身最好用實拍照片當基礎。</p>
-<p>部分廣告和社群平台也要求標示 AI 生成內容，上稿前以平台最新規定為準。</p>
-<h2>上廣告前的一分鐘檢查</h2>
-<ol><li>這個工具、這個方案允許商用嗎？條款截圖了嗎？</li><li>有沒有真實人物的臉，或很像名人的臉？</li><li>有沒有別人的商標、角色、招牌文字？</li><li>商品顏色和細節跟實品一樣嗎？</li><li>平台需要標示 AI 生成嗎？</li></ol>
-<p>五題都過，風險就小很多；拿不準的，留給人工判斷，必要時請教專業人士。</p>
-<h2>常見問題</h2>
-<dl class="note-qa"><dt>付費版做的圖，就一定沒問題嗎？</dt><dd>不一定。付費通常代表工具允許你商用，但不代表它保證圖裡沒有侵權內容，很多條款會寫明由使用者自行負責。人像和商標的檢查還是要做。</dd></dl>
-<dl class="note-qa"><dt>AI 做的影片，規則跟圖片一樣嗎？</dt><dd>大原則一樣，先看條款，再查人像和商標。影片多了配樂和配音要注意：AI 產生的音樂和聲音也要確認可以商用，而且不要用 AI 模仿真人的聲音。</dd></dl>
-<dl class="note-qa"><dt>寫上「本圖由 AI 生成」就沒事了嗎？</dt><dd>不是。標示是誠實的做法，部分平台也有要求，但它不能讓侵權變成不侵權。真正重要的是，素材裡沒有用到別人的臉、商標和作品。</dd></dl>
-<h2>想把哪個工作交給 AI？</h2>
-<p>AI 素材用得安心之後，像廣告上稿、文案初稿這類重複的工作，也可以交給 AI 小工具。告訴我們哪個工作最麻煩，川花幫你評估能不能做成小工具，專案 NT$49,000 起。加入官方 LINE @riverflower2025，預約初步諮詢。</p>
-</div>
-<nav class="note-related" aria-label="相關筆記"><h2>讓想法繼續開花</h2><a href="/chuanhua_site_v12_1/notes/ai-ad-copy-brand-voice/" data-route>AI 寫廣告文案，品牌語氣怎麼守住？服飾品牌實戰做法</a><a href="/chuanhua_site_v12_1/notes/small-business-website-inquiry-design/" data-route>中小企業官網怎麼做？從品牌形象到有效詢價的網站規劃</a></nav>
-<div class="note-service-link"><a class="btn" href="/chuanhua_site_v12_1/ai/" data-route>探索 AI 客製化服務 →</a></div>
 </section>
 <!-- NOTE-ARTICLES:END -->
     <section class="feature-page" data-feature="quote" hidden>

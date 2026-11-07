@@ -15,7 +15,6 @@ home/index.html
 notes/ai-ad-copy-brand-voice/index.html
 notes/ai-ad-upload-automation/index.html
 notes/ai-custom-tool-pricing-guide/index.html
-notes/ai-image-video-commercial-use/index.html
 notes/ai-receipt-photo-bookkeeping/index.html
 notes/custom-business-app-web-vs-mobile/index.html
 notes/index.html
