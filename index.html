@@ -1843,10 +1843,10 @@ body p, body h1, body h2, body h3, body h4, body span, body li, body article { -
     <ul class="nav-links" id="navLinks">
       <li class="nav-close-item"><button class="nav-close" id="navClose" type="button" aria-label="摺疊選單">× 摺疊功能區</button></li>
       <li><a href="#about">關於我們</a></li>
-      <li><a href="/chuanhua_site_v12_1/services/" data-route>我們做的事</a></li>
-      <li><a href="/chuanhua_site_v12_1/cases/" id="navCases" data-route>我們開過的花</a></li>
-      <li><a href="/chuanhua_site_v12_1/notes/" id="navNotes" data-route>開花筆記</a></li>
-      <li><a href="#" id="navGarden">找川花說話</a></li>
+      <li><a href="#services">我們做的事</a></li>
+      <li><a href="#cases">我們開過的花</a></li>
+      <li><a href="#courses">開花教室</a></li>
+      <li><a href="#contact">找川花說話</a></li>
     </ul>
   </div>
 </nav>
@@ -2159,7 +2159,7 @@ body p, body h1, body h2, body h3, body h4, body span, body li, body article { -
           <h4>關於川花<small>ABOUT</small></h4>
           <a href="#about">關於我們</a>
           <a href="/chuanhua_site_v12_1/team/" data-route>川花團隊</a>
-          <a href="#" data-studio>開花教室</a>
+          <a href="#courses">開花教室</a>
           <a href="/chuanhua_site_v12_1/policy/" data-route>退款規則</a>
           <a href="#contact">找川花說話</a>
         </div>
@@ -3027,7 +3027,6 @@ field.addEventListener('click',e=>{
   btn.classList.add('picked');
   setTimeout(()=>{
     if(btn.dataset.target==='studio' || btn.dataset.target==='studio-flow'){ enterMain(null); openStudio(btn.dataset.target==='studio-flow'?'#flow':null); }
-    else if(btn.dataset.target==='#cases') $('#navCases').click();
     else enterMain(btn.dataset.target);
   }, reduced?0:1100);
 });
@@ -3101,7 +3100,6 @@ function closeStudio(scrollTo_){
 }
 $$('[data-studio]').forEach(el=>el.addEventListener('click',e=>{e.preventDefault();openStudio();setNavOpen(false)}));
 $('#stBack').addEventListener('click',()=>closeStudio('#courses'));
-$('#navGarden').addEventListener('click',e=>{e.preventDefault();if($('#studio').classList.contains('open')) closeStudio();$('#reGarden').click()});
 $('#navLogo').addEventListener('click',e=>{e.preventDefault();if($('#studio').classList.contains('open')) closeStudio();$('#reGarden').click()});
 const stFlowLink=$('#stFlowLink');
 if(stFlowLink) stFlowLink.addEventListener('click',e=>{e.preventDefault();closeStudio('#flow')});
@@ -4362,7 +4360,7 @@ async function submit(){
   const META = JSON.parse($id('route-meta').textContent);
   const SECTION_ROUTE = {};
   Object.entries(META).forEach(([p,m])=>{ if(m.layer==='main' && m.section) SECTION_ROUTE[m.section]=p; });
-  SECTION_ROUTE['#services']='/home/'; // 首頁卡片區仍屬首頁，完整服務另開布幕。
+  SECTION_ROUTE['#services']='/home/'; // 選單「我們做的事」捲到首頁卡片區，網址停在 /home/；/services/ 總頁從服務專屬頁進。
   const studio = $id('studio');
   const feature = $id('feature');
   const featurePages = [...feature.querySelectorAll('[data-feature]')];
@@ -4516,6 +4514,7 @@ async function submit(){
     const a = e.target.closest('a[href^="#"]');
     if (a && SECTION_ROUTE[a.getAttribute('href')]){
       e.preventDefault();
+      if (studio.classList.contains('open')) closeStudio();
       section = a.getAttribute('href');
       const el = document.querySelector(section);
       if (el) el.scrollIntoView({behavior: reduced?'auto':'smooth'});
@@ -4524,7 +4523,7 @@ async function submit(){
     }
     const flower = e.target.closest('.g-flower');
     if (flower) section = flower.dataset.target;
-    if (e.target.closest('#reGarden,#navGarden,#navLogo,#g-skip,[data-studio],#stFlowLink')) section = null;
+    if (e.target.closest('#reGarden,#navLogo,#g-skip,[data-studio],#stFlowLink')) section = null;
     if (e.target.closest('#stBack')) section = '#courses';
   }, true);
 
