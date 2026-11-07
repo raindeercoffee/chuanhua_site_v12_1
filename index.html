@@ -1566,8 +1566,10 @@ footer .ft-bottom .back-garden{margin-top:0}
 .note-related h2{font:600 22px/1.8 var(--serif);margin:0 0 18px;color:var(--river-deep)}
 .note-related a{display:block;padding:12px 0;font-size:14px;line-height:1.9;color:var(--river);text-decoration:none}
 .note-related a:hover{text-decoration:underline;text-underline-offset:5px}
-.note-service-link{max-width:720px;margin:30px auto 0;padding-top:26px;border-top:1px solid var(--line)}
-.note-service-link .btn{text-decoration:none}
+.note-service-link{max-width:720px;margin:8px auto 0;padding:22px 26px;background:var(--card);border:1px solid var(--line);border-radius:18px}
+.note-service-link p{margin:0;font:400 15px/2 var(--sans);color:var(--ink-soft);overflow-wrap:anywhere}
+.note-service-link a{color:var(--river);text-decoration:underline;text-underline-offset:4px}
+.note-service-link a:hover,.note-service-link a:focus-visible{color:var(--pink-deep)}
 @media(max-width:760px){.bloom-entry-actions{flex-direction:column;align-items:flex-start;gap:14px}.notes-list{grid-template-columns:1fr;gap:26px}.note-card{padding:28px 24px}.note-card-title{font-size:20px}.notes-filters{gap:8px}.notes-filters .topic-tab{padding:9px 14px;font-size:12px;letter-spacing:0}.note-prose{font-size:15px;line-height:2.05}.note-prose h2{font-size:22px;margin-top:36px}.note-prose h3{font-size:18px}.note-deck{font-size:15px}.note-qa dt{font-size:17px}}
 @media(prefers-reduced-motion:reduce){.note-card{transition:none}.note-card:hover{transform:none}}
 footer .notes-link{margin-left:24px}
@@ -2267,11 +2269,13 @@ body p, body h1, body h2, body h3, body h4, body span, body li, body article { -
       <header class="st-head notes-head"><div class="st-eyebrow">BLOOM NOTES</div><h1 id="feature-notes-title" tabindex="-1">開花筆記</h1><p>關於品牌、行銷與 AI 的一些觀察。<br>讓每個想法，在這裡慢慢開花。</p></header>
       <div class="feature-body notes-body">
         <div class="notes-filters" role="group" aria-label="文章分類">
-          <button class="topic-tab" type="button" data-notes-filter="全部" aria-pressed="true">全部</button>
-          <button class="topic-tab" type="button" data-notes-filter="流程自動化" aria-pressed="false">流程自動化</button>
-          <button class="topic-tab" type="button" data-notes-filter="品牌內容" aria-pressed="false">品牌內容</button>
-          <button class="topic-tab" type="button" data-notes-filter="AI 導入" aria-pressed="false">AI 導入</button>
-          <button class="topic-tab" type="button" data-notes-filter="網站建置" aria-pressed="false">網站建置</button>
+          <!-- NOTES-FILTERS:START -->
+<button class="topic-tab" type="button" data-notes-filter="全部" aria-pressed="true">全部</button>
+<button class="topic-tab" type="button" data-notes-filter="流程自動化" aria-pressed="false">流程自動化</button>
+<button class="topic-tab" type="button" data-notes-filter="品牌內容" aria-pressed="false">品牌內容</button>
+<button class="topic-tab" type="button" data-notes-filter="AI 導入" aria-pressed="false">AI 導入</button>
+<button class="topic-tab" type="button" data-notes-filter="網站建置" aria-pressed="false">網站建置</button>
+<!-- NOTES-FILTERS:END -->
         </div>
         <p id="notes-count" class="notes-count" role="status" aria-live="polite"></p>
         <div class="notes-list" aria-label="文章列表">
