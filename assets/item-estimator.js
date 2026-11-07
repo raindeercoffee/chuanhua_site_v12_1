@@ -27,7 +27,7 @@
     workflow: make('AI 工作流程自動化','assets/quiz-plants/eucalyptus.png',['流程訪談','基本流程規劃'],[item('自動化流程','設計並建立指定工作流程',12000,true,'條'),item('資料整理串接','銜接資料來源與整理方式',8000,true),item('通知與提醒','在指定時機提供提醒',5000),item('人工確認節點','保留需要人工判斷的步驟',5000),item('團隊操作教學','說明日常使用方式',6000),item('流程文件','整理設定與操作說明',4000)]),
     content: make('AI 文案與內容生成','assets/quiz-plants/jasmine.png',['需求訪談','內容流程規劃'],[item('品牌口吻規則整理','整理品牌常用語氣與禁忌',8000,true),item('文案範本組','建立可重複使用的文案範本',4000,true,'組'),item('商品文案','規劃商品介紹生成方式',6000,true),item('社群貼文','規劃社群內容生成方式',6000),item('團隊 AI 文案技能訓練','練習產出與調整文案',8000),item('季度更新','定期調整規則與範本',6000)]),
     tools: make('AI 客製工具開發','assets/quiz-plants/cedar.png',['需求訪談','工具功能規劃'],[item('操作介面設計','規劃易於使用的畫面',10000,true),item('資料匯入與整理','整理輸入資料的方式',8000,true),item('AI 生成與分析','依需求處理內容或資料',12000,true),item('結果匯出','將結果匯出供後續使用',5000),item('帳號與權限','規劃使用者權限',10000),item('操作教學','陪團隊熟悉工具',6000)]),
-    'ad-ops': make('廣告上稿自動化','assets/quiz-plants/mint.png',['上稿流程訪談','基本需求規劃'],[item('上稿表規格設計','整理上稿欄位與規則',8000,true),item('匯入檔自動轉換','將資料整理成所需格式',10000,true),item('影片批次上傳與編號回填','減少重複搬運與填寫',12000,true),item('上稿前逐項檢查','檢查必要欄位與資料',8000,true),item('團隊操作教學','說明上稿流程與操作',6000),item('錯誤提示與紀錄','保留可追查的處理紀錄',6000)])
+    'ad-ops': make('加速下廣告','assets/quiz-plants/mint.png',['上稿流程訪談','基本需求規劃'],[item('上稿表規格設計','整理上稿欄位與規則',8000,true),item('匯入檔自動轉換','將資料整理成所需格式',10000,true),item('影片批次上傳與編號回填','減少重複搬運與填寫',12000,true),item('上稿前逐項檢查','檢查必要欄位與資料',8000,true),item('團隊操作教學','說明上稿流程與操作',6000),item('錯誤提示與紀錄','保留可追查的處理紀錄',6000)])
   };
   const CONFIG = Object.fromEntries(['ads', 'brand-marketing', 'ads-audit', 'website', 'workflow', 'content', 'tools', 'ad-ops'].map(id => [id, RAW_CONFIG[id]]));
   const clone = x => JSON.parse(JSON.stringify(x));

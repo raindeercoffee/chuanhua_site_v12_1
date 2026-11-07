@@ -32,7 +32,7 @@ const CH_PRICING = {
     { id: 'workflow', name: 'AI 工作流程自動化', description: '把資料整理、表單彙整與重複上稿串成清楚的工作流程，依你的做事方式規劃，讓每天重複的操作少一點。', addons: [{ id: 'line', name: 'LINE 串接' }, { id: 'sheets', name: 'Google Sheet 串接' }, { id: 'training', name: '員工教學' }, { id: 'monitor', name: '流程異常提醒' }], quantity: { label: '自動化流程條數', unit: '條', included: 1, min: 1, max: 20 } },
     { id: 'content', name: 'AI 文案與內容生成', description: '從品牌語氣、商品文案到社群貼文，建立適合你的內容生成流程。讓 AI 協助打底，保留品牌自己的聲音。', addons: [{ id: 'voice', name: '品牌語氣訓練' }, { id: 'product', name: '商品文案範本' }, { id: 'social', name: '社群貼文範本' }, { id: 'library', name: '品牌素材知識庫' }], quantity: { label: '內容範本組數', unit: '組', included: 1, min: 1, max: 30 } },
     { id: 'tools', name: 'AI 客製工具開發', description: '依實際需求規劃報表、記帳或資料查詢工具，串接既有表單與系統。從最卡手的小事開始，做出真正用得上的幫手。', addons: [{ id: 'dashboard', name: '報表儀表板' }, { id: 'api', name: '既有系統串接' }, { id: 'access', name: '使用者權限' }, { id: 'training', name: '操作教學' }], quantity: { label: '客製工具數量', unit: '個', included: 1, min: 1, max: 10 } },
-    { id: "ad-ops", name: "廣告上稿自動化", description: "將上稿表轉成可匯入檔案，批次處理影片與檢查欄位，讓團隊把時間留給判斷。", addons: [], quantity: null }
+    { id: "ad-ops", name: "加速下廣告", description: "將上稿表轉成可匯入檔案，批次處理影片與檢查欄位，讓團隊把時間留給判斷。", addons: [], quantity: null }
   ];
   const byId = id => SERVICES.find(service => service.id === id);
   const TIERS = { basic: '基本', advanced: '進階', complete: '完整' };
