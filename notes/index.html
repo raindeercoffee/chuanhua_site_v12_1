@@ -2232,16 +2232,10 @@ body p, body h1, body h2, body h3, body h4, body span, body li, body article { -
           </ul>
           <a class="ft-line" href="https://line.me/R/ti/p/@riverflower2025" target="_blank" rel="noopener">LINE 找川花 @riverflower2025</a>
         </div>
-        <div class="ft-col" role="navigation" aria-label="我們做的事">
-          <h4>我們做的事<small>WHAT WE DO</small></h4>
-          <a href="/chuanhua_site_v12_1/services/ads/" data-route>數位廣告投放</a>
-          <a href="/chuanhua_site_v12_1/services/brand-marketing/" data-route>品牌整合行銷</a>
-          <a href="/chuanhua_site_v12_1/services/ads-audit/" data-route>廣告帳戶健檢</a>
-          <a href="/chuanhua_site_v12_1/services/website/" data-route>品牌官網製作</a>
-          <a href="/chuanhua_site_v12_1/services/workflow/" data-route>AI 工作流程自動化</a>
-          <a href="/chuanhua_site_v12_1/services/content/" data-route>AI 文案與內容生成</a>
-          <a href="/chuanhua_site_v12_1/services/tools/" data-route>AI 客製工具開發</a>
-          <a href="/chuanhua_site_v12_1/services/ad-ops/" data-route>加速下廣告</a>
+        <div class="ft-col" role="navigation" aria-label="服務項目">
+          <h4>服務項目<small>SERVICES</small></h4>
+          <a href="/chuanhua_site_v12_1/services/" data-route data-svc-group="brand">品牌行銷</a>
+          <a href="/chuanhua_site_v12_1/services/" data-route data-svc-group="digital">AI 與數位工具</a>
         </div>
         <div class="ft-col" role="navigation" aria-label="開過的花">
           <h4>開過的花<small>CASES</small></h4>
@@ -3102,6 +3096,20 @@ field.addEventListener('click',e=>{
   }, reduced?0:1100);
 });
 $('#g-skip').addEventListener('click',()=>enterMain(null));
+
+/* 頁尾「服務項目」：打開服務項目頁後，捲到點選的那一組（品牌行銷／AI 與數位工具） */
+document.addEventListener('click',e=>{
+  const link=e.target.closest('[data-svc-group]');
+  if(!link)return;
+  const target='svc-group-'+link.dataset.svcGroup;
+  let tries=0;
+  const go=()=>{
+    const el=document.getElementById(target), layer=document.getElementById('feature');
+    if(el&&layer&&layer.classList.contains('open')&&!el.closest('[hidden]')) el.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});
+    else if(tries++<30) setTimeout(go,100);
+  };
+  setTimeout(go,150);
+});
 
 /* 回到花園 */
 $('#reGarden').addEventListener('click',e=>{
