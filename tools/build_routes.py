@@ -19,15 +19,19 @@ import json
 import re
 from pathlib import Path
 
-from build_services import render_services
+from build_services import load_services, render_services
 
 ROOT = Path(__file__).resolve().parents[1]
 SITE = "https://raindeercoffee.com/chuanhua_site_v12_1"
 SOURCE = ROOT / "index.html"
 MANIFEST = ROOT / "tools" / "generated.txt"
 NOTES = ROOT / "content" / "notes.json"
-NOTE_IDS = ["06", "07", "10", "01", "02", "03", "04", "05", "08", "09"]
+NOTE_IDS = ["06", "07", "10", "01", "02", "03", "04", "05", "08"]
 NOTE_SCHEMA_ID = "note-schema"
+NOTE_CATEGORIES = ("流程自動化", "品牌內容", "AI 導入", "網站建置")
+# 文末連到服務的那段話要像朋友順口提起：不催促、不推銷，也不用 AI 腔的對比句。
+SERVICE_NOTE_BANNED = ("立即", "現在就", "名額", "限時", "下單", "不是", "而是", "與其", "不如", "上稿自動化")
+SERVICE_TOKEN = re.compile(r"\{([a-z-]+)\}")
 
 
 def unique_object(pairs: list[tuple]) -> dict:
@@ -61,7 +65,9 @@ def load_notes() -> list[dict]:
     if [a.get("id") for a in articles] != NOTE_IDS:
         raise ValueError("文章編號與順序必須恰為 " + "、".join(NOTE_IDS))
     slugs = set()
-    article_fields = {"id", "slug", "title", "description", "keywords", "category", "sourceFile", "blocks"}
+    service_slugs = {service["slug"] for service in load_services()}
+    article_fields = {"id", "slug", "title", "description", "keywords", "category", "sourceFile", "blocks",
+                      "serviceNote"}
     for article in articles:
         label = f"筆記 {article['id']}"
         if set(article) != article_fields:
@@ -72,8 +78,15 @@ def load_notes() -> list[dict]:
         if len(slug) > 120 or not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", slug) or slug in slugs:
             raise ValueError(f"{label} 網址代稱不安全或重複")
         slugs.add(slug)
-        if article["category"] not in {"流程自動化", "品牌內容", "AI 導入", "網站建置"}:
+        if article["category"] not in NOTE_CATEGORIES:
             raise ValueError(f"{label} 分類不在允許清單")
+        # serviceNote：文末一段話，用 {服務代稱} 標出要連到的服務專屬頁（1～2 個）。
+        service_note = require_text(article["serviceNote"], f"{label}.serviceNote")
+        linked = SERVICE_TOKEN.findall(service_note)
+        if not 1 <= len(linked) <= 2 or len(set(linked)) != len(linked) or not set(linked) <= service_slugs:
+            raise ValueError(f"{label} serviceNote 要用 {{服務代稱}} 連到 1～2 個不同的服務")
+        if "{" in SERVICE_TOKEN.sub("", service_note) or any(w in service_note for w in SERVICE_NOTE_BANNED):
+            raise ValueError(f"{label} serviceNote 有多餘的大括號，或用了推銷、AI 腔字眼")
         if any(c in article["sourceFile"] for c in "/\\:") or not article["sourceFile"].endswith(".txt"):
             raise ValueError(f"{label} 來源只可記錄文字稿檔名")
         keywords = article["keywords"]
@@ -117,6 +130,27 @@ def note_link(article: dict, label: str | None = None) -> str:
     return f'<a href="{url}" data-route>{title}</a>'
 
 
+def render_service_note(article: dict, names: dict[str, str]) -> str:
+    """把 {服務代稱} 換成服務專屬頁連結，連結文字一律用服務現行名稱。"""
+    parts = SERVICE_TOKEN.split(article["serviceNote"])
+    for index, part in enumerate(parts):
+        if index % 2:
+            parts[index] = (f'<a href="/chuanhua_site_v12_1/services/{part}/" data-route>'
+                            f'{html.escape(names[part], quote=True)}</a>')
+        else:
+            parts[index] = html.escape(part, quote=True)
+    return f'<div class="note-service-link"><p>{"".join(parts)}</p></div>'
+
+
+def render_filters(articles: list[dict]) -> str:
+    """分類按鈕跟著文章產生：沒有文章的分類不出現，以後增減文章不必手改。"""
+    present = [c for c in NOTE_CATEGORIES if any(a["category"] == c for a in articles)]
+    return "\n".join(
+        f'<button class="topic-tab" type="button" data-notes-filter="{html.escape(c, quote=True)}" '
+        f'aria-pressed="{"true" if c == "全部" else "false"}">{html.escape(c)}</button>'
+        for c in ["全部", *present])
+
+
 def render_block(block: dict) -> str:
     kind = block["type"]
     if kind in ("p", "h2"):
@@ -148,6 +182,7 @@ def render_notes(text: str, articles: list[dict]) -> str:
         raise ValueError("首頁缺少既有開花筆記路由")
     # 每篇筆記各用一株既有手繪植物，維持小花尺寸。
     note_plants = ("lavender", "chamomile", "rosemary", "rose", "jasmine", "olive", "mint", "lemon", "geranium", "eucalyptus")
+    names = {service["slug"]: service["name"] for service in load_services()}
     cards, pages = [], []
     for number, article in enumerate(articles):
         plant = note_plants[number % len(note_plants)]
@@ -166,26 +201,18 @@ def render_notes(text: str, articles: list[dict]) -> str:
         related = sorted((other for other in articles if other["id"] != identity),
                          key=lambda other: other["category"] != article["category"])[:2]
         prose = "\n".join(render_block(block) for block in article["blocks"])
-        services = {
-            "06": [("/services/website/", "品牌官網製作 →")],
-            "07": [("/ai/workflow/", "AI 工作流程自動化 →")],
-            "10": [("/ai/tools/", "AI 客製工具開發 →")],
-        }.get(identity, [("/ai/", "探索 AI 客製化服務 →")])
-        service_links = "".join(
-            f'<a class="btn" href="/chuanhua_site_v12_1{path}" data-route>{html.escape(label)}</a>'
-            for path, label in services
-        )
         pages.append(
             f'<section class="feature-page note-article" data-feature="note-{identity}" data-note-id="{identity}" hidden>\n'
             '<div class="st-top"><a class="st-back" href="/chuanhua_site_v12_1/notes/" data-route>← 回到開花筆記</a></div>\n'
             f'<header class="st-head"><h1 id="feature-note-{identity}-title" tabindex="-1">{title}</h1>'
             f'<p class="note-category">{category}</p><p class="note-deck">{description}</p></header>\n'
             f'<div class="note-prose">\n{prose}\n</div>\n'
+            + render_service_note(article, names) + '\n'
             '<nav class="note-related" aria-label="相關筆記"><h2>讓想法繼續開花</h2>'
             + "".join(note_link(other) for other in related) + '</nav>\n'
-            f'<div class="note-service-link">{service_links}</div>\n'
             '</section>'
         )
+    text = replace_marked(text, "NOTES-FILTERS", render_filters(articles))
     text = replace_marked(text, "NOTES-LIST", "\n".join(cards))
     text = replace_marked(text, "NOTE-ARTICLES", "\n".join(pages))
     # 只移除本生成器曾建立的筆記文章，不動其他頁面路由。
@@ -218,7 +245,7 @@ def route_schema(path: str, articles: list[dict], description: str = "") -> list
     if path == "/notes/":
         return [{"@context": "https://schema.org", "@type": "CollectionPage", "@id": url + "#webpage",
                  "name": "開花筆記", "description": description, "url": url,
-                 "mainEntity": {"@type": "ItemList", "itemListElement": [
+                 "mainEntity": {"@type": "ItemList", "numberOfItems": len(articles), "itemListElement": [
                      {"@type": "ListItem", "position": i, "name": a["title"], "url": SITE + note_path(a)}
                      for i, a in enumerate(articles, 1)]}}]
     article = next((a for a in articles if note_path(a) == path), None)
@@ -339,6 +366,11 @@ def main() -> None:
         stale_path = ROOT / stale
         if stale_path.exists():
             stale_path.unlink()
+        # 下架的網址連資料夾一起收掉，免得留下空殼資料夾。
+        folder = stale_path.parent
+        while folder != ROOT and folder.is_dir() and not any(folder.iterdir()):
+            folder.rmdir()
+            folder = folder.parent
 
     write(MANIFEST, "\n".join(sorted(generated)) + "\n")
 
