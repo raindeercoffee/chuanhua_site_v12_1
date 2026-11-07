@@ -1400,8 +1400,11 @@ nav.scrolled{box-shadow:0 4px 24px rgba(90,80,60,.08)}
 .terms .t-body p{margin-bottom:8px}
 footer{background:#E6E2D8;color:#4A4844;padding:56px 24px 30px;font-size:13px;border-top:1px solid rgba(255,255,255,.35)}
 footer .ft-grid{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1.35fr 1.1fr .85fr 1fr .85fr;gap:36px}
-footer .ft-brand img{height:76px;width:auto;margin-bottom:16px}
-footer .ft-intro{font-family:var(--serif);font-size:14px;line-height:1.95;color:var(--river-deep);margin-bottom:16px}
+footer .ft-brand-head{display:flex;align-items:center;gap:18px;margin-bottom:20px}
+footer .ft-brand img{height:76px;width:auto;margin:0}
+footer .ft-slogan{font-family:var(--serif);font-size:16px;letter-spacing:4px;line-height:1.7;color:var(--river-deep);margin:0}
+footer .ft-col .ft-line{margin-top:14px;color:var(--pink-deep);white-space:nowrap;padding:7px 14px;font-size:12px;letter-spacing:.3px}
+footer .ft-col .ft-line:hover{color:#fff;transform:none}
 footer .ft-contact{list-style:none;padding:0;margin:0 0 14px;line-height:1.9;color:#5E5A53;letter-spacing:.3px}
 footer .ft-line{display:inline-block;padding:7px 16px;border:1px solid rgba(147,50,63,.35);border-radius:99px;color:var(--pink-deep);text-decoration:none;font-size:12.5px;letter-spacing:.5px;transition:background .3s,color .3s}
 footer .ft-line:hover{background:var(--pink-deep);color:#fff}
@@ -2148,19 +2151,21 @@ body p, body h1, body h2, body h3, body h4, body span, body li, body article { -
     <footer>
       <div class="ft-grid">
         <div class="ft-brand">
-          <img src="/chuanhua_site_v12_1/assets/logo-v-color.png" alt="川花 RIVER FLOWER">
-          <p class="ft-intro">從河川長出花。<br>我們陪品牌找到最懂它的那群人，<br>再一起，慢慢開出自己的花季。</p>
+          <div class="ft-brand-head">
+            <img src="/chuanhua_site_v12_1/assets/logo-v-color.png" alt="川花 RIVER FLOWER">
+            <p class="ft-slogan">川流不息，花開有時</p>
+          </div>
           <ul class="ft-contact">
             <li>riverflower2025@gmail.com</li>
             <li>02-2885-4268</li>
             <li>週一至週五 10：00–18：00</li>
           </ul>
-          <a class="ft-line" href="https://line.me/R/ti/p/@riverflower2025" target="_blank" rel="noopener">LINE 找川花 @riverflower2025</a>
         </div>
         <div class="ft-col" role="navigation" aria-label="服務項目">
           <h4>服務項目<small>SERVICES</small></h4>
           <a href="/chuanhua_site_v12_1/services/" data-route data-svc-group="brand">品牌行銷</a>
           <a href="/chuanhua_site_v12_1/services/" data-route data-svc-group="digital">AI 與數位工具</a>
+          <a class="ft-line" href="https://line.me/R/ti/p/@riverflower2025" target="_blank" rel="noopener">LINE 找川花 @riverflower2025</a>
         </div>
         <div class="ft-col" role="navigation" aria-label="開過的花">
           <h4>開過的花<small>CASES</small></h4>
@@ -2177,11 +2182,9 @@ body p, body h1, body h2, body h3, body h4, body span, body li, body article { -
         </div>
         <div class="ft-col" role="navigation" aria-label="關於川花">
           <h4>關於川花<small>ABOUT</small></h4>
-          <a href="#about">關於我們</a>
           <a href="/chuanhua_site_v12_1/team/" data-route>川花團隊</a>
           <a href="#courses">開花教室</a>
           <a href="/chuanhua_site_v12_1/policy/" data-route>退款規則</a>
-          <a href="#contact">找川花說話</a>
         </div>
       </div>
       <div class="ft-bottom">

@@ -13,7 +13,7 @@ const BASE = (process.env.TEST_BASE || 'http://127.0.0.1:18930/chuanhua_site_v12
         await page.waitForTimeout(2500);
         const col = await page.evaluate(()=>{
           const c=document.querySelector('footer .ft-col[aria-label="服務項目"]');
-          return c?{title:c.querySelector('h4').childNodes[0].textContent.trim(),links:[...c.querySelectorAll('a')].map(a=>a.textContent.trim())}:null;
+          return c?{title:c.querySelector('h4').childNodes[0].textContent.trim(),links:[...c.querySelectorAll('a[data-svc-group]')].map(a=>a.textContent.trim())}:null;
         });
         assert.ok(col,'頁尾要有「服務項目」欄');
         assert.equal(col.title,'服務項目');
