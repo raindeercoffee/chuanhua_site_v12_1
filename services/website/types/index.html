@@ -86,8 +86,8 @@ if (!['/chuanhua_site_v12_1', '/chuanhua_site_v12_1/', '/'].includes(location.pa
     "noindex": true
   },
   "/cases/": {
-    "layer": "feature",
-    "feature": "cases",
+    "layer": "main",
+    "section": "#cases",
     "title": "我們開過的花｜品牌案例｜川花 RIVER FLOWER",
     "desc": "川花的品牌案例：服飾品牌、服飾電商品牌、募資品牌。",
     "noindex": true
@@ -1298,7 +1298,7 @@ nav.scrolled{box-shadow:0 4px 24px rgba(90,80,60,.08)}
 .case-bullets li::before{content:"·";position:absolute;left:2px;top:-1px;color:var(--pink-deep);font-weight:700;font-size:15px}
 
 /* courses(保留)+ 教室入口 ─ 山頂最深處 */
-.courses{background:linear-gradient(180deg,var(--services-b),var(--team-t))}
+.courses{background:linear-gradient(180deg,var(--cases-b),var(--team-t))}
 .course-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:44px}
 .course{position:relative;background:var(--card);border-radius:22px;padding:40px 34px 34px;border:1px solid var(--line);box-shadow:0 10px 34px rgba(90,80,60,.07);transition:transform .35s cubic-bezier(.22,.8,.35,1),box-shadow .35s;overflow:hidden}
 .course:hover{transform:translateY(-8px);box-shadow:0 24px 48px rgba(90,80,60,.13)}
@@ -1513,10 +1513,6 @@ footer .ft-bottom .back-garden{margin-top:0}
 .bloom-entry-actions{display:flex;flex-wrap:wrap;gap:18px;margin-top:38px}
 .bloom-entry-actions .btn{text-decoration:none}
 #bloom-entries{min-height:70svh;display:grid;align-content:center}
-#feature[data-page="cases"]{background:linear-gradient(180deg,var(--cases-t),var(--cases-b))}
-#feature .feature-page.cases{max-width:none;background:transparent;padding:0;min-height:calc(100svh - 150px);align-content:start}
-#feature .feature-page.cases>.wrap{padding:0}
-#feature-cases-title{font-family:var(--serif);font-size:clamp(26px,4vw,38px);color:var(--et-h);font-weight:700;letter-spacing:normal;margin-bottom:18px;line-height:1.45}
 .notes-body{max-width:900px}
 .notes-filters{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 18px}
 .notes-filters .topic-tab{font-size:13px;padding:10px 18px;letter-spacing:1px;min-height:44px}
@@ -1843,10 +1839,10 @@ body p, body h1, body h2, body h3, body h4, body span, body li, body article { -
     <ul class="nav-links" id="navLinks">
       <li class="nav-close-item"><button class="nav-close" id="navClose" type="button" aria-label="摺疊選單">× 摺疊功能區</button></li>
       <li><a href="#about">關於我們</a></li>
-      <li><a href="/chuanhua_site_v12_1/services/" data-route>我們做的事</a></li>
-      <li><a href="/chuanhua_site_v12_1/cases/" id="navCases" data-route>我們開過的花</a></li>
-      <li><a href="/chuanhua_site_v12_1/notes/" id="navNotes" data-route>開花筆記</a></li>
-      <li><a href="#" id="navGarden">找川花說話</a></li>
+      <li><a href="#services">我們做的事</a></li>
+      <li><a href="#cases">我們開過的花</a></li>
+      <li><a href="#courses">開花教室</a></li>
+      <li><a href="#contact">找川花說話</a></li>
     </ul>
   </div>
 </nav>
@@ -1934,6 +1930,34 @@ body p, body h1, body h2, body h3, body h4, body span, body li, body article { -
         <div class="topic-intro">
           <p>讓繁瑣的工作變簡單，把時間留給真正重要的事。</p>
           <a class="btn" href="/chuanhua_site_v12_1/ai/" data-route>探索 AI 客製化服務 →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 我們開過的花(1107 從布幕搬回首頁) -->
+  <section class="cases esec" id="cases" data-label="我們開過的花">
+    <div class="wrap">
+      <div class="eyebrow reveal">WHAT WE BLOOMED</div>
+      <h2 class="reveal">我們開過的花</h2>
+      <p class="lead reveal d1">每一個品牌，都是我們聆聽完河聲，親手開出來的。</p>
+      <div class="topic-tabs" role="tablist" aria-label="案例分類" data-topic-tabs>
+        <button class="topic-tab" type="button" role="tab" id="cases-brand-tab" aria-selected="true" aria-controls="cases-brand" tabindex="0">品牌行銷</button>
+        <button class="topic-tab" type="button" role="tab" id="cases-ai-tab" aria-selected="false" aria-controls="cases-ai" tabindex="-1">AI 工具</button>
+      </div>
+      <div class="topic-panel" id="cases-brand" role="tabpanel" aria-labelledby="cases-brand-tab">
+      <div class="case-grid">
+        <article class="case reveal d1"><div class="ind">個性女裝</div><h3>服飾品牌</h3><div class="strat">品牌年輕化內容策略</div><div class="nums"><div class="num"><b>↑ 57%</b><span>新客佔比成長</span></div><div class="num"><b>×2.1</b><span>社群自然觸及</span></div></div></article>
+        <article class="case reveal d2"><div class="ind">質感服飾</div><h3>服飾電商品牌</h3><div class="strat">品牌靈魂重塑 × 內容矩陣</div><div class="nums"><div class="num"><b>×3.0</b><span>內容留存率提升</span></div><div class="num"><b>重建</b><span>品牌識別體系</span></div></div></article>
+        <article class="case reveal"><div class="ind">募資操盤</div><h3>募資品牌</h3><div class="strat">早鳥策略 × 廣告轉換 × 節奏管理</div><div class="nums"><div class="num"><b>499 萬</b><span>上線 15 天達標</span></div><div class="num"><b>0→100</b><span>從冷啟動到熱銷</span></div></div><ul class="case-bullets"><li>市場定位</li><li>早鳥設計</li><li>募資達標</li></ul></article>
+      </div>
+      </div>
+      <div class="topic-panel" id="cases-ai" role="tabpanel" aria-labelledby="cases-ai-tab" hidden>
+        <div class="ai-case-grid">
+          <article class="ai-case"><h3>廣告上稿自動化</h3><p>把素材、文案與連結整理成上稿資料，減少重複複製貼上的時間。</p></article>
+          <article class="ai-case"><h3>AI 品牌文案師</h3><p>依品牌語氣整理商品賣點，協助撰寫貼文、廣告與活動文案。</p></article>
+          <article class="ai-case"><h3>發票記帳小幫手</h3><p>協助辨識發票資訊、分類收支，讓日常帳務更清楚。</p></article>
+          <article class="ai-case"><h3>剪輯師</h3><p>協助整理影片素材、剪輯節奏與字幕，讓故事更順暢地被看見。</p></article>
         </div>
       </div>
     </div>
@@ -2159,7 +2183,7 @@ body p, body h1, body h2, body h3, body h4, body span, body li, body article { -
           <h4>關於川花<small>ABOUT</small></h4>
           <a href="#about">關於我們</a>
           <a href="/chuanhua_site_v12_1/team/" data-route>川花團隊</a>
-          <a href="#" data-studio>開花教室</a>
+          <a href="#courses">開花教室</a>
           <a href="/chuanhua_site_v12_1/policy/" data-route>退款規則</a>
           <a href="#contact">找川花說話</a>
         </div>
@@ -2175,36 +2199,6 @@ body p, body h1, body h2, body h3, body h4, body span, body li, body article { -
 <!-- AI 與筆記共用的內容布幕；只有對應網址的內容會顯示 -->
 <div id="feature" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="feature-ai-title" inert>
   <div class="st-wrap">
-  <section class="feature-page cases esec" id="cases" data-feature="cases" data-label="我們開過的花" hidden>
-    <div class="st-top"><a class="st-back" href="/chuanhua_site_v12_1/home/" data-route>← 回到首頁</a></div>
-    <div class="wrap">
-      <div class="eyebrow reveal">WHAT WE BLOOMED</div>
-      <h1 class="reveal" id="feature-cases-title" tabindex="-1">我們開過的花</h1>
-      <p class="lead reveal d1">每一個品牌，都是我們聆聽完河聲，親手開出來的。</p>
-      <div class="topic-tabs" role="tablist" aria-label="案例分類" data-topic-tabs>
-        <button class="topic-tab" type="button" role="tab" id="cases-brand-tab" aria-selected="true" aria-controls="cases-brand" tabindex="0">品牌行銷</button>
-        <button class="topic-tab" type="button" role="tab" id="cases-ai-tab" aria-selected="false" aria-controls="cases-ai" tabindex="-1">AI 工具</button>
-      </div>
-      <div class="topic-panel" id="cases-brand" role="tabpanel" aria-labelledby="cases-brand-tab">
-      <div class="case-grid">
-        <article class="case reveal d1"><div class="ind">個性女裝</div><h3>服飾品牌</h3><div class="strat">品牌年輕化內容策略</div><div class="nums"><div class="num"><b>↑ 57%</b><span>新客佔比成長</span></div><div class="num"><b>×2.1</b><span>社群自然觸及</span></div></div></article>
-        <article class="case reveal d2"><div class="ind">質感服飾</div><h3>服飾電商品牌</h3><div class="strat">品牌靈魂重塑 × 內容矩陣</div><div class="nums"><div class="num"><b>×3.0</b><span>內容留存率提升</span></div><div class="num"><b>重建</b><span>品牌識別體系</span></div></div></article>
-        <article class="case reveal"><div class="ind">募資操盤</div><h3>募資品牌</h3><div class="strat">早鳥策略 × 廣告轉換 × 節奏管理</div><div class="nums"><div class="num"><b>499 萬</b><span>上線 15 天達標</span></div><div class="num"><b>0→100</b><span>從冷啟動到熱銷</span></div></div><ul class="case-bullets"><li>市場定位</li><li>早鳥設計</li><li>募資達標</li></ul></article>
-      </div>
-      </div>
-      <div class="topic-panel" id="cases-ai" role="tabpanel" aria-labelledby="cases-ai-tab" hidden>
-        <div class="ai-case-grid">
-          <article class="ai-case"><h3>廣告上稿自動化</h3><p>把素材、文案與連結整理成上稿資料，減少重複複製貼上的時間。</p></article>
-          <article class="ai-case"><h3>AI 品牌文案師</h3><p>依品牌語氣整理商品賣點，協助撰寫貼文、廣告與活動文案。</p></article>
-          <article class="ai-case"><h3>發票記帳小幫手</h3><p>協助辨識發票資訊、分類收支，讓日常帳務更清楚。</p></article>
-          <article class="ai-case"><h3>剪輯師</h3><p>協助整理影片素材、剪輯節奏與字幕，讓故事更順暢地被看見。</p></article>
-        </div>
-      </div>
-      <div class="feature-actions"><a class="btn" href="/chuanhua_site_v12_1/notes/" data-route>閱讀開花筆記 →</a></div>
-    </div>
-  </section>
-
-
 <section class="feature-page" data-feature="ai" hidden>
       <div class="st-top"><a class="st-back" href="/chuanhua_site_v12_1/services/" data-route>← 回到我們做的事</a></div>
       <header class="st-head"><h1 id="feature-ai-title" tabindex="-1">AI 客製化服務</h1><p>讓繁瑣的工作變簡單，把時間留給真正重要的事。</p></header>
@@ -3027,7 +3021,6 @@ field.addEventListener('click',e=>{
   btn.classList.add('picked');
   setTimeout(()=>{
     if(btn.dataset.target==='studio' || btn.dataset.target==='studio-flow'){ enterMain(null); openStudio(btn.dataset.target==='studio-flow'?'#flow':null); }
-    else if(btn.dataset.target==='#cases') $('#navCases').click();
     else enterMain(btn.dataset.target);
   }, reduced?0:1100);
 });
@@ -3101,7 +3094,6 @@ function closeStudio(scrollTo_){
 }
 $$('[data-studio]').forEach(el=>el.addEventListener('click',e=>{e.preventDefault();openStudio();setNavOpen(false)}));
 $('#stBack').addEventListener('click',()=>closeStudio('#courses'));
-$('#navGarden').addEventListener('click',e=>{e.preventDefault();if($('#studio').classList.contains('open')) closeStudio();$('#reGarden').click()});
 $('#navLogo').addEventListener('click',e=>{e.preventDefault();if($('#studio').classList.contains('open')) closeStudio();$('#reGarden').click()});
 const stFlowLink=$('#stFlowLink');
 if(stFlowLink) stFlowLink.addEventListener('click',e=>{e.preventDefault();closeStudio('#flow')});
@@ -4362,7 +4354,7 @@ async function submit(){
   const META = JSON.parse($id('route-meta').textContent);
   const SECTION_ROUTE = {};
   Object.entries(META).forEach(([p,m])=>{ if(m.layer==='main' && m.section) SECTION_ROUTE[m.section]=p; });
-  SECTION_ROUTE['#services']='/home/'; // 首頁卡片區仍屬首頁，完整服務另開布幕。
+  SECTION_ROUTE['#services']='/home/'; // 選單「我們做的事」捲到首頁卡片區，網址停在 /home/；/services/ 總頁從服務專屬頁進。
   const studio = $id('studio');
   const feature = $id('feature');
   const featurePages = [...feature.querySelectorAll('[data-feature]')];
@@ -4516,6 +4508,7 @@ async function submit(){
     const a = e.target.closest('a[href^="#"]');
     if (a && SECTION_ROUTE[a.getAttribute('href')]){
       e.preventDefault();
+      if (studio.classList.contains('open')) closeStudio();
       section = a.getAttribute('href');
       const el = document.querySelector(section);
       if (el) el.scrollIntoView({behavior: reduced?'auto':'smooth'});
@@ -4524,7 +4517,7 @@ async function submit(){
     }
     const flower = e.target.closest('.g-flower');
     if (flower) section = flower.dataset.target;
-    if (e.target.closest('#reGarden,#navGarden,#navLogo,#g-skip,[data-studio],#stFlowLink')) section = null;
+    if (e.target.closest('#reGarden,#navLogo,#g-skip,[data-studio],#stFlowLink')) section = null;
     if (e.target.closest('#stBack')) section = '#courses';
   }, true);
 
@@ -4583,10 +4576,6 @@ async function submit(){
           await window.RiverNotes.play();
           if(stale())return;
           openFeature(m.feature);
-        } else if (!initial&&m.feature==='cases'){
-          // 同用教室的花瓣。快速返回或改選時，舊回呼只結束等待，不再開啟舊頁。
-          await new Promise(resolve=>bloomTransition(()=>{if(!stale())openFeature(m.feature);resolve()}));
-          if(stale())return;
         } else openFeature(m.feature,initial);
         return;
       }
