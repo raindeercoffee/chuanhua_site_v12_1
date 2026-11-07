@@ -37,7 +37,7 @@ async function inView(page, section, label) {
       casesLive = await page.locator('#main #cases').count() === 1;
 
       // 選單順序與名字
-      const labels = (await page.locator('#navLinks a').allInnerTexts()).map(s => s.trim());
+      const labels = (await page.locator('#navLinks a').allTextContents()).map(s => s.trim());
       assert.deepEqual(labels, NAV.map(n => n.label), `${width} 選單順序`);
 
       for (const item of NAV) {
